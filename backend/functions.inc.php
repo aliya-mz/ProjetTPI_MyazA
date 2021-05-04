@@ -36,6 +36,9 @@ function VerifyAccessibility($connecte){
   }
 }
 
+
+
+
 //Gestion garde-robe - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 //Gestion du formulaire_________________________________________________________
@@ -146,26 +149,48 @@ function DisplayDress($dress){
 }
 
 
+
+
+
 //Gestion du calendrier- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+//Générer le calendrier et semainier _____________________________________________
+
+//Générer un tableau à deux dimensions contenant tous les jours à afficher dans le calendrier pour le mois X de l'année X
+function GetCalendarDays($month, $year){
+  $days = [];
+
+  return $days;
+}
+
+//Générer un tableau à deux dimensions contenant toutes les heures à afficher dans le semainier
+function GetWeekHours(){
+  $days = [];
+
+  return $days;
+}
 
 //Gestion des évènements__________________________________________________________
 
-function GetEventsBetween($isReccurent, $dateStart, $dateEnd){
-  //Transformer les dates en timestamp mySQL
+//Récupérer tous les évènements ajoutés au calendrier, compris dans les jours du mois actuellement affiché
+function GetEventsBetween($dateStart, $dateEnd){
   $timestampStart = DateToTimestamp($dateStart);
   $timestampEnd = DateToTimestamp($dateEnd);
-  
-  //Rechercher dans la base de données
-  $events = readEventsByTimeAndType($isReccurent, $timestampStart, $timestampEnd);
 
+  //Rechercher dans la base de données
+  $events = readEventsByTime($timestampStart, $timestampEnd);
+  return $events;
+}
+
+//Récupérer tous les évènements ajoutés au semainier
+function GetEventsWeekPlanner(){  
+  //Rechercher dans la base de données les évènements réccurents (hebdomadaires)
+  $events = readWeekPlannerEvents();
   return $events;
 }
 
 //Affichage des évènements dans un intervalle de temps donnée 
-function DisplayEventsBetween($isReccurent, $dateStart, $dateEnd){
-  //Récupérer les évènements à afficher
-  $events = GetEventsBetween($isReccurent, $dateStart, $dateEnd);
-
+function DisplayEvent($event){
   //Afficher les évènements
 
   //[echo de HTML]
@@ -215,18 +240,28 @@ function HourToTimestamp($date){
 }
 
 
-/*A FAIRE*/
-//Pour le mois actuellement affiché, rechercher tous les évènements entre dateDebut et dateFin avec reccurent = false
+//Gérer l'affichage________________________________________________________________
+
 //Afficher le calendrier sous forme de tableau. Chaque jour est une case, chaque ligne une semaine (tableau 6x7)
-//A chaque fois que dans le tableau, on rencontre une date identique à un évènement, afficher l'évènement dedans
+function DisplayMonthCalendar($month, $year){
+  $days = GetCalendarDays($month, $year);
+  //Afficher le tableau de jours généré grâce à au mois actuel
+  //[...]
+
+  //A chaque fois que dans le tableau, on rencontre une date identique à un évènement, afficher l'évènement dedans
+  //[...]
+}
+
+//Afficher le semainier sous forme de tableau, contenant 7 jours et différentes heures de la journée, avec les évènements qui y sont inscrits.
+function DisplayWeekPlanner(){
+  $hours = GetWeekHours();
+  $event = GetEventsWeekPlanner();
+
+  //Afficher le tableau du semainier avec les évènements récupérés
+  //[...]
+}
 
 
-
-//Gestion du semainier - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-/*A FAIRE*/
-//rechercher tous les évènements entre dateDebut et dateFin avec reccurent = true
-//Afficher la semaine sous forme de tableau (7x1)
 
 
 

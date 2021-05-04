@@ -6,13 +6,12 @@
   Description : Gestion de la table "event" - en cours
 */
 
-//A FAIRE : Gérer les dates
-function readEventsByTimeAndType($reccurent, $dateStart, $dateEnd){
+function readEventsByTime($dateStart, $dateEnd){
   //initaliser le prepare statement
   static $ps = null;
 
   //requête
-  $sql = "SELECT *, DATE_FORMAT(`dateStart`, '%d.%m.%Y') as theDate, DATE_FORMAT(`dateStart`, '%H:%i') as theHour, DATE_FORMAT(`dateStart`, '%w') as theWeekDay from `event` WHERE reccurent LIKE :reccurent";
+  $sql = "SELECT *, DATE_FORMAT(`dateStart`, '%d.%m.%Y') as theDate, DATE_FORMAT(`dateStart`, '%H:%i') as theHour, DATE_FORMAT(`dateStart`, '%w') as theWeekDay from `event` WHERE reccurent LIKE -1";
   //si le prepare statement n'a encore jamais été fait
   if($ps == null){
     //préparer la requête
@@ -21,9 +20,33 @@ function readEventsByTimeAndType($reccurent, $dateStart, $dateEnd){
   $answer = false;
   try{
     //lier le paramètre de la requête avec la variable
-    $ps->bindParam(':reccurent', $reccurent, PDO::PARAM_STR);
-    $ps->bindParam(':reccurent', $reccurent, PDO::PARAM_STR);
-    $ps->bindParam(':reccurent', $reccurent, PDO::PARAM_STR);
+    $ps->bindParam(':dateStart', $dateStart, PDO::PARAM_STR);
+    $ps->bindParam(':dateEnd', $dateEnd, PDO::PARAM_STR);
+
+    if($ps->execute())
+      $answer = $ps->fetchAll(PDO::FETCH_ASSOC);
+  }
+  catch(PDOException $e){
+    echo $e->getMessage();
+  }
+
+  echo $answer;
+  return $answer;
+}
+
+function readWeekPlannerEvents(){
+  //initaliser le prepare statement
+  static $ps = null;
+
+  //requête
+  $sql = "SELECT *, DATE_FORMAT(`dateStart`, '%d.%m.%Y') as theDate, DATE_FORMAT(`dateStart`, '%H:%i') as theHour, DATE_FORMAT(`dateStart`, '%w') as theWeekDay from `event` WHERE reccurent LIKE 1";
+  //si le prepare statement n'a encore jamais été fait
+  if($ps == null){
+    //préparer la requête
+    $ps = db()->prepare($sql);
+  }
+  $answer = false;
+  try{
 
     if($ps->execute())
       $answer = $ps->fetchAll(PDO::FETCH_ASSOC);
