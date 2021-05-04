@@ -53,64 +53,62 @@ W : Won't
 
 | Nom                        | S6 : Afficher la météo détaillée                             |
 | -------------------------- | ------------------------------------------------------------ |
-| *Description (user story)* | En tant qu'utilisateur connecté, je peux visualiser, pour un jour sélectionné parmi les 5 prochains, les détails météo enregistrés toutes les trois heures |
-| *Critère d'acceptation*    | Les tests x.y à x.y passent                                  |
+| *Description (user story)* | En tant qu'utilisateur connecté, je peux visualiser, pour un jour sélectionné parmi les 5 prochains, les détails météo enregistrés toutes les trois heures. |
+| *Critère d'acceptation*    | Le test 2.1 passe                                            |
 | *Priorité*                 | M                                                            |
 
 | Nom                        | S7 : Afficher la météo résumée                               |
 | -------------------------- | ------------------------------------------------------------ |
 | *Description (user story)* | En tant qu'utilisateur connecté, je peux visualiser, dans mon calendrier, pour les trois prochains jours, la température et l'état d'ensoleillement. |
-| *Critère d'acceptation*    | Les tests x.y à x.y passent                                  |
+| *Critère d'acceptation*    | Le test 2.2 passe                                            |
 | *Priorité*                 | S                                                            |
 
 
 
 ## Calendrier
 
- 
-
 | Nom                        | S8 : Afficher le calendrier                                  |
 | -------------------------- | ------------------------------------------------------------ |
-| *Description (user story)* | En tant qu'utilisateur connecté, je peux visualiser mon calendrier, mois par mois, avec ses évènements, ainsi que la météo sur les trois |
-| *Critère d'acceptation*    | Les tests x.y à x.y passent                                  |
+| *Description (user story)* | En tant qu'utilisateur connecté, je peux visualiser mon calendrier, mois par mois, avec ses évènements, ainsi que la météo sur les trois jours à venir. |
+| *Critère d'acceptation*    | Les tests 2.2, 3.1 et 3.3 passent                            |
 | *Priorité*                 | M                                                            |
 
-| Nom                        | S8 : Afficher le semainier                                   |
+| Nom                        | S9 : Afficher le semainier                                   |
 | -------------------------- | ------------------------------------------------------------ |
-| *Description (user story)* | En tant qu'utilisateur connecté, je peux visualiser mon semainier, contenant  tous les évènements hebdomadaires que j'ai ajouté. |
-| *Critère d'acceptation*    | Les tests x.y à x.y passent                                  |
+| *Description (user story)* | En tant qu'utilisateur connecté, je peux visualiser mon semainier, contenant tous les évènements hebdomadaires que j'ai ajouté. |
+| *Critère d'acceptation*    | Les tests 3.2 à 3.3 passent                                  |
 | *Priorité*                 | M                                                            |
 
-| Nom                        | S9 : Ajouter un évènement                                    |
+| Nom                        | S10 : Ajouter un évènement                                   |
 | -------------------------- | ------------------------------------------------------------ |
 | *Description (user story)* | En tant qu'utilisateur connecté, je peux remplir un formulaire contenant une description de l'évènement ainsi que sa date et son heure, ainsi qu'une case à cocher définissant si c'est un évènement hebdomadaire ou unique. |
-| *Critère d'acceptation*    | Les tests x.y à x.y passent                                  |
+| *Critère d'acceptation*    | Les tests 3.3 à 3.4 passent                                  |
 | *Priorité*                 | M                                                            |
 
-| Nom                        | S10 : Afficher un évènement                                  |
+| Nom                        | S11 : Afficher un évènement                                  |
 | -------------------------- | ------------------------------------------------------------ |
-| *Description (user story)* | En tant qu'utilisateur connecté, je peux, en sélectionnant un jour parmi les 5 jours à venir, afficher les évènements assignés à cette date. |
-| *Critère d'acceptation*    | Les tests x.y à x.y passent                                  |
+| *Description (user story)* | En tant qu'utilisateur connecté, je peux, en sélectionnant un jour parmi les 5 jours à venir, afficher les évènements assignés à cette date et ce jour de la semaine. |
+| *Critère d'acceptation*    | Les tests 3.5 à 3.6 passent                                  |
 | *Priorité*                 | S                                                            |
 
 
 
 ## Vêtements
 
-| Nom                        | S11 : Ajouter vêtement                                       |
+| Nom                        | S12 : Ajouter un vêtement                                    |
 | -------------------------- | ------------------------------------------------------------ |
-| *Description (user story)* | En tant qu'utilisateur connecté, je peux ajouter un vêtement à ma garde-robe en replissant un formulaire, qui indique son type et sa couleur, ainsi la catégorie météo et intervalle de température dans lequel il peut être porté. |
-| *Critère d'acceptation*    | Les tests x.y à x.y passent                                  |
-| *Priorité*                 | M                                                            |
-
-| Nom                        | S12 : Afficher une recommandation de tenue                   |
-| -------------------------- | ------------------------------------------------------------ |
-| *Description (user story)* | En tant qu'utilisateur connecté, je peux visualiser, pour chaque jour sélectionné parmi les 5 à venir, une tenue adaptée à la météo prévue. |
-| *Critère d'acceptation*    | Les tests x.y à x.y passent                                  |
+| *Description (user story)* | En tant qu'utilisateur connecté, je peux ajouter un vêtement à ma garde-robe en replissant un formulaire, qui indique son type et sa couleur, ainsi que la catégorie météo et intervalle de température dans lequel il peut être porté. |
+| *Critère d'acceptation*    | Le test 4.1 passe                                            |
 | *Priorité*                 | M                                                            |
 
 | Nom                        | S13 : Afficher les vêtements                                 |
 | -------------------------- | ------------------------------------------------------------ |
 | *Description (user story)* | En tant qu'utilisateurs connecté, je peux visualiser l'image d'un vêtement que j'ai créé, qui est un fichier SVG généré grâce au type et à la couleur du vêtement. |
-| *Critère d'acceptation*    | Les tests x.y à x.y passent                                  |
+| *Critère d'acceptation*    | Le test 4.2 passe                                            |
 | *Priorité*                 | S                                                            |
+
+| Nom                        | S14 : Afficher une recommandation de tenue                   |
+| -------------------------- | ------------------------------------------------------------ |
+| *Description (user story)* | En tant qu'utilisateur connecté, je peux visualiser, pour chaque jour sélectionné parmi les 5 à venir, une tenue adaptée à la météo prévue. |
+| *Critère d'acceptation*    | Les tests 4.2 à 4.3 passent                                  |
+| *Priorité*                 | M                                                            |
