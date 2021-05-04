@@ -36,13 +36,13 @@ Durant la dernière heure, j'ai commencé à écrire mes tests, en me basant sur
 
 - Finir les tests
 - Créer la base de données
-- Implémenter le CRUD des vêtements
+- Implémenter le CRUD des utilisateurs
 
 *Fait :*
 
 7h30 : J'ai fait les tests concernant la météo, le calendrier, le semainier et la gestion de la garde-robe. 
 
-9h20 : J'ai créé la base de données en fonction du modèle de l'énoncé complété la veille. Ensuite, j'ai commencé le CRUD des vêtements.
+9h20 : J'ai créé la base de données en fonction du modèle de l'énoncé complété la veille. Ensuite, j'ai fait le CRUD des utilisateurs et commencé celui des vêtements.
 
 **Après-midi**
 
