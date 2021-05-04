@@ -60,21 +60,21 @@ Durant la dernière heure, j'ai commencé à écrire mes tests, en me basant sur
 Voilà comment j'ai fait :
 
 ```php
-$startHour = date('h', strtotime($dateStart));
-$startMinute = date('i', strtotime($dateStart));
-$startMonth = date('m', strtotime($dateStart));
-$startDay = date('d', strtotime($dateStart));
-$startYear = date('Y', strtotime($dateStart));
+$hour = date('h', strtotime($dateStart));
+$minute = date('i', strtotime($dateStart));
+$mMonth = date('m', strtotime($dateStart));
+$day = date('d', strtotime($dateStart));
+$year = date('Y', strtotime($dateStart));
 
 //Transformer les dates en timestamp mySQL
-$timestampStart = date ('Ymd H: i: s', mktime ($startHour, $startMinute, 0, $startMonth, $startDay, $startYear));
+$timestamp = date ('Ymd H: i: s', mktime ($startHour, $startMinute, 0, $startMonth, $startDay, $startYear));
 ```
 
 
 
-14h00 : J'ai commencé les formulaires de connexion et d'inscription.
+14h40 : J'ai réalisé les formulaires de connexion et d'inscription, en gérant l'enregistrement des informations du compte, dont le hash du mot de passe, et le système de vérification des informations lors de la connexion.
 
-
+j'ai également géré les autorisations, avec trois rôles : "déconnecté", "utilisateur" et "administrateur".
 
 
 
@@ -82,7 +82,9 @@ $timestampStart = date ('Ymd H: i: s', mktime ($startHour, $startMinute, 0, $sta
 
 *A faire :*
 
-
+- Créer la page qui permet de supprimer les utilisateurs dans une liste
+- Créer la fonction qui génère les jours à afficher pour le calendrier (arrangement pour que la semaine ne soit pas coupée dans l'affichage du mois)
+- 
 
 **Matin**
 

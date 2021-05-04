@@ -9,35 +9,72 @@
 //Gestion des utilisateurs - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 function GetIdUser(){
-  if(isset($_SESSION["idUtilisateur"])){
-    return $_SESSION["idUtilisateur"];
+  if(isset($_SESSION["idUser"])){
+    return $_SESSION["idUser"];
   }
   else{
     return false;
   }  
 }
 
-//Vérifie qu'un utilisateur est connecté
-function VerifyAccessibility($connecte){
-  //si la page est réservée aux utilisateurs connectés, vérifier qu'un utilisateur est connecté, sinon renvoyer à l'accueil
-  if($connecte){
+function SetIdUser($idUser){
+  $_SESSION["idUser"] = $idUser;
+}
+
+//Vérifie que l'utilisateur (déconnecté, utilisateur ou administrateur) a le droit d'accéder à la page
+function VerifyAccessibility($acceptedRole){
+  //si elle est réservée aux déconnectés, vérifier que l'utilisateur n'est pas connecté
+  if($acceptedRole = 0){
+    //tester si on doit pouvoir accéder à cette page
     if(!isset(GetIdUser())){
       header('Location: index.php');
       exit;
     }
   }
-  //si elle est réservée aux déconnectés, vérifier que l'utilisateur n'est pas connecté, sinon renvoyer à l'accueil
+  //si la page est réservée aux utilisateurs connectés, vérifier que l'utilisateur connecté a le bon rôle (utilisateur ou adminisatrateur)
   else{
-    //tester si on doit pouvoir accéder à cette page
     if(isset(GetIdUser())){
+      if(!ReadUserById(GetIdUser())["idRole"]==$acceptedRole){
+        header('Location: index.php');
+        exit;
+      }
+    }
+    else{
       header('Location: index.php');
       exit;
     }
   }
 }
 
+function ConnectUser($login, $password){
+  //récupérer l'utilisateur dans la BD avec son Id
+  $user = ReadUserByUsername($login);
 
+  //tester le mot de passe
+  if(password_verify($password, $user["password"])){
+    //enregister l'utilisateur dans la session
+    SetIdUser($user["idUser"]);
 
+    //rediriger vers la page d'accueil
+    header('Location: index.php');
+    exit;
+  }
+  else{
+    //Message d'erreur
+  }
+}
+
+function SignUserIn($login, $firstName, $lastName, $eMail, $password){
+  //hasher le mot de passe
+  $password = password_hash($password, PASSWORD_DEFAULT);
+
+  //ajouter l'utilisateur dans la BD
+  createUser($login, $firstName, $lastName, $eMail, $password);
+
+  //rediriger vers la page d'accueil
+  header('Location: index.php');
+  exit;
+}
 
 //Gestion garde-robe - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
