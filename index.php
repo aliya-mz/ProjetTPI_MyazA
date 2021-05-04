@@ -1,17 +1,16 @@
 <?php
 /*
-  Projet     :
-  Date       : Novembre/décembre 2020
+  Projet     : Suggestion de tenues en fonction de la météo
   Auteur     : Aliya Myaz
-  Sujet      : Page d'accueil du projet
+  Date       : Mai 2021
+  Sujet      : Page de formulaire pour ajouter un un vêtement dans la garde-robe
 */
 
-/*
 session_start();
+
 include("backend/autoload.php");
 
-$categorie = FILTER_INPUT(INPUT_POST, "categorie", FILTER_SANITIZE_STRING);
-*/
+//$_SESSION["jourAffichage"] = [idJour]; (entre 0 et 4 ; default = 0)
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +22,7 @@ $categorie = FILTER_INPUT(INPUT_POST, "categorie", FILTER_SANITIZE_STRING);
     <link rel="stylesheet" type="text/css" href="css/style.css" >
   </head>
   <body>
-  <!--Barre de navigation-->
+  	<!--Navigation principale-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	  <div class="container-fluid">
 		<a class="navbar-brand" href="#">Home</a>
@@ -32,11 +31,11 @@ $categorie = FILTER_INPUT(INPUT_POST, "categorie", FILTER_SANITIZE_STRING);
 		</button>
 		<div class="collapse navbar-collapse" id="navbarText">
 		  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-				<!--Lien page actuelle-->
+			<!--Lien page actuelle-->
 			<li class="nav-item">
-			  <a class="nav-link active" aria-current="page" href="#">Météo</a>
+			  <a class="nav-link active" aria-current="page" href="#">Home</a>
 			</li>
-			<!--Lien caldenrier-->
+			<!--Lien calendrier-->
 			<li class="nav-item">
 			  <a class="nav-link" href="#">Calendrier</a>
 			</li>
@@ -46,9 +45,9 @@ $categorie = FILTER_INPUT(INPUT_POST, "categorie", FILTER_SANITIZE_STRING);
 				Garde-robe
 			  </a>
 			  <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-				<li><a class="dropdown-item" href="#">Ajouter des vêtements</a></li>
-				<li><a class="dropdown-item" href="#">Voir mes vêtements</a></li>
-				<li><a class="dropdown-item" href="#">Vêtements de la semaine</a></li>
+				<li><a class="dropdown-item" href="ajouterVetement.php">Ajouter des vêtements</a></li>
+				<li><a class="dropdown-item" href="voirMesVetements.phpm">Voir mes vêtements</a></li>
+				<li><a class="dropdown-item" href="voirTenues">Tenues de la semaine</a></li>
 			  </ul>
 			</li>
 			<li class="nav-item">
@@ -56,11 +55,35 @@ $categorie = FILTER_INPUT(INPUT_POST, "categorie", FILTER_SANITIZE_STRING);
 			</li>
 		  </ul>
 		  <span class="navbar-text">
+			Organise ta journée du lundi
 		  </span>
 		</div>
 	  </div>
 	</nav>
-	
+
+	<!--Navigation entre les jours de la semaine-->
+	<ul class="nav justify-content-end">
+		<li class="nav-item">
+			<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Lundi</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link active" aria-current="page" href="#">Mardi</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#">Mercredi</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#">Jeudi</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#">Vendredi</a>
+		</li>
+	</ul>
+
+	<!--Affichage journalier-->
+	<main>
+
+	</main>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
   </body>
 </html>

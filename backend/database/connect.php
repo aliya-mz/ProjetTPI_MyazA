@@ -1,8 +1,9 @@
 <?php
 /*
-  Date       : Octobre 2020
-  Auteur     : Aliya Myaz
-  Sujet      : Page de fonction de connexion à la bd
+  Projet      : Suggestion de tenues en fonction de la météo
+  Date        : Mai 2020
+  Auteur      : Aliya Myaz
+  Description : Contient la fonction de connexion à la base de données
  */
 
 //Connexion à la base de donnée

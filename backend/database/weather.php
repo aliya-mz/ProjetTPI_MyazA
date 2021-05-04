@@ -6,7 +6,72 @@
   Description : Gestion de la table "weather"
 */
 
-//récupérer toutes les idées
+function readWeathers(){
+  static $ps = null;
+  $sql = "SELECT * FROM weather";
+
+  if($ps == null){
+    $ps = db()->prepare($sql);
+  }
+  $answer = false;
+  try{
+    if($ps->execute())
+      $answer = $ps->fetchAll(PDO::FETCH_ASSOC);
+  }
+  catch(PDOException $e){
+    echo $e->getMessage();
+  }
+  return $answer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 function ReadIdees(){
   static $ps = null;
   $sql = "SELECT *, DATE_FORMAT(`dateCreation`, '%d/%m/%Y %H:%i:%s') as dateFormatee FROM idee";
@@ -209,3 +274,4 @@ function deleteIdee($idIdee){
 
   return $answer;
 }
+*/

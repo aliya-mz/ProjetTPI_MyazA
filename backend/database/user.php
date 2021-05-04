@@ -3,11 +3,11 @@
   Projet      : Suggestion de tenues en fonction de la météo
   Date        : Mai 2021
   Auteur      : Aliya Myaz
-  Description : Gestion de la table "user"
+  Description : Gestion de la table "user" - ok
 */
 
 
-function readUserByUsername($username){
+function ReadUserByUsername($username){
   //initaliser le prepare statement
   static $ps = null;
   //requête
@@ -33,7 +33,7 @@ function readUserByUsername($username){
   return $answer;
 }
 
-function readUserById($idUser){
+function ReadUserById($idUser){
   //initaliser le prepare statement
   static $ps = null;
   //requête
@@ -59,7 +59,7 @@ function readUserById($idUser){
   return $answer;
 }
 
-function createUser($login, $firstName, $lastName, $eMail, $myPassword){
+function CreateUser($login, $firstName, $lastName, $eMail, $myPassword){
   //initaliser le prepare statement
   static $ps = null;
   //requête
@@ -88,5 +88,65 @@ function createUser($login, $firstName, $lastName, $eMail, $myPassword){
     echo $e->getMessage();
     echo "Un problème est survenu lors de la création de l'utilisateur";
   }
+  return $answer;
+}
+
+function UpdateUserById($idUser, $login, $firstName, $lastName, $eMail, $myPassword){
+  //initaliser le prepare statement
+  static $ps = null;
+  //requête
+  $sql = 'UPDATE note SET login = :login, firstName = :firstName, lastName = :lastName, eMail = :eMail, password = :myPassword WHERE idUser = :idUser';
+
+  //si le prépare statement n'a encore jamais été fait
+  if($ps == null){
+    //préparer la requête
+    $ps = db()->prepare($sql);
+  }
+  $answer = false;
+  try{
+    //lier le paramètre dans la requête avec la variable
+    $ps->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+    $ps->bindParam(':login', $login, PDO::PARAM_STR);
+    $ps->bindParam(':firstName', $firstName, PDO::PARAM_STR);
+    $ps->bindParam(':lastName', $lastName, PDO::PARAM_STR);
+    $ps->bindParam(':eMail', $eMail, PDO::PARAM_STR);
+    $ps->bindParam(':myPassword', $myPassword, PDO::PARAM_INT);
+
+    $answer = $ps->execute();
+    if($answer){
+      echo "La note ".$idUser." a été modifiée";
+    }    
+  }
+  catch(PDOException $e){
+    echo $e->getMessage();
+    echo "Un problème est survenu lors de la modification de la note ".$idUser;
+  } 
+
+  return $answer;
+}
+
+function DeleteUserById($idUser){
+  //initaliser le prepare statement
+  static $ps = null;
+  //requête
+  $sql = "DELETE FROM user, role WHERE idUser LIKE :idUser";
+
+  //si le prepare statement n'a encore jamais été fait
+  if($ps == null){
+    //préparer la requête
+    $ps = db()->prepare($sql);
+  }
+  $answer = false;
+  try{
+    //lier le paramètre dans la requête avec la variable
+    $ps->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+
+    if($ps->execute())
+      $answer = $ps->fetchAll(PDO::FETCH_ASSOC);
+  }
+  catch(PDOException $e){
+    echo $e->getMessage();
+  }
+
   return $answer;
 }

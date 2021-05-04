@@ -3,7 +3,7 @@
   Projet     : Suggestion de tenues en fonction de la météo
   Date       : Mai 2021
   Auteur     : Aliya Myaz
-  Sujet      : Constantes de bdnotes
+  Sujet      : Constantes de la base de données clothes_recommendation_db
  */
 
 define("HOST", "127.0.0.1");
