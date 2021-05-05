@@ -3,16 +3,22 @@
   Projet      : Suggestion de tenues en fonction de la météo
   Date        : Mai 2021
   Auteur      : Aliya Myaz
-  Description : Page de gestion des utilisateurs - affiche une liste des utilisateurs, dans laquelle l'administrateur peut les supprimer
+  Description : Page de gestion des utilisateurs - affiche une liste des utilisateurs, que l'administrateur peut supprimer
 */
 
 include("backend/autoload.php");
 session_start();
 
-//Vérifier que l'utilisateur est déconnecté
+//Vérifier que l'administrateur est connecté
 VerifyAccessibility(2);
 
+//Récupérer l'identifiant de l'utilisateurs à supprimer
+$delete = FILTER_INPUT(INPUT_POST, "delete", FILTER_SANITIZE_STRING);
 
+//Supprimer l'utilisateur sur lequel l'administrateur a cliqué
+if($delete){
+  DeleteUser($delete);
+}
 ?>
 
 <!DOCTYPE html>
@@ -27,10 +33,11 @@ VerifyAccessibility(2);
       <td><a class="lienBouton boutonHome" href="index.php"><img src="img/home.png"/></a></td>
     </nav>
     <main>
-    <form class="formAdd" action="" method="POST">
-      <table>
+    <form class="formAdd" action="manageUsers.php" method="POST">
+      <table class="usersList">
        <?PHP
-        //Affichage des utilisateurs
+        //Afficher la liste des utilisateurs
+        ShowListUsers();
        ?>
       </table>
     </form>

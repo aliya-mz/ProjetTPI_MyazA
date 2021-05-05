@@ -7,11 +7,11 @@
 */
 
 
-function ReadUserByUsername($username){
+function ReadUserByUsername($login){
   //initaliser le prepare statement
   static $ps = null;
   //requête
-  $sql = "SELECT * FROM user WHERE username = :username";
+  $sql = "SELECT * FROM user WHERE login = :login";
 
   //si le prepare statement n'a encore jamais été fait
   if($ps == null){
@@ -21,7 +21,7 @@ function ReadUserByUsername($username){
   $answer = false;
   try{
     //lier le paramètre dans la requête avec la variable
-    $ps->bindParam(':username', $username, PDO::PARAM_STR);
+    $ps->bindParam(':login', $login, PDO::PARAM_STR);
 
     if($ps->execute())
       $answer = $ps->fetch(PDO::FETCH_ASSOC);
@@ -37,7 +37,7 @@ function ReadUserById($idUser){
   //initaliser le prepare statement
   static $ps = null;
   //requête
-  $sql = "SELECT *, name as myRole FROM utilisateur, role WHERE idUser LIKE :idUser";
+  $sql = "SELECT * FROM user WHERE idUser LIKE :idUser";
 
   //si le prepare statement n'a encore jamais été fait
   if($ps == null){
@@ -50,6 +50,31 @@ function ReadUserById($idUser){
     $ps->bindParam(':idUser', $idUser, PDO::PARAM_INT);
 
     if($ps->execute())
+      $answer = $ps->fetch(PDO::FETCH_ASSOC);
+  }
+  catch(PDOException $e){
+    echo $e->getMessage();
+  }
+
+  return $answer;
+}
+
+function ReadUsers(){
+  //initaliser le prepare statement
+  static $ps = null;
+
+  //requête
+  $sql = "SELECT * FROM user WHERE idRole = 1";
+
+  //si le prepare statement n'a encore jamais été fait
+  if($ps == null){
+    //préparer la requête
+    $ps = db()->prepare($sql);
+  }
+  $answer = false;
+  try{
+
+    if($ps->execute())
       $answer = $ps->fetchAll(PDO::FETCH_ASSOC);
   }
   catch(PDOException $e){
@@ -59,11 +84,12 @@ function ReadUserById($idUser){
   return $answer;
 }
 
+
 function CreateUser($login, $firstName, $lastName, $eMail, $myPassword){
   //initaliser le prepare statement
   static $ps = null;
   //requête
-  $sql = "INSERT INTO `utilisateur` (`login`, `firstName`, `lastName`, `eMail`, `password`) VALUES ( :login, :firstName, :lastName, :eMail, :myPassword, 1)";
+  $sql = "INSERT INTO `user` (`login`, `firstName`, `lastName`, `eMail`, `password`, `idRole`) VALUES ( :login, :firstName, :lastName, :eMail, :myPassword, 1)";
 
   //si le prepare statement n'a encore jamais été fait
   if($ps == null){
@@ -81,12 +107,10 @@ function CreateUser($login, $firstName, $lastName, $eMail, $myPassword){
 
     $answer = $ps->execute();
     if($answer){
-      echo "L'utilisateur' a bien été créé";
     }
   }
   catch(PDOException $e){
     echo $e->getMessage();
-    echo "Un problème est survenu lors de la création de l'utilisateur";
   }
   return $answer;
 }
@@ -95,7 +119,7 @@ function UpdateUserById($idUser, $login, $firstName, $lastName, $eMail, $myPassw
   //initaliser le prepare statement
   static $ps = null;
   //requête
-  $sql = 'UPDATE note SET login = :login, firstName = :firstName, lastName = :lastName, eMail = :eMail, password = :myPassword WHERE idUser = :idUser';
+  $sql = 'UPDATE user SET login = :login, firstName = :firstName, lastName = :lastName, eMail = :eMail, password = :myPassword WHERE idUser = :idUser';
 
   //si le prépare statement n'a encore jamais été fait
   if($ps == null){
@@ -129,7 +153,7 @@ function DeleteUserById($idUser){
   //initaliser le prepare statement
   static $ps = null;
   //requête
-  $sql = "DELETE FROM user, role WHERE idUser LIKE :idUser";
+  $sql = "DELETE FROM user WHERE idUser LIKE :idUser";
 
   //si le prepare statement n'a encore jamais été fait
   if($ps == null){

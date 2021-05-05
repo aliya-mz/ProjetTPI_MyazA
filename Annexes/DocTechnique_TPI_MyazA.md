@@ -6,10 +6,37 @@ Documentation technique
 
 [TOC]
 
+## Table des versions
+
+| N° de version | Date       | Auteur     | Changements apportés                            |
+| ------------- | ---------- | ---------- | ----------------------------------------------- |
+| 1.0           | 20.05.2021 | Aliya Myaz | Version finale du document pour le rendu du TPI |
 
 
 
 ## Introduction
+
+[Généralités]
+
+
+
+## Rappel de l'énoncé
+
+### Objectif
+
+[Description fonctionnelle de l'application - liste fonctionnalités énoncé]
+
+### Organisation
+
+[Temporalité et méthodologie]
+
+### Livrables
+
+[Quoi ? A qui ?]
+
+### Matériel et logiciels nécessaires
+
+
 
 
 
@@ -35,7 +62,19 @@ Documentation technique
 
 ## Méthodologie
 
-#### Notation des priorités
+### Planification en six étapes
+
+#### 1. S'informer
+
+J'ai commencé par lire attentivement mon énoncé afin d'en ressortir tout ce qui était nécessaire à la réalisation de mon projet, et ai demandé des précisions à mon formateur. J'ai également fait des recherches sur l'API météo que je pourrais utiliser pour mon projet.
+
+#### 2. Planifier
+
+Ensuite, je me suis directement attaquée au planning, sous forme de diagramme de GANTT, dans le but d'être organisée dès le début et d'optimiser mon temps. Cela m'a aussi permis de clarifié toutes les tâches et sous-tâches que je devais réaliser pour mener mon projet jusqu'au bout. 
+
+Je me suis appuyée dessus pour faire, juste après, le product backlog avec des user stories, en définir ainsi clairement, du côté de l'utilisateur de mon site, les fonctionnalités à implémenter.
+
+Pour chaque story, j’ai fixé une priorité, grâce à la méthode MoSCoW, pour être plus efficace dans ma manière de travailler. Voici la notation de cette méthode :
 
 M : Must
 
@@ -45,11 +84,37 @@ C : Could
 
 W : Won't
 
+J'ai également ajouté ce caractère :
+
 !  : Bloquant
 
+#### 3. Décider
+
+Dans chaque partie de mon travail, j'ai dû faire des choix, notamment quant au calendrier, dont les instructions étaient plutôt libres, mais aussi des choix quand aux limites de mon travail. En effet, ayant souvent tendance à vouloir faire plus, j'ai du me restreindre de manière à répondre correctement aux objectifs explicitement donnés, dans le temps donné. J'explique dans le journal de bord les différentes décisions que j'ai pris.
+
+#### 4. Réaliser
+
+J'ai donc pu, grâce aux étapes précédentes, implémenter mon travail de manière organisée et réfléchie.
+
+#### 5. Contrôler
+
+J'avais commencé par mettre, dans le planning, tous mes tests à la fin, avant de réaliser que je devais tester chaque fonctionnalité après l'avoir terminée, d'autant plus que les tests étaient déjà créés dès le début à cet effet. J'ai donc effectué tous les tests de chaque fonctionnalité après l'avoir terminée, ainsi que tous les tests des fonctionnalités précédemment réalisées et testées, pour vérifier qu'il n'y ait pas de régression. Un tableau, dans ma documentation, me permet de suivre l'évolution de mes fonctionnalités terminées, en visualisant les tests fonctionnels. Ensuite, je suis allée au-delà des tests et ai essayé d'utiliser "mal" mon programme afin de m'assurer qu'il ne possédait pas de failles.
+
+#### 6. Évaluer
+
+Les bilans de la journée que j'ai écrit après chaque journée de travail m'ont permis, à la fin, de me rendre compte de ma manière de travailler, et d'évoluer. Les plannings prévisionnels et effectifs m'ont également été utiles pour constater la manière de travailler qui me convenait réellement. J'ai donc rédigé un bilan personnel dans ma conclusion, afin de rendre compte de mes constatations et ressentis.
 
 
-## Planification - product backlog
+
+### Développement agile
+
+[Expliquer backlog]
+
+
+
+## Planification
+
+### Product backlog
 
 #### Utilisateurs
 
@@ -151,9 +216,21 @@ W : Won't
 
 
 
+### Planification prévue
+
+[Graphique]
+
+### Planification effective
+
+[Blabla évolution entre les graphiques]
+
+[Graphique]
+
+
+
 ## Analyse Fonctionnelle
 
-### Description globale des fonctionnalités du projet
+### Fonctionnalités du projet
 
 [Lister les fonctionnalités]
 
@@ -163,7 +240,7 @@ W : Won't
 
 ### Description de l’interface
 
-[maquettes (figma) commentées]
+[maquettes (Figma) commentées]
 
 
 
@@ -174,23 +251,35 @@ W : Won't
 
 [Programmation en CSS, projet de type WidowsForm.
 
-Développement sur Visual Studio, réalisation des diagrammes sur Umlet, maquettes sur Balsamiq, documentation sur Typora.]
+Développement sur Visual Studio, réalisation des diagrammes sur Umlet, maquettes sur Figma, documentation sur Typora.]
 
-
+[Langages et versions]
 
 ### Description globale de l’architecture du projet
 
-[Diagramme de classe simplifié]
+[Diagramme de classe simplifié + capture d'écran de l'architecture]
 
 
 
-### Description des méthodes de réalisation
+### Base de données
 
-#### Diagramme de classe
+[Présentation]
+
+#### MLD
 
 ![mld_TPI_MyazA.png](C:\Users\aliya.mz\Desktop\TPI\Annexes\mld_TPI_MyazA.png)
 
-#### Classe [Exemple]
+
+
+### API externe (météo)
+
+[Présenter l'API]
+
+
+
+### Classes PHP
+
+#### Week
 
 Description du rôle
 
@@ -200,7 +289,27 @@ Description du rôle
 
 
 
-### Argumentation des éventuels choix de méthode de résolution
+#### Day
+
+Description du rôle
+
+**Méthodes :**
+
+*ExempleMethode* : Description de la méthode
+
+
+
+#### MeteoRecord
+
+Description du rôle
+
+**Méthodes :**
+
+*ExempleMethode* : Description de la méthode
+
+
+
+### Argumentation des choix de méthodes de résolution
 
 [Choix de l'API météo]
 
@@ -212,7 +321,7 @@ Description du rôle
 
 ### Pseudo code ou des structogrammes
 
-[Algorithme compliqué]
+[Structogramme . algorithme de recommandation de vêtements]
 
 
 
@@ -237,7 +346,7 @@ Description du rôle
 
 Les scénarios ont été écrits avant la réalisation du projet, afin de garantir la réponse aux demandes du cahier des charge. Lors de la réalisation d'un scénario, faire attention à ce que son scénario prérequis ait été exécuté avant. Dans le cadre de ce travail, les tests ont été exécutés manuellement.
 
-#### Tests - gestion des utilisateurs
+#### Scénarios - gestion des utilisateurs
 
 | Nom                 | 1.1 Inscription                                              |
 | ------------------- | ------------------------------------------------------------ |
@@ -304,7 +413,7 @@ Les scénarios ont été écrits avant la réalisation du projet, afin de garant
 
 
 
-#### Tests - gestion de la météo
+#### Scénarios  - gestion de la météo
 
 | Nom                 | 2.1 Afficher météo détaillée                                 |
 | ------------------- | ------------------------------------------------------------ |
@@ -324,7 +433,7 @@ Les scénarios ont été écrits avant la réalisation du projet, afin de garant
 
 
 
-#### Tests - gestion du calendrier- à faire
+#### Scénarios  - gestion du calendrier- à faire
 
 | Nom                 | 3.1 Afficher le calendrier                                   |
 | ------------------- | ------------------------------------------------------------ |
@@ -368,7 +477,7 @@ Les scénarios ont été écrits avant la réalisation du projet, afin de garant
 | *Résultats obtenus* |                                                              |
 | *Statut*            | X                                                            |
 
-#### Tests - gestion de la garde-robe - à faire
+#### Scénarios - gestion de la garde-robe
 
 [Nom ; Type ; Couleur ; Catégorie météo ; Intervalle temp]
 
@@ -403,7 +512,30 @@ Les scénarios ont été écrits avant la réalisation du projet, afin de garant
 
 ### Evolution des tests
 
-[Tableau 12 col x nb tests]
+| N° test | J0   | J1   | J2   | J3   | J4   | J5   | J6   | J7   | J8   | J9   | J10  |
+| ------- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| 1.1     | X    |      |      |      |      |      |      |      |      |      |      |
+| 1.2     | X    |      |      |      |      |      |      |      |      |      |      |
+| 1.3     | X    |      |      |      |      |      |      |      |      |      |      |
+| 1.4     | X    |      |      |      |      |      |      |      |      |      |      |
+| 1.5     | X    |      |      |      |      |      |      |      |      |      |      |
+| 1.6     | X    |      |      |      |      |      |      |      |      |      |      |
+| 1.7     | X    |      |      |      |      |      |      |      |      |      |      |
+| 1.8     | X    |      |      |      |      |      |      |      |      |      |      |
+| 1.9     | X    |      |      |      |      |      |      |      |      |      |      |
+| 2.1     | X    |      |      |      |      |      |      |      |      |      |      |
+| 2.2     | X    |      |      |      |      |      |      |      |      |      |      |
+| 3.1     | X    |      |      |      |      |      |      |      |      |      |      |
+| 3.2     | X    |      |      |      |      |      |      |      |      |      |      |
+| 3.3     | X    |      |      |      |      |      |      |      |      |      |      |
+| 3.4     | X    |      |      |      |      |      |      |      |      |      |      |
+| 3.5     | X    |      |      |      |      |      |      |      |      |      |      |
+| 3.6     | X    |      |      |      |      |      |      |      |      |      |      |
+| 4.1     | X    |      |      |      |      |      |      |      |      |      |      |
+| 4.2     | X    |      |      |      |      |      |      |      |      |      |      |
+| 4.3     | X    |      |      |      |      |      |      |      |      |      |      |
+
+
 
 
 
@@ -417,13 +549,15 @@ Description améliorations
 
 [Idées : gestion de l'alimentation pour que ce soit encore plus complet, machines si ce n'est pas déjà fait dans le TPI]
 
-### Bilan du travail
+### Difficultés rencontrées
 
+[Blabla]
 
+### Bilan personnel
 
+[Bilan]
 
-
-## Remerciements
+### Remerciements
 
 [Remerciements]
 

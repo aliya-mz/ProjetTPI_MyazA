@@ -31,31 +31,20 @@ include("backend/autoload.php");
 		</button>
 		<div class="collapse navbar-collapse" id="navbarText">
 		  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-			<!--Lien page actuelle-->
+		  	<!--Lien page actuelle-->
 			<li class="nav-item">
 			  <a class="nav-link active" aria-current="page" href="#">Home</a>
 			</li>
-			<!--Lien calendrier-->
-			<li class="nav-item">
-			  <a class="nav-link" href="#">Calendrier</a>
-			</li>
-			<!--Liste déroulante gestion de la garde-robe-->
-			<li class="nav-item dropdown">
-			  <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-				Garde-robe
-			  </a>
-			  <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-				<li><a class="dropdown-item" href="ajouterVetement.php">Ajouter des vêtements</a></li>
-				<li><a class="dropdown-item" href="voirMesVetements.phpm">Voir mes vêtements</a></li>
-				<li><a class="dropdown-item" href="voirTenues">Tenues de la semaine</a></li>
-			  </ul>
-			</li>
-			<li class="nav-item">
-			  <a class="nav-link" href="#">Deconnexion</a>
-			</li>
+
+			<?php 
+			//Afficher la barre de navigation en fonction du rôle de l'utilisateur
+				ShowNavByRole();
+			?>
+			
+			
 		  </ul>
 		  <span class="navbar-text">
-			Organise ta journée du lundi
+			Organise ta journée
 		  </span>
 		</div>
 	  </div>

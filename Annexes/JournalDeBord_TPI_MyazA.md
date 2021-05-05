@@ -4,6 +4,8 @@
 ## Table des matières
 [TOC]
 
+**Note** : la section "*à faire*" est définie à la fin de la journée de travail précédente
+
 ## Lundi 04.05.2021
 
 *A faire :*
@@ -15,23 +17,21 @@
 
 **Matin**
 
-*Fait :*
+Je lis l'énoncé, réalise le planning prévisionnel, qui prend un peu plus de temps que prévu, et pose des questions à l'enseignant qui me suit.
 
-J'ai lu l'énoncé, réalisé le planning prévisionnel, qui a pris un peu plus de temps que prévu, et posé des questions à l'enseignant qui me suit.
+Nous convenons que je peux, au lieu de donner la météo sur la semaine à venir, la donner sur les 5 jours à venir, puisque telles sont le contraintes de l'API gratuite (openweathermap).
 
-Nous avons convenu que je pouvais, au lieu de donner la météo sur la semaine à venir, la donner sur les 5 jours à venir, puisque telles étaient le contraintes de l'API gratuite (openweathermap).
-
-J'ai ensuite réalisé le backlog, en me référant à l'énoncé. Je l'ai donc fini plus tôt que prévu.
+Je réalise ensuite le product backlog, en me référant à l'énoncé. Je le finis plus tôt que prévu.
 
 **Après-midi**
 
-*Fait :*
+Je réalise les maquettes principales du site (page principale, calendrier, semainier, formulaire d'ajout de vêtements, page de visualisation des vêtements).
 
-J'ai réalisé les maquettes principales du site (page principale, calendrier, semainier, formulaire d'ajout de vêtements, page de visualisation des vêtements).
+Ensuite, je finis de modéliser la base de données, puisque mon énoncé ne contient pas d'instructions particulières pour la gestion du calendrier. J'ai réalise également un diagramme de classes PHP pour la gestion des informations météo.
 
-Ensuite, j'ai fini de modéliser la base de données, puisque mon énoncé ne contenait pas d'instructions particulières pour la gestion du calendrier. J'ai également réaliser un diagramme de classes php pour la gestion des informations météo.
+15h30 : Je commence à écrire mes tests, en me basant sur le product backlog et sur les maquettes.
 
-Durant la dernière heure, j'ai commencé à écrire mes tests, en me basant sur le product backlog et sur les maquettes.
+➔ **Bilan de la journée** :
 
 
 
@@ -49,50 +49,63 @@ Durant la dernière heure, j'ai commencé à écrire mes tests, en me basant sur
 
 **Matin**
 
-7h30 : J'ai fait les tests concernant la météo, le calendrier, le semainier et la gestion de la garde-robe. 
+7h30 : Je fais les tests concernant la météo, le calendrier, le semainier et la gestion de la garde-robe. 
 
-9h20 : J'ai créé la base de données en fonction du modèle de l'énoncé complété la veille. Ensuite, j'ai fait le CRUD des utilisateurs et celui des vêtements.
+9h20 : Je crée la base de données en fonction du modèle de l'énoncé complété la veille. Ensuite, je fais le CRUD des utilisateurs et celui des vêtements.
 
 **Après-midi**
 
-12h40 : J'ai fait le CRUD des évènements pour le calendrier. J'ai passé un peu de temps à faire des recherches pour manipuler les dates, puisque je dois les faire passer du PHP au SQL dans la création et la recherche d'évènements. Finalement, je les ai mises en timestamp dans la BD, donc je dois les convertir en timestamp avant de les envoyer à la requête. 
+12h40 : Je fais le CRUD des évènements pour le calendrier. Je passe un peu de temps à faire des recherches pour manipuler les dates, puisque je dois les faire passer du PHP au SQL dans la création et la recherche d'évènements. Finalement, je les enregistre en timestamp dans la BD, donc je dois les convertir en timestamp avant de les envoyer à la requête. 
 
 Voilà comment j'ai fait :
 
 ```php
-$hour = date('h', strtotime($dateStart));
-$minute = date('i', strtotime($dateStart));
-$mMonth = date('m', strtotime($dateStart));
-$day = date('d', strtotime($dateStart));
-$year = date('Y', strtotime($dateStart));
+$hour = date('h', strtotime($date));
+$minute = date('i', strtotime($date));
+$month = date('m', strtotime($date));
+$day = date('d', strtotime($date));
+$year = date('Y', strtotime($date));
 
 //Transformer les dates en timestamp mySQL
-$timestamp = date ('Ymd H: i: s', mktime ($startHour, $startMinute, 0, $startMonth, $startDay, $startYear));
+$timestamp = date ('Ymd H: i: s', mktime ($hour, $minute, 0, $month, $day, $year));
 ```
 
 
 
-14h40 : J'ai réalisé les formulaires de connexion et d'inscription, en gérant l'enregistrement des informations du compte, dont le hash du mot de passe, et le système de vérification des informations lors de la connexion.
+14h40 : Je réalise les formulaires de connexion et d'inscription, en gérant l'enregistrement des informations du compte, dont le hash du mot de passe, et le système de vérification des informations lors de la connexion.
 
-j'ai également géré les autorisations, avec trois rôles : "déconnecté", "utilisateur" et "administrateur".
+je m'occupe ensuite du système de gestion les autorisations, avec trois rôles : "déconnecté", "utilisateur" et "administrateur".
 
-
+➔ **Bilan de la journée** : Je commence à être un peu plus éparpillée dans mes tâches que ce qui était prévu sur le planning.
 
 ## Mercredi 05.05.2021
 
 *A faire :*
 
-- Créer la page qui permet de supprimer les utilisateurs dans une liste
-- Créer la fonction qui génère les jours à afficher pour le calendrier (arrangement pour que la semaine ne soit pas coupée dans l'affichage du mois)
 - 
 
+- Créer la page qui permet de supprimer les utilisateurs dans une liste
+- Créer la fonction qui génère les jours à afficher pour le calendrier (arrangement pour que la semaine ne soit pas coupée dans l'affichage du mois)
+- Récupérer les évènements à afficher dans le calendrier et le semainier
+- Affichage du calendrier (s'il me reste du temps)
+
 **Matin**
+
+7h30 : Je commence la journée en testant ce que j'avais fait la veille, c'est à dire le système de gestion des utilisateurs. J'ai dois résoudre quelques problèmes de fonctionnement, puisque les tests ne passent pas
+
+8h30 : Erreurs corrigées, les tests passent. J'ai avancé sur la documentation, notamment en remplissant mon tableau d'avancée des tests.
+
+9h30 : Je réalise la page de gestion des utilisateurs, réservée aux administrateurs. J'effectue les tests, que je valide.
+
+10h30 : Je commence le calendrier
 
 
 
 **Après-midi**
 
 
+
+➔ **Bilan de la journée** :
 
 
 
@@ -126,6 +139,10 @@ j'ai également géré les autorisations, avec trois rôles : "déconnecté", "u
 
 
 
+➔ **Bilan de la journée** :
+
+
+
  
 
 ## Mardi 11.05.2021
@@ -141,6 +158,8 @@ j'ai également géré les autorisations, avec trois rôles : "déconnecté", "u
 **Après-midi**
 
 
+
+➔ **Bilan de la journée** :
 
 
 
@@ -159,6 +178,8 @@ j'ai également géré les autorisations, avec trois rôles : "déconnecté", "u
 **Après-midi**
 
 
+
+➔ **Bilan de la journée** :
 
 
 
@@ -196,6 +217,8 @@ j'ai également géré les autorisations, avec trois rôles : "déconnecté", "u
 
 
 
+➔ **Bilan de la journée** :
+
 
 
  
@@ -214,6 +237,10 @@ j'ai également géré les autorisations, avec trois rôles : "déconnecté", "u
 
 
 
+➔ **Bilan de la journée** :
+
+
+
 
 
 ## Jeudi 20.05.2021
@@ -227,6 +254,10 @@ j'ai également géré les autorisations, avec trois rôles : "déconnecté", "u
 
 
 **Après-midi**
+
+
+
+➔ **Bilan de la journée** :
 
 
 

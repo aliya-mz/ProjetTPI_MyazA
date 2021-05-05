@@ -8,6 +8,7 @@
 
 //Gestion des utilisateurs - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
+//Retourne l'identifiant de l'utilisateur connecté
 function GetIdUser(){
   if(isset($_SESSION["idUser"])){
     return $_SESSION["idUser"];
@@ -17,23 +18,41 @@ function GetIdUser(){
   }  
 }
 
+//Définit l'utilisateur connecté
 function SetIdUser($idUser){
   $_SESSION["idUser"] = $idUser;
 }
 
+//Retourne l'indentifiant du rôle de l'utilisateur
+function GetUserRole(){
+  if(isset($_SESSION["idUser"])){
+    //Récupérer l'utilisateur pour récupérer son rôle
+    return ReadUserById($_SESSION["idUser"])["idRole"];
+  }
+  else{
+    return 0;
+  }
+}
+
 //Vérifie que l'utilisateur (déconnecté, utilisateur ou administrateur) a le droit d'accéder à la page
 function VerifyAccessibility($acceptedRole){
+  if(!(GetUserRole()==$acceptedRole)){
+    header('Location: index.php');
+    exit;
+  }
+
+  /*
   //si elle est réservée aux déconnectés, vérifier que l'utilisateur n'est pas connecté
   if($acceptedRole = 0){
     //tester si on doit pouvoir accéder à cette page
-    if(!isset(GetIdUser())){
+    if(!GetIdUser()){
       header('Location: index.php');
       exit;
     }
   }
   //si la page est réservée aux utilisateurs connectés, vérifier que l'utilisateur connecté a le bon rôle (utilisateur ou adminisatrateur)
   else{
-    if(isset(GetIdUser())){
+    if(GetIdUser()){
       if(!ReadUserById(GetIdUser())["idRole"]==$acceptedRole){
         header('Location: index.php');
         exit;
@@ -44,8 +63,10 @@ function VerifyAccessibility($acceptedRole){
       exit;
     }
   }
+  */
 }
 
+//Vérifier que l'utilisateur existe et que son mot de passe est correct pour le connecter
 function ConnectUser($login, $password){
   //récupérer l'utilisateur dans la BD avec son Id
   $user = ReadUserByUsername($login);
@@ -64,6 +85,7 @@ function ConnectUser($login, $password){
   }
 }
 
+//Inscrire l'utilisateur, en l'ajoutant dans la BD avec son mot de passe hashé
 function SignUserIn($login, $firstName, $lastName, $eMail, $password){
   //hasher le mot de passe
   $password = password_hash($password, PASSWORD_DEFAULT);
@@ -76,14 +98,90 @@ function SignUserIn($login, $firstName, $lastName, $eMail, $password){
   exit;
 }
 
-//Gestion garde-robe - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+function ShowNavByRole(){
+  //Si l'utilisateur est déconnecté, afficher le lien pour se connecter
+  if(GetUserRole()==0){
+    //Connexion
+		echo "<li class=\"nav-item\">";
+		echo "<a class=\"nav-link\" href=\"login.php\">Connexion</a>";
+		echo "</li>";
+    //Inscription
+		echo "<li class=\"nav-item\">";
+		echo "<a class=\"nav-link\" href=\"signin.php\">Inscription</a>";
+		echo "</li>";
+  }
+  //Si c'est un utilisateur connecté, afficher les liens vers le parties calendrier, garde-robe et compte, et la déconnexion
+  else if(GetUserRole()==1){
+    //Lien calendrier
+    echo "<li class=\"nav-item\">";
+		echo "<a class=\"nav-link\" href=\"#\">Calendrier</a>";
+		echo "</li>";
+    
+    //Liste déroulante gestion de la garde-robe
+		echo "<li class=\"nav-item dropdown\">";
+		echo "<a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDarkDropdownMenuLink\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">	Garde-robe </a>
+          <ul class=\"dropdown-menu dropdown-menu-light\" aria-labelledby=\"navbarLightDropdownMenuLink\">
+          <li><a class=\"dropdown-item\" href=\"ajouterVetement.php\">Ajouter des vêtements</a></li>
+          <li><a class=\"dropdown-item\" href=\"voirMesVetements.phpm\">Voir mes vêtements</a></li>
+          <li><a class=\"dropdown-item\" href=\"voirTenues\">Tenues de la semaine</a></li>
+          </ul>";
+		echo "</li>";
 
-//Gestion du formulaire_________________________________________________________
+    //Déconnexion
+		echo "<li class=\"nav-item\">";
+		echo "<a class=\"nav-link\" href=\"logout.php\">Deconnexion</a>";
+		echo "</li>";
+  }
+  //Si c'est un administrateur, afficher le lien vers la gestion des utilisateurs et la déconnexion
+  else if(GetUserRole()==2){
+    //Gestion des utilisateurs
+    echo "<li class=\"nav-item\">";
+		echo "<a class=\"nav-link\" href=\"manageUsers.php\">Gestion des utilisateurs</a>";
+		echo "</li>";
+
+    //Déconnexion
+		echo "<li class=\"nav-item\">";
+		echo "<a class=\"nav-link\" href=\"logout.php\">Deconnexion</a>";
+		echo "</li>";
+  }
+}
+
+//Affiche une liste des utilisateurs, avec un bouton supprimer
+function ShowListUsers(){
+  //Récupérer tous les utilisateurs dont le rôle est "utilisateur"
+  $users = readUsers();
+
+  foreach($users as $user){
+    echo "<tr>";
+     
+    echo "<td> <div class=\"bubble\">";
+    //Informations sur l'utilisateur
+    echo "<div><p class=\"bubbleTitle\">".$user["login"]."</p><p>".$user["firstName"]." ".$user["lastName"]."</p></div>";    
+    //Bouton supprimer
+    echo "<button type=\"submit\" name=\"delete\" value=\"".$user["idUser"]."\"/><img src=\"img/delete.png\"></button>
+    </div></td>";
+
+    echo "</tr>";
+  }
+}
+
+function DeleteUser($idUser){
+  DeleteUserById($idUser);
+}
+
+
+
+//Gestion garde-robe - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+//Gestion du formulaire___________________________________________________________________________________________
+
+//Retourne la liste des catégories de vêtements
 function GetCategories(){
 
   return [];
 }
 
+//Retourne la liste des catégories météo
 function GetWeathers(){
 
   return [];
@@ -130,21 +228,25 @@ function EnregistrerVetement($name, $idCategory, $color, $idWeather, $tempMin, $
    CreateClothe($name, $idCategory, $color, $idWeather, $tempMin, $tempsMax, GetIdUser());
 }
 
-/*A FAIRE*/
-function GenererNomRandom(){
-  return "abc";
+function GenerateRandomString($length) {
+  $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  $charactersLength = strlen($characters);
+  $randomString = '';
+  for ($i = 0; $i < $length; $i++) {
+      $randomString .= $characters[rand(0, $charactersLength - 1)];
+  }
+  return $randomString;
 }
 
-
-//Création de tenues_____________________________________________________________
+//Création de tenues______________________________________________________________________________________________
 
 //Définir les groupes de vêtements pour pouvoir les assembler en tenues
 $groups = [
-  "hauts" => [],
-  "bas" => [],
-  "combinaisons" => [],
-  "vestes et manteaux" => [],
-  "chaussures" => []
+  "Hauts" => [],
+  "Bas" => [],
+  "Combinaisons" => [],
+  "Vestes et manteaux" => [],
+  "Chaussures" => []
 ];
 
 function GenerateDress($temperature, $weather){
@@ -155,24 +257,23 @@ function GenerateDress($temperature, $weather){
   return [];
 }
 
-
-//Affichage______________________________________________________________________
+//Affichage_______________________________________________________________________________________________________
 
 //Créer fichier à partir de vêtement BD (couleur et script SVG) avec nom correspondant à idVetement - en cours
 function CreateClotheImage($idCategory, $color){
   //Créer un fichier SVG en reprenant le modèle pour ce type de vêtement dans la base de données
-  $chemin = GenererNomRandom().".svg";
-  $fichier = fopen($chemin, "c+b");
+  $path = GenerateRandomString(10).".svg";
+  $file = fopen($path, "c+b");
 
   //Récupérer le script du fichier dans la BD
-  $script = GetCategories($idType)["is_template"];
+  $script = GetCategories()[$idCategory]["is_template"];
   
   //Modifier la couleur par celle choisie par l'utilisateur
   $aModifier = "";
-  $script = preg_replace($aModifier, $couleur, $fichier);
+  $script = preg_replace($aModifier, $color, $file);
 
   //Retourner l'adresse du fichier
-  return $chemin;
+  return $path;
 }
 
 /*A FAIRE*/
@@ -189,9 +290,9 @@ function DisplayDress($dress){
 
 
 
-//Gestion du calendrier- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//Gestion du calendrier- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-//Générer le calendrier et semainier _____________________________________________
+//Générer le calendrier et semainier ____________________________________________________________________________
 
 //Générer un tableau à deux dimensions contenant tous les jours à afficher dans le calendrier pour le mois X de l'année X
 function GetCalendarDays($month, $year){
@@ -207,7 +308,7 @@ function GetWeekHours(){
   return $days;
 }
 
-//Gestion des évènements__________________________________________________________
+//Gestion des évènements_________________________________________________________________________________________
 
 //Récupérer tous les évènements ajoutés au calendrier, compris dans les jours du mois actuellement affiché
 function GetEventsBetween($dateStart, $dateEnd){
@@ -276,8 +377,7 @@ function HourToTimestamp($date){
   return $timestamp;
 }
 
-
-//Gérer l'affichage________________________________________________________________
+//Gérer l'affichage______________________________________________________________________________________________
 
 //Afficher le calendrier sous forme de tableau. Chaque jour est une case, chaque ligne une semaine (tableau 6x7)
 function DisplayMonthCalendar($month, $year){
@@ -331,43 +431,3 @@ function DisplayWeekPlanner(){
 
 
 
-
-
-
-
-
-
-
-
-
-/*
-function ideesToHtmlTable($idees, $mesIdees, $favoris){
-    $note = "";
-
-    echo "<tbody>";
-    //afficher chaque idée, afficher chaque champs de l'idée
-    foreach($idees as $idee) {
-      //récupérer la note de l'idée
-      $note = readNoteByIdeeIdAndUser($idee["idIdee"], $_SESSION["idUser"]);
-      echo "<tr>";
-
-          //fabrication du conteneur avec des flexbox
-          echo "<td>";
-          echo "<div class=\"conteneurIdee\">
-          <div class=\"en-teteIdee\"><div>".$idee['titre']."</div><div>".$idee['dateFormatee']."</div></div>
-          <div class=\"corpsIdee\">
-          <div id=\"categorie\">Catégorie :".readCategorieById($idee['idCategorie'])["nom"]."</div>
-          <div id=\"description\">".$idee['descriptionIdee']."</div>
-          <div id=\"tags\">";
-          //afficher tous les tags
-          $tags = getTagsById($idee['idIdee']);
-          foreach ($tags as $tag) {
-            echo "<label class=\"taglabel\">".$tag["mot"]."</label>";
-          }
-          echo "</div></div>";      
-
-        echo "</tr>";
-      }
-    echo "</tbody>";
-}
-*/

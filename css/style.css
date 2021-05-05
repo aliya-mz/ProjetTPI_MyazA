@@ -316,3 +316,43 @@ input[type=color] {
   height: 20px;
   width: 150px;
 }
+
+
+/*Liste des utilisateurs à supprimer*/
+
+.usersList button{  
+  background-color: white;
+  height: 30px;
+  width: 30px;
+}
+
+.usersList img{
+  height: 20px;
+  width: 20px;
+}
+
+.usersList div, button{
+  margin : 20px;
+}
+
+
+.bubble{
+  width:100%;
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: gray;
+}
+
+.bubble div{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.bubbleTitle{
+  font-weight:bold;
+}
