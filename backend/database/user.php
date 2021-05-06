@@ -84,7 +84,6 @@ function ReadUsers(){
   return $answer;
 }
 
-
 function CreateUser($login, $firstName, $lastName, $eMail, $myPassword){
   //initaliser le prepare statement
   static $ps = null;
@@ -115,7 +114,40 @@ function CreateUser($login, $firstName, $lastName, $eMail, $myPassword){
   return $answer;
 }
 
-function UpdateUserById($idUser, $login, $firstName, $lastName, $eMail, $myPassword){
+function UpdateUserById($idUser, $login, $firstName, $lastName, $eMail){
+  //initaliser le prepare statement
+  static $ps = null;
+  //requête
+  $sql = 'UPDATE user SET login = :login, firstName = :firstName, lastName = :lastName, eMail = :eMail WHERE idUser = :idUser';
+
+  //si le prépare statement n'a encore jamais été fait
+  if($ps == null){
+    //préparer la requête
+    $ps = db()->prepare($sql);
+  }
+  $answer = false;
+  try{
+    //lier le paramètre dans la requête avec la variable
+    $ps->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+    $ps->bindParam(':login', $login, PDO::PARAM_STR);
+    $ps->bindParam(':firstName', $firstName, PDO::PARAM_STR);
+    $ps->bindParam(':lastName', $lastName, PDO::PARAM_STR);
+    $ps->bindParam(':eMail', $eMail, PDO::PARAM_STR);
+
+    $answer = $ps->execute();
+    if($answer){
+      echo "La note ".$idUser." a été modifiée";
+    }    
+  }
+  catch(PDOException $e){
+    echo $e->getMessage();
+    echo "Un problème est survenu lors de la modification de la note ".$idUser;
+  } 
+
+  return $answer;
+}
+
+function UpdateUserByIdWithPassword($idUser, $login, $firstName, $lastName, $eMail, $myPassword){
   //initaliser le prepare statement
   static $ps = null;
   //requête
@@ -134,7 +166,7 @@ function UpdateUserById($idUser, $login, $firstName, $lastName, $eMail, $myPassw
     $ps->bindParam(':firstName', $firstName, PDO::PARAM_STR);
     $ps->bindParam(':lastName', $lastName, PDO::PARAM_STR);
     $ps->bindParam(':eMail', $eMail, PDO::PARAM_STR);
-    $ps->bindParam(':myPassword', $myPassword, PDO::PARAM_INT);
+    $ps->bindParam(':myPassword', $myPassword, PDO::PARAM_STR);
 
     $answer = $ps->execute();
     if($answer){

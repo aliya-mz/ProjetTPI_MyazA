@@ -16,13 +16,6 @@ VerifyAccessibility(0);
 $login = FILTER_INPUT(INPUT_POST, "login", FILTER_SANITIZE_STRING);
 $password = FILTER_INPUT(INPUT_POST, "password", FILTER_SANITIZE_STRING);
 $connexion = FILTER_INPUT(INPUT_POST, "connexion", FILTER_SANITIZE_STRING);
-
-if($connexion){
-  //si les champs sont remplis
-  if($login && $password){
-    ConnectUser($login, $password);
-  }
-}
 ?>
 
 <!DOCTYPE html>
@@ -46,6 +39,14 @@ if($connexion){
           <td colspan="2"><input type="password" name="password" value="" placeholder="Mot de passe"></td>
         </tr>
         <tr>
+          <?php
+          if($connexion){
+            //si les champs sont remplis
+            if($login && $password){
+              ConnectUser($login, $password);
+            }
+          }
+          ?>
           <td colspan="2"><button class="btnCreateIdea" type="submit" name="connexion" value="connexion">Connexion</button></td>
         </tr>
         <tr>

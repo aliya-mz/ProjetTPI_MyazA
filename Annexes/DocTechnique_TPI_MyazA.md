@@ -1,10 +1,12 @@
-Documentation technique 
+# Documentation technique
+
+
 
 ## Table des matières
 
-
-
 [TOC]
+
+
 
 ## Table des versions
 
@@ -14,9 +16,13 @@ Documentation technique
 
 
 
+
+
 ## Introduction
 
-[Généralités]
+Le projet ***Wearther*** est une application web qui propose des suggestions de tenues en fonction de la météo. Son but est de faire gagner du temps aux utilisateurs, voir de les sauver les jours où leur réveil ne sonne pas. L'application permet, en un clic, d'avoir un aperçu sur la météo du jour et de la semaine à venir, une suggestion de tenue journalière adaptée à la météo, et une vue sur leur agenda du jour, le tout sur la même page. En effet, pour être la plus pratique possible, l'application dispose également d'un calendrier et d'un semainier.
+
+J'ai réalisé ce projet en PHP avec une base de donnée MySQL. J'ai également fait appel à une API externe, *OpenWeatherMap*, pour la météo.
 
 
 
@@ -35,6 +41,10 @@ Documentation technique
 [Quoi ? A qui ?]
 
 ### Matériel et logiciels nécessaires
+
+[Blabla]
+
+
 
 
 
@@ -228,6 +238,10 @@ Les bilans de la journée que j'ai écrit après chaque journée de travail m'on
 
 
 
+
+
+
+
 ## Analyse Fonctionnelle
 
 ### Fonctionnalités du projet
@@ -241,6 +255,10 @@ Les bilans de la journée que j'ai écrit après chaque journée de travail m'on
 ### Description de l’interface
 
 [maquettes (Figma) commentées]
+
+
+
+
 
 
 
@@ -328,6 +346,8 @@ Description du rôle
 
 
 
+
+
 ## Tests et protocole de tests
 
 ### Périmètre des tests
@@ -345,6 +365,8 @@ Description du rôle
 ### Scénarios de test
 
 Les scénarios ont été écrits avant la réalisation du projet, afin de garantir la réponse aux demandes du cahier des charge. Lors de la réalisation d'un scénario, faire attention à ce que son scénario prérequis ait été exécuté avant. Dans le cadre de ce travail, les tests ont été exécutés manuellement.
+
+
 
 #### Scénarios - gestion des utilisateurs
 
@@ -477,6 +499,8 @@ Les scénarios ont été écrits avant la réalisation du projet, afin de garant
 | *Résultats obtenus* |                                                              |
 | *Statut*            | X                                                            |
 
+
+
 #### Scénarios - gestion de la garde-robe
 
 [Nom ; Type ; Couleur ; Catégorie météo ; Intervalle temp]
@@ -514,26 +538,26 @@ Les scénarios ont été écrits avant la réalisation du projet, afin de garant
 
 | N° test | J0   | J1   | J2   | J3   | J4   | J5   | J6   | J7   | J8   | J9   | J10  |
 | ------- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
-| 1.1     | X    |      |      |      |      |      |      |      |      |      |      |
-| 1.2     | X    |      |      |      |      |      |      |      |      |      |      |
-| 1.3     | X    |      |      |      |      |      |      |      |      |      |      |
-| 1.4     | X    |      |      |      |      |      |      |      |      |      |      |
-| 1.5     | X    |      |      |      |      |      |      |      |      |      |      |
-| 1.6     | X    |      |      |      |      |      |      |      |      |      |      |
-| 1.7     | X    |      |      |      |      |      |      |      |      |      |      |
-| 1.8     | X    |      |      |      |      |      |      |      |      |      |      |
-| 1.9     | X    |      |      |      |      |      |      |      |      |      |      |
-| 2.1     | X    |      |      |      |      |      |      |      |      |      |      |
-| 2.2     | X    |      |      |      |      |      |      |      |      |      |      |
-| 3.1     | X    |      |      |      |      |      |      |      |      |      |      |
-| 3.2     | X    |      |      |      |      |      |      |      |      |      |      |
-| 3.3     | X    |      |      |      |      |      |      |      |      |      |      |
-| 3.4     | X    |      |      |      |      |      |      |      |      |      |      |
-| 3.5     | X    |      |      |      |      |      |      |      |      |      |      |
-| 3.6     | X    |      |      |      |      |      |      |      |      |      |      |
-| 4.1     | X    |      |      |      |      |      |      |      |      |      |      |
-| 4.2     | X    |      |      |      |      |      |      |      |      |      |      |
-| 4.3     | X    |      |      |      |      |      |      |      |      |      |      |
+| 1.1     | ✗    | ✗    | ✓    |      |      |      |      |      |      |      |      |
+| 1.2     | ✗    | ✗    | ✓    |      |      |      |      |      |      |      |      |
+| 1.3     | ✗    | ✗    | ✓    |      |      |      |      |      |      |      |      |
+| 1.4     | ✗    | ✗    | ✓    |      |      |      |      |      |      |      |      |
+| 1.5     | ✗    | ✗    | ✓    |      |      |      |      |      |      |      |      |
+| 1.6     | ✗    | ✗    | ✓    |      |      |      |      |      |      |      |      |
+| 1.7     | ✗    | ✗    | ✓    |      |      |      |      |      |      |      |      |
+| 1.8     | ✗    | ✗    | ✓    |      |      |      |      |      |      |      |      |
+| 1.9     | ✗    | ✗    | ✓    |      |      |      |      |      |      |      |      |
+| 2.1     | ✗    | ✗    | ✗    |      |      |      |      |      |      |      |      |
+| 2.2     | ✗    | ✗    | ✗    |      |      |      |      |      |      |      |      |
+| 3.1     | ✗    | ✗    | ✗    |      |      |      |      |      |      |      |      |
+| 3.2     | ✗    | ✗    | ✗    |      |      |      |      |      |      |      |      |
+| 3.3     | ✗    | ✗    | ✗    |      |      |      |      |      |      |      |      |
+| 3.4     | ✗    | ✗    | ✗    |      |      |      |      |      |      |      |      |
+| 3.5     | ✗    | ✗    | ✗    |      |      |      |      |      |      |      |      |
+| 3.6     | ✗    | ✗    | ✗    |      |      |      |      |      |      |      |      |
+| 4.1     | ✗    | ✗    | ✗    |      |      |      |      |      |      |      |      |
+| 4.2     | ✗    | ✗    | ✗    |      |      |      |      |      |      |      |      |
+| 4.3     | ✗    | ✗    | ✗    |      |      |      |      |      |      |      |      |
 
 
 
@@ -569,13 +593,13 @@ Description améliorations
 
 ### API Météo
 
-[liens]
+https://openweathermap.org/forecast5
 
 
 
 ### Graphiques
 
-[liens]
+https://developers.google.com/chart/interactive/docs
 
 
 

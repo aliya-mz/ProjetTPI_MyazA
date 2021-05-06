@@ -1,4 +1,9 @@
+html {
+}
+
 body{
+  max-height: 100vh;
+  padding: 0;
   background-color:#C8E8F3;
   width:100%;
   margin:0;
@@ -7,12 +12,13 @@ body{
   color:#463333;
 }
 
-main{
+.otherMain{
   width:100%;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:space-around;
+  color:gray;
 }
 
 h3{
@@ -71,7 +77,7 @@ input, select, button{
   border:none;
   width:100%;
   height:50px;
-  background-color:#E0EFFF;
+  background-color:white;
   color:#656565;
   border-radius:5px;
   margin-left:50px;
@@ -81,7 +87,11 @@ input, select, button{
 }
 
 .iconButton{
-  height:30px;
+  height:40px;
+}
+
+.smallIconButton{
+  height:25px;
 }
 
 table{
@@ -91,12 +101,12 @@ table{
 }
 
 form{
-  margin-left:5%;
+  
 }
 
 thead{
   background-color:#D5D5E0;
-  color:white;
+  color:grey;
 }
 
 td{
@@ -149,7 +159,7 @@ td{
   margin:2%;
   margin-top:50px;
 }
-
+/*
 .formAdd tr, td{
   width:100%;
   height:auto;
@@ -158,22 +168,23 @@ td{
   justify-content:center;
   padding-top:1%;
   padding-bottom:1%;
-}
+}*/
 
 .formAdd button{
   height:50px;
-  background-color:#D5D5E0;
+  background-color:white;
   border-radius:5px;
-  border:none;
+  border:1px solid #C0C0C0;
 }
 
 .formAdd input, select, option, button, textarea{
   width:100%;
+  border:1px solid #C0C0C0;
 }
 
 .formAdd textarea{
   height:200px;
-  background-color:#E9E7EF;
+  background-color:white;
   border-radius:5px;
   border:none;
 }
@@ -252,7 +263,7 @@ td{
 .ideesUserMain thead tr td{
   height:50px;
   background-color:#CBC5ED;
-  color:#4F4C5B;
+  color:#797979;
 }
 
 .ideesUserMain button{
@@ -355,4 +366,92 @@ input[type=color] {
 
 .bubbleTitle{
   font-weight:bold;
+}
+
+/*Calendrier*/
+
+.mainCalendar{
+  width: 100%;
+  height: 100vh;
+  margin: 0px;
+  padding: 0px;
+}
+
+.navCalendar{
+  height: 7.9vh;
+}
+
+.calendarForm{
+  height: 92vh;
+  padding: 0px;
+  margin: 0px;
+}
+
+.calendarTable{
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+.calendarTable th{
+  font-weight: normal;
+  color: #505050;
+}
+
+.calendarTable tr{
+  height: 16%;  
+}
+
+.calendarTable td{
+  width: 10%;
+  height: 10%;
+}
+
+.activeDay{
+  color: #656565;
+}
+
+.inactiveDay{
+  color: #C5C5C5;
+}
+
+.eventBubble{  
+  background-color: #D3EFFF;
+  border-radius: 5px;
+  padding: 1px 10px 1px 10px;
+}
+
+.eventsCase{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.eventBubble button{  
+  background-color: #D3EFFF;
+  height: 14px;
+  width: 14px;
+}
+
+.eventBubble img{
+  height: 14px;
+  width: 14px;
+}
+
+
+
+
+/*Formulaires*/
+.ordinaryForm{
+  width:100%;
+  height: 92vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 100px;
 }

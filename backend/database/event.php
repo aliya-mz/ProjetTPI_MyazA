@@ -6,12 +6,16 @@
   Description : Gestion de la table "event" - en cours
 */
 
+//Ajouter paramètre user
 function readEventsByTime($dateStart, $dateEnd){
   //initaliser le prepare statement
   static $ps = null;
 
-  //requête
-  $sql = "SELECT *, DATE_FORMAT(`dateStart`, '%d.%m.%Y') as theDate, DATE_FORMAT(`dateStart`, '%H:%i') as theHour, DATE_FORMAT(`dateStart`, '%w') as theWeekDay from `event` WHERE reccurent LIKE -1";
+  //requête  
+  $sql = "SELECT *, DATE_FORMAT(`dateStart`, '%Y-%m-%d') AS theDate, DATE_FORMAT(`dateStart`, '%H:%i') AS theHour, DATE_FORMAT(`dateStart`, '%w') AS theWeekDay from `event` 
+  WHERE reccurent LIKE 0 
+  AND ((dateStart BETWEEN :dateStart AND :dateEnd) OR (dateEnd BETWEEN :dateStart AND :dateEnd))";
+
   //si le prepare statement n'a encore jamais été fait
   if($ps == null){
     //préparer la requête
@@ -29,8 +33,6 @@ function readEventsByTime($dateStart, $dateEnd){
   catch(PDOException $e){
     echo $e->getMessage();
   }
-
-  echo $answer;
   return $answer;
 }
 
@@ -54,8 +56,6 @@ function readWeekPlannerEvents(){
   catch(PDOException $e){
     echo $e->getMessage();
   }
-
-  echo $answer;
   return $answer;
 }
 
@@ -86,10 +86,11 @@ function readEventById($idEvent){
 }
 
 function createEvent($description, $dateStart, $dateEnd, $isReccurent, $idUser){
+  echo $dateStart;
   //initaliser le prepare statement
   static $ps = null;
   //requête
-  $sql = "INSERT INTO `event` (`description`, `dateStart`, `dateEnd`, `isReccurent`, `idUser`) VALUES ( :description, :dateStart, :dateEnd, :isReccurent, :idUser)";
+  $sql = "INSERT INTO `event` (`description`, `dateStart`, `dateEnd`, `reccurent`, `idUser`) VALUES ( :description, :dateStart, :dateEnd, :isReccurent, :idUser)";
 
   //si le prepare statement n'a encore jamais été fait
   if($ps == null){
@@ -100,8 +101,8 @@ function createEvent($description, $dateStart, $dateEnd, $isReccurent, $idUser){
   try{
     //lier le paramètre dans la requête avec la variable
     $ps->bindParam(':description', $description, PDO::PARAM_STR);
-    $ps->bindParam(':dateStart', $dateStart, PDO::PARAM_INT);
-    $ps->bindParam(':dateEnd', $dateEnd, PDO::PARAM_INT);
+    $ps->bindParam(':dateStart', $dateStart, PDO::PARAM_STR);
+    $ps->bindParam(':dateEnd', $dateEnd, PDO::PARAM_STR);
     $ps->bindParam(':isReccurent', $isReccurent, PDO::PARAM_INT);
     $ps->bindParam(':idUser', $idUser, PDO::PARAM_INT);
 
@@ -146,7 +147,7 @@ function DeleteEventById($idEvent){
   //initaliser le prepare statement
   static $ps = null;
   //requête
-  $sql = "DELETE FROM event, role WHERE idEvent LIKE :idEvent";
+  $sql = "DELETE FROM event WHERE idEvent LIKE :idEvent";
 
   //si le prepare statement n'a encore jamais été fait
   if($ps == null){
