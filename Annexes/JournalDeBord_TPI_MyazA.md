@@ -157,19 +157,22 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 - Affichage météo
 - Tests météo
-- Fonctionnalités création, modification et suppression de vêtement
-- Discuter avec mon enseignant des catégories de vêtements
-- Rechercher images vectorielles pour chaque catégorie de vêtement
 
 **Matin**
 
+8h40 : Je commence le système météo. Pour ça, je dois d'abord récupérer les informations grâce à l'API. Je lis la documentation de l'option que j'ai choisie au début de mon travail, et essaie de créer la bonne requête. Puis je l'implémente dans mon code.
 
+10h00 : Je crée des classes pour gérer l'enregistrement des informations météo récupérées.
 
 **Après-midi**
 
+12h40 : Je réalise des fonctions de classement des informations, afin de ne récupérer que celles dont j'ai besoin, et de les organiser de manière pratique pour pouvoir facilement les afficher ensuite.
+
+14h00 : Je réalise des fonctions d'affichage, qui me permettent d'afficher les informations détaillées pour chaque jours, ainsi que les informations résumées, pour le calendrier.
 
 
-➔ **Bilan de la journée** :
+
+➔ **Bilan de la journée** : 
 
 
 
@@ -179,10 +182,10 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 *A faire :*
 
+- Fonctionnalités création, modification et suppression de vêtement
+- Discuter avec mon enseignant des catégories de vêtements
+- Rechercher images vectorielles pour chaque catégorie de vêtement
 - Génération dynamique de l'image du vêtement (vectoriel)
-
-- Algorithme de recommandation de tenues
-- Documentation
 
 **Matin**
 
@@ -202,7 +205,11 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 *A faire :*
 
+- Algorithme de recommandation de tenues
 
+- Documentation
+
+  
 
 **Matin**
 
@@ -222,7 +229,8 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 *A faire :*
 
-
+- Visuel
+- Tests
 
 **Matin**
 
@@ -240,7 +248,7 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 *A faire :*
 
-
+- Corrections
 
 **Matin**
 
@@ -260,7 +268,7 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 *A faire :*
 
-
+- Documentation
 
 **Matin**
 
@@ -280,7 +288,7 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 *A faire :*
 
-
+- Documentation
 
 **Matin**
 

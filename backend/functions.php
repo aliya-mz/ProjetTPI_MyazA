@@ -3,7 +3,7 @@
   Projet      : Suggestion de tenues en fonction de la météo
   Date        : Mai 2021
   Auteur      : Aliya Myaz
-  Description : Fonction du projet
+  Description : Fonctions du projet
 */
 
 //Gestion des utilisateurs - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -47,30 +47,6 @@ function VerifyAccessibility($acceptedRole){
     header('Location: index.php');
     exit;
   }
-
-  /*
-  //si elle est réservée aux déconnectés, vérifier que l'utilisateur n'est pas connecté
-  if($acceptedRole = 0){
-    //tester si on doit pouvoir accéder à cette page
-    if(!GetIdUser()){
-      header('Location: index.php');
-      exit;
-    }
-  }
-  //si la page est réservée aux utilisateurs connectés, vérifier que l'utilisateur connecté a le bon rôle (utilisateur ou adminisatrateur)
-  else{
-    if(GetIdUser()){
-      if(!ReadUserById(GetIdUser())["idRole"]==$acceptedRole){
-        header('Location: index.php');
-        exit;
-      }
-    }
-    else{
-      header('Location: index.php');
-      exit;
-    }
-  }
-  */
 }
 
 //Vérifier que l'utilisateur existe et que son mot de passe est correct pour le connecter
@@ -111,6 +87,7 @@ function SignUserIn($login, $firstName, $lastName, $eMail, $password){
   exit;
 }
 
+//Affiche une barre de navigation pour la page principale, contenant les liens adaptés au rôle de l'utilisateur
 function ShowNavByRole(){
   //Si l'utilisateur est déconnecté, afficher le lien pour se connecter
   if(GetUserRole()==0){
@@ -183,6 +160,7 @@ function ShowListUsers(){
   }
 }
 
+//Supprime un utilisateur en fonction de son indentifiant
 function DeleteUser($idUser){
   DeleteUserById($idUser);
 }
@@ -417,13 +395,12 @@ function DisplayMonthCalendar($month, $year){
   echo "</table>";
 }
 
-//A FAIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIREEEEEEEEEEEEEEEEEEEEEEEE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //Afficher le semainier sous forme de tableau
 function DisplayWeekPlanner(){
   $hours = GetWeekHours();
   $events = GetEventsWeekPlanner();
 
-  var_dump($events);
+  //var_dump($events);
   //Afficher le tableau du semainier
   echo "<table class=\"table table-bordered table-light calendarTable\">";
   echo "<thead><tr>
@@ -442,7 +419,7 @@ function DisplayWeekPlanner(){
       //créer un identifiant avec l'heure et le jour de la semaine
       $indexCase=($col+1).":".$hours[$col][$row];
       echo "<div class=\"eventsCase\">";
-      echo $indexCase;
+      //echo $indexCase;
       if(array_key_exists($indexCase, $events)){
         DisplayEvent($events[$indexCase], false);
       }
@@ -607,3 +584,247 @@ function DisplayDress($dress){
 
 
 //Gestion de la météo- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+define("KEY_IP", "d4fb62a10090dc46eff900d5da5eeca7");
+
+//Fonctions pour récupérer et stocker les informations - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+function IsSetMeteo(){
+  return $_SESSION["meteo"];
+}
+
+function SetMeteo($meteo){
+  $_SESSION["meteo"] = $meteo;
+}
+
+function GetMeteo(){
+  return $_SESSION["meteo"];
+}
+
+function ExecuteMeteoProgram(){
+    //Récupérer les informations météo des 5 jours à venir
+    $meteoInfos = GetMeteoInfos();
+
+    //Les classer pour pouvoir les enregistrer
+    $ClassedInfos = ClassifyMeteoInfos($meteoInfos);
+
+    //Ranger les informations dans des jours
+    $ClassedInfos = ClassifyInfosByDay($ClassedInfos);
+
+    //Les enregistrer dans un objet
+    $week = new week($ClassedInfos);
+
+    //sauvegarder l'objet dans la session
+    SetMeteo($week);
+}
+
+function GetMeteoInfos(){
+    //Appel de l'API
+    $url = "http://api.openweathermap.org/data/2.5/forecast?q=Geneve&appid=".KEY_IP."&lang=fr";
+    $result = file_get_contents($url);
+    $meteoInfos = json_decode($result, true);
+
+    return $meteoInfos;
+}
+
+function ClassifyMeteoInfos($meteoInfos){ 
+    $nbDays = 5; 
+    $nbDayRecording = 8;
+    
+    $recordingsInfos = [];
+
+    //Parcourir tous les enregistrements météo de la semaine
+    for($i = 0; $i < ($nbDayRecording * $nbDays); $i++){
+        //enregistrer sous forme de dictionnaire les informations météo récupérées par l'API
+        $recordingInfos = $array = [
+            //Date de l'enregistrement
+            "date" => explode(" ",$meteoInfos["list"][$i]["dt_txt"])[0],
+            //Heure de l'enregistrement
+            "heure" => explode(":", explode(" ",$meteoInfos["list"][$i]["dt_txt"])[1])[0],            
+            //Récupérer la temperature
+            "temperature" => round($meteoInfos["list"][$i]["main"]["temp"]-273.15),
+            //Le groupe météorologique(pluie, neige...)
+            "groupeMeteorologique" => $meteoInfos["list"][$i]["weather"][0]["main"],
+            //La description de la météo
+            "descriptionMeteo" => $meteoInfos["list"][$i]["weather"][0]["description"],
+            //l'icone météo
+            "icone" => $meteoInfos["list"][$i]["weather"][0]["icon"],
+            //L'humidité
+            "humidite" => $meteoInfos["list"][$i]["main"]["humidity"],
+            //La vitesse du vent
+            "vitesseVent" => $meteoInfos["list"][$i]["wind"]["speed"],
+            //La probabilité de pécipitations
+            "probPrecipitations" => $meteoInfos["list"][$i]["pop"],
+        ];
+
+        //Ajouter le relevé météo au tableau général
+        array_push($recordingsInfos, $recordingInfos);
+    }
+
+    //var_dump($recordingsInfos);
+    return $recordingsInfos;
+}
+
+function ClassifyInfosByDay($meteoInfos){
+    $daysInfos = [];
+    $intervalEnreg = 3;
+
+    //Récupérer la première heure disponible de la journée (les heures déjà passées ne sont pas données)
+    $firstHour = $meteoInfos[0]["heure"];
+    //Calculer le nombre d'enregistrements météo restants pour la journée (une journée commence à minuit)
+    $lastingHours = ((24-$firstHour)/$intervalEnreg);
+
+    //Supprimer les enregistrements du 6ème jour incomplet
+    $lastDayHours = 8-$lastingHours;
+    if($lastDayHours<8){
+        $a = (count($meteoInfos) - $lastDayHours);
+        for($i = count($meteoInfos)-1; $i >= $a; $i--){
+            unset($meteoInfos[$i]);
+        }
+    }
+
+    //var_dump($meteoInfos);
+
+    //Créer un tableau contenant les jours, contenant eux-mêmes * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    $countRecordings = 0;
+    //parcourir tous les jours (les 5 à venir)
+    for($i = 0; $i < 5; $i++){
+        $dayRecording = [];
+        //Tant que l'enregistrement suivant a la même date que le précédent
+        do{
+            //L'ajouter dans le jour actuel
+            array_push($dayRecording, $meteoInfos[$countRecordings]);
+            //Incrémenter le compteur d'enregistrements
+            $countRecordings += 1;
+        }
+        while($meteoInfos[$countRecordings-1]["date"] == $meteoInfos[$countRecordings]["date"] && $countRecordings < count($meteoInfos)-1);
+
+        //ajouter la journée dans le tableau des journées
+        array_push($daysInfos, $dayRecording);
+    }
+
+    //echo GetJourSemaineActuel();
+
+    //var_dump($daysInfos);
+
+    return $daysInfos;
+}
+
+//Fonctions d'affichage - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+function ShowDaysNav(){
+  //Afficher les liens vers les informations de chacun des cinq jours à venir
+  for($i = 0; $i < 5; $i++){
+    if($i == GetDayToDisplay()){
+      echo '<li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.php?numDay='.$i.'">'.GetWeekDayName($i).'</a>
+          </li>';
+    }
+    else{
+      echo '<li class="nav-item">
+          <a class="nav-link" href="index.php?numDay='.$i.'">'.GetWeekDayName($i).'</a>
+          </li>';
+    }    
+  }
+}
+
+//Retourne le jour dont les informations doivent être affichée, parmi les cinq jours à venir
+function GetDayToDisplay(){
+  //Récupérer le jour envoyé en paramètre
+  if(isset($_GET["numDay"])){
+    $dayToDisplay = $_GET["numDay"];
+  }
+  //Si le paramètre n'existe pas, aller par défaut au jour actuel
+  else{
+    $dayToDisplay = 0;
+  }
+  //Si le paramètre est erroné, aller par défaut au jour actuel
+  if(($dayToDisplay < 0) || ($dayToDisplay < 0)){
+    $dayToDisplay = 0;
+  }
+  return $dayToDisplay;
+}
+
+function DisplayDayMeteo($numDay){
+    //Récupérer les informations météo du jour sélectionné
+    $day = GetMeteo()->GetDay($numDay); 
+
+    echo "<div class=\"meteoTable\">";
+
+    //températures
+    echo "<div class=\"meteoBubble\" id=".$day->GetDate().">";   
+    $hours = [];
+    $temperatures = [];
+    //Parcourir les informations de touts les enregistrements de la journée, et récupérer les heures et les températures correspondantes
+    for($i = 0; $i < count($day->GetHours()); $i++){
+        $hour = $day->GetHour($i);
+        array_push($hours, $hour->GetHour());
+        array_push($temperatures, $hour->GetTemperature());        
+    }       
+    echo "</div>";
+
+    //infos météo spécifiques à une heure
+    echo "<div class=\"infosBubble\" id=".$day->GetDate().">";
+    echo "</div>";
+
+    //tenue recommandée en fonction de la météo
+    echo "<div class=\"dressBubble\" id=".$day->GetDate().">";    
+    $hours = [];
+    $temperatures = [];
+    //Parcourir les informations de touts les enregistrements de la journée, et récupérer les heures et les températures correspondantes
+    for($i = 0; $i < count($day->GetHours()); $i++){
+        $hour = $day->GetHour($i);
+        array_push($hours, $hour->GetHour());
+        array_push($temperatures, $hour->GetTemperature());        
+    }       
+    echo "</div>";
+
+    //activités et évènements du jour
+    echo "<div class=\"eventsBubble\" id=".$day->GetDate().">";
+    DisplayDaysEvents($numDay);
+    echo "</div>";
+
+    echo "</div>";
+
+    //Afficher les températures avec un graphique javascript
+    DisplayTemperatureGraphic($hours, $temperatures, $day->GetDate());
+}
+
+//Affichage de la température au cours de la journée grâce à un graphique js
+function DisplayTemperatureGraphic($hours, $temperatures, $date){
+  //Créer un string avec le format tableau en javascript pour pouvoir envoyer les données à la fonction d'affichage
+  $temperaturesJSArray = "[['Heure', 'Temperature'],";
+  for($i = 0; $i < count($hours); $i++){
+    $temperaturesJSArray .= "[";
+    $temperaturesJSArray .= '"'.$hours[$i].'"' . "," . $temperatures[$i];
+    $temperaturesJSArray .= "]";
+    if($i!=(count($hours)-1)){
+      $temperaturesJSArray .= ",";
+    }
+  }
+  $temperaturesJSArray .= "]";
+
+  //appel de la fonction qui affiche le graphique des températures
+  echo "<script>DisplayTemperatures($temperaturesJSArray,\"$date\")</script>";
+}
+
+function DisplayDaysEvents($numDay){
+  //Récupérer les évènements du semainier
+  $weeklyEvents = GetEventsWeekPlanner();
+  var_dump($weeklyEvents);
+  
+  //Récupérer les évènements du calendrier
+  //Les trier par ordre chronologique
+  //Les afficher
+}
+
+function GetWeekDayName($numDay){
+    $days = array('Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi');
+
+    //récupérer l'index du jour actuel et ajouter le nombre de jours indiqué en paramètre
+    $index = date('w', date_timestamp_get(new DateTime('now'))) + $numDay;
+    if($index > 6){
+        $index = ($index % 6) - 1;
+    }
+
+    return $days[$index];
+}
