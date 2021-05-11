@@ -582,15 +582,30 @@ function GenerateDress($temperature, $weather){
     CLOTHES_GROUPS[2] => ReadClotheByMeteoAndCategorie($temperature, $weather, CLOTHES_GROUPS[2]),
     CLOTHES_GROUPS[3] => ReadClotheByMeteoAndCategorie($temperature, $weather, CLOTHES_GROUPS[3]),
     CLOTHES_GROUPS[4] => ReadClotheByMeteoAndCategorie($temperature, $weather, CLOTHES_GROUPS[4])
-  ];  
+  ];
   
+  $dress = [];
   //Sélectionner au hasard un vêtement parmi les hauts et les ensembles
-
-  //Si c'est un haut, sélectionner au hasard un bas
+  //Chance de tomber sur un haut par rapport à un ensemble égale à la proportionnalité de hauts dans l'ensemble des hauts et des ensembles
+  if(rand(0, count($clothesForMeteo["Haut"])+count($clothesForMeteo["Ensemble"]))<count($clothesForMeteo["Ensemble"])){
+    //Si c'est un haut, sélectionner un haut et un bas
+    $top = $clothesForMeteo["Haut"][rand(0, count($clothesForMeteo["Haut"]))];
+    $bottom = $clothesForMeteo["Bas"][rand(0, count($clothesForMeteo["Bas"]))];
+    array_push($dress, $top);
+    array_push($dress, $bottom);
+  }
+  else{
+    $both = $clothesForMeteo["Ensemble"][rand(0, count($clothesForMeteo["Ensemble"]))];
+    array_push($dress, $both);
+  }  
 
   //Sélectionner au hasard des chaussures
+  $shoes = $clothesForMeteo["Chaussures"][rand(0, count($clothesForMeteo["Chaussures"]))];
+  array_push($dress, $shoes);
 
   //Vérifier s'il y a des vestes/manteaux, si oui en sélectionner un au hasard
+  $outwear = $clothesForMeteo["Exterieur"][rand(0, count($clothesForMeteo["Exterieur"]))];
+  array_push($dress, $outwear);
 
   //Retourner l'ensemble des vêtements de la tenue générée sous forme de tableau
   return [];
