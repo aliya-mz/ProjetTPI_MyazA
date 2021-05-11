@@ -12,6 +12,8 @@ session_start();
 //Vérifier que l'utilisateur est connecté
 VerifyAccessibility(1);
 
+DeleteClothesImages();
+
 //Récupérer l'identifiant du vêtement à supprimer
 $delete = FILTER_INPUT(INPUT_POST, "delete", FILTER_SANITIZE_STRING);
 $update = FILTER_INPUT(INPUT_POST, "update", FILTER_SANITIZE_STRING);

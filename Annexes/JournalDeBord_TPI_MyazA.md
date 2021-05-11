@@ -215,7 +215,7 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 - Finir génération images vectorielles
 
-- Discuter avec mon enseignant des catégories de vêtements
+- Discuter avec mon enseignant de la gestion des catégories de vêtements
 - Rechercher images vectorielles pour chaque catégorie de vêtement
 
 - Algorithme de recommandation de tenues

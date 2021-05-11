@@ -513,14 +513,17 @@ function GetClothe($idClothe){
 
 //Retourne la liste des catégories de vêtements
 function GetCategories(){
+  return readCategories();
+}
 
-  return [];
+//Retourne la catégorie correspondant à l'id
+function GetCategory($idCategory){
+  return readCategoryById($idCategory);
 }
 
 //Retourne la liste des catégories météo
 function GetWeathers(){
-
-  return [];
+  return readWeathers();
 }
 
 //Afficher les type de vêtements de la BD dans une liste déroulante
@@ -567,17 +570,6 @@ function DeleteClothe($idClothe){
   DeleteClotheById($idClothe);
 }
 
-//Génère un string aléatoire pour nommer l'image du vêtement
-function GenerateRandomString($length) {
-  $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  $charactersLength = strlen($characters);
-  $randomString = '';
-  for ($i = 0; $i < $length; $i++) {
-      $randomString .= $characters[rand(0, $charactersLength - 1)];
-  }
-  return $randomString;
-}
-
 //Création de tenues______________________________________________________________________________________________
 
 //A FAIRE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -605,45 +597,74 @@ function GenerateDress($temperature, $weather){
 }
 
 //Affichage_______________________________________________________________________________________________________
-//A FAIRE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-------------------------------------------------------------------------------------/!\
-//Créer fichier à partir de vêtement BD (couleur et script SVG) avec nom correspondant à idVetement - en cours
+
+//Créer fichier à partir de vêtement BD (couleur et script SVG) avec nom correspondant à idVetement
 function CreateClotheImage($idCategory, $color){
-  //Créer un fichier SVG en reprenant le modèle pour ce type de vêtement dans la base de données
-  $path = GenerateRandomString(10).".svg";
+  //Créer un fichier SVG dans le dossier img
+  $path = "img/clothesImg/".GenerateRandomString(10).".svg";
   $file = fopen($path, "c+b");
 
   //Récupérer le script du fichier dans la BD
-  $script = GetCategories()[$idCategory]["is_template"];
-  
-  //Modifier la couleur par celle choisie par l'utilisateur
-  $aModifier = "";
-  $script = preg_replace($aModifier, $color, $file);
+  $script = GetCategory($idCategory)["isTemplate"];
 
+  //Modifier la couleur par celle choisie par l'utilisateur
+  $aModifier = "[PLACE_COLOR]";
+  $script = preg_replace($aModifier, $color, $script);
+
+  //écrire le script créé dans le fichier
+  fwrite($file, $script);
+
+  fclose($file);
+  
   //Retourner l'adresse du fichier
   return $path;
 }
 
-//Afficher svg correspondant à idVetement-------------------------------------------------------------------------------------------------------------------------------------------------------/!\
-function DisplayClotheImage($cheminFichier){
-  echo "<img src=\"$cheminFichier\" alt=\"icône du vêtement enregistré\"/>";
+//Supprimer toutes les images crées
+function DeleteClothesImages(){
+  $files = glob('img/clothesImg/*'); // get all file names
+  foreach($files as $file){
+    if(is_file($file))
+      unlink($file);
+  }
 }
 
-//A FAIRE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//Afficher une tenue complète, avec le résumé des vêtements
-function DisplayDress($dress){
+//Afficher une tenue complète adaptée à la météo
+function DisplayDress($temperature, $weather){
+  $dress = GenerateDress($temperature, $weather);
+  foreach($dress as $clothe){
+    DisplayClothe($clothe);
+  }
 }
 
-//AFFICHER IMAGE - A FAIRE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//Afficher tous les vêtements de l'utilisateur
 function DisplayClothesList(){
   $clothes = ReadClothesByUser(GetIdUser());
   foreach($clothes as $clothe){
-    //Afficher les évènements, avec un bouton supprimer
-    echo "<div class=\"eventBubble clothesBubble text-center\">"
-          .$clothe["name"]
-          ."<div><button type=\"submit\" name=\"delete\" value=\"".$clothe["idClothe"]."\"/><img src=\"img/delete.png\"></button>
-          <button type=\"submit\" name=\"update\" value=\"".$clothe["idClothe"]."\"/><img src=\"img/update.png\"></button></div>
-          </div>";
-    }
+    DisplayClothe($clothe);    
+  }
+}
+
+//Afficher un vêtement
+function DisplayClothe($clothe){
+  $imagePath = CreateClotheImage($clothe["idCategory"], $clothe["color"]);
+  echo "<div class=\"eventBubble clothesBubble text-center\">"
+        .$clothe["name"]
+        ."<img src=\"".$imagePath."\"/>
+        <div><button type=\"submit\" name=\"delete\" value=\"".$clothe["idClothe"]."\"/><img src=\"img/delete.png\"></button>
+        <button type=\"submit\" name=\"update\" value=\"".$clothe["idClothe"]."\"/><img src=\"img/update.png\"></button></div>
+        </div>";
+}
+
+//Génère un string aléatoire pour nommer l'image du vêtement
+function GenerateRandomString($length) {
+  $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  $charactersLength = strlen($characters);
+  $randomString = '';
+  for ($i = 0; $i < $length; $i++) {
+      $randomString .= $characters[rand(0, $charactersLength - 1)];
+  }
+  return $randomString;
 }
 
 
@@ -875,8 +896,7 @@ function DisplayDayMeteo($numDay, $numHour){
     
     //Tenue recommandée en fonction de la météo
     echo "<div class=\"dressBubble\">";
-    $dress = GenerateDress($temperatures, "RECUPERER IDs WEATHER DANS LA LISTE");
-    DisplayDress($dress);
+    DisplayDress($temperatures, "RECUPERER IDs WEATHER DANS LA LISTE");
     echo "</div>";
 
     //Activités et évènements du jour

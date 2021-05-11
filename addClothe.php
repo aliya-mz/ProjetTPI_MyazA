@@ -14,9 +14,9 @@ include("backend/autoload.php");
 VerifyAccessibility(1);
 
 //Récupérer les types de vêtements dans la BD (pantalon, veste, etc...)
-$categories = readCategories();
+$categories = GetCategories();
 //Récupérer les catégories météo prédéfinies dans la BD (pluie, neige, etc...) 
-$weathers = readWeathers();
+$weathers = GetWeathers();
 
 //récupérer les champs du formulaire
 $name = FILTER_INPUT(INPUT_POST, "name", FILTER_SANITIZE_STRING);
@@ -33,8 +33,10 @@ $cheminFichier = "";
 if($validate){
   //Enregistrer le vêtement dans la BD
   SaveClothe($name, $idCategory, $idWeather, $color, $minTemp, $maxTemp);
-  //Générer dans ./img un fichier SVG correspondant au type de vêtement et à la couleur, et récupérer son chemin d'accès
-  $cheminFichier = DisplayClotheImage($color, $idCategory);
+
+  //Rediriger vers la agrde-robe
+  header('Location: manageClothes.php');
+  exit;
 }
 ?>
 
