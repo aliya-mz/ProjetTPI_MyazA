@@ -19,10 +19,10 @@ $firstName = FILTER_INPUT(INPUT_POST, "firstName", FILTER_SANITIZE_STRING);
 $lastName = FILTER_INPUT(INPUT_POST, "lastName", FILTER_SANITIZE_STRING);
 $eMail = FILTER_INPUT(INPUT_POST, "eMail", FILTER_SANITIZE_STRING);
 $password = FILTER_INPUT(INPUT_POST, "password", FILTER_SANITIZE_STRING);
-$enregistrer = FILTER_INPUT(INPUT_POST, "enregistrer", FILTER_SANITIZE_STRING);
+$validate = FILTER_INPUT(INPUT_POST, "validate", FILTER_SANITIZE_STRING);
 
 //Envoyer les modification à la base de données
-if($enregistrer){
+if($validate){
     UpdateUser($login, $firstName, $lastName, $eMail, $password);
 }
 
@@ -60,7 +60,7 @@ $user = GetUser();
           <td colspan="2"><input type="password" name="password" value="" placeholder="Nouveau mot de passe"></td>
         </tr>
         <tr>
-          <td colspan="2"><button class="btnCreateIdea" type="submit" name="enregistrer" value="enregistrer">Enregistrer les modifications</button></td>
+          <td colspan="2"><button class="btnCreateIdea" type="submit" name="validate" value="validate">Enregistrer les modifications</button></td>
         </tr>
       </table>
     </form>

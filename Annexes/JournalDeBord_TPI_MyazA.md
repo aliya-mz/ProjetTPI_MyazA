@@ -182,9 +182,9 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 *A faire :*
 
+- Finir affichage météo
+
 - Fonctionnalités création, modification et suppression de vêtement
-- Discuter avec mon enseignant des catégories de vêtements
-- Rechercher images vectorielles pour chaque catégorie de vêtement
 - Génération dynamique de l'image du vêtement (vectoriel)
 
 **Matin**
@@ -193,9 +193,9 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 9h40 : Je m'occupe de l'affichage de ma météo résumée (température et catégorie météo) dans le calendrier pour les 3 jours à venir.
 
-12h40 : Je commence le système de gestion de la garde-robe en créant des formulaires de création et modification des vêtements. 
+12h40 : Je commence le système de gestion de la garde-robe en créant des formulaires de création, modification et suppression des vêtements. 
 
-14h00 : Le site doit permettre d'afficher des images des vêtements que les utilisateurs vont créer. Je dois donc créer une fonctionnalité de génération d'images vectorielles (.svg) représentant la catégorie et la couleur du vêtement. L'image ne sera stockée nul part, mais sera générée au moment de l'affichage grâce à la base de données
+15h00 : Le site doit permettre d'afficher des images des vêtements que les utilisateurs vont créer. Je dois donc créer une fonctionnalité de génération d'images vectorielles (.svg) représentant la catégorie et la couleur du vêtement. L'image ne sera stockée nul part, mais sera générée au moment de l'affichage grâce à la base de données.
 
 
 
@@ -212,6 +212,11 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 ## Mercredi 12.05.2021
 
 *A faire :*
+
+- Finir génération images vectorielles
+
+- Discuter avec mon enseignant des catégories de vêtements
+- Rechercher images vectorielles pour chaque catégorie de vêtement
 
 - Algorithme de recommandation de tenues
 

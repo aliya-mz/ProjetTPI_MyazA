@@ -111,9 +111,8 @@ function ShowNavByRole(){
 		echo "<li class=\"nav-item dropdown\">";
 		echo "<a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDarkDropdownMenuLink\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">	Garde-robe </a>
           <ul class=\"dropdown-menu dropdown-menu-light\" aria-labelledby=\"navbarLightDropdownMenuLink\">
-          <li><a class=\"dropdown-item\" href=\"ajouterVetement.php\">Ajouter des vêtements</a></li>
-          <li><a class=\"dropdown-item\" href=\"voirMesVetements.phpm\">Voir mes vêtements</a></li>
-          <li><a class=\"dropdown-item\" href=\"voirTenues\">Tenues de la semaine</a></li>
+          <li><a class=\"dropdown-item\" href=\"addClothe.php\">Ajouter des vêtements</a></li>
+          <li><a class=\"dropdown-item\" href=\"manageClothes.php\">Voir ma garde-robe</a></li>
           </ul>";
 		echo "</li>";
 
@@ -477,7 +476,40 @@ function DisplayEvent($event, $calendar){
 
 //Gestion garde-robe - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
+//Définir les groupes de vêtements pour pouvoir les assembler en tenues
+DEFINE("CLOTHES_GROUPS", ["Haut", "Bas", "Ensemble", "Exterieur", "Chaussures"]);
+
 //Gestion du formulaire___________________________________________________________________________________________
+
+//Retourne l'identifiant du vêtement à modifier
+function GetClothe($idClothe){
+  $id = 0;
+  //Récupérer le jour envoyé en paramètre
+  if(isset($idClothe)){
+    $id = $idClothe;
+  }
+  //Si le paramètre n'existe pas, quitter
+  else{
+    header('Location: manageClothes.php');
+    exit;
+  }
+  echo $id;
+  //Récupérer le vêtement correspondant à l'identifiant
+  $clothe = ReadClotheById($id);
+  //Si le vêtement n'existe pas, quitter
+  if(!array_key_exists("idClothe", $clothe)){
+    header('Location: manageClothes.php');
+    exit;    
+  }
+  //Si le vêtement n'appartient pas à l'utilisateur, quitter
+  else{
+    if($clothe["idUser"]!=GetIdUser()){
+      header('Location: manageClothes.php');
+      exit;
+    }
+  }
+  return $clothe;
+}
 
 //Retourne la liste des catégories de vêtements
 function GetCategories(){
@@ -492,10 +524,8 @@ function GetWeathers(){
 }
 
 //Afficher les type de vêtements de la BD dans une liste déroulante
-function CategoriesToSelect($categorySelected){
-  $categories = GetCategories();
-
-  echo "<select name=\"category\">";
+function CategoriesToSelect($categories, $categorySelected){
+  echo "<select name=\"categoryClothe\">";
   //parcourir les types de la BD et les afficher
   foreach($categories as $category){
     //si le type est celui sélecionnée précédemment (sticky), le re-sélectionner
@@ -510,9 +540,8 @@ function CategoriesToSelect($categorySelected){
 }
 
 //Afficher les catégories météo de la BD dans une liste déroulante
-function WeathersToSelect($weatherSelected){
-  $weathers = GetWeathers();
-  echo "<select name=\"categorieVetement\">";
+function WeathersToSelect($weathers, $weatherSelected){
+  echo "<select name=\"groupWeather\">";
   //parcourir les catégories de la BD et les afficher
   foreach($weathers as $weather){
     //si la catégorie est celle sélecionnée précédemment (sticky), la re-sélectionner
@@ -527,9 +556,15 @@ function WeathersToSelect($weatherSelected){
 }
 
 //Enregistrer un vêtement dans la BD
-function EnregistrerVetement($name, $idCategory, $color, $idWeather, $tempMin, $tempsMax){
+function SaveClothe($name, $idCategory, $idWeather, $color, $tempMin, $tempsMax){
    //Insert dans la BD
-   CreateClothe($name, $idCategory, $color, $idWeather, $tempMin, $tempsMax, GetIdUser());
+   CreateClothe($name, $idCategory, $idWeather, $color, $tempMin, $tempsMax, GetIdUser());
+   echo $name . " ". $idCategory. " " .$idWeather. " " .$color. " " .$tempMin. " " .$tempsMax. " " .GetIdUser();
+}
+
+//Supprime le vêtement correspondant à l'ID en appelant le CRUD
+function DeleteClothe($idClothe){
+  DeleteClotheById($idClothe);
 }
 
 //Génère un string aléatoire pour nommer l'image du vêtement
@@ -545,26 +580,32 @@ function GenerateRandomString($length) {
 
 //Création de tenues______________________________________________________________________________________________
 
-//Définir les groupes de vêtements pour pouvoir les assembler en tenues
-$groups = [
-  "Hauts" => [],
-  "Bas" => [],
-  "Combinaisons" => [],
-  "Vestes et manteaux" => [],
-  "Chaussures" => []
-];
-
+//A FAIRE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //Génère une tenue complète en fonction de la météo
 function GenerateDress($temperature, $weather){
-  //Recherche les vêtements appartenant à un groupe (hauts, bas ou combinaisons)
+  //Créer un tableau avec tous les vêtements possibles pour cette météo, classés par catégorie
+  $clothesForMeteo = [
+    CLOTHES_GROUPS[0] => ReadClotheByMeteoAndCategorie($temperature, $weather, CLOTHES_GROUPS[0]),
+    CLOTHES_GROUPS[1] => ReadClotheByMeteoAndCategorie($temperature, $weather, CLOTHES_GROUPS[1]),
+    CLOTHES_GROUPS[2] => ReadClotheByMeteoAndCategorie($temperature, $weather, CLOTHES_GROUPS[2]),
+    CLOTHES_GROUPS[3] => ReadClotheByMeteoAndCategorie($temperature, $weather, CLOTHES_GROUPS[3]),
+    CLOTHES_GROUPS[4] => ReadClotheByMeteoAndCategorie($temperature, $weather, CLOTHES_GROUPS[4])
+  ];  
+  
+  //Sélectionner au hasard un vêtement parmi les hauts et les ensembles
 
+  //Si c'est un haut, sélectionner au hasard un bas
 
-  //Retourner l'ensemble des vêtements de la tenue générée
+  //Sélectionner au hasard des chaussures
+
+  //Vérifier s'il y a des vestes/manteaux, si oui en sélectionner un au hasard
+
+  //Retourner l'ensemble des vêtements de la tenue générée sous forme de tableau
   return [];
 }
 
 //Affichage_______________________________________________________________________________________________________
-
+//A FAIRE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-------------------------------------------------------------------------------------/!\
 //Créer fichier à partir de vêtement BD (couleur et script SVG) avec nom correspondant à idVetement - en cours
 function CreateClotheImage($idCategory, $color){
   //Créer un fichier SVG en reprenant le modèle pour ce type de vêtement dans la base de données
@@ -582,15 +623,28 @@ function CreateClotheImage($idCategory, $color){
   return $path;
 }
 
-//Afficher svg correspondant à idVetement
+//Afficher svg correspondant à idVetement-------------------------------------------------------------------------------------------------------------------------------------------------------/!\
 function DisplayClotheImage($cheminFichier){
   echo "<img src=\"$cheminFichier\" alt=\"icône du vêtement enregistré\"/>";
 }
 
+//A FAIRE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //Afficher une tenue complète, avec le résumé des vêtements
 function DisplayDress($dress){
 }
 
+//AFFICHER IMAGE - A FAIRE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+function DisplayClothesList(){
+  $clothes = ReadClothesByUser(GetIdUser());
+  foreach($clothes as $clothe){
+    //Afficher les évènements, avec un bouton supprimer
+    echo "<div class=\"eventBubble clothesBubble text-center\">"
+          .$clothe["name"]
+          ."<div><button type=\"submit\" name=\"delete\" value=\"".$clothe["idClothe"]."\"/><img src=\"img/delete.png\"></button>
+          <button type=\"submit\" name=\"update\" value=\"".$clothe["idClothe"]."\"/><img src=\"img/update.png\"></button></div>
+          </div>";
+    }
+}
 
 
 

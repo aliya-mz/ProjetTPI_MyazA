@@ -6,7 +6,7 @@
   Description : Gestion de la table "clothe" - en cours
 */
 
-//Recherche les vêtements appartenant à une certaine catégorie (pulls, pantalons...), qui correspondent à la météo
+//Rechercher les vêtements appartenant à une certaine catégorie (haut, bas, ensemble, exterieur, chaussures), qui correspondent à la météo
 function ReadClotheByMeteoAndCategorie($temperature, $idWeather, $idCategorie){
   //initaliser le prepare statement
   static $ps = null;
@@ -35,12 +35,12 @@ function ReadClotheByMeteoAndCategorie($temperature, $idWeather, $idCategorie){
   return $answer;
 }
 
-//Récupère le vêtement correspondant à l'identifiant
+//Récupérer le vêtement correspondant à l'identifiant
 function ReadClotheById($idClothe){
   //initaliser le prepare statement
   static $ps = null;
   //requête
-  $sql = "SELECT * FROM clothe, role WHERE idClothe LIKE :idClothe";
+  $sql = "SELECT * FROM clothe WHERE idClothe LIKE :idClothe";
 
   //si le prepare statement n'a encore jamais été fait
   if($ps == null){
@@ -53,6 +53,33 @@ function ReadClotheById($idClothe){
     $ps->bindParam(':idClothe', $idClothe, PDO::PARAM_INT);
 
     if($ps->execute())
+      $answer = $ps->fetch(PDO::FETCH_ASSOC);
+  }
+  catch(PDOException $e){
+    echo $e->getMessage();
+  }
+
+  return $answer;
+}
+
+//Récupérer les vêtements appartenant à l'utilisateur
+function ReadClothesByUser($idUser){
+  //initaliser le prepare statement
+  static $ps = null;
+  //requête
+  $sql = "SELECT * FROM clothe WHERE idUser LIKE :idUser";
+
+  //si le prepare statement n'a encore jamais été fait
+  if($ps == null){
+    //préparer la requête
+    $ps = db()->prepare($sql);
+  }
+  $answer = false;
+  try{
+    //lier le paramètre dans la requête avec la variable
+    $ps->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+
+    if($ps->execute())
       $answer = $ps->fetchAll(PDO::FETCH_ASSOC);
   }
   catch(PDOException $e){
@@ -63,11 +90,11 @@ function ReadClotheById($idClothe){
 }
 
 //Créer un vêtement grâce à des propriétés données
-function CreateClothe($name, $idCategory, $color, $idWeather, $tempMin, $tempMax, $idUser){
+function CreateClothe($name, $idCategory, $idWeather, $color, $tempMin, $tempMax, $idUser){
   //initaliser le prepare statement
   static $ps = null;
   //requête
-  $sql = "INSERT INTO `clothe` (`name`, `idCategory`, `color`, `idWeather`, `tempMin`, `tempMax`, `idUser`) VALUES ( :name, :idCategory, :color, :idWeather, :tempMin, :tempMax, :idUser)";
+  $sql = "INSERT INTO `clothe` (`name`, `idCategory`, `idWeather`, `color`, `tempMin`, `tempMax`, `idUser`) VALUES ( :name, :idCategory, :idWeather, :color, :tempMin, :tempMax, :idUser)";
 
   //si le prepare statement n'a encore jamais été fait
   if($ps == null){
@@ -79,8 +106,8 @@ function CreateClothe($name, $idCategory, $color, $idWeather, $tempMin, $tempMax
     //lier le paramètre dans la requête avec la variable
     $ps->bindParam(':name', $name, PDO::PARAM_STR);
     $ps->bindParam(':idCategory', $idCategory, PDO::PARAM_INT);
-    $ps->bindParam(':color', $color, PDO::PARAM_STR);
     $ps->bindParam(':idWeather', $idWeather, PDO::PARAM_INT);
+    $ps->bindParam(':color', $color, PDO::PARAM_STR);
     $ps->bindParam(':tempMin', $tempMin, PDO::PARAM_INT);
     $ps->bindParam(':tempMax', $tempMax, PDO::PARAM_INT);
     $ps->bindParam(':idUser', $idUser, PDO::PARAM_INT);
@@ -98,7 +125,8 @@ function CreateClothe($name, $idCategory, $color, $idWeather, $tempMin, $tempMax
   return $answer;
 }
 
-function UpdateClotheById($idClothe, $name, $idCategory, $color, $idWeather, $tempMin, $tempMax){
+//Modifier les caractéristiques d'un vêtement en fonction de son identifant
+function UpdateClotheById($idClothe, $name, $idCategory, $idWeather, $color, $tempMin, $tempMax){
   //initaliser le prepare statement
   static $ps = null;
   //requête
@@ -113,6 +141,7 @@ function UpdateClotheById($idClothe, $name, $idCategory, $color, $idWeather, $te
   try{
     //lier le paramètre dans la requête avec la variable
     $ps->bindParam(':idClothe', $idClothe, PDO::PARAM_INT);
+    $ps->bindParam(':name', $name, PDO::PARAM_STR);
     $ps->bindParam(':idCategory', $idCategory, PDO::PARAM_INT);
     $ps->bindParam(':color', $color, PDO::PARAM_STR);
     $ps->bindParam(':idWeather', $idWeather, PDO::PARAM_INT);
@@ -132,11 +161,12 @@ function UpdateClotheById($idClothe, $name, $idCategory, $color, $idWeather, $te
   return $answer;
 }
 
+//Supprimer le vêtement correspondant à l'identifiant
 function DeleteClotheById($idClothe){
   //initaliser le prepare statement
   static $ps = null;
   //requête
-  $sql = "DELETE FROM clothe, role WHERE idClothe LIKE :idClothe";
+  $sql = "DELETE FROM clothe WHERE idClothe LIKE :idClothe";
 
   //si le prepare statement n'a encore jamais été fait
   if($ps == null){
