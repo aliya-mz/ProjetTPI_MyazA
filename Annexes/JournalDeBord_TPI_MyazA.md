@@ -168,7 +168,7 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 12h40 : Je réalise des fonctions de classement des informations, afin de ne récupérer que celles dont j'ai besoin, et de les organiser de manière pratique pour pouvoir facilement les afficher ensuite.
 
-14h00 : Je réalise des fonctions d'affichage, qui me permettent d'afficher les informations détaillées pour chaque jours, ainsi que les informations résumées, pour le calendrier.
+14h00 : Je commencer à réaliser des fonctions d'affichage, qui me permettent d'afficher les informations détaillées pour chaque jours.
 
 
 
@@ -188,6 +188,14 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 - Génération dynamique de l'image du vêtement (vectoriel)
 
 **Matin**
+
+7h30 : Je n'avais pas fini l'affichage de la météo, donc je continue. Je dois trier les évènements de chaque journée par ordre chronologique, et gérer l'affichage des détails météo pour une heure de la journée sélectionnée.
+
+9h40 : Je m'occupe de l'affichage de ma météo résumée (température et catégorie météo) dans le calendrier pour les 3 jours à venir.
+
+12h40 : Je commence le système de gestion de la garde-robe en créant des formulaires de création et modification des vêtements. 
+
+14h00 : Le site doit permettre d'afficher des images des vêtements que les utilisateurs vont créer. Je dois donc créer une fonctionnalité de génération d'images vectorielles (.svg) représentant la catégorie et la couleur du vêtement. L'image ne sera stockée nul part, mais sera générée au moment de l'affichage grâce à la base de données
 
 
 
@@ -249,6 +257,7 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 *A faire :*
 
 - Corrections
+- Documentation
 
 **Matin**
 

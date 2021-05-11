@@ -13,6 +13,9 @@ include("backend/autoload.php");
 //Récupérer le numéro du jour à afficher envoyé en GET
 $dayToDisplay = GetDayToDisplay();
 
+//Heure dont les détails doivent être affichés
+$hourToDisplay = GetHourToDisplay();
+
 //Récupérer et enregistrer dans la session les informations météo des 5 jours à venir (se met à jour si plus de 5 minutes sont passées)
 ExecuteMeteoProgram();
 ?>
@@ -57,7 +60,7 @@ ExecuteMeteoProgram();
 		<form>
 		<?php
 			//Affiche les informations météo et complémentaires du jour sélectionné
-			DisplayDayMeteo($dayToDisplay);
+			DisplayDayMeteo($dayToDisplay, $hourToDisplay);
 		?>
 		</form>
 	</main>

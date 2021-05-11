@@ -28,8 +28,8 @@ function DrawGraphic(){
 
   var materialOptions = { 
     bars: 'vertical',
-    'width':700,
-    'height':200,
+    'width':500,
+    'height':180,
     //'background-color': '#BFD1DE',
     colors: ['#BFD1DE']
   };

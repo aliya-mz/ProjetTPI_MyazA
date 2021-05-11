@@ -25,6 +25,8 @@ $delete = FILTER_INPUT(INPUT_POST, "delete", FILTER_SANITIZE_STRING);
 if($delete){
 	DeleteEvent($delete);
 }
+
+ExecuteMeteoProgram();
 ?>
 
 <!DOCTYPE html>
