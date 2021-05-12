@@ -7,11 +7,11 @@
 */
 
 //Rechercher les vêtements appartenant à une certaine catégorie (haut, bas, ensemble, exterieur, chaussures), qui correspondent à la météo
-function ReadClotheByMeteoAndCategorie($temperature, $idWeather, $categoryGroup){
+function ReadClothesByMeteoAndCategorie($temperature, $weather, $categoryGroup){
   //initaliser le prepare statement
   static $ps = null;
   //requête
-  $sql = "SELECT idClothe FROM clothe, category WHERE idWeather = :idWeather AND  idWeather = :idWeather AND tempMin <= :temperature AND tempMax >= :temperature and category.type LIKE :categoryGroup";
+  $sql = "SELECT idClothe FROM category c join clothe on c.idCategory = clothe.idCategory JOIN weather w on W.idWeather = clothe.idWeather WHERE c.typeClothe = :categoryGroup AND w.name = :weather AND tempMin <= :temperature AND tempMax >= :temperature GROUP BY idClothe";
 
   //si le prepare statement n'a encore jamais été fait
   if($ps == null){
@@ -22,11 +22,11 @@ function ReadClotheByMeteoAndCategorie($temperature, $idWeather, $categoryGroup)
   try{
     //lier le paramètre dans la requête avec la variable    
     $ps->bindParam(':temperature', $temperature, PDO::PARAM_INT);
-    $ps->bindParam(':idWeather', $idWeather, PDO::PARAM_INT);
+    $ps->bindParam(':weather', $weather, PDO::PARAM_STR);
     $ps->bindParam(':categoryGroup', $categoryGroup, PDO::PARAM_STR);
 
     if($ps->execute())
-      $answer = $ps->fetch(PDO::FETCH_ASSOC);
+      $answer = $ps->fetchAll(PDO::FETCH_ASSOC);
   }
   catch(PDOException $e){
     echo $e->getMessage();

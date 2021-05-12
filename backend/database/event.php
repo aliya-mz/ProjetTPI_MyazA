@@ -7,13 +7,14 @@
 */
 
 //Ajouter paramètre user
-function readEventsByTime($dateStart, $dateEnd){
+function readEventsByTime($dateStart, $dateEnd, $idUser){
   //initaliser le prepare statement
   static $ps = null;
 
   //requête  
   $sql = "SELECT *, DATE_FORMAT(`dateStart`, '%Y-%m-%d') AS theDate, DATE_FORMAT(`dateStart`, '%H:%i') AS theHour, DATE_FORMAT(`dateStart`, '%w') AS theWeekDay from `event` 
   WHERE reccurent LIKE 0 
+  AND idUser = :idUser
   AND ((dateStart BETWEEN :dateStart AND :dateEnd) OR (dateEnd BETWEEN :dateStart AND :dateEnd))";
 
   //si le prepare statement n'a encore jamais été fait
@@ -24,6 +25,7 @@ function readEventsByTime($dateStart, $dateEnd){
   $answer = false;
   try{
     //lier le paramètre de la requête avec la variable
+    $ps->bindParam(':idUser', $idUser, PDO::PARAM_INT);
     $ps->bindParam(':dateStart', $dateStart, PDO::PARAM_STR);
     $ps->bindParam(':dateEnd', $dateEnd, PDO::PARAM_STR);
 
@@ -36,12 +38,12 @@ function readEventsByTime($dateStart, $dateEnd){
   return $answer;
 }
 
-function readWeekPlannerEvents(){
+function readWeekPlannerEvents($idUser){
   //initaliser le prepare statement
   static $ps = null;
 
   //requête
-  $sql = "SELECT *, DATE_FORMAT(`dateStart`, '%d.%m.%Y') as theDate, DATE_FORMAT(`dateStart`, '%H:%i') as theHour, DATE_FORMAT(`dateStart`, '%w') as theWeekDay from `event` WHERE reccurent LIKE 1";
+  $sql = "SELECT *, DATE_FORMAT(`dateStart`, '%d.%m.%Y') as theDate, DATE_FORMAT(`dateStart`, '%H:%i') as theHour, DATE_FORMAT(`dateStart`, '%w') as theWeekDay from `event` WHERE idUser = :idUser AND reccurent LIKE 1";
   //si le prepare statement n'a encore jamais été fait
   if($ps == null){
     //préparer la requête
@@ -49,6 +51,7 @@ function readWeekPlannerEvents(){
   }
   $answer = false;
   try{
+    $ps->bindParam(':idUser', $idUser, PDO::PARAM_INT);
 
     if($ps->execute())
       $answer = $ps->fetchAll(PDO::FETCH_ASSOC);
@@ -59,11 +62,11 @@ function readWeekPlannerEvents(){
   return $answer;
 }
 
-function readEventById($idEvent){
+function readEventById($idEvent, $idUser){
   //initaliser le prepare statement
   static $ps = null;
   //requête
-  $sql = "SELECT * from `event` WHERE idEvent LIKE :idEvent";
+  $sql = "SELECT * from `event` WHERE idUser = :idUser AND idEvent LIKE :idEvent";
 
   //si le prepare statement n'a encore jamais été fait
   if($ps == null){
@@ -73,6 +76,7 @@ function readEventById($idEvent){
   $answer = false;
   try{
     //lier le paramètre dans la requête avec la variable
+    $ps->bindParam(':idUser', $idUser, PDO::PARAM_INT);
     $ps->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
 
     if($ps->execute())

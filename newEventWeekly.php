@@ -14,9 +14,11 @@ include("backend/autoload.php");
 //Vérifier que l'utilisateur est connecté
 VerifyAccessibility(1);
 
-//Récupérer en get !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-$hour = "08";
-$day = "02";
+$idHour = FILTER_INPUT(INPUT_GET, "hour", FILTER_VALIDATE_INT);
+$idDay = FILTER_INPUT(INPUT_GET, "day", FILTER_VALIDATE_INT);
+
+$hour = GetHour($idHour);
+$day = GetDay($idDay);
 
 //Récupérer l'identifiant de l'évènement à supprimer
 $description = FILTER_INPUT(INPUT_POST, "description", FILTER_SANITIZE_STRING);
@@ -24,8 +26,7 @@ $save = FILTER_INPUT(INPUT_POST, "save", FILTER_SANITIZE_STRING);
 
 //Ajouter l'activité hebdomadaire à la BD
 if($save){
-	SaveEvent(1, $description, $hour, "", $day);
-}
+	SaveEvent(1, $description, $hour, "", $hour, $day);}
 ?>
 
 <!DOCTYPE html>
@@ -41,16 +42,12 @@ if($save){
 		<!--Navigation principale-->
 		<nav class="navbar navbar-expand-lg navbar-light bg-light navCalendar">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="#"><?php echo $day." à ".$hour. " h"?></a>
+				<a class="navbar-brand" href="#"><?php echo GetWeekDayNameAbsolute($day)." à ".$hour. " h"?></a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="justify-content-right navbar-nav me-auto mb-2 mb-lg-0">
-					<!--Retour page principale-->
-					<li class="nav-item">
-						<a class="nav-link " aria-current="page" href="index.php"><img class="smallIconButton" src="img/home.png"/></a>
-					</li>
                     <!--Calendrier-->
 					<li class="nav-item">
 						<a class="nav-link " aria-current="page" href="calendar.php">Calendrier</a>
@@ -61,11 +58,15 @@ if($save){
 					</li>
 				</ul>
 				</div>
+				<span class="navbar-text">
+					<!--Ajouter évènement-->
+					<a class="nav-link " aria-current="page" href="index.php"><img class="smallIconButton" src="img/home.png"/></a>
+				<span>
 			</div>
 		</nav>
 
 		<!--Formulaire ajout d'une activité-->
-        <form class="formAdd" action="newEventWeekly.php" method="POST">
+        <form class="formAdd" action="<?php echo "newEventWeekly.php?day=$day&hour=".intval($hour)?>" method="POST">
       <table>
         <tr>
           <td colspan="2"><input type="text" name="description" value="" placeholder="Description de l'activité"></td>

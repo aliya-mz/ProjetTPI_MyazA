@@ -102,17 +102,21 @@ function ShowNavByRole(){
   }
   //Si c'est un utilisateur connecté, afficher les liens vers le parties calendrier, garde-robe et compte, et la déconnexion
   else if(GetUserRole()==1){
-    //Lien calendrier
-    echo "<li class=\"nav-item\">";
-		echo "<a class=\"nav-link\" href=\"calendar.php\">Calendrier</a>";
-		echo "</li>";
-    
     //Liste déroulante gestion de la garde-robe
 		echo "<li class=\"nav-item dropdown\">";
-		echo "<a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDarkDropdownMenuLink\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">	Garde-robe </a>
+		echo "<a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarLightDropdownMenuLink\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\"> Garde-robe </a>
           <ul class=\"dropdown-menu dropdown-menu-light\" aria-labelledby=\"navbarLightDropdownMenuLink\">
           <li><a class=\"dropdown-item\" href=\"addClothe.php\">Ajouter des vêtements</a></li>
           <li><a class=\"dropdown-item\" href=\"manageClothes.php\">Voir ma garde-robe</a></li>
+          </ul>";
+		echo "</li>";
+
+    //Liste déroulante calendrier
+		echo "<li class=\"nav-item dropdown\">";
+		echo "<a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarLightDropdownMenuLink\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\"> Calendrier </a>
+          <ul class=\"dropdown-menu dropdown-menu-light\" aria-labelledby=\"navbarLightDropdownMenuLink\">
+          <li class=\"nav-item\"><a class=\"dropdown-item\" href=\"calendar.php\">Calendrier</a></li>
+          <li class=\"nav-item\"><a class=\"dropdown-item\" href=\"weeklyPlanner.php\">Semainier</a></li>
           </ul>";
 		echo "</li>";
 
@@ -186,6 +190,130 @@ function UpdateUser($login, $firstName, $lastName, $eMail, $password){
 
 //Générer le calendrier et semainier ____________________________________________________________________________
 
+function GetDay($idDay){
+  $day = "";
+  //Récupérer le mois envoyé en paramètre
+  if(isset($idDay)){
+    if(intval($idDay) <= 6 && intval($idDay) >= 0){
+      $day = $idDay;
+    }
+    //Si le paramètre est erroné, quitter
+    else{
+      header('Location: weeklyPlanner.php');
+      exit;
+    }
+  }
+  //Si le paramètre n'existe pas, quitter
+  else{
+    header('Location: weeklyPlanner.php');
+      exit;
+  }
+  return $day;
+}
+
+function GetHour($idHour){
+  $hour = "";
+  //Récupérer le mois envoyé en paramètre
+  if(isset($idHour)){
+    if(intval($idHour) <= 20 && intval($idHour) >= 6){
+      $hour = intval($idHour);
+      if($hour<10){
+        $hour = "0".$hour;
+      }
+    }
+    //Si le paramètre est erroné, quitter
+    else{
+      header('Location: weeklyPlanner.php');
+      exit;
+    }
+  }
+  //Si le paramètre n'existe pas, quitter
+  else{
+    header('Location: weeklyPlanner.php');
+    exit;
+  }
+  return $hour;
+}
+
+function GetYear($idYear){
+  $year = "";
+  //Récupérer l'année envoyée en paramètre
+  if(isset($idYear)){
+    if(intval($idYear) <= 2050 && intval($idYear) >= 1970){
+      $year = intval($idYear);
+    }
+    //Si le paramètre est erroné, afficher l'année actuelle
+    else{
+      $year=date("Y");
+    }
+  }
+  //Si le paramètre n'existe pas, l'année affichée est l'année actuelle
+  else{
+    $year=date("Y");
+  }
+  return $year;
+}
+
+function GetMonth($idMonth){
+  $month = "";
+  //Récupérer le mois envoyé en paramètre
+  if(isset($idMonth)){
+    if(intval($idMonth) <= 12 && intval($idMonth) >= 1){
+      $month = intval($idMonth);
+      if($month<10){
+        $month = "0".$month;
+      }
+    }
+    //Si le paramètre est erroné, le mois affiché est le mois actuel
+    else{
+      $month=date("m");
+    }
+  }
+  //Si le paramètre n'existe pas, le mois affiché est le mois actuel
+  else{
+    $month=date("m");
+  }
+  return $month;
+}
+
+function GetLastMonth($theMonth, $theYear){
+  if(intval($theYear) >= 1970){
+    if(intval($theMonth) <= 1){
+      $theMonth = 12;
+    }
+    else{
+      $theMonth -= 1;
+    }
+  }  
+  return $theMonth;
+}
+
+function GetNextMonth($theMonth, $theYear){
+  if(intval($theYear) <= 2050){
+    if(intval($theMonth) >= 12){
+      $theMonth = 1;
+    }
+    else{
+      $theMonth += 1;
+    }
+  }  
+  return $theMonth;
+}
+
+function GetLastMonthsYear($theMonth, $theYear){
+  if(intval($theMonth) == 1 && intval($theYear) > 1970){
+    $theYear = intval($theYear) - 1;
+  }
+  return $theYear;
+}
+
+function GetNextMonthsYear($theMonth, $theYear){
+  if(intval($theMonth) == 12 && intval($theYear) <= 2050){
+    $theYear = intval($theYear) + 1;
+  }
+  return $theYear;
+}
+
 //Générer un tableau à deux dimensions contenant tous les jours à afficher dans le calendrier pour le mois X de l'année X
 function GetCalendarDays($month, $year){
   $days = [];
@@ -228,7 +356,7 @@ function GetWeekHours(){
   $hours = [];
   for($d = 0; $d < 7; $d++){
     $day = [];
-    for($h = 6; $h <= 22; $h++){
+    for($h = 6; $h <= 20; $h++){
       array_push($day, $h);
     }
     array_push($hours, $day);
@@ -244,7 +372,7 @@ function GetEventsBetween($dateStart, $dateEnd){
   $timestampEnd = DateToTimestamp($dateEnd);
 
   //Rechercher dans la base de données
-  $events = readEventsByTime($timestampStart, $timestampEnd);
+  $events = readEventsByTime($timestampStart, $timestampEnd, GetIdUser());
 
   //var_dump($events);
 
@@ -267,7 +395,7 @@ function GetEventsBetween($dateStart, $dateEnd){
 //Récupérer tous les évènements ajoutés au semainier
 function GetEventsWeekPlanner(){  
   //Rechercher dans la base de données les évènements réccurents (hebdomadaires)
-  $events = readWeekPlannerEvents();
+  $events = readWeekPlannerEvents(GetIdUser());
 
   //Placer les évènements dans un tableau dont les clés sont l'heure plus le jour de la semaine
   $hours = [];
@@ -286,7 +414,7 @@ function GetEventsWeekPlanner(){
 }
 
 //Enregistre un évènement
-function SaveEvent($isReccurent, $description, $dateStart, $dateEnd, $day){
+function SaveEvent($isReccurent, $description, $dateStart, $dateEnd, $hour, $day){
   //Formater les dates pour les envoyer à la requête sous forme de TimeStamps
   //Evènement unique
   if($isReccurent == 0){
@@ -295,12 +423,15 @@ function SaveEvent($isReccurent, $description, $dateStart, $dateEnd, $day){
   }
   //Activité hebdomadaire
   else{
-    $dateStart = HourToTimestamp($dateStart, $day);
+    $dateStart = HourToTimestamp($hour, $day);
     $dateEnd = $dateStart;
+    echo $dateStart."";
   }
 
   echo $dateStart. "  ";
   echo $dateEnd;
+
+  echo $description. " ".$dateStart. " ".$dateEnd. " ".$isReccurent. " ".GetIdUser(). " ";
   //Créer l'évènement
   createEvent($description, $dateStart, $dateEnd, $isReccurent, GetIdUser());
 }
@@ -326,9 +457,9 @@ function DateToTimestamp($date){
 }
 
 //Formater la date pour la convertir en un timestamp mySql qui ne contient que l'heure et le jour (0-6 pour les jours de la semaine)
-function HourToTimestamp($date, $day){
+function HourToTimestamp($hour, $day){
   //Transformer les dates en timestamp mySQL
-  $timestamp = date ('Y-m-d H:i:s', mktime (intval($date), 0, 0, 0, intval($day), 0));
+  $timestamp = date ('Y-m-d H:i:s', mktime (intval($hour), 0, 0, 1, intval($day), 2000));
   return $timestamp;
 }
 
@@ -409,8 +540,6 @@ function DisplayMonthCalendar($month, $year){
 function DisplayWeekPlanner(){
   $hours = GetWeekHours();
   $events = GetEventsWeekPlanner();
-
-  //var_dump($events);
   //Afficher le tableau du semainier
   echo "<table class=\"table table-bordered table-light calendarTable\">";
   echo "<thead><tr>
@@ -425,11 +554,13 @@ function DisplayWeekPlanner(){
     echo "<td>".$hour."h</td>";
     for($col = 0; $col < count($hours); $col++){
       echo "<td>";
+      //Bouton ajouter une activité à cette heure
+      echo '<a href="newEventWeekly.php?day='.($col+1).'&hour='.$hours[$col][$row].'" class="addEventHour"><img class="smallIconButton" src="/img/addReminder.png"/></a>';
+
       //Si des évènements existent à cette date, les afficher
       //créer un identifiant avec l'heure et le jour de la semaine
-      $indexCase=($col+1).":".$hours[$col][$row];
+      $indexCase=$hours[$col][$row].":".($col+1);
       echo "<div class=\"eventsCase\">";
-      //echo $indexCase;
       if(array_key_exists($indexCase, $events)){
         DisplayEvent($events[$indexCase], false);
       }
@@ -493,7 +624,6 @@ function GetClothe($idClothe){
     header('Location: manageClothes.php');
     exit;
   }
-  echo $id;
   //Récupérer le vêtement correspondant à l'identifiant
   $clothe = ReadClotheById($id);
   //Si le vêtement n'existe pas, quitter
@@ -572,43 +702,116 @@ function DeleteClothe($idClothe){
 
 //Création de tenues______________________________________________________________________________________________
 
-//A FAIRE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+DEFINE("MAIN_ERROR", "Vous feriez bien d'obtenir des vêtements");
+DEFINE("COAT_ERROR", "Vous feriez bien d'obtenir un manteau");
+DEFINE("SHOES_ERROR", "Vous feriez bien d'obtenir des chaussures");
+
 //Génère une tenue complète en fonction de la météo
-function GenerateDress($temperature, $weather){
-  //Créer un tableau avec tous les vêtements possibles pour cette météo, classés par catégorie
-  $clothesForMeteo = [
-    CLOTHES_GROUPS[0] => ReadClotheByMeteoAndCategorie($temperature, $weather, CLOTHES_GROUPS[0]),
-    CLOTHES_GROUPS[1] => ReadClotheByMeteoAndCategorie($temperature, $weather, CLOTHES_GROUPS[1]),
-    CLOTHES_GROUPS[2] => ReadClotheByMeteoAndCategorie($temperature, $weather, CLOTHES_GROUPS[2]),
-    CLOTHES_GROUPS[3] => ReadClotheByMeteoAndCategorie($temperature, $weather, CLOTHES_GROUPS[3]),
-    CLOTHES_GROUPS[4] => ReadClotheByMeteoAndCategorie($temperature, $weather, CLOTHES_GROUPS[4])
-  ];
+function GenerateDress($temperatures, $weathers){
+  //Récupérer un tableau de listes pour chaque groupe de vêtement, correspondant à la météo du jour
+  $clothesForMeteo = GetClothesForMeteo($temperatures, $weathers);
   
   $dress = [];
-  //Sélectionner au hasard un vêtement parmi les hauts et les ensembles
-  //Chance de tomber sur un haut par rapport à un ensemble égale à la proportionnalité de hauts dans l'ensemble des hauts et des ensembles
-  if(rand(0, count($clothesForMeteo["Haut"])+count($clothesForMeteo["Ensemble"]))<count($clothesForMeteo["Ensemble"])){
-    //Si c'est un haut, sélectionner un haut et un bas
-    $top = $clothesForMeteo["Haut"][rand(0, count($clothesForMeteo["Haut"]))];
-    $bottom = $clothesForMeteo["Bas"][rand(0, count($clothesForMeteo["Bas"]))];
+  //Sélectionner aléoirement un haut+bas ou un ensemble (Chance de tomber sur un haut par rapport à un ensemble égale à la proportionnalité de hauts dans l'ensemble des hauts et des ensembles)
+  if(count($clothesForMeteo["Exterieur"])!=0 && count($clothesForMeteo["Bas"])!=0 && $clothesForMeteo["Bas"]){
+    //S'il y a des hauts et des ensemble qui correspondent à la météo
+    if(rand(0, count($clothesForMeteo["Haut"])+count($clothesForMeteo["Ensemble"]))<count($clothesForMeteo["Ensemble"])){
+      //Sélectionner un haut et un bas
+      $top = $clothesForMeteo["Haut"][rand(0, count($clothesForMeteo["Haut"])-1)]["idClothe"];
+      $bottom = $clothesForMeteo["Bas"][rand(0, count($clothesForMeteo["Bas"])-1)]["idClothe"];
+      array_push($dress, $top);
+      array_push($dress, $bottom);     
+    }
+    else{
+      //Sélectionner un ensemble
+      $both = $clothesForMeteo["Ensemble"][rand(0, count($clothesForMeteo["Ensemble"])-1)]["idClothe"];
+      array_push($dress, $both);
+    }
+  }
+  else if(count($clothesForMeteo["Haut"])!=0 && count($clothesForMeteo["Bas"])!=0){
+    //S'il y a uniquement des hauts qui correspondent, et qu'il y a aussi des bas, sélectionner un haut et un bas
+    $top = $clothesForMeteo["Haut"][rand(0, count($clothesForMeteo["Haut"])-1)]["idClothe"];
+    $bottom = $clothesForMeteo["Bas"][rand(0, count($clothesForMeteo["Bas"])-1)]["idClothe"];
     array_push($dress, $top);
     array_push($dress, $bottom);
   }
-  else{
-    $both = $clothesForMeteo["Ensemble"][rand(0, count($clothesForMeteo["Ensemble"]))];
+  else if(count($clothesForMeteo["Exterieur"])!=0){
+    //S'il y a uniquement des ensembles qui correspondent
+    $both = $clothesForMeteo["Ensemble"][rand(0, count($clothesForMeteo["Ensemble"])-1)]["idClothe"];
     array_push($dress, $both);
-  }  
+  }
+  else{
+    //Si aucun ne correspond, erreur
+    array_push($dress, MAIN_ERROR);
+  }
 
-  //Sélectionner au hasard des chaussures
-  $shoes = $clothesForMeteo["Chaussures"][rand(0, count($clothesForMeteo["Chaussures"]))];
-  array_push($dress, $shoes);
+  //Vérifier s'il y a des chaussures, si oui en sélectionner un au hasard
+  if(count($clothesForMeteo["Chaussures"])!=0){
+    $shoes = $clothesForMeteo["Chaussures"][rand(0, count($clothesForMeteo["Chaussures"]))]["idClothe"];
+    array_push($dress, $shoes);
+  }
+  else{
+    array_push($dress, SHOES_ERROR);
+  }
 
   //Vérifier s'il y a des vestes/manteaux, si oui en sélectionner un au hasard
-  $outwear = $clothesForMeteo["Exterieur"][rand(0, count($clothesForMeteo["Exterieur"]))];
-  array_push($dress, $outwear);
+  if(count($clothesForMeteo["Exterieur"])!=0){
+    $outwear = $clothesForMeteo["Exterieur"][rand(0, count($clothesForMeteo["Exterieur"]))]["idClothe"];
+    array_push($dress, $outwear);
+  }
+  else{
+    //S'il fait froid le matin, erreur
+    if($temperatures[2]<=8 && $temperatures[3]<=10){
+      array_push($dress, COAT_ERROR);
+    }
+  }
 
   //Retourner l'ensemble des vêtements de la tenue générée sous forme de tableau
-  return [];
+  return $dress;
+}
+
+function GetClothesForMeteo($temperatures, $weathers){
+  //Traiter les information météo de toute la journée pour récupérer ce qui est important à la création de la tenue
+  //Faire la moyenne des température de la journée
+  $minTemp = $temperatures[0];
+  $maxTemp = $temperatures[0];
+  $sum = 0;
+  foreach($temperatures as $temperature){
+    $sum += $temperature;
+  }
+  $temperature = round($sum / count($temperatures));
+
+  $weatherPriority = false;
+  //Récupérer les temps particuliers de la journée (neige, pluie, normal)
+  foreach($weathers as $weather){
+    //Il neige
+    if($weather == "Snow"){
+      $weatherPriority = "Neige";
+    }
+    //Il pleut
+    else if($weather == "Rain" || $weather == "Thuderstorm"){
+      if($weatherPriority != "Neige"){
+        $weatherPriority = "Pluie";
+      }      
+    }
+    //Il y a du soleil ou des nuages
+    else{
+      if($weatherPriority != "Neige" && $weatherPriority != "Pluie"){
+        $weatherPriority = "Normal";
+      }
+    }
+  }
+
+  //Créer un tableau avec tous les vêtements possibles pour cette météo (neige prioritaire), classés par catégorie
+  $clothesForMeteo = [
+    CLOTHES_GROUPS[0] => ReadClothesByMeteoAndCategorie($temperature, $weatherPriority, CLOTHES_GROUPS[0]),
+    CLOTHES_GROUPS[1] => ReadClothesByMeteoAndCategorie($temperature, $weatherPriority, CLOTHES_GROUPS[1]),
+    CLOTHES_GROUPS[2] => ReadClothesByMeteoAndCategorie($temperature, $weatherPriority, CLOTHES_GROUPS[2]),
+    CLOTHES_GROUPS[3] => ReadClothesByMeteoAndCategorie($temperature, $weatherPriority, CLOTHES_GROUPS[3]),
+    CLOTHES_GROUPS[4] => ReadClothesByMeteoAndCategorie($temperature, $weatherPriority, CLOTHES_GROUPS[4])
+  ];
+
+  return $clothesForMeteo;
 }
 
 //Affichage_______________________________________________________________________________________________________
@@ -623,8 +826,8 @@ function CreateClotheImage($idCategory, $color){
   $script = GetCategory($idCategory)["isTemplate"];
 
   //Modifier la couleur par celle choisie par l'utilisateur
-  $aModifier = "[PLACE_COLOR]";
-  $script = preg_replace($aModifier, $color, $script);
+  $aModifier = "PLACE_COLOR";
+  $script = str_replace($aModifier, $color, $script);
 
   //écrire le script créé dans le fichier
   fwrite($file, $script);
@@ -647,8 +850,12 @@ function DeleteClothesImages(){
 //Afficher une tenue complète adaptée à la météo
 function DisplayDress($temperature, $weather){
   $dress = GenerateDress($temperature, $weather);
-  foreach($dress as $clothe){
-    DisplayClothe($clothe);
+  
+  foreach($dress as $idClothe){
+    if(is_numeric($idClothe))
+    DisplayClothe(GetClothe($idClothe));
+    else
+    DisplayEmptyClothe($idClothe);
   }
 }
 
@@ -656,18 +863,35 @@ function DisplayDress($temperature, $weather){
 function DisplayClothesList(){
   $clothes = ReadClothesByUser(GetIdUser());
   foreach($clothes as $clothe){
-    DisplayClothe($clothe);    
+    DisplayClothe($clothe);
   }
 }
 
 //Afficher un vêtement
 function DisplayClothe($clothe){
   $imagePath = CreateClotheImage($clothe["idCategory"], $clothe["color"]);
+  
   echo "<div class=\"eventBubble clothesBubble text-center\">"
+        ."<div class=\"displayClothe\">"
         .$clothe["name"]
-        ."<img src=\"".$imagePath."\"/>
-        <div><button type=\"submit\" name=\"delete\" value=\"".$clothe["idClothe"]."\"/><img src=\"img/delete.png\"></button>
+        ."<img class=\"clotheImage\" src=\"".$imagePath."\"/>
+        </div>
+        <div class=\"displayButtons\"><button type=\"submit\" name=\"delete\" value=\"".$clothe["idClothe"]."\"/><img src=\"img/delete.png\"></button>
         <button type=\"submit\" name=\"update\" value=\"".$clothe["idClothe"]."\"/><img src=\"img/update.png\"></button></div>
+        </div>";
+}
+
+function DisplayClotheImage($clothe){
+  $imagePath = CreateClotheImage($clothe["idCategory"], $clothe["color"]);
+  echo "<img class=\"clotheImage\" src=\"".$imagePath."\"/>";
+}
+
+//Afficher une case vide avec un message d'erreur pour un vêtement nécessaire non existant
+function DisplayEmptyClothe($idClothe){
+  echo "<div class=\"eventBubble clothesBubble text-center\">"
+        ."<div class=\"displayClothe\">"
+        .$idClothe
+        ."</div>
         </div>";
 }
 
@@ -760,9 +984,9 @@ function ClassifyMeteoInfos($meteoInfos){
             //L'humidité
             "humidite" => $meteoInfos["list"][$i]["main"]["humidity"],
             //La vitesse du vent
-            "vitesseVent" => $meteoInfos["list"][$i]["wind"]["speed"],
+            "vitesseVent" => ($meteoInfos["list"][$i]["wind"]["speed"]*10),
             //La probabilité de pécipitations
-            "probPrecipitations" => $meteoInfos["list"][$i]["pop"],
+            "probPrecipitations" => ($meteoInfos["list"][$i]["pop"]*100),
         ];
 
         //Ajouter le relevé météo au tableau général
@@ -874,7 +1098,9 @@ function GetHourToDisplay(){
 //Afficher les informations détaillées pour la journée sélectionnée
 function DisplayDayMeteo($numDay, $numHour){
     //Récupérer les informations météo du jour sélectionné
-    $day = GetMeteo()->GetDay($numDay); 
+    $day = GetMeteo()->GetDay($numDay);
+    
+    echo "</div>";
 
     echo "<div class=\"meteoTable\">";
 
@@ -882,11 +1108,13 @@ function DisplayDayMeteo($numDay, $numHour){
     echo "<div class=\"meteoBubble\" id=".$day->GetDate()."> ";   
     $hours = [];
     $temperatures = [];
+    $weathers = [];
     //Parcourir les informations de touts les enregistrements de la journée, et récupérer les heures et les températures correspondantes
     for($i = 0; $i < count($day->GetHours()); $i++){
         $hour = $day->GetHour($i);
         array_push($hours, $hour->GetHour());
-        array_push($temperatures, $hour->GetTemperature());        
+        array_push($temperatures, $hour->GetTemperature());    
+        array_push($weathers, $hour->GetMeteoGroup());           
     }       
     echo "</div>";
 
@@ -894,13 +1122,13 @@ function DisplayDayMeteo($numDay, $numHour){
     echo "<div class=\"hoursBubble\" id=".$day->GetDate()."> "; 
     for($i = 0; $i < count($hours); $i++){
       $hour = $hours[$i];
-      //mettre en évidence l'heure sélectionnle
+      //mettre en évidence l'heure sélectionnàe
       if($i == $numHour){
         echo '<a class="selectedLink" href="index.php?numDay='.$numDay.'&numHour='.$i.'">'.$hour.'h</a> ';   
       }
       else{
         echo '<a href="index.php?numDay='.$numDay.'&numHour='.$i.'">'.$hour.'h</a> ';   
-      }         
+      }
     }
     echo "</div>";
 
@@ -911,7 +1139,7 @@ function DisplayDayMeteo($numDay, $numHour){
     
     //Tenue recommandée en fonction de la météo
     echo "<div class=\"dressBubble\">";
-    DisplayDress($temperatures, "RECUPERER IDs WEATHER DANS LA LISTE");
+    DisplayDress($temperatures, $weathers);
     echo "</div>";
 
     //Activités et évènements du jour
@@ -1081,6 +1309,14 @@ function GetWeekDayName($numDay){
 
     return $days[$index];
 }
+
+//Retournre, le nom du jour de la semaine en français
+function GetWeekDayNameAbsolute($numDay){
+  $days = array('Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi');
+
+  return $days[intval($numDay)];
+}
+
 
 //Retourner, pour dans X jours, le numéro du jour de la semaine (0-6 pour dimanche-samedi)
 function GetWeekDay($numDay){

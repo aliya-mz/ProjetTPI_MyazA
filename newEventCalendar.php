@@ -26,7 +26,7 @@ $save = FILTER_INPUT(INPUT_POST, "save", FILTER_SANITIZE_STRING);
 
 //Supprimer l'évènement sur lequel l'utilisateur a cliqué
 if($save){
-	SaveEvent(0, $description, $dateStart, $dateEnd, 0);
+	SaveEvent(0, $description, $dateStart, $dateEnd, 0, 0);
 }
 ?>
 
@@ -39,7 +39,7 @@ if($save){
     <link rel="stylesheet" type="text/css" href="css/style.css" >
   </head>
   <body>
-	<main class="mainCalendar">		
+	<main class="mainCalendar" class="bg-light">		
 		<!--Navigation principale-->
 		<nav class="navbar navbar-expand-lg navbar-light bg-light navCalendar">
 			<div class="container-fluid">
@@ -59,7 +59,7 @@ if($save){
 					</li>
                     <!--Semainier-->
 					<li class="nav-item">
-						<a class="nav-link " aria-current="page" href="weeklyPlanner.php">Semainier</a>
+						<a class="nav-link" aria-current="page" href="weeklyPlanner.php">Semainier</a>
 					</li>
 				</ul>
 				</div>
@@ -73,10 +73,10 @@ if($save){
           <td colspan="2"><input type="text" name="description" value="" placeholder="Description de l'évènement"></td>
         </tr>
         <tr>
-          <td colspan="2"><input type="date" name="dateStart" value=""></td>
+          <td colspan="2"><input type="datetime-local" name="dateStart" value=""></td>
         </tr>
         <tr>
-          <td colspan="2"><input type="date" name="dateEnd" value=""></td>
+          <td colspan="2"><input type="datetime-local" name="dateEnd" value=""></td>
         </tr>
         <tr>          
           <td colspan="2"><button class="btnCreateIdea" type="submit" name="save" value="save"><img class="iconButton" src="img/submit.png"/></button></td>

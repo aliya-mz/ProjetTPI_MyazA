@@ -32,7 +32,7 @@ if($delete){
     <nav class="navAjouter">
       <td><a class="lienBouton boutonHome" href="index.php"><img src="img/home.png"/></a></td>
     </nav>
-    <main>
+    <main class="bg-light">
     <form class="formAdd" action="manageUsers.php" method="POST">
       <table class="usersList">
        <?PHP

@@ -17,7 +17,11 @@ $dayToDisplay = GetDayToDisplay();
 $hourToDisplay = GetHourToDisplay();
 
 //Récupérer et enregistrer dans la session les informations météo des 5 jours à venir (se met à jour si plus de 5 minutes sont passées)
-ExecuteMeteoProgram();
+
+if(GetIdUser()){
+	ExecuteMeteoProgram();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +38,7 @@ ExecuteMeteoProgram();
   	<!--Navigation principale-->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light navCalendar">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">Home</a>
+			<a class="navbar-brand" href="#"><img class="iconButton" src="img/home"/></a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -56,11 +60,13 @@ ExecuteMeteoProgram();
 	</nav>
 
 	<!--Affichage journalier-->
-	<main>
+	<main class="bg-light">
 		<form>
 		<?php
 			//Affiche les informations météo et complémentaires du jour sélectionné
-			DisplayDayMeteo($dayToDisplay, $hourToDisplay);
+			if(GetIdUser()){
+				DisplayDayMeteo($dayToDisplay, $hourToDisplay);
+			}			
 		?>
 		</form>
 	</main>

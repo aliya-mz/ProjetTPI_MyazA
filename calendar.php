@@ -14,9 +14,11 @@ include("backend/autoload.php");
 //Vérifier que l'utilisateur est connecté
 VerifyAccessibility(1);
 
-//Mettre en dynamique !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-$month = "05";
-$year = "2021";
+$idMonth = FILTER_INPUT(INPUT_GET, "month", FILTER_VALIDATE_INT);
+$idYear = FILTER_INPUT(INPUT_GET, "year", FILTER_VALIDATE_INT);
+
+$month = GetMonth($idMonth);
+$year = GetYear($idYear);
 
 //Récupérer l'identifiant de l'évènement à supprimer
 $delete = FILTER_INPUT(INPUT_POST, "delete", FILTER_SANITIZE_STRING);
@@ -54,13 +56,13 @@ ExecuteMeteoProgram();
 				</ul>
 				<ul class="navbar-nav justify-content-center">
 					<li class="nav-item">
-						<a class="nav-link" href="#"><img class="smallIconButton" src="/img/back.png"/></a>
+						<a class="nav-link" href="<?php echo "calendar.php?month=".GetLastMonth($month, $year)."&year=".GetLastMonthsYear($month, $year)?>"><img class="smallIconButton" src="/img/back.png"/></a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#"><?php echo GetMonthName(intval($month), true)." ".$year ?></a>
 					</li>					
 					<li class="nav-item">
-						<a class="nav-link" href="#"><img class="smallIconButton" src="/img/next.png"/></a>
+						<a class="nav-link" href="<?php echo "calendar.php?month=".GetNextMonth($month, $year)."&year=".GetNextMonthsYear($month, $year)?>"><img class="smallIconButton" src="/img/next.png"/></a>
 					</li>
 				</ul>			
 				<span class="navbar-text">

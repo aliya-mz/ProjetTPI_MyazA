@@ -4,7 +4,7 @@ html {
 body{
   max-height: 100vh;
   padding: 0;
-  background-color:white;
+  background-color:#F6FDFF;
   width:100%;
   margin:0;
   font-size:14px;
@@ -410,7 +410,10 @@ input[type=color] {
 
 .calendarTable td{
   width: 10%;
-  height: 10%;
+  height: 100px;
+}
+
+.calendarTable td div{
   overflow: auto;
 }
 
@@ -466,7 +469,9 @@ input[type=color] {
   border: none;
 }
 
-
+.addEventHour{
+  float:right;
+}
 
 
 /*Formulaires*/
@@ -487,8 +492,7 @@ input[type=color] {
 
 .meteoTable{
   margin: auto;
-  margin-top: 30px;
-  width: 50%;
+  width: 40%;
   padding:30px;
   border-radius: 15px;
   /*background-color: white;*/
@@ -505,13 +509,17 @@ input[type=color] {
   margin-top: 30px;
 }
 
+.meteoBubble rect{
+  fill: #f8f9fa;
+}
+
 .hoursBubble{
   border-top: 1px solid #E5E4E4;
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 10px;
   padding-top:10px;
 }
 
@@ -608,4 +616,22 @@ input[type=color] {
   width: 200px;
   height: 200px;
   margin : 10px;
+}
+
+.displayClothe{
+  margin-top: 20px !important;
+  width: 160px !important;
+}
+
+.displayButtons{  
+  width: 40px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-end !important;
+  justify-content: flex-start !important;
+}
+
+.clotheImage{
+  height: 100px !important; 
+  width: 100px !important;
 }

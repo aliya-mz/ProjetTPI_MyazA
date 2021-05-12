@@ -56,7 +56,7 @@ if($update){
 		</nav>
     <main>
     <form action="manageClothes.php" method="POST">
-      <main class="listClothes">
+      <main class="listClothes bg-light">
        <?PHP
         //Afficher la liste des vêtements
         DisplayClothesList();

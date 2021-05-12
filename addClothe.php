@@ -69,7 +69,7 @@ if($validate){
 		</nav>
   
     <!--Formulaire-->
-    <main>
+    <main class="bg-light">
     <form class="formAdd" action="" method="POST">
       <table class="formClothes">
         <tr>

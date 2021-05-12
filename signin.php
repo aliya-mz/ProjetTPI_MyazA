@@ -39,7 +39,7 @@ if($enregistrer){
     <nav class="navAjouter">
       <td><a class="lienBouton boutonHome" href="index.php"><img src="img/home.png"/></a></td>
     </nav>
-    <main>
+    <main class="bg-light">
     <form class="formAdd" action="" method="POST">
       <table>
         <tr>

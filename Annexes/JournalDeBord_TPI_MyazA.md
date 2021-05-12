@@ -193,15 +193,11 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 9h40 : Je m'occupe de l'affichage de ma météo résumée (température et catégorie météo) dans le calendrier pour les 3 jours à venir.
 
+**Après-midi**
+
 12h40 : Je commence le système de gestion de la garde-robe en créant des formulaires de création, modification et suppression des vêtements. 
 
 15h00 : Le site doit permettre d'afficher des images des vêtements que les utilisateurs vont créer. Je dois donc créer une fonctionnalité de génération d'images vectorielles (.svg) représentant la catégorie et la couleur du vêtement. L'image ne sera stockée nul part, mais sera générée au moment de l'affichage grâce à la base de données.
-
-
-
-**Après-midi**
-
-
 
 ➔ **Bilan de la journée** :
 
@@ -214,15 +210,40 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 *A faire :*
 
 - Finir génération images vectorielles
-
 - Discuter avec mon enseignant de la gestion des catégories de vêtements
 - Rechercher images vectorielles pour chaque catégorie de vêtement
-
 - Algorithme de recommandation de tenues
-
+- Corrections calendrier
 - Documentation
 
-  
+
+**Matin**
+
+7h30 : Je finis la dernière tâche d'hier. Je n'ai pas encore les images vectorielles des vêtements, mais je teste quand même avec des valeurs par défaut. Les tests de création, modification, suppression et affichage des vêtements passent.
+
+8h30 : La dernière étape pour la gestion des vêtement est la génération de tenues journalières adaptées à la météo. Je réalise donc l'algorithme qui permet de sélectionner aléatoirement une tenue complète en fonction de la température de la journée et du groupe météo (pluie, etc...)
+
+11h00 : Le gros du travail est fini. Je commence à corriger ce qui ne fonctionne pas, dont quelques petites fonctionnalité que j'ai oublié d'implémenter, comme le déplacement de mois en mois sur le calendrier, que j'ai oublié d'implémenter.
+
+**Après-midi**
+
+12h40 : mon enseignant pour discuter dans la consigne. En effet, je pensais mettre, pour chaque type de vêtement (veste, chaussures...) un modèle d'image SVG dans la BD pour pouvoir les afficher. Or dans la consigne, on me demande de pouvoir ajouter des types, qui ne pourront donc pas avoir d'image attribuée. Puis je continue les corrections concernant la gestion du calendrier et du semainier.
+
+16h00 : Je réalise les tests l'ensemble des fonctionnalités. Les tests passent. La partie fonctionnement du site est terminée.
+
+➔ **Bilan de la journée** :
+
+
+
+ 
+
+## Lundi 17.05.2021
+
+*A faire :*
+
+- Créer le template
+- Appliquer le template sur l'ensemble du site.
+- Avancer sur la documentation (s'il reste du temps) : []
 
 **Matin**
 
@@ -238,31 +259,14 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
  
 
-## Lundi 17.05.2021
-
-*A faire :*
-
-- Visuel
-- Tests
-
-**Matin**
-
-
-
-**Après-midi**
-
-
-
-
-
- 
-
 ## Mardi 18.05.2021
 
 *A faire :*
 
-- Corrections
-- Documentation
+- Améliorations sur le site
+- Refaire les tests pour vérifier qu'il y a pas de régression
+
+- Avancer sur la documentation : []
 
 **Matin**
 
@@ -282,7 +286,7 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 *A faire :*
 
-- Documentation
+- Finir la documentation : []
 
 **Matin**
 
@@ -302,7 +306,7 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 *A faire :*
 
-- Documentation
+- Avancer la documentation
 
 **Matin**
 
