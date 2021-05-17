@@ -2,7 +2,9 @@
 
 Projet ***Wearther***, par *Myaz Aliya*, TPI 2021
 
-<img src="..\img\logo.png" style="zoom: 15%;" />
+<img src="DocImages\logo.png"/>
+
+
 
 ## Table des matières
 
@@ -287,7 +289,7 @@ Développement sur Visual Studio, réalisation des diagrammes sur Umlet, maquett
 
 #### MLD
 
-![mld_TPI_MyazA.png](C:\Users\aliya.mz\Desktop\TPI\Annexes\mld_TPI_MyazA.png)
+<img src="mld_TPI_MyazA.png"/>
 
 
 
