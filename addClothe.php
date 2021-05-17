@@ -74,9 +74,6 @@ if($validate){
       <table class="formClothes">
         <tr>
           <td colspan="2"><input type="text" name="name" value="<?php echo $name;?>" placeholder="Nom (ex : pull vert préféré)" required><?php echo $name;?></input</td>
-        </tr>      
-        <tr>
-          <td colspan="2"><div class="contenantSvg"> <?php DisplayClotheImage($color, $idCategory); ?> </div></td>
         </tr>
         <tr>
           <td colspan="2"> <label>Sélectionner une couleur</label> </td>

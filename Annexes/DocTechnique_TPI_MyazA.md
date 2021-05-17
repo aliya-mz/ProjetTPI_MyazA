@@ -1,6 +1,8 @@
 # Documentation technique
 
+Projet ***Wearther***, par *Myaz Aliya*, TPI 2021
 
+<img src="C:\Users\aliya.mz\Desktop\TPI\ProjetTPI_MyazA\img\logo.png" style="zoom: 33%;" />
 
 ## Table des matières
 

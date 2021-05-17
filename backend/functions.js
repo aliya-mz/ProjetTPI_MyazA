@@ -30,7 +30,7 @@ function DrawGraphic(){
     bars: 'vertical',
     'width':500,
     'height':180,
-    colors: ['#D3EFFF']
+    colors: ['#D2EEFF']
   };
 
   var materialChart = new google.charts.Bar(document.getElementById(id));

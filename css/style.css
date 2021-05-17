@@ -4,12 +4,34 @@ html {
 body{
   max-height: 100vh;
   padding: 0;
-  background-color:#F6FDFF;
+  background-color:#f8f9fa;
   width:100%;
   margin:0;
   font-size:14px;
   font-family:sans-serif;
   color:#463333;
+}
+
+.meteoMain{
+  width: 100% !important;
+  color:grey;
+  float: right;
+}
+
+.brandName{
+  color: #6FCA9C;
+  font-size: 18px;
+  margin: 0px 15px 0px 15px;
+}
+
+
+.horizontalNav{
+  flex-direction: row !important;
+  align-items: center;
+}
+
+.horizontalNav li{
+  margin: 0px 15px 0px 15px;
 }
 
 .otherMain{
@@ -23,13 +45,13 @@ body{
 
 h3{
   color: grey;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 /*Navigation*/
-nav{
-  background-color:#F3F0F7;
-  height:60px;
+.otherNav{
+  background-color:#EDEDED;/*B4F1CE*/
+  height:50px;
   display:flex;
   flex-direction:row;
   justify-content:space-between;
@@ -37,11 +59,27 @@ nav{
   padding-bottom:2%;
 }
 
+.mainNav{
+  background-color: #F3F3F3 !important; /*#ECECEC */
+}
+
+.pageTitle{
+  color: grey;
+  margin-right: 20px;
+  font-size: 22px;
+}
+
+.marginElements span{
+  margin-right:10px;
+}
+
+/*
 .navigation{
   display:flex;
   flex-direction:row;
   margin-right:5%;
 }
+*/
 
 a{
   text-decoration:none;
@@ -86,22 +124,28 @@ input, select, button{
   margin-bottom:5px;
 }
 
+.logo{
+  height:90px;
+  margin-right: 10px;
+}
+
 .iconButton{
   height:40px;
+  width:40px;
 }
 
 .smallIconButton{
   height:25px;
 }
 
+.mIconButton{
+  height: 30px;
+}
+
 table{
   width:90%;
   border-collapse:collapse;
   text-align:center;
-}
-
-form{
-  
 }
 
 thead{
@@ -196,17 +240,6 @@ td{
 
 .navAjouter .lienBouton{
   margin-left:5%;
-}
-
-.taglabel{
-  background-color:#F3F0F7;
-  color: #4F4C5B;
-  border-radius:50px;
-  height:40px;
-  margin:5px;
-  padding-right:20px;
-  padding-left:20px;
-  line-height: 40px;
 }
 
 .contenantTags{
@@ -314,7 +347,7 @@ td{
 .formVetements{
   width: 100%;
   height: 500px;
-  background-color: #D3E7FF;
+  background-color: #D2F9E2; /*D3E7FF*/
   border-radius: 5px;
 }
 
@@ -377,13 +410,41 @@ input[type=color] {
 
 .mainCalendar{
   width: 100%;
-  height: 100vh;
+  height: 92.1vh;
   margin: 0px;
   padding: 0px;
 }
 
+.mainCalendar form{
+  width : 88%;
+  float: right;
+  border-left: none !important;
+}
+
+.mainCalendar nav{
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.mainCalendar img{
+  margin-right: 10px;
+}
+
 .navCalendar{
   height: 7.9vh;
+  background-color: #F3F3F3 !important;
+}
+
+.daysNav{
+  display: flex;
+  flex-direction: row !important;
+  justify-content: flex-end;
+  align-items: flex-start;
+  margin-right: 20px;
+}
+.daysNav *{
+  margin-left: 10px;
+  color:grey !important;
 }
 
 .calendarForm{
@@ -411,6 +472,7 @@ input[type=color] {
 .calendarTable td{
   width: 10%;
   height: 100px;
+  overflow: auto;
 }
 
 .calendarTable td div{
@@ -418,15 +480,31 @@ input[type=color] {
 }
 
 .activeDay{
-  color: #656565;
+  color: #6FCA9C !important;
+  font-size: 17px !important;
 }
 
 .inactiveDay{
-  color: #C5C5C5;
+  color: #A8A8A8 !important;
 }
 
+/*Semainier*/
+.rowTitle{
+  width: 2% !important;
+}
+
+.weekPlanner tr{
+  height: 7% !important;  
+}
+
+.weekPlanner table{
+  height: 92vh !important;
+}
+
+/*Evenements*/
+
 .eventBubble{  
-  background-color: #D3EFFF;
+  background-color: #DDF9E9;
   border-radius: 5px;
   padding: 1px 10px 1px 10px;
   border: none;
@@ -457,7 +535,7 @@ input[type=color] {
 }
 
 .eventBubble button{  
-  background-color: #D3EFFF;
+  background-color: #D2F9E2;
   height: 14px;
   width: 14px;
   border: none;
@@ -514,7 +592,7 @@ input[type=color] {
 }
 
 .hoursBubble{
-  border-top: 1px solid #E5E4E4;
+  border-top: 1px solid #D2F9E2;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -579,7 +657,7 @@ input[type=color] {
 }
 
 .summaryBubble div{
-  width:40%;
+  width:25%;
   margin:0px;
 }
 
@@ -590,12 +668,11 @@ input[type=color] {
 }
 
 .summaryBubble img{
-  width:30px;
-  height:30px;
+  height:35px;
 }
 
 .summaryLeftBox{
-  border-right: 1px solid grey;
+  /*border-right: 1px solid rgb(192, 192, 192);*/
 }
 
 
@@ -603,19 +680,17 @@ input[type=color] {
 /*Gestion de la garde-robe*/
 
 .listClothes{
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  width: 90%;
+  width: 88%;
+  float: right;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
 }
 
 .clothesBubble{
   width: 200px;
   height: 200px;
-  margin : 10px;
+  margin : 20px 0px 0px 15px;
 }
 
 .displayClothe{
@@ -635,3 +710,23 @@ input[type=color] {
   height: 100px !important; 
   width: 100px !important;
 }
+
+/*
+<nav class="navbar navbar-expand-lg navbar-light bg-light mainNav">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#"><img class="iconButton" src="img/home"/>Wearther</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarText">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+			</ul>
+			<!--Navigation entre les jours de la semaine-->
+			<ul class="navbar-nav justify-content-center">
+				<?php 
+					//Afficher la navigation entre les jours de la semaine
+					ShowDaysNav();
+				?>				
+			</ul>
+		</div>
+	</nav>

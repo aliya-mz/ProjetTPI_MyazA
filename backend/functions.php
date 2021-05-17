@@ -91,56 +91,45 @@ function SignUserIn($login, $firstName, $lastName, $eMail, $password){
 function ShowNavByRole(){
   //Si l'utilisateur est déconnecté, afficher le lien pour se connecter
   if(GetUserRole()==0){
+    echo '<ul class="nav flex-column">';
     //Connexion
-		echo "<li class=\"nav-item\">";
-		echo "<a class=\"nav-link\" href=\"login.php\">Connexion</a>";
-		echo "</li>";
+    echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"login.php\">Connexion</a></li>";
     //Inscription
-		echo "<li class=\"nav-item\">";
-		echo "<a class=\"nav-link\" href=\"signin.php\">Inscription</a>";
-		echo "</li>";
+    echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"signin.php\">Inscription</li>";
+    echo '</ul>';
   }
   //Si c'est un utilisateur connecté, afficher les liens vers le parties calendrier, garde-robe et compte, et la déconnexion
   else if(GetUserRole()==1){
-    //Liste déroulante gestion de la garde-robe
-		echo "<li class=\"nav-item dropdown\">";
-		echo "<a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarLightDropdownMenuLink\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\"> Garde-robe </a>
-          <ul class=\"dropdown-menu dropdown-menu-light\" aria-labelledby=\"navbarLightDropdownMenuLink\">
-          <li><a class=\"dropdown-item\" href=\"addClothe.php\">Ajouter des vêtements</a></li>
-          <li><a class=\"dropdown-item\" href=\"manageClothes.php\">Voir ma garde-robe</a></li>
-          </ul>";
-		echo "</li>";
-
-    //Liste déroulante calendrier
-		echo "<li class=\"nav-item dropdown\">";
-		echo "<a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarLightDropdownMenuLink\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\"> Calendrier </a>
-          <ul class=\"dropdown-menu dropdown-menu-light\" aria-labelledby=\"navbarLightDropdownMenuLink\">
-          <li class=\"nav-item\"><a class=\"dropdown-item\" href=\"calendar.php\">Calendrier</a></li>
-          <li class=\"nav-item\"><a class=\"dropdown-item\" href=\"weeklyPlanner.php\">Semainier</a></li>
-          </ul>";
-		echo "</li>";
-
-    //Modifier les informations du compte
-		echo "<li class=\"nav-item\">";
-		echo "<a class=\"nav-link\" href=\"updateUser.php\">Mon compte</a>";
-		echo "</li>";
-
-    //Déconnexion
-		echo "<li class=\"nav-item\">";
-		echo "<a class=\"nav-link\" href=\"logout.php\">Deconnexion</a>";
-		echo "</li>";
+  echo '<ul class="nav flex-column">';
+  //Modifier les informations du compte
+  echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"updateUser.php\"><img class=\"smallIconButton\" src=\"img/account.png\"/></a></li>";
+  //Déconnexion
+  echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"logout.php\"><img class=\"smallIconButton\" src=\"img/logout.png\"/></a></li>";
+  echo '</ul>';
+  //Gestion des vêtements
+  echo'<h6 class="sidebar-heading d-flex justify-content-start align-items-center px-3 mt-4 mb-1 text-muted marginElements">
+        <span><img src="img/clothe.png" alt="" class="mIconButton"></span> <span>Garde-robe</span>
+       </h6>
+       <ul class="nav flex-column mb-2">
+        <li class="nav-item"><a class="nav-link" href="manageClothes.php">Voir ma garde-robe</a></li>
+        <li class="nav-item"><a class="nav-link" href="addClothe.php">Ajouter un vêtement</a></li>
+       </ul>';
+  echo'<h6 class="sidebar-heading d-flex justify-content-start align-items-center px-3 mt-4 mb-1 text-muted marginElements">
+        <span><img src="img/calendar.png" alt="" class="mIconButton"></span> <span>Calendrier</span>
+       </h6>
+       <ul class="nav flex-column mb-2">
+        <li class="nav-item"><a class="nav-link" href="calendar.php">Calendrier</a></li>
+        <li class="nav-item"><a class="nav-link" href="weeklyPlanner.php">Semainier</a></li>
+       </ul>';
   }
   //Si c'est un administrateur, afficher le lien vers la gestion des utilisateurs et la déconnexion
   else if(GetUserRole()==2){
+    echo '<ul class="nav flex-column">';
+    //Dénnexion
+    echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"logout.php\"><img class=\"smallIconButton\" src=\"img/logout.png\"/></a></li>";
     //Gestion des utilisateurs
-    echo "<li class=\"nav-item\">";
-		echo "<a class=\"nav-link\" href=\"manageUsers.php\">Gestion des utilisateurs</a>";
-		echo "</li>";
-
-    //Déconnexion
-		echo "<li class=\"nav-item\">";
-		echo "<a class=\"nav-link\" href=\"logout.php\">Deconnexion</a>";
-		echo "</li>";
+    echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"manageUsers.php\">Gestion des utilisateurs</li>";
+    echo '</ul>';
   }
 }
 
@@ -543,7 +532,7 @@ function DisplayWeekPlanner(){
   //Afficher le tableau du semainier
   echo "<table class=\"table table-bordered table-light calendarTable\">";
   echo "<thead><tr>
-        <th scope=\"col\">Heure</th><th scope=\"col\">Lun.</th> <th scope=\"col\">Mar.</th> <th scope=\"col\">Mer.</th> <th scope=\"col\">Jeu.</th> <th scope=\"col\">Ven</th> <th scope=\"col\">Sam.</th> <th scope=\"col\">Dim.</th>
+        <th scope=\"col\" class=\"rowTitle\">Heure</th><th scope=\"col\">Lun.</th> <th scope=\"col\">Mar.</th> <th scope=\"col\">Mer.</th> <th scope=\"col\">Jeu.</th> <th scope=\"col\">Ven</th> <th scope=\"col\">Sam.</th> <th scope=\"col\">Dim.</th>
         </tr></thead>";
         
   echo "<tbody>";
@@ -551,7 +540,7 @@ function DisplayWeekPlanner(){
     //Afficher les heures
     echo "<tr>";
     $hour = $hours[0][$row];
-    echo "<td>".$hour."h</td>";
+    echo "<td class=\"rowTitle\">".$hour."h</td>";
     for($col = 0; $col < count($hours); $col++){
       echo "<td>";
       //Bouton ajouter une activité à cette heure
@@ -591,7 +580,7 @@ function GetMonthName($idMonth, $long){
 //Affichage d'un évènement donnée
 function DisplayEvent($event, $calendar){
   //Afficher les évènements, avec un bouton supprimer
-  echo "<div class=\"eventBubble text-center\">";
+  echo "<div class=\"eventBubble\">";
     if($calendar){
       echo $event["theHour"]. " ";
     }
@@ -863,7 +852,7 @@ function DisplayDress($temperature, $weather){
 function DisplayClothesList(){
   $clothes = ReadClothesByUser(GetIdUser());
   foreach($clothes as $clothe){
-    DisplayClothe($clothe);
+    DisplayClotheWithControls($clothe);
   }
 }
 
@@ -871,7 +860,19 @@ function DisplayClothesList(){
 function DisplayClothe($clothe){
   $imagePath = CreateClotheImage($clothe["idCategory"], $clothe["color"]);
   
-  echo "<div class=\"eventBubble clothesBubble text-center\">"
+  echo "<div class=\"eventBubble clothesBubble\">"
+        ."<div class=\"displayClothe\">"
+        .$clothe["name"]
+        ."<img class=\"clotheImage\" src=\"".$imagePath."\"/>
+        </div>
+        </div>";
+}
+
+//Afficher un vêtement avec les contrôles (modifier et supprimer)
+function DisplayClotheWithControls($clothe){
+  $imagePath = CreateClotheImage($clothe["idCategory"], $clothe["color"]);
+  
+  echo "<div class=\"eventBubble clothesBubble\">"
         ."<div class=\"displayClothe\">"
         .$clothe["name"]
         ."<img class=\"clotheImage\" src=\"".$imagePath."\"/>
@@ -879,11 +880,6 @@ function DisplayClothe($clothe){
         <div class=\"displayButtons\"><button type=\"submit\" name=\"delete\" value=\"".$clothe["idClothe"]."\"/><img src=\"img/delete.png\"></button>
         <button type=\"submit\" name=\"update\" value=\"".$clothe["idClothe"]."\"/><img src=\"img/update.png\"></button></div>
         </div>";
-}
-
-function DisplayClotheImage($clothe){
-  $imagePath = CreateClotheImage($clothe["idCategory"], $clothe["color"]);
-  echo "<img class=\"clotheImage\" src=\"".$imagePath."\"/>";
 }
 
 //Afficher une case vide avec un message d'erreur pour un vêtement nécessaire non existant
@@ -1051,12 +1047,12 @@ function ShowDaysNav(){
   for($i = 0; $i < 5; $i++){
     if($i == GetDayToDisplay()){
       echo '<li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="index.php?numDay='.$i.'">'.GetWeekDayName($i).'</a>
+          <a class="nav-link active displayBlock activeDay" aria-current="page" href="index.php?numDay='.$i.'">'.GetWeekDayName($i).'</a>
           </li>';
     }
     else{
       echo '<li class="nav-item">
-          <a class="nav-link" href="index.php?numDay='.$i.'">'.GetWeekDayName($i).'</a>
+          <a class="nav-link displayBlock inactiveDay" href="index.php?numDay='.$i.'">'.GetWeekDayName($i).'</a>
           </li>';
     }    
   }
@@ -1156,7 +1152,7 @@ function DisplayDayMeteo($numDay, $numHour){
 //Afficher de la température au cours de la journée grâce à un graphique js
 function DisplayTemperatureGraphic($hours, $temperatures, $date){
   //Créer un string avec le format tableau en javascript pour pouvoir envoyer les données à la fonction d'affichage
-  $temperaturesJSArray = "[['Heure', 'Temperature'],";
+  $temperaturesJSArray = "[['Heure', 'Température'],";
   for($i = 0; $i < count($hours); $i++){
     $temperaturesJSArray .= "[";
     $temperaturesJSArray .= '"'.$hours[$i].'"' . "," . $temperatures[$i];
@@ -1191,9 +1187,9 @@ function DisplayDaysEvents($numDay){
   $weeklyEvents = GetEventsWeekPlanner();  
   $events = [];  
   foreach($weeklyEvents as $key => $event){
-      if($event["theWeekDay"] == GetWeekDay($numDay)){
-        array_push($events, $event);
-      }    
+      if(intval(explode(".",$event["theDate"])[0]) == GetWeekDay($numDay)){
+        array_push($events, $event);        
+      }
   }
 
   //Récupérer les évènements du calendrier à cette date
@@ -1316,7 +1312,6 @@ function GetWeekDayNameAbsolute($numDay){
 
   return $days[intval($numDay)];
 }
-
 
 //Retourner, pour dans X jours, le numéro du jour de la semaine (0-6 pour dimanche-samedi)
 function GetWeekDay($numDay){

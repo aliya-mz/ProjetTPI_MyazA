@@ -243,15 +243,20 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 - Créer le template
 - Appliquer le template sur l'ensemble du site.
-- Avancer sur la documentation (s'il reste du temps) : []
+- Refaire les tests
+- Avancer sur la documentation (s'il reste du temps) 
 
 **Matin**
 
+7h30 : Je crée le template que je vais utiliser pour toutes les pages de mon site
 
+10h30 : Je commence à l'implémenter
 
 **Après-midi**
 
+12h40 : Je continue à ajuster le template à mes différents types de pages.
 
+15h30 : Je réalise les tests pour vérifier que les changements n'ont pas entraîné de régression
 
 ➔ **Bilan de la journée** :
 
@@ -263,9 +268,7 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 *A faire :*
 
-- Améliorations sur le site
-- Refaire les tests pour vérifier qu'il y a pas de régression
-
+- Améliorations sur le site (corrections ajout évènement semainier)
 - Avancer sur la documentation : []
 
 **Matin**
