@@ -250,15 +250,123 @@ Les bilans de la journée que j'ai écrit après chaque journée de travail m'on
 
 ### Fonctionnalités du projet
 
-[Lister les fonctionnalités]
+#### Gestion des utilisateurs
 
-### Description détaillée de la liste des fonctionnalités
+Se connecter :
 
-[Expliquer les fonctionnalités]
+S'inscrire :
+
+Voir les informations de son compte :
+
+Modifier les informations de son compte :
+
+Voir la liste des utilisateurs :
+
+Supprimer un utilisateur :
+
+
+
+#### Fonctionnement de la météo
+
+ExecuteMeteoProgram() : 
+
+GetMeteoInfos() :
+
+ClassifyMeteoInfos($meteoInfos) : 
+
+ClassifyInfosByDay($meteoInfos) :
+
+ShowDaysNav() :
+
+DisplayDayMeteo($numDay, $numHour) : 
+
+DisplayTemperatureGraphic($hours, $temperatures, $date) : 
+
+DisplayRecordingsDetails($day, $idRecording) : 
+
+DisplayDaysEvents($numDay) : 
+
+SortEventsByTime($events) :
+
+DisplayMeteoSummary($numDay) :
+
+
+
+#### Fonctionnement du calendrier
+
+GetCalendarDays($month, $year) :
+
+GetWeekHours() :
+
+GetEventsBetween($dateStart, $dateEnd) :
+
+GetEventsWeekPlanner() :
+
+SaveEvent($isReccurent, $description, $dateStart, $dateEnd, $hour, $day) :
+
+DeleteEvent($idEvent) :
+
+DateToTimestamp($date) :
+
+HourToTimestamp($hour, $day) :
+
+DisplayMonthCalendar($month, $year) :
+
+DisplayWeekPlanner() :
+
+DisplayEvent($event, $calendar) :
+
+
+
+#### Gestion des vêtements
+
+SaveClothe($name, $idCategory, $idWeather, $color, $tempMin, $tempsMax) :
+
+DeleteClothe($idClothe) : 
+
+GetClothesForMeteo($temperatures, $weathers) :
+
+GenerateDress($temperatures, $weathers) : 
+
+CreateClotheImage($idCategory, $color) :
+
+DisplayClothe($clothe) :
+
+DisplayClotheWithControls($clothe) :
+
+DisplayEmptyClothe($idClothe)
+
+DisplayDress($temperature, $weather) :
+
+DisplayClothesList() :
+
+
+
+
 
 ### Description de l’interface
 
-[maquettes (Figma) commentées]
+*Page d'accueil* : Affiche, pour une journée parmi les 5 à venir, la météo tout au long de la journée, une recommandations de tenue adaptée à la tenue, ainsi que les activités et évènements. Navigation entre ces jours.
+
+![](C:\Users\aliya.mz\Desktop\TPI\ProjetTPI_MyazA\annexes\DocImages\captureAccueil.PNG)
+
+
+
+*Page de gestion de la garde-robe* : Affiche les vêtements ajoutés par l'utilisateur, avec des contrôles permettant de les modifier et de les supprimer.
+
+![](DocImages\captureGardeRobe.PNG)
+
+
+
+*Calendrier* : Calendrier classique affichant les évènements ajoutés par l'utilisateur, ainsi que la météo du matin et du soir pour les trois jours à venir. Navigation de mois en mois.
+
+![](DocImages\captureCalendrier.PNG)
+
+
+
+*Semainier* : Semainier affichant, pour chaque jour de la semaine, de 6h à 22h, les activités hebdomadaires enregistrées par les utilisateurs.
+
+![](DocImages\captureSemainier.PNG)
 
 
 
@@ -331,6 +439,102 @@ Description du rôle
 
 
 
+### Fonctions
+
+#### Gestion des utilisateurs
+
+VerifyAccessibility($acceptedRole) :
+
+SignUserIn($login, $firstName, $lastName, $eMail, $password) :
+
+ConnectUser($login, $password) :
+
+ShowNavByRole() :
+
+ShowListUsers() :
+
+DeleteUser($idUser) :
+
+UpdateUser($login, $firstName, $lastName, $eMail, $password) :
+
+
+
+#### Fonctionnement de la météo
+
+ExecuteMeteoProgram() : 
+
+GetMeteoInfos() :
+
+ClassifyMeteoInfos($meteoInfos) : 
+
+ClassifyInfosByDay($meteoInfos) :
+
+ShowDaysNav() :
+
+DisplayDayMeteo($numDay, $numHour) : 
+
+DisplayTemperatureGraphic($hours, $temperatures, $date) : 
+
+DisplayRecordingsDetails($day, $idRecording) : 
+
+DisplayDaysEvents($numDay) : 
+
+SortEventsByTime($events) :
+
+DisplayMeteoSummary($numDay) :
+
+
+
+#### Fonctionnement du calendrier
+
+GetCalendarDays($month, $year) :
+
+GetWeekHours() :
+
+GetEventsBetween($dateStart, $dateEnd) :
+
+GetEventsWeekPlanner() :
+
+SaveEvent($isReccurent, $description, $dateStart, $dateEnd, $hour, $day) :
+
+DeleteEvent($idEvent) :
+
+DateToTimestamp($date) :
+
+HourToTimestamp($hour, $day) :
+
+DisplayMonthCalendar($month, $year) :
+
+DisplayWeekPlanner() :
+
+DisplayEvent($event, $calendar) :
+
+
+
+#### Gestion des vêtements
+
+SaveClothe($name, $idCategory, $idWeather, $color, $tempMin, $tempsMax) :
+
+DeleteClothe($idClothe) : 
+
+GetClothesForMeteo($temperatures, $weathers) :
+
+GenerateDress($temperatures, $weathers) : 
+
+CreateClotheImage($idCategory, $color) :
+
+DisplayClothe($clothe) :
+
+DisplayClotheWithControls($clothe) :
+
+DisplayEmptyClothe($idClothe)
+
+DisplayDress($temperature, $weather) :
+
+DisplayClothesList() :
+
+
+
 ### Argumentation des choix de méthodes de résolution
 
 [Choix de l'API météo]
@@ -343,7 +547,7 @@ Description du rôle
 
 ### Pseudo code ou des structogrammes
 
-[Structogramme . algorithme de recommandation de vêtements]
+[Structogramme algorithme de recommandation de vêtements]
 
 
 
@@ -551,24 +755,18 @@ Les scénarios ont été écrits avant la réalisation du projet, afin de garant
 | 1.7     | ✗          | ✗          | ✓          | ✓         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓          |
 | 1.8     | ✗          | ✗          | ✓          | ✓         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓          |
 | 1.9     | ✗          | ✗          | ✓          | ✓         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓          |
-| 2.1     | ✗          | ✗          | ✗          |           |           |           | ✓         | ✓         | ✓         | ✓         | ✓          |
-| 2.2     | ✗          | ✗          | ✗          |           |           |           | ✓         | ✓         | ✓         | ✓         | ✓          |
-| 3.1     | ✗          | ✗          | ✗          |           |           |           | ✓         | ✓         | ✓         | ✓         | ✓          |
-| 3.2     | ✗          | ✗          | ✗          |           |           |           | ✓         | ✓         | ✓         | ✓         | ✓          |
-| 3.3     | ✗          | ✗          | ✗          |           |           |           | ✓         | ✓         | ✓         | ✓         | ✓          |
-| 3.4     | ✗          | ✗          | ✗          |           |           |           | ✗         | ✓         | ✓         | ✓         | ✓          |
-| 3.5     | ✗          | ✗          | ✗          |           |           |           | ✓         | ✓         | ✓         | ✓         | ✓          |
-| 3.6     | ✗          | ✗          | ✗          |           |           |           | ✗         | ✓         | ✓         | ✓         | ✓          |
-| 4.1     | ✗          | ✗          | ✗          |           |           |           | ✓         | ✓         | ✓         | ✓         | ✓          |
-| 4.2     | ✗          | ✗          | ✗          |           |           |           | ✓         | ✓         | ✓         | ✓         | ✓          |
-| 4.3     | ✗          | ✗          | ✗          |           |           |           | ✓         | ✓         | ✓         | ✓         | ✓          |
+| 2.1     | ✗          | ✗          | ✗          | ✗         | ✗         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓          |
+| 2.2     | ✗          | ✗          | ✗          | ✗         | ✗         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓          |
+| 3.1     | ✗          | ✗          | ✗          | ✗         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓          |
+| 3.2     | ✗          | ✗          | ✗          | ✗         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓          |
+| 3.3     | ✗          | ✗          | ✗          | ✗         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓          |
+| 3.4     | ✗          | ✗          | ✗          | ✗         | ✗         | ✗         | ✗         | ✓         | ✓         | ✓         | ✓          |
+| 3.5     | ✗          | ✗          | ✗          | ✗         | ✗         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓          |
+| 3.6     | ✗          | ✗          | ✗          | ✗         | ✗         | ✗         | ✗         | ✓         | ✓         | ✓         | ✓          |
+| 4.1     | ✗          | ✗          | ✗          | ✗         | ✗         | ✗         | ✓         | ✓         | ✓         | ✓         | ✓          |
+| 4.2     | ✗          | ✗          | ✗          | ✗         | ✗         | ✗         | ✓         | ✓         | ✓         | ✓         | ✓          |
+| 4.3     | ✗          | ✗          | ✗          | ✗         | ✗         | ✗         | ✓         | ✓         | ✓         | ✓         | ✓          |
 
-
-
-J3 : Calendrier partiellement ok
-J4 : Météo ok partiellement
-J5 : Météo ok
-J6 : tout ok ?
 
 
 ## Conclusion
@@ -579,7 +777,7 @@ J6 : tout ok ?
 
 Description améliorations
 
-[Idées : gestion de l'alimentation pour que ce soit encore plus complet, machines si ce n'est pas déjà fait dans le TPI]
+[Idées : gestion des machines, création de tenu manuelle, attribution de tenue manuellement pour un jour, enregistrement des tenues pour une certaine date]
 
 ### Difficultés rencontrées
 
@@ -613,10 +811,13 @@ https://developers.google.com/chart/interactive/docs
 
 ### Affichage
 
-[liens]
+https://getbootstrap.com/docs/5.0/getting-started/introduction/
+
+https://getbootstrap.com/docs/4.0/examples/dashboard/#
 
 
 
 ### Autres
 
-[liens]
+https://www.php.net/manual/fr/ref.datetime.php
+
