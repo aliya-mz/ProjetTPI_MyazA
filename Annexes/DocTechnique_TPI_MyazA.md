@@ -232,7 +232,7 @@ Les bilans de la journée que j'ai écrit après chaque journée de travail m'on
 
 ### Planification prévue
 
-[Graphique]
+
 
 ### Planification effective
 
@@ -246,105 +246,7 @@ Les bilans de la journée que j'ai écrit après chaque journée de travail m'on
 
 
 
-## Analyse Fonctionnelle
-
-### Fonctionnalités du projet
-
-#### Gestion des utilisateurs
-
-Se connecter :
-
-S'inscrire :
-
-Voir les informations de son compte :
-
-Modifier les informations de son compte :
-
-Voir la liste des utilisateurs :
-
-Supprimer un utilisateur :
-
-
-
-#### Fonctionnement de la météo
-
-ExecuteMeteoProgram() : 
-
-GetMeteoInfos() :
-
-ClassifyMeteoInfos($meteoInfos) : 
-
-ClassifyInfosByDay($meteoInfos) :
-
-ShowDaysNav() :
-
-DisplayDayMeteo($numDay, $numHour) : 
-
-DisplayTemperatureGraphic($hours, $temperatures, $date) : 
-
-DisplayRecordingsDetails($day, $idRecording) : 
-
-DisplayDaysEvents($numDay) : 
-
-SortEventsByTime($events) :
-
-DisplayMeteoSummary($numDay) :
-
-
-
-#### Fonctionnement du calendrier
-
-GetCalendarDays($month, $year) :
-
-GetWeekHours() :
-
-GetEventsBetween($dateStart, $dateEnd) :
-
-GetEventsWeekPlanner() :
-
-SaveEvent($isReccurent, $description, $dateStart, $dateEnd, $hour, $day) :
-
-DeleteEvent($idEvent) :
-
-DateToTimestamp($date) :
-
-HourToTimestamp($hour, $day) :
-
-DisplayMonthCalendar($month, $year) :
-
-DisplayWeekPlanner() :
-
-DisplayEvent($event, $calendar) :
-
-
-
-#### Gestion des vêtements
-
-SaveClothe($name, $idCategory, $idWeather, $color, $tempMin, $tempsMax) :
-
-DeleteClothe($idClothe) : 
-
-GetClothesForMeteo($temperatures, $weathers) :
-
-GenerateDress($temperatures, $weathers) : 
-
-CreateClotheImage($idCategory, $color) :
-
-DisplayClothe($clothe) :
-
-DisplayClotheWithControls($clothe) :
-
-DisplayEmptyClothe($idClothe)
-
-DisplayDress($temperature, $weather) :
-
-DisplayClothesList() :
-
-
-
-
-
-### Description de l’interface
+## Description de l'interface
 
 *Page d'accueil* : Affiche, pour une journée parmi les 5 à venir, la météo tout au long de la journée, une recommandations de tenue adaptée à la tenue, ainsi que les activités et évènements. Navigation entre ces jours.
 
