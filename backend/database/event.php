@@ -172,3 +172,34 @@ function DeleteEventById($idEvent){
 
   return $answer; 
 }
+
+function DeleteEventByTime($dateStart, $idUser){
+  //initaliser le prepare statement
+  static $ps = null;
+
+  echo $dateStart. " ".$idUser;
+  //requête  
+  $sql = "DELETE FROM `event` 
+  WHERE reccurent LIKE 1
+  AND idUser = :idUser
+  AND dateStart BETWEEN :dateStart AND :dateStart";
+
+  //si le prepare statement n'a encore jamais été fait
+  if($ps == null){
+    //préparer la requête
+    $ps = db()->prepare($sql);
+  }
+  $answer = false;
+  try{
+    //lier le paramètre de la requête avec la variable
+    $ps->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+    $ps->bindParam(':dateStart', $dateStart, PDO::PARAM_STR);
+
+    if($ps->execute())
+      $answer = $ps->fetchAll(PDO::FETCH_ASSOC);
+  }
+  catch(PDOException $e){
+    echo $e->getMessage();
+  }
+  return $answer;
+}

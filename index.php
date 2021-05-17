@@ -10,6 +10,8 @@ session_start();
 
 include("backend/autoload.php");
 
+DeleteClothesImages();
+
 //Récupérer le numéro du jour à afficher envoyé en GET
 $dayToDisplay = GetDayToDisplay();
 

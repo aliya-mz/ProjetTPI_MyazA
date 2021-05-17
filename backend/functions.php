@@ -321,7 +321,12 @@ function GetCalendarDays($month, $year){
   $weekDay = $date->format("w");
 
   //Déterminer la date du début du calendrier pour que la semaine de départ soit complète
-  $daysToAdd = $weekDay-1; //ok
+  $daysToAdd = $weekDay-1;
+  //Recommencer la semaine depuis la fin
+  if($daysToAdd == -1){
+    $daysToAdd = 6;
+  }
+
   $dateStart = date_create($year.'-'.$month.'-01');
   //soustraction
   date_sub($dateStart, date_interval_create_from_date_string($daysToAdd.' days'));
@@ -414,13 +419,10 @@ function SaveEvent($isReccurent, $description, $dateStart, $dateEnd, $hour, $day
   else{
     $dateStart = HourToTimestamp($hour, $day);
     $dateEnd = $dateStart;
-    echo $dateStart."";
+
+    //Supprimer l'activité qui occupe déjà cet horaire, s'il existe
+    DeleteEventByTime($dateStart, GetIdUser());
   }
-
-  echo $dateStart. "  ";
-  echo $dateEnd;
-
-  echo $description. " ".$dateStart. " ".$dateEnd. " ".$isReccurent. " ".GetIdUser(). " ";
   //Créer l'évènement
   createEvent($description, $dateStart, $dateEnd, $isReccurent, GetIdUser());
 }
