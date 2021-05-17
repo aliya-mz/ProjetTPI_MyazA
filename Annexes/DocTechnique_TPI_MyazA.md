@@ -2,7 +2,7 @@
 
 Projet ***Wearther***, par *Myaz Aliya*, TPI 2021
 
-<img src="..\img\logo.png" style="zoom: 33%;" />
+<img src="..\img\logo.png" style="zoom: 15%;" />
 
 ## Table des matières
 
