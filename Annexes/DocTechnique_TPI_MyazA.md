@@ -12,7 +12,7 @@ Projet ***Wearther***, par *Myaz Aliya*, TPI 2021
 
 
 
-## Table des versions
+## Table des versions - ok
 
 | N° de version | Date       | Auteur     | Changements apportés                            |
 | ------------- | ---------- | ---------- | ----------------------------------------------- |
@@ -22,59 +22,73 @@ Projet ***Wearther***, par *Myaz Aliya*, TPI 2021
 
 
 
-## Introduction
+## Introduction - ok
 
 Le projet ***Wearther*** est une application web qui propose des suggestions de tenues en fonction de la météo. Son but est de faire gagner du temps aux utilisateurs, voir de les sauver les jours où leur réveil ne sonne pas. L'application permet, en un clic, d'avoir un aperçu sur la météo du jour et de la semaine à venir, une suggestion de tenue journalière adaptée à la météo, et une vue sur leur agenda du jour, le tout sur la même page. En effet, pour être la plus pratique possible, l'application dispose également d'un calendrier et d'un semainier.
 
-J'ai réalisé ce projet en PHP avec une base de donnée MySQL. J'ai également fait appel à une API externe, *OpenWeatherMap*, pour la météo.
+J'ai réalisé ce projet en PHP avec une base de donnée MySQL. J'ai également fait appel à une API externe, *OpenWeatherMap*, pour les informations météo.
 
 
 
-## Rappel de l'énoncé
+## Rappel du cahier des charges -ok
 
 ### Objectif
 
-[Description fonctionnelle de l'application - liste fonctionnalités énoncé]
+L'application à réaliser est un système de recommandation de tenues en fonction de la météo.
+
+- Elle comporte une gestion des utilisateurs, qui peuvent appartenir à deux types de rôles : les utilisateurs et les administrateurs. Ils doivent pouvoir se connecter. Les utilisateurs peuvent créer, modifier et supprimer leur compte. Les administrateurs peuvent créer, modifier et supprimer les comptes des utilisateurs.
+
+- L'utilisateur peut créer, modifier et supprimer des vêtements. Il peut choisir la couleur de son vêtement et lui associer une catégorie et des conditions météorologiques. Les vêtements proposés sont conformes aux conditions météorologiques du jour sélectionné.
+  "Des catégories et vêtements de base sont pré-disponibles. L’utilisateur peut en créer de nouveaux." -> changement
+
+- Les informations météorologiques sont toujours actualisées depuis la source externe avant d’être affichées. Chaque jour peut être sélectionné individuellement pour voir les détails (température, ensoleillement et suggestions vestimentaires associées).
+- Un calendrier avec un prévisionnel météorologique des 3 jours à venir doit être affiché (temp. et ensoleillement).
+- L’application est fonctionnelle avec un moins un service de données météo externe.
+- 
 
 ### Organisation
 
-[Temporalité et méthodologie]
+Travail a réaliser entre le 3 mars et le 20 mars avec comme horaire de travail : 7h30-11h40 / 12h40 -16h45. A rendre le 20 mars.
+
+Un planning détaillé doit être réalisé avant la fin de la première journée. Les temps approximatifs qui doivent être attribués à chaque partie du travail sont les suivants : 14h pour l'analyse, 34h pour l'implémentation, 14h pour les tests, et 18h pour la documentation.
+
+La méthodologie en 6 étapes doit être utilisée pour la gestion du projet (GANTT) et la méthodologie agile pour le développement
+(BACKLOG).
+
+
 
 ### Livrables
 
-[Quoi ? A qui ?]
+A la fin de la durée du TPI, je dois rendre aux experts et à mon enseignant :
+
+1. Un résumé du TPI
+
+2. Un planning prévisionnel et effectif
+
+3. Un rapport de projet avec le code source en annexe
+
+4. Un manuel d'utilisateur
+
+5. Une journal de travail
+
+   
 
 ### Matériel et logiciels nécessaires
 
-[Blabla]
+1. Un PC standard école avec Windows 10 ou Linux Ubuntu LTS, 2 écrans
+2. Serveur Web et SGBD au choix
+3. Environnement intégré de développement au choix
+4. Outil de versionnage (gitlab/github ou un conteneur de l’école).
+5. Navigateur web (Mozilla Firefox/Google Chrome).
+6. Logiciel de création de schémas au choix
+7. Logiciel de maquettage au choix
+8. API tierce de services météo: https://openweathermap.org/api ou autre jugé équivalent.
+9. Outil bureautique à choix pour les documents
+10. Matériel personnel
 
 
 
-
-
-
-
-## Etude d'opportunité
-
-### Pourquoi ce sujet ?
-
-[Blabla]
-
-
-
-### Ce que mon projet a de plus
-
-[Regroupe une grande partie des informations nécessaires à une personne pour se préparer à sa journée]
-
-
-
-### Description de ce qui existe déjà
-
-[Sites météo ordinaires, organisateurs de temps]
-
-
-
-## Méthodologie
+## Méthodologie - presque ok
 
 ### Planification en six étapes
 
@@ -126,7 +140,7 @@ Les bilans de la journée que j'ai écrit après chaque journée de travail m'on
 
 
 
-## Planification
+## Planification - à modifier
 
 ### Product backlog
 
@@ -232,13 +246,13 @@ Les bilans de la journée que j'ai écrit après chaque journée de travail m'on
 
 ### Planification prévue
 
+[Insérer graphique]
+
 
 
 ### Planification effective
 
-[Blabla évolution entre les graphiques]
-
-[Graphique]
+[Insérer graphique]
 
 
 
@@ -246,7 +260,7 @@ Les bilans de la journée que j'ai écrit après chaque journée de travail m'on
 
 
 
-## Description de l'interface
+## Description de l'interface - ok
 
 *Page d'accueil* : Affiche, pour une journée parmi les 5 à venir, la météo tout au long de la journée, une recommandations de tenue adaptée à la tenue, ainsi que les activités et évènements. Navigation entre ces jours.
 
@@ -279,41 +293,114 @@ Les bilans de la journée que j'ai écrit après chaque journée de travail m'on
 
 ## Analyse organique
 
-### Technologies utilisées et environnement
+### Technologies utilisées - ok
 
-[Programmation en CSS, projet de type WidowsForm.
+- PHP 7.3.21
+- CSS
+- JavaScript
+- MySQL
+- Bootstrap 5
+- (Google Charts) ?
 
-Développement sur Visual Studio, réalisation des diagrammes sur Umlet, maquettes sur Figma, documentation sur Typora.]
 
-[Langages et versions]
 
-### Description globale de l’architecture du projet
+### Environnement - ok
+
+J'ai développé mon projet sur Visual Studio Code.
+
+Pour la planification, j'ai réalisée le planning en document Excel, les maquettes sur Figma, les diagrammes sur Umlet.
+
+J'ai également réalisé tout le reste de la documentation en Markdown, grâce à Typora.
+
+J'ai créé un repo git et y est sauvegardé mon projet plusieurs fois par jour, nécessairement avant de quitter la classe, grâce à Git Kraken.
+
+
+
+### Description de l’architecture du projet
 
 [Diagramme de classe simplifié + capture d'écran de l'architecture]
 
 
 
-### Base de données
+#### MLD - ok
 
-[Présentation]
-
-#### MLD
-
-<img src="mld_TPI_MyazA.png"/>
+<img src="/docImages/mld_TPI_MyazA.png"/>
 
 
 
-### API externe (météo)
-
-[Présenter l'API]
 
 
+### Description des tables - ok
 
-### Classes PHP
+#### Table "User"
+
+[Capture d'écran]
+
+Sauvegarde les informations du compte de l'utilisateur, dont son mot de passe en SHA1.
+
+
+
+#### Table "Role"
+
+[Capture d'écran]
+
+Sauvegarde la liste des rôles prédéfinis pour les utilisateurs (déconnecté, utilisateur, administrateur).
+
+
+
+#### Table "Dress"
+
+[Capture d'écran]
+
+Sauvegarde les vêtements des utilisateurs avec leurs météo correspondante.
+
+
+
+#### Table "Event"
+
+[Capture d'écran]
+
+Sauvagarde les évènements des utilisateurs, qui peuvent être uniques ou hebdomadaires.
+
+
+
+#### Table "Category"
+
+[Capture d'écran]
+
+Sauvegarde les catégories de vêtements disponibles prédéfinies. Le fonctionnement du programme ne dépend pas de l'index des catégories.
+
+
+
+#### Table "Weather"
+
+[Capture d'écran]
+
+Sauvegarde les groupes météo prédéfinis (Neige, Pluie, Normal). Le fonctionnement du programme ne dépend pas de l'index.
+
+
+
+
+
+### API externe - météo - ok
+
+Pour réaliser mon système de météo, j'ai utilisé l'API **OpenWeatherMap**, et plus spécifiquement la version gratuite de l'offre "*5 day weather forecast*", qui permet d'obtenir, pour les 5 jours (5x24h) à partir de maintenant, des informations météo détaillées toutes les trois heures. 
+
+Voici le lien de la documentation de cette version : https://openweathermap.org/forecast5
+
+J'ai ensuite dû réaliser des fonctions qui permettent de traiter ces informations brutes, pour en retirer ce dont mon application a besoin, et les organiser de manière pratique pour les récupérer et les afficher ensuite.
+
+
+
+
+
+### Classes PHP - en cours
+
+J'ai créé des classes PHP, qui me permettent toutes d'organiser et d'enregistrer les informations météo renvoyées par l'API. 
 
 #### Week
 
-Description du rôle
+Enregistre une liste de jours (de type *day*).
 
 **Méthodes :**
 
@@ -323,7 +410,7 @@ Description du rôle
 
 #### Day
 
-Description du rôle
+Enregistre une liste d'enregistrements météo (de type *meteoRecord*).
 
 **Méthodes :**
 
@@ -333,7 +420,7 @@ Description du rôle
 
 #### MeteoRecord
 
-Description du rôle
+Enregistre une liste de jours (de type *day*).
 
 **Méthodes :**
 
@@ -341,23 +428,27 @@ Description du rôle
 
 
 
-### Fonctions
+### Fonctions principales du projet
+
+Tout ce qui concerne la gestion des utilisateurs, de la météo, du calendrier, du semainier et de la garde-robe est programmé sous forme de fonctions, toutes réunies dans un même fichier (functions.php). Voici la liste de ces fonctions, ainsi que la description de leur rôle.
+
+
 
 #### Gestion des utilisateurs
 
-VerifyAccessibility($acceptedRole) :
+Fonction VerifyAccessibility($acceptedRole) :
 
-SignUserIn($login, $firstName, $lastName, $eMail, $password) :
+Fonction SignUserIn($login, $firstName, $lastName, $eMail, $password) :
 
-ConnectUser($login, $password) :
+Fonction ConnectUser($login, $password) :
 
-ShowNavByRole() :
+Fonction ShowNavByRole() :
 
-ShowListUsers() :
+Fonction ShowListUsers() :
 
-DeleteUser($idUser) :
+Fonction DeleteUser($idUser) :
 
-UpdateUser($login, $firstName, $lastName, $eMail, $password) :
+Fonction UpdateUser($login, $firstName, $lastName, $eMail, $password) :
 
 
 
@@ -439,17 +530,25 @@ DisplayClothesList() :
 
 ### Argumentation des choix de méthodes de résolution
 
-[Choix de l'API météo]
+#### Choix de l'API météo
 
-[Choix de la réalisation du calendrier]
 
-[Choix des images en fichiers SVG]
+
+#### Méthode de réalisation du calendrier
+
+
+
+#### Images des vêtements de type vectoriel
+
+
 
 
 
 ### Pseudo code ou des structogrammes
 
-[Structogramme algorithme de recommandation de vêtements]
+Voici un structogramme représentant l'algorithme de recommandation de tenue. Cet algorithme a pour but de créer, de manière aléatoire, un tenue complète qui soit adaptée à la météo du jour. Dans cette version du programme, il est parfaitement fonctionnel et remplit son rôle, mais peut être amélioré dans le futur en y intégrant plus de détails.
+
+[Structogramme]
 
 
 
@@ -472,7 +571,7 @@ DisplayClothesList() :
 
 
 
-### Scénarios de test
+### Scénarios de test - modifications à faire
 
 Les scénarios ont été écrits avant la réalisation du projet, afin de garantir la réponse aux demandes du cahier des charge. Lors de la réalisation d'un scénario, faire attention à ce que son scénario prérequis ait été exécuté avant. Dans le cadre de ce travail, les tests ont été exécutés manuellement.
 
@@ -532,14 +631,14 @@ Les scénarios ont été écrits avant la réalisation du projet, afin de garant
 | Nom                 | 1.8 Voir les utilisateurs                                    |
 | ------------------- | ------------------------------------------------------------ |
 | *User story*        | S4 : Supprimer un utilisateur                                |
-| *Situation*         | Je suis connecté en tant qu'administrateur ; Je clique sur "*Gestion des utilisateurs*" dans la navigation de la page principale ➔ Alors, je suis redirigé vers la page de gestion des utilisateurs, qui affiche la liste des comptes utilisateurs. |
+| *Situation*         | Je suis connecté en tant qu'administrateur (scénario 1.3); Je clique sur "*Gestion des utilisateurs*" dans la navigation de la page principale ➔ Alors, je suis redirigé vers la page de gestion des utilisateurs, qui affiche la liste des comptes utilisateurs. |
 | *Résultats obtenus* |                                                              |
 | *Statut*            | X                                                            |
 
 | Nom                 | 1.9 Supprimer un utilisateur                                 |
 | ------------------- | ------------------------------------------------------------ |
 | *User story*        | S4 : Supprimer un utilisateur                                |
-| *Situation*         | Je suis connecté en tant qu'administrateur (scénario 1.3) ; Je clique sur la case à cocher de l'utilisateur *"PseudoTest"* dans la liste de la page "*Gestion des utilisateurs*"  (scénario 1.8);  Je clique sur "*Supprimer*"➔ La page est actualisée et l'utilisateur *"PseudoTest"* n'est plus dans la liste. |
+| *Situation*         | Je suis connecté en tant qu'administrateur (scénario 1.3) ; Je clique sur la case à cocher de l'utilisateur *"PseudoTest"* dans la liste de la page "*Gestion des utilisateurs*"  (scénario 1.8) ;  Je clique sur "*Supprimer*"➔ La page est actualisée et l'utilisateur *"PseudoTest"* n'est plus dans la liste. |
 | *Résultats obtenus* |                                                              |
 | *Statut*            | X                                                            |
 
@@ -547,17 +646,24 @@ Les scénarios ont été écrits avant la réalisation du projet, afin de garant
 
 #### Scénarios  - gestion de la météo
 
-| Nom                 | 2.1 Afficher météo détaillée                                 |
+| Nom                 | 2.1 Afficher météo d'une journée                             |
 | ------------------- | ------------------------------------------------------------ |
 | *User story*        | S6 : Afficher la météo détaillée                             |
-| *Situation*         | Je suis connecté en tant qu'administrateur ; Je clique sur la case à cocher de l'utilisateur *"PseudoTest"* dans la liste de la page "*Gestion des utilisateurs*" ;  Je clique sur "*Supprimer*"➔ La page est actualisée et l'utilisateur *"PseudoTest"* n'est plus dans la liste. |
+| *Situation*         | Je suis connecté en tant qu'utilisateur (scénario 1.2) ; Je suis sur la page principale ;  ➔ Je peux voir, pour le jour actuel et des deux suivants, la température et le niveau d'ensoleillement. |
 | *Résultats obtenus* |                                                              |
 | *Statut*            | X                                                            |
 
-| Nom                 | 2.2 Afficher la météo résumée                                |
+| Nom                 | 2.2 Afficher météo d'une heure de la journée                 |
+| ------------------- | ------------------------------------------------------------ |
+| *User story*        | S6 : Afficher la météo détaillée                             |
+| *Situation*         | Je suis connecté en tant qu'utilisateur (scénario 1.2) ; Je suis sur la page principale ;  ➔ Je peux voir, pour le jour actuel et des deux suivants, la température et le niveau d'ensoleillement. |
+| *Résultats obtenus* |                                                              |
+| *Statut*            | X                                                            |
+
+| Nom                 | 2.3 Afficher la météo résumée                                |
 | ------------------- | ------------------------------------------------------------ |
 | *User story*        | S7 : Afficher la météo résumée                               |
-| *Situation*         | Je suis connecté en tant qu'utilisateur; Je clique sur "*Calendrier*"  depuis la page principale ;  ➔ Je peux voir, pour le jour actuel et des deux suivants, la température et le niveau d'ensoleillement. |
+| *Situation*         | Je suis connecté en tant qu'utilisateur (scénario 1.2) ; Je clique sur "*Calendrier*"  depuis la page principale ;  ➔ Je peux voir, pour le jour actuel et des deux suivants, la température et le niveau d'ensoleillement du matin et du soir. |
 | *Résultats obtenus* |                                                              |
 | *Statut*            | X                                                            |
 
@@ -565,7 +671,9 @@ Les scénarios ont été écrits avant la réalisation du projet, afin de garant
 
 
 
-#### Scénarios  - gestion du calendrier- à faire
+#### Scénarios  - gestion du calendrier
+
+[Ajouter "Supprimer un évènement du calendrier" et "Supprimer un évènement du semainier"]
 
 | Nom                 | 3.1 Afficher le calendrier                                   |
 | ------------------- | ------------------------------------------------------------ |
@@ -613,6 +721,10 @@ Les scénarios ont été écrits avant la réalisation du projet, afin de garant
 
 #### Scénarios - gestion de la garde-robe
 
+[Ajouter "Modifier un vêtement" et "Supprimer un vêtement"]
+
+
+
 [Nom ; Type ; Couleur ; Catégorie météo ; Intervalle temp]
 
 ["Pull vert préféré" ;  "Pull" ;  "\#F08080" ;  "Neige" ;  "-10;5"]
@@ -644,7 +756,7 @@ Les scénarios ont été écrits avant la réalisation du projet, afin de garant
 
 
 
-### Evolution des tests
+### Evolution des tests - modifications à faire
 
 | N° test | J0 - 03.05 | J1 - 04.05 | J2 - 05.05 | J3- 06.05 | J4- 10.05 | J5- 11.05 | J6- 12.05 | J7- 17.05 | J8- 18.05 | J9- 18.05 | J10- 29.05 |
 | ------- | ---------- | ---------- | ---------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | ---------- |
@@ -671,23 +783,47 @@ Les scénarios ont été écrits avant la réalisation du projet, afin de garant
 
 
 
-## Conclusion
+## Conclusion - ok
 
 ### Améliorations possibles
 
-***[Titre amélioration]***
+***Amélioration de l'algorithme de recommandation***
 
-Description améliorations
+L'algorithme de recommandation de tenue pourrait prendre en compte davantage de paramètres, comme par exemple les différences de météo au cours de la journée, et les heures des activités de la personne, afin de s'adapter à la météo des heures où elle sortira.
 
-[Idées : gestion des machines, création de tenu manuelle, attribution de tenue manuellement pour un jour, enregistrement des tenues pour une certaine date]
+***Création manuelle de tenue***
+
+L'application pourrait permettre à l'utilisateur de créer lui-même des tenues, en choisissant un ensemble de vêtements qu'il aime porter ensemble. Ces tenues seraient alors affichées dans les recommandation, comme les tenues crées automatiquement.
+
+***Sauvegarde des tenues pour une date précise***
+
+L'application pourrait enregistrer une tenue recommandée pour un jour précis, afin que la même soit réaffichée, pour le même jour, la prochaine fois que l'utilisateur rouvrira la page.
+
+***Gestion des machines***
+
+L'application pourrait comporter une page supplémentaire, qui afficherait tous les vêtements qui seront portés lors de la semaine, afin de faciliter la gestion des machines.
+
+
 
 ### Difficultés rencontrées
 
-[Blabla]
+La partie, dans la programmation, qui m'a semblé la plus difficile, est la gestion des dates. En effet, j'ai dû créer et traiter des dates, faire des calculs, les envoyer dans un type différent à la base de données, notamment pour créer le calendrier. 
+
+A part cette complication, que j'ai bien surmontée, je n'ai pas particulièrement eu de problèmes dans la réalisation du projet
+
+J'ai en revanche rencontré quelques difficultés avec la documentation, puisque c'est un exercice auquel je n'étais pas très habituée, mais, en m'en tenant aux ressources que j'avais, j'ai réussi à accomplir la tâche.
+
+
 
 ### Bilan personnel
 
-[Bilan]
+J'ai, dès le début, décidé de ne rien ajouter à mon cahier des charges, et de tout faire de la manière la plus simple possible, puisque j'ai généralement tendance à faire le contraire, et que ça me porte préjudice. J'ai pris du temps pour énumérer les tâches et estimer le temps qu'elles me prendraient, pour être sûre que j'étais large. Je suis heureuse de constater que ces efforts ont porté leurs fruits et que j'ai parfaitement réussi à organiser mon temps, sans trop d'efforts. J'en conclus que je devrais plus souvent mettre cela en place. 
+
+D'autre part, c'était agréable de travailler sur un projet qui était adapté à mes connaissances, et qui demandait quand même de la réflexion, puisqu'il y a plusieurs algorithmes que j'ai dû inventer pour réaliser les fonctionnalités. Malgré que ce soit fait dans le cadre d'un examen, je me suis plus amusée que stressée, du moins pour la partie programmation.
+
+Et je suis plutôt contente du résultat final, qui, même s'il peut être amélioré et optimisé, est complet, fonctionnel, organisé et satisfaisant visuellement.
+
+
 
 ### Remerciements
 
@@ -697,7 +833,7 @@ Description améliorations
 
 
 
-## Bibliographie
+## Webographie - ok
 
 ### API Météo
 
@@ -723,3 +859,10 @@ https://getbootstrap.com/docs/4.0/examples/dashboard/#
 
 https://www.php.net/manual/fr/ref.datetime.php
 
+
+
+
+
+## Glossaire
+
+**CRUD** : Création, Lecture, Mise-à-jour, Suppression (« Create, Read, Update, Delete »).

@@ -10,6 +10,7 @@
 
 define("ERROR_MESSAGE", "Votre pseudo ou mot de passe est erroné");
 
+
 //Retourne l'identifiant de l'utilisateur connecté
 function GetIdUser(){
   if(isset($_SESSION["idUser"])){
@@ -23,6 +24,31 @@ function GetIdUser(){
 //Définit l'utilisateur connecté
 function SetIdUser($idUser){
   $_SESSION["idUser"] = $idUser;
+}
+
+function GetIdUserToUpdate($idUser){
+  $user = "";
+  //Récupérer le mois envoyé en paramètre
+  if(isset($idUser)){
+    if(GetUser($idUser)!=null){
+      $user = $idUser;
+    }
+    //Si le paramètre est erroné, quitter
+    else{
+      header('Location: manageUsers.php');
+      exit;
+    }
+  }
+  //Si le paramètre n'existe pas, quitter
+  else{
+    //header('Location: manageUsers.php');
+    //exit;
+  }
+  return $user;
+}
+
+function GetUserToUpdate($idUser){
+  return readUserById(GetIdUserToUpdate($idUser));
 }
 
 //Retourne l'indentifiant du rôle de l'utilisateur
@@ -42,9 +68,16 @@ function GetUser(){
 }
 
 //Vérifie que l'utilisateur (déconnecté, utilisateur ou administrateur) a le droit d'accéder à la page
-function VerifyAccessibility($acceptedRole){
-  if(!(GetUserRole()==$acceptedRole)){
-    header('Location: index.php');
+function VerifyAccessibility($acceptedRoles){
+  //Si l'un des rôles envoyés en paramètre est connecté, rester sur la page
+  $accepted = false;
+  foreach($acceptedRoles as $acceptedRole){
+    if(GetUserRole()==$acceptedRole){
+      $accepted = true;
+    }
+  } 
+  if(!$accepted){
+    //header('Location: index.php');
     exit;
   }
 }
@@ -141,13 +174,14 @@ function ShowListUsers(){
   foreach($users as $user){
     echo "<tr>";
      
-    echo "<td> <div class=\"bubble\">";
+    echo "<td> <div class=\"userBubble eventBubble\">";
     //Informations sur l'utilisateur
     echo "<div><p class=\"bubbleTitle\">".$user["login"]."</p><p>".$user["firstName"]." ".$user["lastName"]."</p></div>";    
     //Bouton supprimer
-    echo "<button type=\"submit\" name=\"delete\" value=\"".$user["idUser"]."\"/><img src=\"img/delete.png\"></button>
+    echo "<div class=\"bubbleButtons\"><button type=\"submit\" name=\"delete\" value=\"".$user["idUser"]."\"/><img src=\"img/delete.png\"></button>
+          <button type=\"submit\" name=\"modify\" value=\"".$user["idUser"]."\"/><img src=\"img/update.png\"></button></div>
     </div></td>";
-
+    
     echo "</tr>";
   }
 }
@@ -158,15 +192,26 @@ function DeleteUser($idUser){
 }
 
 //Met à jour les informations de l'utilisateur en appelant le CRUD
-function UpdateUser($login, $firstName, $lastName, $eMail, $password){
+function UpdateUser($login, $firstName, $lastName, $eMail, $password, $idUserToUpdate){
   //Si l'utilisateur a changé son mot de passe, hasher le nouveau mot de passe
   if(strlen($password) > 0){
     $password = password_hash($password, PASSWORD_DEFAULT);
-    UpdateUserByIdWithPassword(GetIdUser(), $login, $firstName, $lastName, $eMail, $password);
+    if(GetUserRole()==1){
+      UpdateUserByIdWithPassword(GetIdUser(), $login, $firstName, $lastName, $eMail, $password);
+    }
+    else{
+      UpdateUserByIdWithPassword($idUserToUpdate, $login, $firstName, $lastName, $eMail, $password);
+    }
+    
     echo $password;
   }
   else{
-    UpdateUserById(GetIdUser(), $login, $firstName, $lastName, $eMail);
+    if(GetUserRole()==1){
+      UpdateUserById(GetIdUser(), $login, $firstName, $lastName, $eMail);
+    }
+    else{
+      UpdateUserById($idUserToUpdate, $login, $firstName, $lastName, $eMail);
+    }
   }
 }
 
@@ -507,6 +552,9 @@ function DisplayMonthCalendar($month, $year){
       }
       else if($day == date_add($actualDate, date_interval_create_from_date_string('1 days'))->format('Y-m-d')){
         DisplayMeteoSummary(2);
+      }
+      else if($day == date_add($actualDate, date_interval_create_from_date_string('1 days'))->format('Y-m-d')){
+        DisplayMeteoSummary(3);
       }
 
       //Si des évènements existent à cette date, les afficher
@@ -1045,19 +1093,22 @@ function ClassifyInfosByDay($meteoInfos){
 
 //Afficher les liens vers les 5 jours à venir
 function ShowDaysNav(){
-  //Afficher les liens vers les informations de chacun des cinq jours à venir
-  for($i = 0; $i < 5; $i++){
-    if($i == GetDayToDisplay()){
-      echo '<li class="nav-item">
-          <a class="nav-link active displayBlock activeDay" aria-current="page" href="index.php?numDay='.$i.'">'.GetWeekDayName($i).'</a>
-          </li>';
+  //Si un utilisateur est connecté
+  if(GetUserRole()==1){
+    //Afficher les liens vers les informations de chacun des cinq jours à venir
+    for($i = 0; $i < 5; $i++){
+      if($i == GetDayToDisplay()){
+        echo '<li class="nav-item">
+            <a class="nav-link active displayBlock activeDay" aria-current="page" href="index.php?numDay='.$i.'">'.GetWeekDayName($i).'</a>
+            </li>';
+      }
+      else{
+        echo '<li class="nav-item">
+            <a class="nav-link displayBlock inactiveDay" href="index.php?numDay='.$i.'">'.GetWeekDayName($i).'</a>
+            </li>';
+      }    
     }
-    else{
-      echo '<li class="nav-item">
-          <a class="nav-link displayBlock inactiveDay" href="index.php?numDay='.$i.'">'.GetWeekDayName($i).'</a>
-          </li>';
-    }    
-  }
+  }  
 }
 
 //Retourner le jour dont les informations doivent être affichée, parmi les cinq jours à venir

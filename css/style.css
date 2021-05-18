@@ -367,44 +367,43 @@ input[type=color] {
 
 /*Liste des utilisateurs à supprimer*/
 
-.usersList button{  
-  background-color: white;
-  height: 30px;
-  width: 30px;
+.usersList td{
+  height : 150px !important;
 }
 
-.usersList img{
-  height: 20px;
-  width: 20px;
+.usersList div{
+  height : 80%;
 }
 
-.usersList div, button{
-  margin : 20px;
-}
-
-
-.bubble{
+.userBubble{
   width:100%;
   background-color: white;
   border-radius: 20px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  color: gray;
+  color: gray;  
 }
 
-.bubble div{
+.userBubble div{
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  padding: 10px;
 }
 
 .bubbleTitle{
   font-weight:bold;
 }
 
-
+.bubbleButtons{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  padding: 10px;
+}
 
 /*Calendrier*/
 

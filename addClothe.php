@@ -11,7 +11,7 @@ session_start();
 include("backend/autoload.php");
 
 //Vérifier qu'un utilisateur est connecté
-VerifyAccessibility(1);
+VerifyAccessibility([1]);
 
 //Récupérer les types de vêtements dans la BD (pantalon, veste, etc...)
 $categories = GetCategories();

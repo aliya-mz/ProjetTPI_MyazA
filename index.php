@@ -23,7 +23,6 @@ $hourToDisplay = GetHourToDisplay();
 if(GetIdUser()){
 	ExecuteMeteoProgram();
 }
-
 ?>
 
 <!doctype html>
@@ -78,8 +77,8 @@ if(GetIdUser()){
 
 		    <?php
           //Affiche la météo, la tenue recommandée et les évènements de la journée, si l'utilisateur est connecté
-          if(GetIdUser()){
-            DisplayDayMeteo($dayToDisplay, $hourToDisplay);
+          if(GetUserRole()==1){
+            DisplayDayMeteo($dayToDisplay, $hourToDisplay);            
           }			
         ?>
      </main>     

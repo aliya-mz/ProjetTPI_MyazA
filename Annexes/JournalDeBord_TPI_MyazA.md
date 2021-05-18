@@ -256,7 +256,9 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 12h40 : Je continue à ajuster le template à mes différents types de pages.
 
-15h30 : Je réalise les tests pour vérifier que les changements n'ont pas entraîné de régression
+15h20 : Je réalise les tests pour vérifier que les changements n'ont pas entraîné de régression
+
+16h00 : Je réalise grâce aux tests qu'il y a un problème avec l'ajout d'activités au semainier, causé par le fait qu'il peut y avoir plusieurs. Je règle le problème en supprimant automatiquement l'activité existante à une certaine heure, au moment où une autre est ajoutée à la même heure du même jour.
 
 ➔ **Bilan de la journée** :
 
@@ -268,16 +270,24 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 *A faire :*
 
-- Améliorations sur le site (corrections ajout évènement semainier)
-- Avancer sur la documentation : []
+- Faire l'analyse organique de la documentation
+- Faire le manuel d'utilisateur
+- Faire le résumé du travail
+- Créer le template pour les formulaires du site
 
 **Matin**
 
+7h30 : Je programme les trois jours qui me restent pour être sûre de bien terminer la documentation et les autres documents
 
+8h00 : Je réalise l'analyse organique
 
 **Après-midi**
 
+12h40 : Je continue la réalisation de mes documentations en faisant la documentation utilisateurs
 
+14h00 : Je réalise le résumé du projet réalisé, en me basant sur le cahier des charges
+
+15h 30 : Je réalise le template que j'appliquerai à l'ensemble des formulaires du site
 
 ➔ **Bilan de la journée** :
 
@@ -289,7 +299,10 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 *A faire :*
 
-- Finir la documentation : []
+- Documentation : [liste des parties à faire]
+- Finir d'appliquer le template de formulaire
+- Tests avancés (recherche de dysfonctionnements inattendus, en testant sur différents navigateurs, et en utilisant le site de manière non idéale)
+- Eventuelles corrections
 
 **Matin**
 
@@ -309,7 +322,9 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 *A faire :*
 
-- Avancer la documentation
+- Documentation : [liste des parties à faire]
+- Relecture de tous les documents
+- Assemblage et conversion en PDF
 
 **Matin**
 

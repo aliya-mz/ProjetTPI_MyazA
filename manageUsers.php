@@ -10,14 +10,20 @@ include("backend/autoload.php");
 session_start();
 
 //Vérifier que l'administrateur est connecté
-VerifyAccessibility(2);
+VerifyAccessibility([2]);
 
 //Récupérer l'identifiant de l'utilisateurs à supprimer
 $delete = FILTER_INPUT(INPUT_POST, "delete", FILTER_SANITIZE_STRING);
+$modify = FILTER_INPUT(INPUT_POST, "modify", FILTER_SANITIZE_STRING);
 
 //Supprimer l'utilisateur sur lequel l'administrateur a cliqué
 if($delete){
   DeleteUser($delete);
+}
+else if($modify){
+  //Redirigier vers le formulaire de modification
+  header('Location: updateUser.php?idUser='.$modify);
+  exit;
 }
 ?>
 
@@ -30,7 +36,8 @@ if($delete){
   </head>
   <body>
     <nav class="navAjouter">
-      <td><a class="lienBouton boutonHome" href="index.php"><img src="img/home.png"/></a></td>
+      <a class="lienBouton boutonHome" href="index.php"><img src="img/home.png"/></a>
+      <a class="lienBouton boutonHome" href="index.php">Ajouter un utilisateur</a>
     </nav>
     <main class="bg-light">
     <form class="formAdd" action="manageUsers.php" method="POST">

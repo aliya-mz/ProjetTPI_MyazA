@@ -10,7 +10,7 @@ include("backend/autoload.php");
 session_start();
 
 //Vérifier que l'utilisateur est déconnecté
-VerifyAccessibility(0);
+VerifyAccessibility([0]);
 
 //récupérer les données du formulaire
 $login = FILTER_INPUT(INPUT_POST, "login", FILTER_SANITIZE_STRING);

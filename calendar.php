@@ -11,7 +11,7 @@ session_start();
 include("backend/autoload.php");
 
 //Vérifier que l'utilisateur est connecté
-VerifyAccessibility(1);
+VerifyAccessibility([1]);
 
 $idMonth = FILTER_INPUT(INPUT_GET, "month", FILTER_VALIDATE_INT);
 $idYear = FILTER_INPUT(INPUT_GET, "year", FILTER_VALIDATE_INT);

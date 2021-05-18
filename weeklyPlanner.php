@@ -11,7 +11,7 @@ session_start();
 include("backend/autoload.php");
 
 //Vérifier que l'utilisateur est connecté
-VerifyAccessibility(1);
+VerifyAccessibility([1]);
 
 //Récupérer l'identifiant de l'évènement à supprimer
 $delete = FILTER_INPUT(INPUT_POST, "delete", FILTER_SANITIZE_STRING);
