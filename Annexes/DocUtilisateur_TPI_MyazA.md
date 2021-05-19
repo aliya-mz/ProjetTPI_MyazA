@@ -78,7 +78,7 @@ Voici les pages principales de l'application, accessibles depuis un compte utili
 
 ***Page d'accueil*** : Affiche, pour une journée parmi les 5 à venir, la météo tout au long de la journée, une recommandations de tenue adaptée à la tenue, ainsi que les activités et évènements. Navigation entre ces jours.
 
-![](DocImages\captureAccueil.PNG)
+![](DocImages/captureAccueil.PNG)
 
 Figure 2.1 - Page principale
 
@@ -86,7 +86,7 @@ Figure 2.1 - Page principale
 
 ***Page de gestion de la garde-robe*** : Affiche les vêtements ajoutés par l'utilisateur, avec des contrôles permettant de les modifier et de les supprimer.
 
-![](DocImages\captureGardeRobe.PNG)
+![](DocImages/captureGardeRobe.PNG)
 
 Figure 2.2 - Page de gestion de la garde-robe
 
@@ -94,7 +94,7 @@ Figure 2.2 - Page de gestion de la garde-robe
 
 ***Calendrier*** : Calendrier classique affichant les évènements ajoutés par l'utilisateur, ainsi que la météo du matin et du soir pour les trois jours à venir. Navigation de mois en mois.
 
-![](DocImages\captureCalendrier.PNG)
+![](DocImages/captureCalendrier.PNG)
 
 Figure 2.3 - Calendrier
 
@@ -102,7 +102,7 @@ Figure 2.3 - Calendrier
 
 ***Semainier*** : Semainier affichant, pour chaque jour de la semaine, de 6h à 22h, les activités hebdomadaires enregistrées par les utilisateurs.
 
-![](DocImages\captureSemainier.PNG)
+![](DocImages/captureSemainier.PNG)
 
 Figure 2.4 - Semainier
 
@@ -264,7 +264,7 @@ Figure 3.8 - Ajout d'une activité au semainier
 3. Modifier dans le formulaire les informations qui doivent être modifiées
 4. Valider le formulaire
 
-![vetement](DocImages\vetement.PNG)
+![vetement](DocImages/vetement.PNG)
 
 Figure 3.10 - Modification d'un vêtement de la garde-robe
 
@@ -301,7 +301,7 @@ En tant qu'administrateur connecté, vous avez accès aux fonctionnalités suiva
 2. Modifier dans le formulaire les informations qui doivent être modifiées
 3. Valider le formulaire
 
-![updateUse](DocImages\updateUse.PNG)
+![updateUse](DocImages/updateUse.PNG)
 
 Figure 4.3 - Modification d'un utilisateur par l'administrateur
 
@@ -312,7 +312,7 @@ Figure 4.3 - Modification d'un utilisateur par l'administrateur
 1. Depuis la page principale, cliquer sur le bouton "***Gestion des utilisateurs***"
 2. Cliquer sur bouton de suppression ("**X**") de l'utilisateur à supprimer
 
-![deleteUser](DocImages\deleteUser.PNG)
+![deleteUser](DocImages/deleteUser.PNG)
 
 Figure 4.3 - Suppression d'un utilisateur par l'administrateur
 
@@ -326,7 +326,7 @@ Figure 4.3 - Suppression d'un utilisateur par l'administrateur
 
 
 
-![addUser](DocImages\addUser.png)
+![addUser](DocImages/addUser.png)
 
 Figure 4.3 - Ajout d'un utilisateur  par l'administrateur
 

@@ -256,7 +256,7 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 12h40 : Je continue à ajuster le template à mes différents types de pages.
 
-15h20 : Je réalise les tests pour vérifier que les changements n'ont pas entraîné de régression
+15h20 : Je réalise les tests pour vérifier que les changements n'ont pas entraîné de régression.
 
 16h00 : Je réalise grâce aux tests qu'il y a un problème avec l'ajout d'activités au semainier, causé par le fait qu'il peut y avoir plusieurs. Je règle le problème en supprimant automatiquement l'activité existante à une certaine heure, au moment où une autre est ajoutée à la même heure du même jour.
 
@@ -283,7 +283,9 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 **Après-midi**
 
-12h40 : Je continue la réalisation de mes documentations en faisant la documentation utilisateurs
+12h40 : Je continue la réalisation de mes documentations en faisant la documentation utilisateurs.
+
+14h00 : Je suis partie.
 
 ➔ **Bilan de la journée** :
 
@@ -303,7 +305,7 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 7h30 : Je découvre une erreur dans mon système d'affichage de météo dans le calendrier qui n'apparaît que tôt le matin. Je la corrige donc, et fais un push.
 
-8h00 : Je continue l'analyse organique
+8h00 : Je continue l'analyse organique.
 
 **Après-midi**
 
