@@ -115,6 +115,11 @@ function SignUserIn($login, $firstName, $lastName, $eMail, $password){
   //ajouter l'utilisateur dans la BD
   createUser($login, $firstName, $lastName, $eMail, $password);
 
+  //Si c'est un administrateur, rediriger vers la gestion des utilisateurs
+  if(GetUserRole()==2){
+    header('Location: manageUsers.php');
+    exit;
+  }
   //rediriger vers la page d'accueil
   header('Location: index.php');
   exit;
@@ -957,10 +962,11 @@ function GenerateRandomString($length) {
 
 
 
+
 //Gestion de la météo- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 define("KEY_IP", "d4fb62a10090dc46eff900d5da5eeca7");
 
-//Fonctions pour récupérer et stocker les informations - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//Fonctions pour récupérer et stocker les informations________________________________________________________________
 
 //Vérifier si la météo a déjà été récupérée grâce à l'API
 function IsSetMeteo(){

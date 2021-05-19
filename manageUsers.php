@@ -37,7 +37,7 @@ else if($modify){
   <body>
     <nav class="navAjouter">
       <a class="lienBouton boutonHome" href="index.php"><img src="img/home.png"/></a>
-      <a class="lienBouton boutonHome" href="index.php">Ajouter un utilisateur</a>
+      <a class="lienBouton boutonHome" href="signin.php">Ajouter un utilisateur</a>
     </nav>
     <main class="bg-light">
     <form class="formAdd" action="manageUsers.php" method="POST">
