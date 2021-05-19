@@ -12,7 +12,7 @@ Projet ***Wearther***, par *Myaz Aliya*, TPI 2021
 
 
 
-## Table des versions - ok
+## Table des versions
 
 | N° de version | Date       | Auteur     | Changements apportés                            |
 | ------------- | ---------- | ---------- | ----------------------------------------------- |
@@ -22,7 +22,7 @@ Projet ***Wearther***, par *Myaz Aliya*, TPI 2021
 
 
 
-## Introduction - ok
+## Introduction
 
 Le projet ***Wearther*** est une application web qui propose des suggestions de tenues en fonction de la météo. Son but est de faire gagner du temps aux utilisateurs, voir de les sauver les jours où leur réveil ne sonne pas. L'application permet, en un clic, d'avoir un aperçu sur la météo du jour et de la semaine à venir, une suggestion de tenue journalière adaptée à la météo, et une vue sur leur agenda du jour, le tout sur la même page. En effet, pour être la plus pratique possible, l'application dispose également d'un calendrier et d'un semainier.
 
@@ -30,7 +30,9 @@ J'ai réalisé ce projet en PHP avec une base de donnée MySQL. J'ai également 
 
 
 
-## Rappel du cahier des charges -ok
+
+
+## Rappel du cahier des charges
 
 ### Objectif
 
@@ -44,9 +46,17 @@ L'application à réaliser est un système de recommandation de tenues en foncti
 - Les informations météorologiques sont toujours actualisées depuis la source externe avant d’être affichées. Chaque jour peut être sélectionné individuellement pour voir les détails (température, ensoleillement et suggestions vestimentaires associées).
 - Un calendrier avec un prévisionnel météorologique des 3 jours à venir doit être affiché (temp. et ensoleillement).
 - L’application est fonctionnelle avec un moins un service de données météo externe.
-- 
+
+  
 
 ### Organisation
+
+|                        | Nom              | Email                      |
+| ---------------------- | ---------------- | -------------------------- |
+| Elève                  | Aliya Myaz       | <aliya.mz@eduge.ch>        |
+| Maître d'apprentissage | Oscar François   | <Oscar.Francois@edu.ge.ch> |
+| Experts                | Serge Murisier   | serge@murisier.com         |
+|                        | Borys Folomietow | <borys@folomietow.ch>      |
 
 Travail a réaliser entre le 3 mars et le 20 mars avec comme horaire de travail : 7h30-11h40 / 12h40 -16h45. A rendre le 20 mars.
 
@@ -88,7 +98,7 @@ A la fin de la durée du TPI, je dois rendre aux experts et à mon enseignant :
 
 
 
-## Méthodologie - presque ok
+## Méthodologie
 
 ### Planification en six étapes
 
@@ -136,13 +146,13 @@ Les bilans de la journée que j'ai écrit après chaque journée de travail m'on
 
 ### Développement agile
 
-[Expliquer backlog]
+Le projet est donc réalisé en développement agile, grâce à un diagramme de GANTT et un backlog créé avant le début du travail.
 
 
 
-## Planification - à modifier
+## Planification
 
-### Product backlog
+### Product backlog - /!\
 
 #### Utilisateurs
 
@@ -260,27 +270,29 @@ Les bilans de la journée que j'ai écrit après chaque journée de travail m'on
 
 
 
-## Description de l'interface - ok
+## Description de l'interface
 
-*Page d'accueil* : Affiche, pour une journée parmi les 5 à venir, la météo tout au long de la journée, une recommandations de tenue adaptée à la tenue, ainsi que les activités et évènements. Navigation entre ces jours.
+Voici une description des pages principales de l'application. Seuls les formulaires, qui ne présentent pas de particularités, ne sont par présentés. 
+
+***Page d'accueil*** : Affiche, pour une journée parmi les 5 à venir, la météo tout au long de la journée, une recommandations de tenue adaptée à la tenue, ainsi que les activités et évènements. Navigation entre ces jours.
 
 ![](C:\Users\aliya.mz\Desktop\TPI\ProjetTPI_MyazA\annexes\DocImages\captureAccueil.PNG)
 
 
 
-*Page de gestion de la garde-robe* : Affiche les vêtements ajoutés par l'utilisateur, avec des contrôles permettant de les modifier et de les supprimer.
+***Page de gestion de la garde-robe*** : Affiche les vêtements ajoutés par l'utilisateur, avec des contrôles permettant de les modifier et de les supprimer.
 
 ![](DocImages\captureGardeRobe.PNG)
 
 
 
-*Calendrier* : Calendrier classique affichant les évènements ajoutés par l'utilisateur, ainsi que la météo du matin et du soir pour les trois jours à venir. Navigation de mois en mois.
+***Calendrier*** : Calendrier classique affichant les évènements ajoutés par l'utilisateur, ainsi que la météo du matin et du soir pour les trois jours à venir. Navigation de mois en mois.
 
 ![](DocImages\captureCalendrier.PNG)
 
 
 
-*Semainier* : Semainier affichant, pour chaque jour de la semaine, de 6h à 22h, les activités hebdomadaires enregistrées par les utilisateurs.
+***Semainier*** : Semainier affichant, pour chaque jour de la semaine, de 6h à 22h, les activités hebdomadaires enregistrées par les utilisateurs.
 
 ![](DocImages\captureSemainier.PNG)
 
@@ -293,7 +305,7 @@ Les bilans de la journée que j'ai écrit après chaque journée de travail m'on
 
 ## Analyse organique
 
-### Technologies utilisées - ok
+### Technologies utilisées
 
 - PHP 7.3.21
 - CSS
@@ -304,7 +316,7 @@ Les bilans de la journée que j'ai écrit après chaque journée de travail m'on
 
 
 
-### Environnement - ok
+### Environnement
 
 J'ai développé mon projet sur Visual Studio Code.
 
@@ -316,13 +328,13 @@ J'ai créé un repo git et y est sauvegardé mon projet plusieurs fois par jour,
 
 
 
-### Description de l’architecture du projet
+### Description de l’architecture du projet - à faire /!\
 
 [Diagramme de classe simplifié + capture d'écran de l'architecture]
 
 
 
-#### MLD - ok
+#### MLD
 
 <img src="/docImages/mld_TPI_MyazA.png"/>
 
@@ -330,7 +342,7 @@ J'ai créé un repo git et y est sauvegardé mon projet plusieurs fois par jour,
 
 
 
-### Description des tables - ok
+### Description des tables - ajouter captures d'écran /!\
 
 #### Table "User"
 
@@ -382,7 +394,7 @@ Sauvegarde les groupes météo prédéfinis (Neige, Pluie, Normal). Le fonctionn
 
 
 
-### API externe - météo - ok
+### API externe - météo
 
 Pour réaliser mon système de météo, j'ai utilisé l'API **OpenWeatherMap**, et plus spécifiquement la version gratuite de l'offre "*5 day weather forecast*", qui permet d'obtenir, pour les 5 jours (5x24h) à partir de maintenant, des informations météo détaillées toutes les trois heures. 
 
@@ -394,7 +406,7 @@ J'ai ensuite dû réaliser des fonctions qui permettent de traiter ces informati
 
 
 
-### Classes PHP - en cours
+### Classes PHP - en cours /!\
 
 J'ai créé des classes PHP, qui me permettent toutes d'organiser et d'enregistrer les informations météo renvoyées par l'API. 
 
@@ -428,7 +440,7 @@ Enregistre une liste de jours (de type *day*).
 
 
 
-### Fonctions principales du projet
+### Fonctions principales du projet - à faire /!\
 
 Tout ce qui concerne la gestion des utilisateurs, de la météo, du calendrier, du semainier et de la garde-robe est programmé sous forme de fonctions, toutes réunies dans un même fichier (functions.php). Voici la liste de ces fonctions, ainsi que la description de leur rôle.
 
@@ -528,7 +540,7 @@ DisplayClothesList() :
 
 
 
-### Argumentation des choix de méthodes de résolution
+### Argumentation des choix de méthodes de résolution - à faire /!\
 
 #### Choix de l'API météo
 
@@ -544,7 +556,7 @@ DisplayClothesList() :
 
 
 
-### Pseudo code ou des structogrammes
+### Pseudo code ou des structogrammes - à faire /!\
 
 Voici un structogramme représentant l'algorithme de recommandation de tenue. Cet algorithme a pour but de créer, de manière aléatoire, un tenue complète qui soit adaptée à la météo du jour. Dans cette version du programme, il est parfaitement fonctionnel et remplit son rôle, mais peut être amélioré dans le futur en y intégrant plus de détails.
 
@@ -557,7 +569,7 @@ Voici un structogramme représentant l'algorithme de recommandation de tenue. Ce
 
 
 
-## Tests et protocole de tests
+## Tests et protocole de tests - à compléter /!\
 
 ### Périmètre des tests
 
@@ -783,7 +795,7 @@ Les scénarios ont été écrits avant la réalisation du projet, afin de garant
 
 
 
-## Conclusion - ok
+## Conclusion
 
 ### Améliorations possibles
 
@@ -825,7 +837,7 @@ Et je suis plutôt contente du résultat final, qui, même s'il peut être amél
 
 
 
-### Remerciements
+### Remerciements - /!\
 
 [Remerciements]
 
@@ -833,7 +845,7 @@ Et je suis plutôt contente du résultat final, qui, même s'il peut être amél
 
 
 
-## Webographie - ok
+## Webographie
 
 ### API Météo
 

@@ -1300,14 +1300,15 @@ function DisplayMeteoSummary($numDay){
   $day = GetMeteo()->GetDay($numDay);
 
   //Indexs des heures auxquelles récupérer les information du matin et du soir
-  $indexMorning = 3;
-  $indexEvening = 6;
+  $indexMorning = 2;
+  $indexEvening = 5;
+  
   //Si la journée n'est plus complète, et que l'heure du soir est passée
-  if(count($day->GetHours())<=5){
+  if(count($day->GetHours())<=2){
     $tempMorning = $day->GetHour(0)->GetTemperature();
-    $tempEvening = $day->GetHour($indexEvening-(8-count($day->GetHours()))-1)->GetTemperature();
+    $tempEvening = $day->GetHour($indexEvening-(8-count($day->GetHours())))->GetTemperature();
     $iconMorning = $day->GetHour(0)->GetIcon();
-    $iconEvening = $day->GetHour($indexEvening-(8-count($day->GetHours()))-1)->GetIcon();
+    $iconEvening = $day->GetHour($indexEvening-(8-count($day->GetHours())))->GetIcon();
 
     echo '<div class="summaryBubble">';
     //Afficher les icones des groupes météo du matin et du soir (9h/18h)
@@ -1319,9 +1320,9 @@ function DisplayMeteoSummary($numDay){
   //Si la journée n'est plus complète, et que l'heure du matin est passée
   else if(count($day->GetHours())<=5){
     $tempMorning = $day->GetHour(0)->GetTemperature();
-    $tempEvening = $day->GetHour($indexEvening-(8-count($day->GetHours()))-1)->GetTemperature();
+    $tempEvening = $day->GetHour($indexEvening-(8-count($day->GetHours())))->GetTemperature();
     $iconMorning = $day->GetHour(0)->GetIcon();
-    $iconEvening = $day->GetHour($indexEvening-(8-count($day->GetHours()))-1)->GetIcon();
+    $iconEvening = $day->GetHour($indexEvening-(8-count($day->GetHours())))->GetIcon();
 
     echo '<div class="summaryBubble">';
     //Afficher les icones des groupes météo du matin et du soir (9h/18h)

@@ -699,10 +699,15 @@ input[type=color] {
 
 .displayButtons{  
   width: 40px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: flex-end !important;
-  justify-content: flex-start !important;
+}
+
+.displayButtons button{  
+  width: 40px !important;
+  height: 40px !important;
+  background-color:#DDF9E9;
+
+  float: right;
+  margin: 0px;
 }
 
 .clotheImage{

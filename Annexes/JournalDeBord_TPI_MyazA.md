@@ -1,5 +1,5 @@
 
-# Journal de bord
+# Journal de travail
 
 ## Table des matières
 [TOC]
@@ -285,10 +285,6 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 12h40 : Je continue la réalisation de mes documentations en faisant la documentation utilisateurs
 
-14h00 : Je réalise le résumé du projet réalisé, en me basant sur le cahier des charges
-
-15h 30 : Je réalise le template que j'appliquerai à l'ensemble des formulaires du site
-
 ➔ **Bilan de la journée** :
 
 
@@ -299,8 +295,7 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 *A faire :*
 
-- Documentation : [liste des parties à faire]
-- Finir d'appliquer le template de formulaire
+- Documentation : planification, finir analyse organique, résumé du projet
 - Tests avancés (recherche de dysfonctionnements inattendus, en testant sur différents navigateurs, et en utilisant le site de manière non idéale)
 - Eventuelles corrections
 

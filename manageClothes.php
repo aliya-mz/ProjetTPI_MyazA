@@ -10,7 +10,7 @@ include("backend/autoload.php");
 session_start();
 
 //Vérifier que l'utilisateur est connecté
-VerifyAccessibility(1);
+VerifyAccessibility([1]);
 
 DeleteClothesImages();
 
