@@ -357,8 +357,8 @@ function GetCalendarDays($month, $year){
   date_default_timezone_set($timeZone);
 
   $dateSrc = $year."-".$month."-01 00:00";
-  $dateTime = new DateTime($dateSrc);  
-  $dateFirstOfMonth = date('d.m.Y H:i:s', strtotime($dateSrc));
+  //$dateTime = new DateTime($dateSrc);  
+  //$dateFirstOfMonth = date('d.m.Y H:i:s', strtotime($dateSrc));
 
   //Déterminer quel jour de la semaine est à cette date
   $date = date('Y-m-d', strtotime($dateSrc));
@@ -373,15 +373,15 @@ function GetCalendarDays($month, $year){
   }
 
   $dateStart = date_create($year.'-'.$month.'-01');
-  //soustraction
+  //Soustraction
   date_sub($dateStart, date_interval_create_from_date_string($daysToAdd.' days'));
   
   //Parcourir tous les jours pour classer leurs dates dans un tableau de semaines
   for($w = 0; $w < 6; $w++){
     $week = [];
-    for($j = 0; $j < 7; $j++){
+    for($d = 0; $d < 7; $d++){
       $day = $dateStart;
-      if(!($w==$j && $w==0))
+      if(!($w==$d && $w==0))
         date_add($day, date_interval_create_from_date_string('1 days'));
       array_push($week, date_format($day, 'Y-m-d'));
     }  
@@ -413,8 +413,6 @@ function GetEventsBetween($dateStart, $dateEnd){
   //Rechercher dans la base de données
   $events = readEventsByTime($timestampStart, $timestampEnd, GetIdUser());
 
-  //var_dump($events);
-
   //Placer les évènements dans un tableau dont les clés sont les dates
   $dates = [];
   foreach($events as $event){
@@ -427,6 +425,9 @@ function GetEventsBetween($dateStart, $dateEnd){
     array_push($classifiedEvents[$date], $events[$countEvents]);
     $countEvents += 1;
   }
+
+  //var_dump($classifiedEvents);
+
 
   return $classifiedEvents;
 }
@@ -1239,6 +1240,8 @@ function DisplayDaysEvents($numDay){
   //Récupérer les évènements du semainier de ce jour de la semaine
   $weeklyEvents = GetEventsWeekPlanner();  
   $events = [];  
+
+  //Les ajouter à la liste des évènements du jour
   foreach($weeklyEvents as $key => $event){
       if(intval(explode(".",$event["theDate"])[0]) == GetWeekDay($numDay)){
         array_push($events, $event);        
@@ -1246,15 +1249,25 @@ function DisplayDaysEvents($numDay){
   }
 
   //Récupérer les évènements du calendrier à cette date
+
+  //Récupérer le début et la fin de la journée actuelle
   $timeZone = 'Europe/Zurich';
   date_default_timezone_set($timeZone);
-  $dateStart = date("Y")."-".date("m")."-".date("d")." 00:00";
-  $dateEnd = date("Y")."-".date("m")."-".date("d")." 23:59";  
-  $dateStart = date('d.m.Y H:i:s', strtotime($dateStart));
-  $dateEnd = date('d.m.Y H:i:s', strtotime($dateEnd));
+  $dateStart = date_create(date("Y")."-".date("m")."-".date("d")." 00:00");
+  $dateEnd = date_create(date("Y")."-".date("m")."-".date("d")." 23:59");
 
+  //Calculer le début et la fin du jour affiché
+  date_add($dateStart, date_interval_create_from_date_string($numDay.' days'))->format('d.m.Y H:i:s');
+  date_add($dateEnd, date_interval_create_from_date_string($numDay.' days'))->format('d.m.Y H:i:s');
+
+  //Transformer les dates dans le bon format pour les envoyer à la requête sql
+  $dateStart = date('d.m.Y H:i:s', strtotime(date_format($dateStart, 'd.m.Y H:i:s')));
+  $dateEnd = date('d.m.Y H:i:s', strtotime(date_format($dateEnd, 'd.m.Y H:i:s')));
+
+  //Envoyer la requête
   $todaysEvents = GetEventsBetween($dateStart, $dateEnd);
 
+  //Ajouter les évènements du calendrier aux évènements précédemment récupérés du semainier
   foreach($todaysEvents as $day){
     foreach($day as $event){
       array_push($events, $event);

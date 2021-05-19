@@ -12,7 +12,7 @@ session_start();
 include("backend/autoload.php");
 
 //Vérifier que l'utilisateur est connecté
-VerifyAccessibility(1);
+VerifyAccessibility([1]);
 
 //Mettre en dynamique !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 $month = "05";

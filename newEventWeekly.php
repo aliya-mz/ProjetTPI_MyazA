@@ -12,7 +12,7 @@ session_start();
 include("backend/autoload.php");
 
 //Vérifier que l'utilisateur est connecté
-VerifyAccessibility(1);
+VerifyAccessibility([1]);
 
 $idHour = FILTER_INPUT(INPUT_GET, "hour", FILTER_VALIDATE_INT);
 $idDay = FILTER_INPUT(INPUT_GET, "day", FILTER_VALIDATE_INT);

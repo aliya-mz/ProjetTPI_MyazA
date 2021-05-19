@@ -406,7 +406,7 @@ J'ai ensuite dû réaliser des fonctions qui permettent de traiter ces informati
 
 
 
-### Classes PHP - en cours /!\
+### Classes PHP - demander
 
 J'ai créé des classes PHP, qui me permettent toutes d'organiser et d'enregistrer les informations météo renvoyées par l'API. 
 
@@ -416,7 +416,11 @@ Enregistre une liste de jours (de type *day*).
 
 **Méthodes :**
 
-*ExempleMethode* : Description de la méthode
+*__construct($infosMeteo)* : Crée la liste de jours grâce au tableau récupéré en paramètre
+
+*GetDays()* : Retourne le liste des jours
+
+*GetDay($numDay)* : Retourne le jour présent à l'emplacement de la liste récupérée en paramètre
 
 
 
@@ -426,17 +430,23 @@ Enregistre une liste d'enregistrements météo (de type *meteoRecord*).
 
 **Méthodes :**
 
-*ExempleMethode* : Description de la méthode
+*__construct($infosMeteo)* : Crée la liste d'enregistrements météo grâce au tableau récupérée en paramètre
+
+*GetHours()* : Retourne le liste des enregistrements
+
+*GetHour($numHour)* : Retourne l'enregistrement présent à l'emplacement de la liste récupérée en paramètre
+
+*GetDate()* : Retourne la date du jour
 
 
 
 #### MeteoRecord
 
-Enregistre une liste de jours (de type *day*).
+Enregistre toutes les informations météo liées à un enregistrement
 
 **Méthodes :**
 
-*ExempleMethode* : Description de la méthode
+*Chaque méthode retourne une information météo différente*
 
 
 
@@ -540,27 +550,37 @@ DisplayClothesList() :
 
 
 
-### Argumentation des choix de méthodes de résolution - à faire /!\
+### Argumentation des choix de méthodes de résolution
 
 #### Choix de l'API météo
 
-
+J'ai choisi l'API OpenWeatherMap parce que j'avais déjà un peu travaillé dessus, et qu'elle proposait une offre gratuite pratique et qui convenait pour l'utilisation que je voulais en faire. En plus, l'apparence professionnelle du site par rapport aux autres donnai plus confiance pour la suite.
 
 #### Méthode de réalisation du calendrier
 
-
+J'ai décidé de réaliser le calendrier entièrement, sans avoir recours à un service externe, parce que je n'en avais jamais utilisé, et aurais donc eu du mal à évaluer la difficulté et le longueur de la tâche, d'autant plus qu'il fallait le personnaliser en y intégrant la météo.
 
 #### Images des vêtements de type vectoriel
 
+Il fallait que j'affiche des images de vêtements, auxquels l'utilisateur pouvait attribuer des couleurs. J'ai choisi de mettre un input de type couleur pour le laisser personnaliser totalement la couleur, et pouvoir ainsi mieux reconnaitre son vêtement. Ainsi, il fallait que je modifie l'image, ne pouvant créer un nombre illimité d'image avec. La manière la plus simple de modifier une image avec du php est d'avoir une image vectorielle, dont le fichier est un script pouvant être facilement modifié. Mon programme génère donc à la demande une image vectorielle avec un script pré-existant pour chaque type de vêtement, dans le quelque il remplace juste l'emplacement de définition de la couleur. Tout est dynamique, je ne stocke des images nul part, et toutes les informations existent dans la base de données.
 
 
 
+### Pseudo code /!\
 
-### Pseudo code ou des structogrammes - à faire /!\
+#### Génération du calendrier
+
+GetCalendarDays($month, $year)
+
+
+
+#### Génération d'une tenue
 
 Voici un structogramme représentant l'algorithme de recommandation de tenue. Cet algorithme a pour but de créer, de manière aléatoire, un tenue complète qui soit adaptée à la météo du jour. Dans cette version du programme, il est parfaitement fonctionnel et remplit son rôle, mais peut être amélioré dans le futur en y intégrant plus de détails.
 
-[Structogramme]
+GetClothesForMeteo($temperatures, $weathers)
+
+GenerateDress($temperatures, $weathers)
 
 
 
@@ -569,21 +589,31 @@ Voici un structogramme représentant l'algorithme de recommandation de tenue. Ce
 
 
 
-## Tests et protocole de tests - à compléter /!\
+## Plan de tests et tests - à compléter
 
 ### Périmètre des tests
 
-[]
+Les tests de ce projet englobent les actions normales qu'un utilisateur, sur un navigateur classique moderne. 
 
 
 
 ### Environnement de test
 
-[]
+**Côté navigateur**
+
+Google Chrome 90.0.4430.212 (64 bits) sur Windows 10 Pro, version 2004
+
+**Côté serveur**
+
+WampServer Version 3.2.3 (64 bits)
+
+PHP 7.3.21
+
+MySQL 5.7.31
 
 
 
-### Scénarios de test - modifications à faire
+### Scénarios de test - modifications à faire /!\
 
 Les scénarios ont été écrits avant la réalisation du projet, afin de garantir la réponse aux demandes du cahier des charge. Lors de la réalisation d'un scénario, faire attention à ce que son scénario prérequis ait été exécuté avant. Dans le cadre de ce travail, les tests ont été exécutés manuellement.
 
@@ -878,3 +908,7 @@ https://www.php.net/manual/fr/ref.datetime.php
 ## Glossaire
 
 **CRUD** : Création, Lecture, Mise-à-jour, Suppression (« Create, Read, Update, Delete »).
+
+**Backlog** : 
+
+**User story** :

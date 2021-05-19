@@ -279,7 +279,7 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 7h30 : Je programme les trois jours qui me restent pour être sûre de bien terminer la documentation et les autres documents
 
-8h00 : Je réalise l'analyse organique
+8h00 : Je réalise la partie planification de la documentation et commence l'analyse organique
 
 **Après-midi**
 
@@ -295,13 +295,15 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 *A faire :*
 
-- Documentation : planification, finir analyse organique, résumé du projet
+- Documentation : finir analyse organique, résumé du projet
 - Tests avancés (recherche de dysfonctionnements inattendus, en testant sur différents navigateurs, et en utilisant le site de manière non idéale)
 - Eventuelles corrections
 
 **Matin**
 
+7h30 : Je découvre une erreur dans mon système d'affichage de météo dans le calendrier qui n'apparaît que tôt le matin. Je la corrige donc, et fais un push.
 
+8h00 : Je continue l'analyse organique
 
 **Après-midi**
 
