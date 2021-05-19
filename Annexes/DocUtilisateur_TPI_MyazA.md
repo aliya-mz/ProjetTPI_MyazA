@@ -42,13 +42,13 @@ L'utilisateur et l'administrateur doivent donc, pour accéder aux fonctionnalit�
 4. Remplir le formulaire avec le nom d'utilisateur et le mot de passe entrés durant l'inscription
 5. Valider le formulaire
 
-![](DocImages\inscription.png)
+![](DocImages\inscription.PNG)
 
 Figure 1.1 - Inscription à l'application
 
 
 
-![](DocImages\connexion.png)
+![](DocImages\connexion.PNG)
 
 Figure 1.2 - Connexion à l'application
 
