@@ -42,11 +42,13 @@ L'utilisateur et l'administrateur doivent donc, pour accéder aux fonctionnalit�
 4. Remplir le formulaire avec le nom d'utilisateur et le mot de passe entrés durant l'inscription
 5. Valider le formulaire
 
-![](docImages/inscription.png)
+![](DocImages\inscription.png)
 
 Figure 1.1 - Inscription à l'application
 
-![](docImages/connexion.png)
+
+
+![](DocImages\connexion.png)
 
 Figure 1.2 - Connexion à l'application
 
@@ -64,7 +66,7 @@ Une fois connecté en tant qu'utilisateur ou administrateur, vous pouvez vous d�
 
 1. Sur la page d'accueil, cliquer sur le bouton de déconnexion
 
-![](docImages/deconnexion.png)
+![](docImages/deconnexion.PNG)
 
 Figure 1.3 - Déconnexion de l'application
 
@@ -128,7 +130,7 @@ En tant qu'utilisateur connecté, vous avez accès aux fonctionnalités suivante
 
    
 
-   ![](docImages/manageAccount.png)
+   ![](docImages/manageAccount.PNG)
 
    Figure 3.1 - Gestion du compte
 
