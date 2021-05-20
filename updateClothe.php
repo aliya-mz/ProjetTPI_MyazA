@@ -74,12 +74,12 @@ if($validate){
     <main class="bg-light">
     <form class="formAdd" action="" method="POST">
       <table class="formClothes">
+      <tr>
+          <td colspan="2"><div class="contenantSvg"> <?php DisplayClothe($clothe); ?> </div></td>
+        </tr>
         <tr>
           <td colspan="2"><input type="text" name="name" value="<?php echo $clothe["name"];?>" placeholder="Nom (ex : pull vert préféré)" required><?php echo $clothe["name"];?></input</td>
         </tr>      
-        <tr>
-          <td colspan="2"><div class="contenantSvg"> <?php DisplayClotheImage($clothe); ?> </div></td>
-        </tr>
         <tr>
           <td colspan="2"> <label>Sélectionner une couleur</label> </td>
         </tr>  
