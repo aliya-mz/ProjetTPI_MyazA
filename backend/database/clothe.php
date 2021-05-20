@@ -7,11 +7,11 @@
 */
 
 //Rechercher les vêtements appartenant à une certaine catégorie (haut, bas, ensemble, exterieur, chaussures), qui correspondent à la météo
-function ReadClothesByMeteoAndCategorie($temperature, $weather, $categoryGroup){
+function ReadClothesByMeteoAndCategorie($temperature, $weather, $categoryGroup, $idUser){
   //initaliser le prepare statement
   static $ps = null;
   //requête
-  $sql = "SELECT idClothe FROM category c join clothe on c.idCategory = clothe.idCategory JOIN weather w on W.idWeather = clothe.idWeather WHERE c.typeClothe = :categoryGroup AND w.name = :weather AND tempMin <= :temperature AND tempMax >= :temperature GROUP BY idClothe";
+  $sql = "SELECT idClothe FROM category c join clothe on c.idCategory = clothe.idCategory JOIN weather w on W.idWeather = clothe.idWeather WHERE c.typeClothe = :categoryGroup AND w.name = :weather AND tempMin <= :temperature AND tempMax >= :temperature AND idUser LIKE :idUser GROUP BY idClothe";
 
   //si le prepare statement n'a encore jamais été fait
   if($ps == null){
@@ -20,7 +20,8 @@ function ReadClothesByMeteoAndCategorie($temperature, $weather, $categoryGroup){
   }
   $answer = false;
   try{
-    //lier le paramètre dans la requête avec la variable    
+    //lier le paramètre dans la requête avec la variable   
+    $ps->bindParam(':idUser', $idUser, PDO::PARAM_INT);
     $ps->bindParam(':temperature', $temperature, PDO::PARAM_INT);
     $ps->bindParam(':weather', $weather, PDO::PARAM_STR);
     $ps->bindParam(':categoryGroup', $categoryGroup, PDO::PARAM_STR);

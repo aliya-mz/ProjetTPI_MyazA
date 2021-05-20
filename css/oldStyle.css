@@ -555,31 +555,15 @@ input[type=color] {
 
 .ordinaryForm{
   width: 100%;
-  height: 92.1vh;
-  margin-top: 100px;
-  margin-right: 0px !important;
-}
-
-.ordinaryForm form{
-  width : 88% !important;
-  float : right !important;
-  margin-right: 0px !important;
+  height: 92vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  margin-top: 100px;
 }
 
-.ordinaryForm input{
-  width: 40% !important;
-  border: 1px solid #D2F9E2;
-}
 
-.ordinaryForm button{
-  width: 20% !important;
-  background-color:#D2F9E2;
-  border: none;
-}
 
 /*Affichage météo*/
 
@@ -705,26 +689,25 @@ input[type=color] {
 .clothesBubble{
   width: 200px;
   height: 200px;
-  margin : 20px 0px 0px 15px;  
-  display: flex !important;
-  flex-direction: row !important;
-  justify-content: space-between !important;
-  align-items: flex-start !important;
+  margin : 20px 0px 0px 15px;
 }
 
 .displayClothe{
   margin-top: 20px !important;
-  margin-right: 20px;
   width: 160px !important;
 }
 
 .displayButtons{  
   width: 40px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: flex-end !important;
-  justify-content: flex-start !important;
+}
+
+.displayButtons button{  
+  width: 40px !important;
+  height: 40px !important;
+  background-color:#DDF9E9;
+
   float: right;
+  margin: 0px;
 }
 
 .clotheImage{

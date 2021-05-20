@@ -679,8 +679,8 @@ function GetClothe($idClothe){
   //Si le vêtement n'appartient pas à l'utilisateur, quitter
   else{
     if($clothe["idUser"]!=GetIdUser()){
-      header('Location: manageClothes.php');
-      exit;
+     // header('Location: index.php');
+      //exit;
     }
   }
   return $clothe;
@@ -865,11 +865,11 @@ function GetClothesForMeteo($temperatures, $weathers){
 
   //Créer un tableau avec tous les vêtements possibles pour cette météo (neige prioritaire), classés par catégorie
   $clothesForMeteo = [
-    CLOTHES_GROUPS[0] => ReadClothesByMeteoAndCategorie($temperature, $weatherPriority, CLOTHES_GROUPS[0]),
-    CLOTHES_GROUPS[1] => ReadClothesByMeteoAndCategorie($temperature, $weatherPriority, CLOTHES_GROUPS[1]),
-    CLOTHES_GROUPS[2] => ReadClothesByMeteoAndCategorie($temperature, $weatherPriority, CLOTHES_GROUPS[2]),
-    CLOTHES_GROUPS[3] => ReadClothesByMeteoAndCategorie($temperature, $weatherPriority, CLOTHES_GROUPS[3]),
-    CLOTHES_GROUPS[4] => ReadClothesByMeteoAndCategorie($temperature, $weatherPriority, CLOTHES_GROUPS[4])
+    CLOTHES_GROUPS[0] => ReadClothesByMeteoAndCategorie($temperature, $weatherPriority, CLOTHES_GROUPS[0], GetIdUser()),
+    CLOTHES_GROUPS[1] => ReadClothesByMeteoAndCategorie($temperature, $weatherPriority, CLOTHES_GROUPS[1], GetIdUser()),
+    CLOTHES_GROUPS[2] => ReadClothesByMeteoAndCategorie($temperature, $weatherPriority, CLOTHES_GROUPS[2], GetIdUser()),
+    CLOTHES_GROUPS[3] => ReadClothesByMeteoAndCategorie($temperature, $weatherPriority, CLOTHES_GROUPS[3], GetIdUser()),
+    CLOTHES_GROUPS[4] => ReadClothesByMeteoAndCategorie($temperature, $weatherPriority, CLOTHES_GROUPS[4], GetIdUser())
   ];
 
   return $clothesForMeteo;
@@ -1252,7 +1252,7 @@ function DisplayRecordingsDetails($day, $idRecording){
   //Afficher les informations météo de l'enregistrements
   echo '<img src="http://openweathermap.org/img/wn/'.$recording->GetIcon().'.png"/>';
   echo "<p>".$recording->GetMeteoDescription()."</p>";
-  echo "<p> Précipitations : ".($recording->GetProbPrecipitations())."% </p>";
+  echo "<p> Précipitations : ".$recording->GetProbPrecipitations()."% </p>";
   echo "<p> Humidité : ".$recording->GetHumidity()."% </p>";
   echo "<p> Vent : ".$recording->GetWindSpeed()." km/h</p>";
 }
