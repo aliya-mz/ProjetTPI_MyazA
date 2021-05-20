@@ -314,7 +314,7 @@ Voici une description des pages principales de l'application. Seuls les formulai
 - JavaScript
 - MySQL
 - Bootstrap 5
-- (Google Charts) ?
+- Google Charts
 
 
 
@@ -340,7 +340,7 @@ J'ai créé un repo git et y est sauvegardé mon projet plusieurs fois par jour,
 
 
 
-#### Modèle logique de données
+### Modèle logique de données
 
 La base de données est composée des six tables suivantes. 
 
@@ -408,8 +408,6 @@ J'ai ensuite dû réaliser des fonctions qui permettent de traiter ces informati
 
 
 
-
-
 ### Classes PHP
 
 J'ai créé des classes PHP, qui me permettent toutes d'organiser et d'enregistrer les informations météo renvoyées par l'API. 
@@ -458,7 +456,7 @@ Enregistre toutes les informations météo liées à un enregistrement
 
 
 
-### Fonctions principales du projet - à faire /!\
+### Fonctions principales du projet
 
 Tout ce qui concerne la gestion des utilisateurs, de la météo, du calendrier, du semainier et de la garde-robe est programmé sous forme de fonctions. Celles-ci sont réunies dans un même fichier (functions.php). Voici la liste de ces fonctions, ainsi que la description de leur rôle. 
 
@@ -468,57 +466,57 @@ Seules les fonctions principales, qui résument le fonctionnement du programme, 
 
 #### Gestion des utilisateurs
 
-Fonction VerifyAccessibility($acceptedRole) :
+Fonction **VerifyAccessibility**($acceptedRole) : Vérifie si le rôle de l'utilisateur connecté est identique à l'un des rôles récupérés en paramètre, et si ce n'est pas la cas, redirige vers la page principale.
 
-Fonction ConnectUser($login, $password) :
+Fonction **ConnectUser**($login, $password) : Vérifie que le nom d'utilisateur recherché existe dans la base de données. Si c'est le cas, récupère son mot de passe hashé, puis vérifie qu'il soit identique au mot de passe entré grâce à la fonction php "*password_verify*". S'ils sont identiques, l'identifiant de l'utilisateur est enregistré dans la session, et est alors connecté.
 
-Fonction UpdateUser($login, $firstName, $lastName, $eMail, $password) :
+Fonction **UpdateUser**($login, $firstName, $lastName, $eMail, $password) : Modifie les informations de l'utilisateur dans la base de données. Si le mot de passe a été modifié dans le formulaire, le hash avant de l'envoyer avec le reste des informations dans la requête update.
 
 
 
 #### Fonctionnement de la météo
 
-ExecuteMeteoProgram() : 
+Fonction **ExecuteMeteoProgram**() : 
 
-GetMeteoInfos() :
+Fonction **GetMeteoInfos()** :
 
-ClassifyMeteoInfos($meteoInfos) : 
+Fonction **ClassifyMeteoInfos**($meteoInfos) : 
 
-ClassifyInfosByDay($meteoInfos) :
+Fonction **ClassifyInfosByDay**($meteoInfos) :
 
-DisplayDayMeteo($numDay, $numHour) : 
+Fonction **DisplayDayMeteo**($numDay, $numHour) : 
 
-DisplayTemperatureGraphic($hours, $temperatures, $date) : 
+Fonction **DisplayTemperatureGraphic**($hours, $temperatures, $date) : 
 
-DisplayRecordingsDetails($day, $idRecording) : 
+Fonction **DisplayRecordingsDetails**($day, $idRecording) : 
 
-DisplayDaysEvents($numDay) : 
+Fonction **DisplayDaysEvents**($numDay) : 
 
-DisplayMeteoSummary($numDay) :
+Fonction **DisplayMeteoSummary**($numDay) :
 
 
 
-#### Fonctionnement du calendrier
+#### Fonctionnement du calendrier et semainier
 
-GetCalendarDays($month, $year) :
+Fonction **GetCalendarDays**($month, $year) :
 
-GetEventsBetween($dateStart, $dateEnd) :
+Fonction **GetEventsBetween**($dateStart, $dateEnd) :
 
-GetEventsWeekPlanner() :
+Fonction **GetEventsWeekPlanner**() :
 
-DisplayMonthCalendar($month, $year) :
+Fonction **DisplayMonthCalendar**($month, $year) :
 
-DisplayWeekPlanner() :
+Fonction **DisplayWeekPlanner**() :
 
 
 
 #### Gestion des vêtements
 
-GetClothesForMeteo($temperatures, $weathers) :
+Fonction **GetClothesForMeteo**($temperatures, $weathers):
 
-GenerateDress($temperatures, $weathers) : 
+Fonction **GenerateDress**($temperatures, $weathers) : 
 
-CreateClotheImage($idCategory, $color) :
+Fonction **CreateClotheImage**($idCategory, $color) :
 
 
 
