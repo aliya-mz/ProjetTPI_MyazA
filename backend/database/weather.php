@@ -6,11 +6,15 @@
   Description : Gestion de la table "weather"
 */
 
+//Retourner les groupes météo prdéfinis enregistrés dans la base de données
 function readWeathers(){
   static $ps = null;
+  
+  //Requête
   $sql = "SELECT * FROM weather";
 
   if($ps == null){
+    //préparer la requête
     $ps = db()->prepare($sql);
   }
   $answer = false;

@@ -10,7 +10,7 @@
 function db() {
   static $myDb = null;
 
-  //si la connexion n'a pas encore été faite
+  //Si la connexion n'a pas encore été faite, connecter
   if ( $myDb == null ) {
     try{
       $myDb = new PDO('mysql:host=' . HOST . ';dbname=' . DBNAME, DBUSER, DBPWD, array(
@@ -19,7 +19,7 @@ function db() {
       ));
     }
     catch(Exception $e){
-      //afficher erreurs
+      //Afficher erreurs
       echo 'Erreur : ' . $e->getMessage() . '<br />';
       echo 'N° : ' . $e->getCode();
       // Quitte le script et meurt
@@ -27,6 +27,6 @@ function db() {
     }    
   }
 
-  //retourne un connecteur
+  //Retourner un connecteur
   return $myDb;
 }

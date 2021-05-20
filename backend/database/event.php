@@ -3,10 +3,10 @@
   Projet      : Suggestion de tenues en fonction de la météo
   Date        : Mai 2021
   Auteur      : Aliya Myaz
-  Description : Gestion de la table "event" - en cours
+  Description : Gestion de la table "event"
 */
 
-//Ajouter paramètre user
+//Retourner les évènements du calendrier enregistrés pour une date située dans l'intervalle donné en paramètre, pour un utilisateur donné
 function readEventsByTime($dateStart, $dateEnd, $idUser){
   //initaliser le prepare statement
   static $ps = null;
@@ -38,6 +38,7 @@ function readEventsByTime($dateStart, $dateEnd, $idUser){
   return $answer;
 }
 
+//Retourner les évènements du semainier d'un utilisateur donné
 function readWeekPlannerEvents($idUser){
   //initaliser le prepare statement
   static $ps = null;
@@ -62,6 +63,7 @@ function readWeekPlannerEvents($idUser){
   return $answer;
 }
 
+//Retourner l'évènement correspondant à un identifiant donné
 function readEventById($idEvent, $idUser){
   //initaliser le prepare statement
   static $ps = null;
@@ -89,6 +91,7 @@ function readEventById($idEvent, $idUser){
   return $answer;
 }
 
+//Ajouter un évènement dans la base de données
 function createEvent($description, $dateStart, $dateEnd, $isReccurent, $idUser){
   echo $dateStart;
   //initaliser le prepare statement
@@ -118,35 +121,7 @@ function createEvent($description, $dateStart, $dateEnd, $isReccurent, $idUser){
   return $answer;
 }
 
-function UpdateEventById($idEvent, $description, $dateStart, $dateEnd, $isReccurent, $idUser){
-  //initaliser le prepare statement
-  static $ps = null;
-  //requête
-  $sql = 'UPDATE `event` SET name = :name, `description` = :description, dateStart = :dateStart, dateEnd = :dateEnd, isReccurent = :isReccurent WHERE idEvent = :idEvent';
-
-  //si le prépare statement n'a encore jamais été fait
-  if($ps == null){
-    //préparer la requête
-    $ps = db()->prepare($sql);
-  }
-  $answer = false;
-  try{
-    //lier le paramètre dans la requête avec la variable
-    $ps->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
-    $ps->bindParam(':description', $description, PDO::PARAM_INT);
-    $ps->bindParam(':dateStart', $dateStart, PDO::PARAM_STR);
-    $ps->bindParam(':dateEnd', $dateEnd, PDO::PARAM_INT);
-    $ps->bindParam(':isReccurent', $isReccurent, PDO::PARAM_INT);
-
-    $answer = $ps->execute();
-  }
-  catch(PDOException $e){
-    echo $e->getMessage();
-  } 
-
-  return $answer;
-}
-
+//Supprimer l'évènement correspondant à un identifiant donné
 function DeleteEventById($idEvent){
   //initaliser le prepare statement
   static $ps = null;
@@ -173,6 +148,7 @@ function DeleteEventById($idEvent){
   return $answer; 
 }
 
+//Supprimer un évènement enregistré à une date donnée
 function DeleteEventByTime($dateStart, $idUser){
   //initaliser le prepare statement
   static $ps = null;

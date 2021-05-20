@@ -1,10 +1,10 @@
-# Wearther - Manuel d'utilisateur
+# WearTher - Manuel d'utilisateur
 
 [TOC]
 
 ## Introduction
 
-L'application ***Wearther*** est un système de recommandations de tenues journalières, se basant sur la météo et la garde-robe de l'utilisateur. Une fois, inscrit et connecté, il est possible d'y enregistrer ses vêtement et de visualiser les propositions sur les 5 jours à venir. Le site comporte également un calendrier et un semainier qui permettent d'avoir une vue d'ensemble des évènements de ces jours à venir 
+L'application ***WearTher*** est un système de recommandations de tenues journalières, se basant sur la météo et la garde-robe de l'utilisateur. Une fois, inscrit et connecté, il est possible d'y enregistrer ses vêtement et de visualiser les propositions sur les 5 jours à venir. Le site comporte également un calendrier et un semainier qui permettent d'avoir une vue d'ensemble des évènements de ces jours à venir 
 
 Ce projet a ainsi pour but d'éviter de perdre du temps à rechercher une tenue.
 

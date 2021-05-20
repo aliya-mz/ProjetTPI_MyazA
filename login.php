@@ -16,20 +16,13 @@ VerifyAccessibility([0]);
 $login = FILTER_INPUT(INPUT_POST, "login", FILTER_SANITIZE_STRING);
 $password = FILTER_INPUT(INPUT_POST, "password", FILTER_SANITIZE_STRING);
 $connexion = FILTER_INPUT(INPUT_POST, "connexion", FILTER_SANITIZE_STRING);
-
-if($connexion){
-  //si les champs sont remplis
-  if($login && $password){
-    ConnectUser($login, $password);
-  }
-}
 ?>
 
 <!DOCTYPE html>
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Projet Wearther">
+    <meta name="description" content="Projet WearTher">
     <meta name="author" content="Myaz Aliya">
     <title>Connexion</title>
     <!-- CSS Bootstrap -->
@@ -40,7 +33,7 @@ if($connexion){
   <body>
     <!--Navigation principale-->
     <nav class="navbar navbar-light sticky-top bg-light flex-md-nowrap p-0 navCalendar">
-      <a class="brandName" href="#"><img src="img/logo.png" alt="" class="logo">Wearther</a>
+      <a class="brandName" href="#"><img src="img/logo.png" alt="" class="logo">WearTher</a>
     </nav>
 
     <main class="ordinaryForm">
@@ -60,6 +53,7 @@ if($connexion){
         </div>
         </div>
 
+      <!--Formulaire de connexion-->
       <form class="formAdd" action="" method="POST" class="listClothes">
       <table>
         <tr>
@@ -70,6 +64,19 @@ if($connexion){
         </tr>
         <tr>
           <td colspan="2"><button class="btnCreateIdea" type="submit" name="connexion" value="connexion">Connexion</button></td>
+        </tr>
+        <tr>
+          <td colspan="2" class="error">
+            <?php
+              if($connexion){
+                //si tous les champs sont remplis
+                if($login && $password){
+                  //Essayer de connecter l'utilisateur, envoyer un message d'erreur si échec
+                  ConnectUser($login, $password);
+                }
+              }
+            ?>
+          </td>
         </tr>
         <tr>
           <td colspan="2"><a href="signin.php">Je n'ai pas encore de compte</a></td>

@@ -7,10 +7,11 @@
 */
 
 include("backend/autoload.php");
+
 session_start();
 
-//Vérifier que l'utilisateur est déconnecté
-VerifyAccessibility([0]);
+//Vérifier que l'utilisateur est déconnecté ou que c'est un administrateur
+VerifyAccessibility([0, 2]);
 
 //récupérer les données du formulaire
 $login = FILTER_INPUT(INPUT_POST, "login", FILTER_SANITIZE_STRING);
@@ -21,7 +22,9 @@ $password = FILTER_INPUT(INPUT_POST, "password", FILTER_SANITIZE_STRING);
 $enregistrer = FILTER_INPUT(INPUT_POST, "enregistrer", FILTER_SANITIZE_STRING);
 
 if($enregistrer){
+  //Si tous les paramètres ont bien été entrés
   if($login && $eMail && $password){
+    //Enregistrer l'utilisateur dans la base de données
     SignUserIn($login, $firstName, $lastName, $eMail, $password);
   }
 }
@@ -31,19 +34,19 @@ if($enregistrer){
 <!DOCTYPE html>
 <html>
   <head>
-    
-  </head><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Projet Wearther">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Projet WearTher">
     <meta name="author" content="Myaz Aliya">
     <title>Inscription</title>
     <!-- CSS Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <!-- CSS propre au projet-->
     <link href="css/style.css" rel="stylesheet">
+  </head>
   <body>
     <!--Navigation principale-->
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 navCalendar">
-      <a class="brandName" href="#"><img src="img/logo.png" alt="" class="logo">Wearther</a>
+      <a class="brandName" href="#"><img src="img/logo.png" alt="" class="logo">WearTher</a>
     </nav>
 
     <main class="ordinaryForm">
@@ -63,6 +66,7 @@ if($enregistrer){
         </div>
         </div>
 
+      <!--Formulaire d'ajout d'utilisateur-->
       <form class="formAdd" action="" method="POST" class="listClothes">
         <table>
           <tr>

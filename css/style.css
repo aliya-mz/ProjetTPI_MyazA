@@ -1,5 +1,9 @@
-html {
-}
+/*
+  Projet      : Suggestion de tenues en fonction de la météo
+  Date        : Mai 2021
+  Auteur      : Aliya Myaz
+  Description : Page de style du projet
+*/
 
 body{
   max-height: 100vh;
@@ -12,10 +16,26 @@ body{
   color:#463333;
 }
 
-.meteoMain{
-  width: 100% !important;
-  color:grey;
-  float: right;
+/* Navigation */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  padding: 0;
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+  width: 12% !important;
+}
+
+.sidebar .nav-link {
+  font-weight: 500;
+  color: #333;
+}
+
+.marginTop100{
+  margin-top: 100px;
 }
 
 .brandName{
@@ -23,7 +43,6 @@ body{
   font-size: 18px;
   margin: 0px 15px 0px 15px;
 }
-
 
 .horizontalNav{
   flex-direction: row !important;
@@ -34,23 +53,13 @@ body{
   margin: 0px 15px 0px 15px;
 }
 
-.otherMain{
-  width:100%;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:space-around;
-  color:gray;
-}
-
 h3{
   color: grey;
   font-size: 16px;
 }
 
-/*Navigation*/
 .otherNav{
-  background-color:#EDEDED;/*B4F1CE*/
+  background-color:#EDEDED;
   height:50px;
   display:flex;
   flex-direction:row;
@@ -60,7 +69,7 @@ h3{
 }
 
 .mainNav{
-  background-color: #F3F3F3 !important; /*#ECECEC */
+  background-color: #F3F3F3 !important;
 }
 
 .pageTitle{
@@ -73,35 +82,12 @@ h3{
   margin-right:10px;
 }
 
-/*
-.navigation{
-  display:flex;
-  flex-direction:row;
-  margin-right:5%;
-}
-*/
-
 a{
-  text-decoration:none;
+  text-decoration: none;
 }
 
-.lienBouton{
-  margin-right:5%;
-  border:none;
-  height:50px;
-  background-color:#D5D5E0;
-  text-decoration:none;
-  text-align:center;
-  color:grey;
-  display:table;
-  border-radius:5px;
-}
 
-.lienBouton span{
-  vertical-align:middle;
-  display:table-cell;
-  width:140px;
-}
+/* Icones */
 
 .boutonHome{
   width:50px;
@@ -110,6 +96,36 @@ a{
 .boutonHome img{
     width: 50px;
 }
+
+.logo{
+  height: 90px;
+  margin-right: 10px;
+}
+
+.iconButton{
+  height: 40px;
+  width: 40px;
+}
+
+.smallIconButton{
+  height: 25px;
+}
+
+.mIconButton{
+  height: 30px;
+}
+
+
+/* Page principale */
+
+.meteoMain{
+  width: 100% !important;
+  color:grey;
+  float: right;
+}
+
+
+/* Formulaires */
 
 input, select, button{
   border:none;
@@ -124,79 +140,14 @@ input, select, button{
   margin-bottom:5px;
 }
 
-.logo{
-  height:90px;
-  margin-right: 10px;
-}
-
-.iconButton{
-  height:40px;
-  width:40px;
-}
-
-.smallIconButton{
-  height:25px;
-}
-
-.mIconButton{
-  height: 30px;
-}
-
 table{
   width:90%;
   border-collapse:collapse;
   text-align:center;
 }
 
-thead{
-  background-color:#D5D5E0;
-  color:grey;
-}
 
-td{
-  width:15%;
-  height:40px;
-}
-
-.btnSubmit{
-  background-color:#D5D5E0;
-  padding:10px;
-  color:#656565;
-}
-
-.supprMod{
-  background-color:#D5D5E0;
-  width:70px;
-}
-
-.colAction{
-  width:5%;
-  color:#656565;
-}
-
-.navEnd{
-  display:flex;
-  justify-content:flex-end;
-}
-
-/*Formulaire Rechercher*/
-
-.formSearch{
-  width:600px;
-  display:flex;
-  flex-direction:row;
-}
-
-.formSearch table{
-  width:100%;
-}
-
-.formSearch button{
-  background-color:#D5D5E0;
-}
-
-
-/*Formulaire Ajouter Idée*/
+/* Formulaires */
 
 .formAdd{
   width:40%;
@@ -204,22 +155,10 @@ td{
   margin-top:50px;
 }
 
-/*
-.formAdd tr, td{
-  width:100%;
-  height:auto;
-  display:flex;
-  flex-direction:row;
-  justify-content:center;
-  padding-top:1%;
-  padding-bottom:1%;
-}*/
-
 .formAdd button{
   height:50px;
   background-color:white;
   border-radius:5px;
-  /*border:1px solid #C0C0C0;*/
 }
 
 .formAdd input, select, option, button, textarea{
@@ -234,116 +173,72 @@ td{
   border:none;
 }
 
-.btnCreateIdea{
-  width:30%;
+.ordinaryForm{
+  width: 100%;
+  height: 92.1vh;
+  margin: 0px !important;
+  padding: 0px !important;
+  margin-top: 100px !important;
 }
 
-.navAjouter .lienBouton{
-  margin-left:5%;
-}
-
-.contenantTags{
-  display:flex;
-  flex-direction:row;
-  flex-wrap:wrap;
-  height:auto;
-}
-
-.align-right{
-  display:flex;
-  flex-direction:row;
-  justify-content:flex-end;
-  align-items: center;
-}
-
-.align-left{
-  display:flex;
-  flex-direction:row;
-  justify-content:flex-start;
-  align-items: center;
-}
-
-#publique{
-  width:30px;
-}
-
-
-
-/*Tableaux de la page "voirMesIdees"*/
-
-.ideesUserMain{
-  display:flex;
-  flex-direction:row;
-  align-items:flex-start;
-  justify-content:space-around;
-}
-
-.ideesUserMain table{
-  width:35%;
-  margin-top:30px;
-}
-
-.ideesUserMain tbody tr{
-  display:flex;
-  flex-direction:row;
-  border-radius:10px;
-  background-color:#E9E7EF;
-  margin:10px;
-}
-
-.ideesUserMain td{
-  height:200px;
-}
-
-.ideesUserMain thead tr td{
-  height:50px;
-  background-color:#CBC5ED;
-  color:#797979;
-}
-
-.ideesUserMain button{
-  background-color: #D5D5E0;
-  width:90px;
-  height:40px;
-}
-
-.conteneurIdee{
-  height:100%;
-  width:100%;
-  padding:10px;
+.ordinaryForm form{
+  width : 100% !important;
+  margin: 0px !important;
+  padding: 0px !important;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
 }
 
-.en-teteIdee{
-  height:15%;
-  width:100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content:space-between;
+.ordinaryForm form table{
+  margin: 0px !important;
+  padding: 0px !important;
+  width: 40%;
 }
 
-.corpsIdee{
-  height:60%;
-  width:100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
+.ordinaryForm input{
+  margin-left: 0px !important;
+  margin-right: 0px !important;;
+  width: 100% !important;
+  border: 1px solid #D2F9E2;
 }
 
-.actionsIdee{
-  height:15%;
-  width:100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+.ordinaryForm input[type=color]{
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  width: 60px !important;
+  border: 1px solid #D2F9E2;
 }
 
-/*Formulaire ajouter vêtement*/
+.ordinaryForm select{
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  width: 100% !important;
+  border: 1px solid #D2F9E2;
+}
+
+.ordinaryForm button{
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  width: 30% !important;
+  background-color: #D2F9E2;
+  border: none;
+}
+
+.ordinaryForm label{
+  font-size: 12px;
+  color: #999;
+  font-style: italic;
+  float: left;
+}
+
+.error{
+  color : red;
+}
+
+/* Formulaire ajouter vêtement */
+
 .formVetements{
   width: 100%;
   height: 500px;
@@ -363,12 +258,21 @@ input[type=color] {
   width: 150px;
 }
 
+.contenantSvg{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 
 
-/*Liste des utilisateurs à supprimer*/
+/* Liste des utilisateurs à supprimer */
+
+.usersList{
+  margin-left : 20px;
+}
 
 .usersList td{
-  height : 150px !important;
+  height : 170px !important;
 }
 
 .usersList div{
@@ -390,7 +294,7 @@ input[type=color] {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: 10px;
+  padding: 20px;
 }
 
 .bubbleTitle{
@@ -405,7 +309,8 @@ input[type=color] {
   padding: 10px;
 }
 
-/*Calendrier*/
+
+/* Calendrier */
 
 .mainCalendar{
   width: 100%;
@@ -488,6 +393,7 @@ input[type=color] {
 }
 
 /*Semainier*/
+
 .rowTitle{
   width: 2% !important;
 }
@@ -500,7 +406,8 @@ input[type=color] {
   height: 92vh !important;
 }
 
-/*Evenements*/
+
+/*Affichage des évènements*/
 
 .eventBubble{  
   background-color: #DDF9E9;
@@ -550,69 +457,6 @@ input[type=color] {
   float:right;
 }
 
-
-/*Formulaires*/
-
-.ordinaryForm{
-  width: 100%;
-  height: 92.1vh;
-  margin: 0px !important;
-  padding: 0px !important;
-  margin-top: 100px !important;
-}
-
-.ordinaryForm form{
-  width : 100% !important;
-  margin: 0px !important;
-  padding: 0px !important;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.ordinaryForm form table{
-  margin: 0px !important;
-  padding: 0px !important;
-  width: 40%;
-}
-
-.ordinaryForm input{
-  margin-left: 0px !important;
-  margin-right: 0px !important;;
-  width: 100% !important;
-  border: 1px solid #D2F9E2;
-}
-
-.ordinaryForm input[type=color]{
-  margin-left: 0px !important;
-  margin-right: 0px !important;
-  width: 60px !important;
-  border: 1px solid #D2F9E2;
-}
-
-.ordinaryForm select{
-  margin-left: 0px !important;
-  margin-right: 0px !important;
-  width: 100% !important;
-  border: 1px solid #D2F9E2;
-}
-
-.ordinaryForm button{
-  margin-left: 0px !important;
-  margin-right: 0px !important;
-  width: 30% !important;
-  background-color: #D2F9E2;
-  border: none;
-}
-
-.ordinaryForm label{
-  font-size: 12px;
-  color: #999;
-  font-style: italic;
-  float: left;
-}
-
 /*Affichage météo*/
 
 .meteoTable{
@@ -620,7 +464,6 @@ input[type=color] {
   width: 40%;
   padding:30px;
   border-radius: 15px;
-  /*background-color: white;*/
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -718,11 +561,6 @@ input[type=color] {
   height:35px;
 }
 
-.summaryLeftBox{
-  /*border-right: 1px solid rgb(192, 192, 192);*/
-}
-
-
 
 /*Gestion de la garde-robe*/
 
@@ -763,125 +601,3 @@ input[type=color] {
   height: 100px !important; 
   width: 100px !important;
 }
-
-/*
-<nav class="navbar navbar-expand-lg navbar-light bg-light mainNav">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#"><img class="iconButton" src="img/home"/>Wearther</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarText">
-			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-			</ul>
-			<!--Navigation entre les jours de la semaine-->
-			<ul class="navbar-nav justify-content-center">
-				<?php 
-					//Afficher la navigation entre les jours de la semaine
-					ShowDaysNav();
-				?>				
-			</ul>
-		</div>
-	</nav>
-
-
-
-  /*Navigation*/
-  body {
-    font-size: .875rem;
-  }
-  
-  .feather {
-    width: 16px;
-    height: 16px;
-    vertical-align: text-bottom;
-  }
-  
-  /*
-   * Sidebar
-   */
-  
-  .sidebar {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 100; /* Behind the navbar */
-    padding: 0;
-    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
-    width: 12% !important;
-  }
-  
-  .sidebar-sticky {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 48px; /* Height of navbar */
-    height: calc(100vh - 48px);
-    padding-top: .5rem;
-    overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-  }
-  
-  .sidebar .nav-link {
-    font-weight: 500;
-    color: #333;
-  }
-  
-  .sidebar .nav-link .feather {
-    margin-right: 4px;
-    color: #999;
-  }
-  
-  .sidebar .nav-link.active {
-    color: #007bff;
-  }
-  
-  .sidebar .nav-link:hover .feather,
-  .sidebar .nav-link.active .feather {
-    color: inherit;
-  }
-  
-  .sidebar-heading {
-    font-size: .75rem;
-    text-transform: uppercase;
-  }
-
-  .marginTop100{
-    margin-top: 100px;
-  }
-  
-  /*
-   * Navbar
-   */
-  
-  .navbar-brand {
-    padding-top: .75rem;
-    padding-bottom: .75rem;
-    font-size: 1rem;
-    background-color: rgba(0, 0, 0, .25);
-    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
-  }
-  
-  .navbar .form-control {
-    padding: .75rem 1rem;
-    border-width: 0;
-    border-radius: 0;
-  }
-  
-  .form-control-dark {
-    color: #fff;
-    background-color: rgba(255, 255, 255, .1);
-    border-color: rgba(255, 255, 255, .1);
-  }
-  
-  .form-control-dark:focus {
-    border-color: transparent;
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
-  }
-  
-  /*
-   * Utilities
-   */
-  
-  .border-top { border-top: 1px solid #e5e5e5; }
-  .border-bottom { border-bottom: 1px solid #e5e5e5; }

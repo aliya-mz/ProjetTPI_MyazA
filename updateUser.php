@@ -3,17 +3,17 @@
   Projet      : Suggestion de tenues en fonction de la météo
   Date        : Mai 2021
   Auteur      : Aliya Myaz
-  Description : Page de gestion des utilisateurs - affiche une liste des utilisateurs, que l'administrateur peut supprimer
+  Description : Page de gestion du compte
 */
 
 include("backend/autoload.php");
 
 session_start();
 
-//Vérifier qu'un utilisateur ou administrateur est connecté
+//Vérifier qu'un utilisateur ou un administrateur est connecté
 VerifyAccessibility([1,2]);
 
-//Récupérer l'utilisateur à modifier si ce n'est pas l'utilisateur connecté
+//Récupérer l'utilisateur à modifier si c'est l'administrateur qui est connecté
 $idUser = FILTER_INPUT(INPUT_GET, "idUser", FILTER_VALIDATE_INT);
 
 //Récupérer les champs du formulaire
@@ -24,7 +24,6 @@ $eMail = FILTER_INPUT(INPUT_POST, "eMail", FILTER_SANITIZE_STRING);
 $password = FILTER_INPUT(INPUT_POST, "password", FILTER_SANITIZE_STRING);
 $validate = FILTER_INPUT(INPUT_POST, "validate", FILTER_SANITIZE_STRING);
 $delete = FILTER_INPUT(INPUT_POST, "delete", FILTER_SANITIZE_STRING);
-
 
 if($validate){
   //Envoyer les modification à la base de données
@@ -37,7 +36,6 @@ if($validate){
 else if($delete){
   //Supprimer l'utilisateur actuel
   DeleteUser(GetIdUser());
-
   //Déconnexion forcée
   header('Location: logout.php');
   exit;
@@ -45,11 +43,11 @@ else if($delete){
 
 //Récpérer les informations de l'utilisateur à modifier
 if(GetUserRole()==1){
-  //Si un utilisateur est connecté
+  //Si un utilisateur est connecté, récupérer ses informations
   $user = GetUser();
 }
 else{
-  //Si un administrateur est connecté
+  //Si un administrateur est connecté, récupérer les informations de l'utilisateur qu'il a sélectionné
   $user = GetUserToUpdate($idUser);
 }
 ?>
@@ -58,7 +56,7 @@ else{
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Projet Wearther">
+    <meta name="description" content="Projet WearTher">
     <meta name="author" content="Myaz Aliya">
     <title>Gestion du compte</title>
     <!-- CSS Bootstrap -->
@@ -69,7 +67,7 @@ else{
   <body>
     <!--Navigation principale-->
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 navCalendar">
-      <a class="brandName" href="#"><img src="img/logo.png" alt="" class="logo">Wearther</a>
+      <a class="brandName" href="#"><img src="img/logo.png" alt="" class="logo">WearTher</a>
     </nav>
 
     <main class="ordinaryForm">
@@ -89,6 +87,7 @@ else{
         </div>
         </div>
 
+      <!--Formulaire de modification du compte-->
       <form class="formAdd" action="" method="POST" class="listClothes">
       <table>
         <tr>

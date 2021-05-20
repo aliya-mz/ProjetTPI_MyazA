@@ -1,6 +1,6 @@
 # Documentation technique
 
-Projet ***Wearther***, par *Myaz Aliya*, TPI 2021
+Projet ***WearTher***, par *Myaz Aliya*, TPI 2021
 
 <img src="DocImages\logo.png"/>
 
@@ -24,7 +24,7 @@ Projet ***Wearther***, par *Myaz Aliya*, TPI 2021
 
 ## Introduction
 
-Le projet ***Wearther*** est une application web qui propose des suggestions de tenues en fonction de la météo. Son but est de faire gagner du temps aux utilisateurs, voir de les sauver les jours où leur réveil ne sonne pas. L'application permet, en un clic, d'avoir un aperçu sur la météo du jour et de la semaine à venir, une suggestion de tenue journalière adaptée à la météo, et une vue sur leur agenda du jour, le tout sur la même page. En effet, pour être la plus pratique possible, l'application dispose également d'un calendrier et d'un semainier.
+Le projet ***WearTher*** est une application web qui propose des suggestions de tenues en fonction de la météo. Son but est de faire gagner du temps aux utilisateurs, voir de les sauver les jours où leur réveil ne sonne pas. L'application permet, en un clic, d'avoir un aperçu sur la météo du jour et de la semaine à venir, une suggestion de tenue journalière adaptée à la météo, et une vue sur leur agenda du jour, le tout sur la même page. En effet, pour être la plus pratique possible, l'application dispose également d'un calendrier et d'un semainier.
 
 J'ai réalisé ce projet en PHP avec une base de donnée MySQL. J'ai également fait appel à une API externe, *OpenWeatherMap*, pour les informations météo.
 
@@ -342,63 +342,59 @@ J'ai créé un repo git et y est sauvegardé mon projet plusieurs fois par jour,
 
 #### Modèle logique de données
 
-<img src="/docImages/mld_TPI_MyazA.png"/>
+La base de données est composée des six tables suivantes. 
+
+<img src="docImages/mld.png"/>
 
 
 
-/!\ Ajouter souligner et dièse
-
-
-
-### Description des tables - ajouter captures d'écran /!\
+### Description des tables
 
 #### Table "User"
 
-[Capture d'écran]
-
 Sauvegarde les informations du compte de l'utilisateur, dont son mot de passe en SHA1.
+
+![](docImages/userTable.PNG)
 
 
 
 #### Table "Role"
 
-[Capture d'écran]
-
 Sauvegarde la liste des rôles prédéfinis pour les utilisateurs (déconnecté, utilisateur, administrateur).
 
+![](docImages/roleTable.PNG)
 
 
-#### Table "Dress"
 
-[Capture d'écran]
+#### Table "Clothe"
 
 Sauvegarde les vêtements des utilisateurs avec leurs météo correspondante.
+
+![](docImages/clotheTable.PNG)
 
 
 
 #### Table "Event"
 
-[Capture d'écran]
-
 Sauvagarde les évènements des utilisateurs, qui peuvent être uniques ou hebdomadaires.
+
+![](docImages/eventTable.PNG)
 
 
 
 #### Table "Category"
 
-[Capture d'écran]
-
 Sauvegarde les catégories de vêtements disponibles prédéfinies. Le fonctionnement du programme ne dépend pas de l'index des catégories.
+
+![](docImages/categoryTable.PNG)
 
 
 
 #### Table "Weather"
 
-[Capture d'écran]
-
 Sauvegarde les groupes météo prédéfinis (Neige, Pluie, Normal). Le fonctionnement du programme ne dépend pas de l'index.
 
-
+![](docImages/weatherTable.PNG)
 
 
 
@@ -418,17 +414,19 @@ J'ai ensuite dû réaliser des fonctions qui permettent de traiter ces informati
 
 J'ai créé des classes PHP, qui me permettent toutes d'organiser et d'enregistrer les informations météo renvoyées par l'API. 
 
+
+
 #### Classe Week
 
 Enregistre une liste de jours (de type *day*).
 
 **Méthodes :**
 
-*__construct($infosMeteo)* : Crée la liste de jours grâce au tableau récupéré en paramètre
+public *__construct($infosMeteo)* : Crée la liste de jours grâce au tableau récupéré en paramètre
 
-*GetDays()* : Retourne le liste des jours
+public *GetDays()* : Retourne le liste des jours
 
-*GetDay($numDay)* : Retourne le jour présent à l'emplacement de la liste récupérée en paramètre
+public *GetDay($numDay)* : Retourne le jour présent à l'emplacement de la liste récupérée en paramètre
 
 
 
@@ -458,11 +456,13 @@ Enregistre toutes les informations météo liées à un enregistrement
 
 
 
+
+
 ### Fonctions principales du projet - à faire /!\
 
-Tout ce qui concerne la gestion des utilisateurs, de la météo, du calendrier, du semainier et de la garde-robe est programmé sous forme de fonctions, toutes réunies dans un même fichier (functions.php). Voici la liste de ces fonctions, ainsi que la description de leur rôle.
+Tout ce qui concerne la gestion des utilisateurs, de la météo, du calendrier, du semainier et de la garde-robe est programmé sous forme de fonctions. Celles-ci sont réunies dans un même fichier (functions.php). Voici la liste de ces fonctions, ainsi que la description de leur rôle. 
 
-[Seulement les plus importantes, les autres sont déjà commentées]
+Seules les fonctions principales, qui résument le fonctionnement du programme, sont présentées. Les autres sont généralement des petites fonctions sans autre intérêt que la séparation des tâches, et sont déjà commentées dans le code source.
 
 
 
@@ -772,7 +772,7 @@ Mauvaise utilisation / Fonctionnel /!\
 
 
 
-### Evolution des tests - modifications à faire
+### Evolution des tests - modifications à faire /!\
 
 | N° test | J0 - 03.05 | J1 - 04.05 | J2 - 05.05 | J3- 06.05 | J4- 10.05 | J5- 11.05 | J6- 12.05 | J7- 17.05 | J8- 18.05 | J9- 18.05 | J10- 29.05 |
 | ------- | ---------- | ---------- | ---------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | ---------- |
@@ -873,15 +873,15 @@ Et je suis plutôt contente du résultat final, qui, même s'il peut être amél
 
 
 
-### Remerciements - /!\
+### Remerciements
 
-[Remerciements]
-
-
+Je tiens à remercier M. François, mon enseignant, pour son accompagnement et ses conseils, ainsi que l'ensemble de des professeurs qui m'ont permis d'acquérir les connaissances nécessaires à la réalisation de mon travail, avec une mention spéciale à M. Bonvin, mon professeur de classe.
 
 
 
 ## Webographie
+
+
 
 ### API Météo
 

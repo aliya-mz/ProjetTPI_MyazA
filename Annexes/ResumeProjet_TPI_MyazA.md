@@ -1,4 +1,4 @@
-# Wearther
+# WearTher
 
 **Résumé du rapport TPI**
 

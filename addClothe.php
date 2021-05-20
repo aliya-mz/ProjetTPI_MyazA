@@ -27,14 +27,12 @@ $maxTemp = FILTER_INPUT(INPUT_POST, "maxTemp", FILTER_VALIDATE_INT);
 $color = FILTER_INPUT(INPUT_POST, "color", FILTER_SANITIZE_STRING);
 $validate = FILTER_INPUT(INPUT_POST, "validate", FILTER_SANITIZE_STRING);
 
-$cheminFichier = "";
-
 //Lorsque le formulaire est envoyé
 if($validate){
   //Enregistrer le vêtement dans la BD
   SaveClothe($name, $idCategory, $idWeather, $color, $minTemp, $maxTemp);
 
-  //Rediriger vers la agrde-robe
+  //Rediriger vers la garde-robe
   header('Location: manageClothes.php');
   exit;
 }
@@ -45,7 +43,7 @@ if($validate){
 
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Projet Wearther">
+    <meta name="description" content="Projet WearTher">
     <meta name="author" content="Myaz Aliya">
     <title>Nouveau vêtement</title>
     <!-- CSS Bootstrap -->
@@ -57,7 +55,7 @@ if($validate){
   <body>
     <!--Navigation principale-->
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 navCalendar">
-      <a class="brandName" href="#"><img src="img/logo.png" alt="" class="logo">Wearther</a>
+      <a class="brandName" href="#"><img src="img/logo.png" alt="" class="logo">WearTher</a>
     </nav>
 
     <main class="ordinaryForm">

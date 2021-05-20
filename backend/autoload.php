@@ -1,4 +1,11 @@
 <?php
+/*
+  Projet     : Suggestion de tenues en fonction de la météo
+  Auteur     : Aliya Myaz
+  Date       : Mai 2021
+  Sujet      : Récupération de tous les scripts php
+*/
+
 require_once('database/constantes.inc.php');
 require_once('database/connect.php');
 require_once("database/user.php");

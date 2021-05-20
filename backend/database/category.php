@@ -6,6 +6,7 @@
   Description : Gestion de la table "category"
 */
 
+//Retourner les catégories prédéfinies enregsitrées dans la base de données
 function readCategories(){
   //initaliser le prepare statement
   static $ps = null;
@@ -28,6 +29,7 @@ function readCategories(){
   return $answer;
 }
 
+//Retourner la catégorie correspondant à un identifiant donné
 function readCategoryById($idCategory){
   //initaliser le prepare statement
   static $ps = null;

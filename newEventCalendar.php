@@ -14,19 +14,18 @@ include("backend/autoload.php");
 //Vérifier que l'utilisateur est connecté
 VerifyAccessibility([1]);
 
-//Mettre en dynamique !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-$month = "05";
-$year = "2021";
-
-//Récupérer l'identifiant de l'évènement à supprimer
+//Récupérer les informations du formulaire sur l'évènement à ajouter
 $description = FILTER_INPUT(INPUT_POST, "description", FILTER_SANITIZE_STRING);
 $dateStart = FILTER_INPUT(INPUT_POST, "dateStart", FILTER_SANITIZE_STRING);
-$dateEnd = FILTER_INPUT(INPUT_POST, "dateEnd", FILTER_SANITIZE_STRING);
 $save = FILTER_INPUT(INPUT_POST, "save", FILTER_SANITIZE_STRING);
 
-//Supprimer l'évènement sur lequel l'utilisateur a cliqué
 if($save){
-	SaveEvent(0, $description, $dateStart, $dateEnd, 0, 0);
+  //Enregistrer l'évènement dans la base de données
+	SaveEvent(0, $description, $dateStart, $dateStart, 0, 0);
+
+  //Rediriger vers le calendrier
+  header('Location: calendar.php');
+  exit;
 }
 ?>
 
@@ -34,7 +33,7 @@ if($save){
 <html lang="fr">
   <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Projet Wearther">
+    <meta name="description" content="Projet WearTher">
     <meta name="author" content="Myaz Aliya">
     <title>Nouvel évènement</title>
     <!-- CSS Bootstrap -->
@@ -45,42 +44,37 @@ if($save){
   <body>
     <!--Navigation principale-->
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 navCalendar">
-      <a class="brandName" href="#"><img src="img/logo.png" alt="" class="logo">Wearther</a>
+      <a class="brandName" href="#"><img src="img/logo.png" alt="" class="logo">WearTher</a>
     </nav>
 
     <main class="ordinaryForm">
-        <!--Navigation secondaire-->
-        <div class="container-fluid">
-        <div class="row">
-            <nav class="col-md-2 d-none d-md-block bg-light sidebar mainSidebar">
-            <div class="sidebar-sticky marginTop100">
-                <ul class="nav flex-column">
-                  <!--Retour page principale-->
-                  <li class="nav-item">
-                    <a class="nav-link " aria-current="page" href="index.php"><img class="mIconButton" src="img/home.png"/></a>
-                  </li>
-                </ul>
-            </div>
-            </nav>        
-        </div>
-        </div>
+      <!--Navigation secondaire-->
+      <div class="container-fluid">
+      <div class="row">
+          <nav class="col-md-2 d-none d-md-block bg-light sidebar mainSidebar">
+          <div class="sidebar-sticky marginTop100">
+              <ul class="nav flex-column">
+                <!--Retour page principale-->
+                <li class="nav-item">
+                  <a class="nav-link " aria-current="page" href="index.php"><img class="mIconButton" src="img/home.png"/></a>
+                </li>
+              </ul>
+          </div>
+          </nav>        
+      </div>
+      </div>
 
+      <!--Formulaire d'ajout d'évènement-->
       <form class="formAdd" action="newEventCalendar.php" method="POST" class="listClothes">
         <table>
           <tr>
             <td colspan="2"><input type="text" name="description" value="" placeholder="Description de l'évènement"></td>
           </tr>
           <tr>
-          <td colspan="2"><label>Début de l'évènement</label></td>
+          <td colspan="2"><label>Date l'évènement</label></td>
           </tr>
           <tr>
             <td colspan="2"><input type="datetime-local" name="dateStart" value=""></td>
-          </tr>
-          <tr>
-          <td colspan="2"> <label>Fin de l'évènement</label></td>
-          </tr>
-          <tr>
-            <td colspan="2"><input type="datetime-local" name="dateEnd" value=""></td>
           </tr>
           <tr>          
             <td colspan="2"><button class="btnCreateIdea" type="submit" name="save" value="save"><img class="iconButton" src="img/submit.png"/></button></td>
@@ -89,7 +83,5 @@ if($save){
       </table>
       </form>
     </main>
-
-	  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
   </body>
 </html>

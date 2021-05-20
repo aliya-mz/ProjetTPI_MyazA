@@ -1,17 +1,16 @@
 <?php
 /*
-projet : 
-auteur : ALiya Myaz
-version : 1.0
-date : Mai 2021
-description : classe Semaine, stocke les 5 jours à venirs
+  Projet      : Suggestion de tenues en fonction de la météo
+  Date        : Mai 2021
+  Auteur      : Aliya Myaz
+  Description : classe Semaine, sauvegarde les 5 jours à venirs
 */
 
 class Week{
     //Champs
     private $_days;
 
-    //Constructeurs
+    //Constructeur
     public function __construct($infosMeteo){
         //Créer tous les jours et les ajouter à la liste _jours
         $this->_days = [];
@@ -21,10 +20,14 @@ class Week{
         }
     }
 
+    //Méthodes
+    
+    //Retourner la liste des jours de la semaine
     public function GetDays(){
         return $this->_days;
     }
 
+    //Retourner le jour de la semaine à la position $numDay
     public function GetDay($numDay){
         return $this->_days[$numDay];
     }

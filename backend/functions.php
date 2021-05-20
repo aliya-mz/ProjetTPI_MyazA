@@ -8,12 +8,15 @@
 
 //Gestion des utilisateurs - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
+//Message d'erreur de connexion
 define("ERROR_MESSAGE", "Votre pseudo ou mot de passe est erroné");
 
 
-//Retourne l'identifiant de l'utilisateur connecté
+//Retourner l'identifiant de l'utilisateur connecté
 function GetIdUser(){
+  //Si l'utilsiateur est définit dans la session
   if(isset($_SESSION["idUser"])){
+    //Retourner son identifiant
     return $_SESSION["idUser"];
   }
   else{
@@ -26,9 +29,10 @@ function SetIdUser($idUser){
   $_SESSION["idUser"] = $idUser;
 }
 
+//Retourner l'identifiant de l'utilisateur sélectionné par l'administrateur et envoyé en GET
 function GetIdUserToUpdate($idUser){
   $user = "";
-  //Récupérer le mois envoyé en paramètre
+  //Récupérer l'utilisateur envoyé en paramètre
   if(isset($idUser)){
     if(GetUser($idUser)!=null){
       $user = $idUser;
@@ -47,12 +51,14 @@ function GetIdUserToUpdate($idUser){
   return $user;
 }
 
+//Retourner l'utilisateur sélectionné par l'administrateur et envoyé en GET
 function GetUserToUpdate($idUser){
   return readUserById(GetIdUserToUpdate($idUser));
 }
 
-//Retourne l'indentifiant du rôle de l'utilisateur
+//Retourner l'identifiant du rôle de l'utilisateur
 function GetUserRole(){
+  //Si l'utilisateur est définti dans la session
   if(isset($_SESSION["idUser"])){
     //Récupérer l'utilisateur pour récupérer son rôle
     return ReadUserById($_SESSION["idUser"])["idRole"];
@@ -62,12 +68,12 @@ function GetUserRole(){
   }
 }
 
-//Retourne toutes les informations de l'utilisateur
+//Retourner toutes les informations de l'utilisateur
 function GetUser(){
   return readUserById(GetIdUser());
 }
 
-//Vérifie que l'utilisateur (déconnecté, utilisateur ou administrateur) a le droit d'accéder à la page
+//Vérifier que l'utilisateur (déconnecté, utilisateur ou administrateur) a le droit d'accéder à la page
 function VerifyAccessibility($acceptedRoles){
   //Si l'un des rôles envoyés en paramètre est connecté, rester sur la page
   $accepted = false;
@@ -77,7 +83,7 @@ function VerifyAccessibility($acceptedRoles){
     }
   } 
   if(!$accepted){
-    //header('Location: index.php');
+    header('Location: index.php');
     exit;
   }
 }
@@ -86,12 +92,15 @@ function VerifyAccessibility($acceptedRoles){
 function ConnectUser($login, $password){
   //Vérifier qu'un utilisateur avec ce pseudo existe
   if(ReadUserByUsername($login)){
+    //Récupérer l'utilisateur
     $user = ReadUserByUsername($login);
 
-    //Vérifier le mot de passe
-    if(password_verify($password, $user["password"])){     
+    //Vérifier le mot de passe crypté avec le mot de passe entré
+    if(password_verify($password, $user["password"])){ 
+
       //enregister l'utilisateur dans la session
       SetIdUser($user["idUser"]);
+
       //rediriger vers la page d'accueil
       header('Location: index.php');
       exit;
@@ -125,7 +134,7 @@ function SignUserIn($login, $firstName, $lastName, $eMail, $password){
   exit;
 }
 
-//Affiche une barre de navigation pour la page principale, contenant les liens adaptés au rôle de l'utilisateur
+//Afficher une barre de navigation pour la page principale, contenant les liens adaptés au rôle de l'utilisateur
 function ShowNavByRole(){
   //Si l'utilisateur est déconnecté, afficher le lien pour se connecter
   if(GetUserRole()==0){
@@ -163,7 +172,7 @@ function ShowNavByRole(){
   //Si c'est un administrateur, afficher le lien vers la gestion des utilisateurs et la déconnexion
   else if(GetUserRole()==2){
     echo '<ul class="nav flex-column">';
-    //Dénnexion
+    //Déconnexion
     echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"logout.php\"><img class=\"smallIconButton\" src=\"img/logout.png\"/></a></li>";
     //Gestion des utilisateurs
     echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"manageUsers.php\">Gestion des utilisateurs</li>";
@@ -171,18 +180,18 @@ function ShowNavByRole(){
   }
 }
 
-//Affiche une liste des utilisateurs, avec un bouton supprimer
+//Afficher une liste des utilisateurs, avec un bouton supprimer et modifier pour chacun
 function ShowListUsers(){
   //Récupérer tous les utilisateurs dont le rôle est "utilisateur"
   $users = readUsers();
-
+  //Afficher chaque utilisateur
   foreach($users as $user){
-    echo "<tr>";
-     
+    echo "<tr>";     
     echo "<td> <div class=\"userBubble eventBubble\">";
     //Informations sur l'utilisateur
     echo "<div><p class=\"bubbleTitle\">".$user["login"]."</p><p>".$user["firstName"]." ".$user["lastName"]."</p></div>";    
-    //Bouton supprimer
+
+    //Boutons supprimer et modifier
     echo "<div class=\"bubbleButtons\"><button type=\"submit\" name=\"delete\" value=\"".$user["idUser"]."\"/><img src=\"img/delete.png\"></button>
           <button type=\"submit\" name=\"modify\" value=\"".$user["idUser"]."\"/><img src=\"img/update.png\"></button></div>
     </div></td>";
@@ -191,16 +200,19 @@ function ShowListUsers(){
   }
 }
 
-//Supprime un utilisateur en fonction de son indentifiant
+//Supprime un utilisateur de la base de données en fonction de son identifiant
 function DeleteUser($idUser){
   DeleteUserById($idUser);
 }
 
 //Met à jour les informations de l'utilisateur en appelant le CRUD
 function UpdateUser($login, $firstName, $lastName, $eMail, $password, $idUserToUpdate){
-  //Si l'utilisateur a changé son mot de passe, hasher le nouveau mot de passe
+  //Si l'utilisateur a changé son mot de passer
   if(strlen($password) > 0){
+    //Hasher le nouveau mot de passe
     $password = password_hash($password, PASSWORD_DEFAULT);
+
+    //Envoyer les informations modifiées à la base de données
     if(GetUserRole()==1){
       UpdateUserByIdWithPassword(GetIdUser(), $login, $firstName, $lastName, $eMail, $password);
     }
@@ -210,6 +222,7 @@ function UpdateUser($login, $firstName, $lastName, $eMail, $password, $idUserToU
     
     echo $password;
   }
+  //Sinon, juste envoyer les nouvelles informations à la base de données
   else{
     if(GetUserRole()==1){
       UpdateUserById(GetIdUser(), $login, $firstName, $lastName, $eMail);
@@ -229,9 +242,10 @@ function UpdateUser($login, $firstName, $lastName, $eMail, $password, $idUserToU
 
 //Générer le calendrier et semainier ____________________________________________________________________________
 
+//Retourner le numéro du jour dont les détails doivent être affichés
 function GetDay($idDay){
   $day = "";
-  //Récupérer le mois envoyé en paramètre
+  //Récupérer le jour envoyé en paramètre
   if(isset($idDay)){
     if(intval($idDay) <= 6 && intval($idDay) >= 0){
       $day = $idDay;
@@ -250,6 +264,7 @@ function GetDay($idDay){
   return $day;
 }
 
+//Retourner le numéro de l'heure du jour dont plus de détails doivent être affichés
 function GetHour($idHour){
   $hour = "";
   //Récupérer le mois envoyé en paramètre
@@ -274,6 +289,7 @@ function GetHour($idHour){
   return $hour;
 }
 
+//Retourner l'année du mois à affiche dans le calendrier
 function GetYear($idYear){
   $year = "";
   //Récupérer l'année envoyée en paramètre
@@ -293,6 +309,7 @@ function GetYear($idYear){
   return $year;
 }
 
+//Retourner le mois à affiche dans le calendrier
 function GetMonth($idMonth){
   $month = "";
   //Récupérer le mois envoyé en paramètre
@@ -315,6 +332,7 @@ function GetMonth($idMonth){
   return $month;
 }
 
+//Calculer le mois précédent
 function GetLastMonth($theMonth, $theYear){
   if(intval($theYear) >= 1970){
     if(intval($theMonth) <= 1){
@@ -327,6 +345,7 @@ function GetLastMonth($theMonth, $theYear){
   return $theMonth;
 }
 
+//Calculer le mois suivant
 function GetNextMonth($theMonth, $theYear){
   if(intval($theYear) <= 2050){
     if(intval($theMonth) >= 12){
@@ -339,6 +358,7 @@ function GetNextMonth($theMonth, $theYear){
   return $theMonth;
 }
 
+//Calculer l'année du mois précédent
 function GetLastMonthsYear($theMonth, $theYear){
   if(intval($theMonth) == 1 && intval($theYear) > 1970){
     $theYear = intval($theYear) - 1;
@@ -346,6 +366,7 @@ function GetLastMonthsYear($theMonth, $theYear){
   return $theYear;
 }
 
+//Calculer l'année du mois suivant
 function GetNextMonthsYear($theMonth, $theYear){
   if(intval($theMonth) == 12 && intval($theYear) <= 2050){
     $theYear = intval($theYear) + 1;

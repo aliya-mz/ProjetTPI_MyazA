@@ -7,18 +7,19 @@
 */
 
 class MeteoRecord{
-    //champs
+    //Champs
     private $_hour;
     private $_temperature;   
-    private $_meteoGroup; //pluie, neige, etc...
+    private $_meteoGroup;
     private $_meteoDescription;
     private $_icon;
     private $_humidity;
     private $_windSpeed;
     private $_probPrecipitations;
 
+    //Constructeur
     function __construct($infosMeteo){
-        //Traiter les informations pour les classer dans les champs        
+        //Enregistrer toutes informations de l'enreistrement dans les champs       
         $this->_hour = $infosMeteo["heure"];
         $this->_temperature = $infosMeteo["temperature"];;
         $this->_meteoGroup = $infosMeteo["groupeMeteorologique"];
@@ -28,35 +29,46 @@ class MeteoRecord{
         $this->_windSpeed = $infosMeteo["vitesseVent"];
         $this->_probPrecipitations = $infosMeteo["probPrecipitations"];
     }
-    
+
+
+    //Méthodes 
+
+    //Retourner l'heure de l'enregistrement
     public function GetHour(){
         return $this->_hour;
     }
 
+    //Retourner la température
     public function GetTemperature(){
         return $this->_temperature;
     }
 
+    //Retourner le groupe météo (pluie, neige...)
     public function GetMeteoGroup(){
         return $this->_meteoGroup;
     }
 
+    //Retourner la secription détaillée de la météo
     public function GetMeteoDescription(){
         return $this->_meteoDescription;
     }
 
+    //Retourner l'icone météo
     public function GetIcon(){
         return $this->_icon;
     }
 
+    //Retourner l'humidité
     public function GetHumidity(){
         return $this->_humidity;
     }
 
+    //Retourner la vitesse du vent
     public function GetWindSpeed(){
         return $this->_windSpeed;
     }
 
+    //Retourner la probabilité de précipitations
     public function GetProbPrecipitations(){
         return $this->_probPrecipitations;
     }

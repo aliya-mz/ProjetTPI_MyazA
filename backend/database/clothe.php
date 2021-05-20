@@ -6,7 +6,7 @@
   Description : Gestion de la table "clothe" - en cours
 */
 
-//Rechercher les vêtements appartenant à une certaine catégorie (haut, bas, ensemble, exterieur, chaussures), qui correspondent à la météo
+//Rechercher les vêtements appartenant à une certaine catégorie (haut, bas, ensemble, exterieur, chaussures), qui correspondent à la météo, appartenant à un utilisateur donné
 function ReadClothesByMeteoAndCategorie($temperature, $weather, $categoryGroup, $idUser){
   //initaliser le prepare statement
   static $ps = null;
@@ -113,15 +113,10 @@ function CreateClothe($name, $idCategory, $idWeather, $color, $tempMin, $tempMax
     $ps->bindParam(':tempMax', $tempMax, PDO::PARAM_INT);
     $ps->bindParam(':idUser', $idUser, PDO::PARAM_INT);
 
-
     $answer = $ps->execute();
-    if($answer){
-      echo "Le vêtement a bien été créé";
-    }
   }
   catch(PDOException $e){
     echo $e->getMessage();
-    echo "Un problème est survenu lors de la création du vêtement";
   }
   return $answer;
 }
@@ -150,19 +145,15 @@ function UpdateClotheById($idClothe, $name, $idCategory, $idWeather, $color, $te
     $ps->bindParam(':tempMax', $tempMax, PDO::PARAM_INT);
 
     $answer = $ps->execute();
-    if($answer){
-      echo "Le vêtement a été modifiée";
-    }    
   }
   catch(PDOException $e){
     echo $e->getMessage();
-    echo "Un problème est survenu lors de la modification du vêtement";
   } 
 
   return $answer;
 }
 
-//Supprimer le vêtement correspondant à l'identifiant
+//Supprimer le vêtement correspondant à l'identifiant donné
 function DeleteClotheById($idClothe){
   //initaliser le prepare statement
   static $ps = null;
