@@ -31,8 +31,6 @@ Ensuite, je finis de modéliser la base de données, puisque mon énoncé ne con
 
 15h30 : Je commence à écrire mes tests, en me basant sur le product backlog et sur les maquettes.
 
-➔ **Bilan de la journée** :
-
 
 
 ## Mardi 04.05.2021
@@ -74,8 +72,6 @@ $timestamp = date ('Ymd H: i: s', mktime ($hour, $minute, 0, $month, $day, $year
 
 je m'occupe ensuite du système de gestion les autorisations, avec trois rôles : "déconnecté", "utilisateur" et "administrateur".
 
-➔ **Bilan de la journée** : Je commence à être un peu plus éparpillée dans mes tâches que ce qui était prévu sur le planning.
-
 
 
 ## Mercredi 05.05.2021
@@ -108,8 +104,6 @@ je m'occupe ensuite du système de gestion les autorisations, avec trois rôles 
 14h35 : Je fais l'affichage du calendrier, et ça marche pas, parce que ma CSS fait n'importe quoi avec Bootstrap.
 
 16h00 : C'est à peu près réglé, le calendrier s'affiche, mais j'ai fait juste le nécessaire pour la suite. Je reviendrai sur les détails plus tard. Maintenant j'essaie de récupérer les évènements à afficher dans la page du calendrier.
-
-➔ **Bilan de la journée** :
 
 
 
@@ -145,8 +139,6 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 16h00 : Finalement, je n'ai pas le temps de commencer la partie météo. Je fais les dernières corrections pour terminer la gestion du calendrier/semainier, et pouvoir commencer la météo lundi prochain
 
- ➔ **Bilan de la journée** : Ca fonctionne mieux quand on travaille le matin.
-
 
 
 ## Lundi 10.05.2021
@@ -170,12 +162,6 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 14h00 : Je commencer à réaliser des fonctions d'affichage, qui me permettent d'afficher les informations détaillées pour chaque jours.
 
-
-
-➔ **Bilan de la journée** : 
-
-
-
  
 
 ## Mardi 11.05.2021
@@ -198,10 +184,6 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 12h40 : Je commence le système de gestion de la garde-robe en créant des formulaires de création, modification et suppression des vêtements. 
 
 15h00 : Le site doit permettre d'afficher des images des vêtements que les utilisateurs vont créer. Je dois donc créer une fonctionnalité de génération d'images vectorielles (.svg) représentant la catégorie et la couleur du vêtement. L'image ne sera stockée nul part, mais sera générée au moment de l'affichage grâce à la base de données.
-
-➔ **Bilan de la journée** :
-
-
 
  
 
@@ -231,11 +213,7 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 16h00 : Je réalise les tests l'ensemble des fonctionnalités. Les tests passent. La partie fonctionnement du site est terminée.
 
-➔ **Bilan de la journée** :
 
-
-
- 
 
 ## Lundi 17.05.2021
 
@@ -260,10 +238,6 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 16h00 : Je réalise grâce aux tests qu'il y a un problème avec l'ajout d'activités au semainier, causé par le fait qu'il peut y avoir plusieurs. Je règle le problème en supprimant automatiquement l'activité existante à une certaine heure, au moment où une autre est ajoutée à la même heure du même jour.
 
-➔ **Bilan de la journée** :
-
-
-
  
 
 ## Mardi 18.05.2021
@@ -271,7 +245,6 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 *A faire :*
 
 - Faire l'analyse organique de la documentation
-- Faire le manuel d'utilisateur
 - Faire le résumé du travail
 - Créer le template pour les formulaires du site
 
@@ -287,17 +260,13 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 14h00 : Je suis partie.
 
-➔ **Bilan de la journée** :
 
-
-
- 
 
 ## Mercredi 19.05.2021
 
 *A faire :*
 
-- Documentation : finir analyse organique, résumé du projet
+- Documentation : faire le manuel d'utilisateur et le résumé du projet, entre autres
 - Tests avancés (recherche de dysfonctionnements inattendus, en testant sur différents navigateurs, et en utilisant le site de manière non idéale)
 - Eventuelles corrections
 
@@ -309,11 +278,7 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 **Après-midi**
 
-
-
-➔ **Bilan de la journée** :
-
-
+12h40 : Je continue la documentation, et pose des questions concernant certaines parties à mon enseignant.
 
 
 
@@ -321,9 +286,44 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 *A faire :*
 
-- Documentation : [liste des parties à faire]
-- Relecture de tous les documents
-- Assemblage et conversion en PDF
+- **Documentation :** 
+- Modifier backlog et tests
+- Pseudo codes
+- Description architecture projet
+- Description des tables
+- Description des fonctions
+- Corriger MLD
+
+- **Code : **
+- Ajouter images vêtements
+- Changer le visuel des formulaires
+- Déplacer les méthodes de gestion de la météo dans les classes météo
+- Nettoyer et finir de commenter le code
+
+**Matin**
+
+7h30 : Je crée les scripts pour les images vectorielles, en modifiant des images déjà existantes. Je les ajoute à la base de données. 
+
+8h30 : J'implémente le template de formulaire à tous les formulaires du site.
+
+9h40 : Faire la partie code
+
+**Après-midi**
+
+12h40 : Analyse fonctionnelle - correction backlog + tests
+
+14h30 : Analyse organique
+
+
+
+## Samedi 22.05.2021
+
+*A faire :*
+
+- **Documentation :**
+- Ajouter planifications prévues et effectives, et finir les tâches non finies du jeudi
+- Relire de tous les documents
+- Assembler et convertir en PDF
 
 **Matin**
 
@@ -333,7 +333,7 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 
 
-➔ **Bilan de la journée** :
+
 
 
 

@@ -11,7 +11,7 @@ session_start();
 include("backend/autoload.php");
 
 //Vérifier qu'un utilisateur est connecté
-VerifyAccessibility(1);
+VerifyAccessibility([1]);
 
 $idClothe = FILTER_INPUT(INPUT_GET, "idClothe", FILTER_VALIDATE_INT);
 

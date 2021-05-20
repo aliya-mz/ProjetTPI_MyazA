@@ -773,26 +773,33 @@ function GenerateDress($temperatures, $weathers){
       array_push($dress, $both);
     }
   }
+  ///S'il y a uniquement des hauts qui correspondent, et qu'il y a aussi des bas, sélectionner un haut et un bas
   else if(count($clothesForMeteo["Haut"])!=0 && count($clothesForMeteo["Bas"])!=0){
-    //S'il y a uniquement des hauts qui correspondent, et qu'il y a aussi des bas, sélectionner un haut et un bas
     $top = $clothesForMeteo["Haut"][rand(0, count($clothesForMeteo["Haut"])-1)]["idClothe"];
     $bottom = $clothesForMeteo["Bas"][rand(0, count($clothesForMeteo["Bas"])-1)]["idClothe"];
     array_push($dress, $top);
     array_push($dress, $bottom);
   }
-  else if(count($clothesForMeteo["Exterieur"])!=0){
-    //S'il y a uniquement des ensembles qui correspondent
-    $both = $clothesForMeteo["Ensemble"][rand(0, count($clothesForMeteo["Ensemble"])-1)]["idClothe"];
+  //S'il y a uniquement des ensembles qui correspondent
+  else if(count($clothesForMeteo["Ensemble"])!=0){    
+    //Si seul un vêtement existe dans cette catégorie, le prendre
+    if(count($clothesForMeteo["Ensemble"]) == 1){
+      $both = $clothesForMeteo["Ensemble"][0]["idClothe"];
+    }
+    //Sinon, choisir avec un random
+    else{
+      $both = $clothesForMeteo["Ensemble"][rand(0, count($clothesForMeteo["Ensemble"])-1)]["idClothe"];
+    }
     array_push($dress, $both);
   }
+  //Si aucun ne correspond, erreur
   else{
-    //Si aucun ne correspond, erreur
     array_push($dress, MAIN_ERROR);
   }
 
-  //Vérifier s'il y a des chaussures, si oui en sélectionner un au hasard
+  //Vérifier s'il y a des chaussures, si oui en sélectionner une paire au hasard
   if(count($clothesForMeteo["Chaussures"])!=0){
-    $shoes = $clothesForMeteo["Chaussures"][rand(0, count($clothesForMeteo["Chaussures"]))]["idClothe"];
+    $shoes = $clothesForMeteo["Chaussures"][rand(0, count($clothesForMeteo["Chaussures"])-1)]["idClothe"];
     array_push($dress, $shoes);
   }
   else{
@@ -801,14 +808,23 @@ function GenerateDress($temperatures, $weathers){
 
   //Vérifier s'il y a des vestes/manteaux, si oui en sélectionner un au hasard
   if(count($clothesForMeteo["Exterieur"])!=0){
-    $outwear = $clothesForMeteo["Exterieur"][rand(0, count($clothesForMeteo["Exterieur"]))]["idClothe"];
+    $outwear = $clothesForMeteo["Exterieur"][rand(0, count($clothesForMeteo["Exterieur"])-1)]["idClothe"];
     array_push($dress, $outwear);
   }
+  //Si n'y en a pas
   else{
-    //S'il fait froid le matin, erreur
-    if($temperatures[2]<=8 && $temperatures[3]<=10){
-      array_push($dress, COAT_ERROR);
+    //Si le matin est passé et qu'il fait froid maintenant, erreur
+    if(count($temperatures)<5){
+      if($temperatures[0]<=10){
+        array_push($dress, COAT_ERROR);
+      }
     }
+    //Sinon, s'il fait froid le matin, erreur
+    else{
+      if($temperatures[2]<=8 && $temperatures[3]<=10){
+        array_push($dress, COAT_ERROR);
+      }
+    }    
   }
 
   //Retourner l'ensemble des vêtements de la tenue générée sous forme de tableau
