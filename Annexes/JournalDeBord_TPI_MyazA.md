@@ -297,7 +297,7 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 - **Code : **
 - Ajouter images vêtements
 - Changer le visuel des formulaires
-- Déplacer les méthodes de gestion de la météo dans les classes météo
+- (Déplacer les méthodes de gestion de la météo dans les classes météo)
 - Nettoyer et finir de commenter le code
 
 **Matin**

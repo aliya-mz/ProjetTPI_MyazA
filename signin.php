@@ -31,21 +31,15 @@ if($enregistrer){
 <!DOCTYPE html>
 <html>
   <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+  </head><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Projet Wearther">
     <meta name="author" content="Myaz Aliya">
-
     <title>Inscription</title>
-
     <!-- CSS Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-
     <!-- CSS propre au projet-->
-    <link href="css/style2.css" rel="stylesheet"> 
-    <link href="css/style.css" rel="stylesheet"> 
-
-    <script src="backend/functions.js"></script>
-  </head>
+    <link href="css/style.css" rel="stylesheet">
   <body>
     <!--Navigation principale-->
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 navCalendar">

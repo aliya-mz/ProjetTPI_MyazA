@@ -683,7 +683,7 @@ Mauvaise utilisation / Fonctionnel /!\
 | *Résultats obtenus* |                                                              |
 | *Statut*            | ✓                                                            |
 
-//A faire plus tard : pareil pour les deux, mais avec des données de test.
+/!\ À faire plus tard : pareil pour les deux, mais avec des données de test.
 
 
 

@@ -41,8 +41,8 @@ function GetIdUserToUpdate($idUser){
   }
   //Si le paramètre n'existe pas, quitter
   else{
-    //header('Location: manageUsers.php');
-    //exit;
+    header('Location: manageUsers.php');
+    exit;
   }
   return $user;
 }
