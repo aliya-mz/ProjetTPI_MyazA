@@ -25,10 +25,15 @@ $password = FILTER_INPUT(INPUT_POST, "password", FILTER_SANITIZE_STRING);
 $validate = FILTER_INPUT(INPUT_POST, "validate", FILTER_SANITIZE_STRING);
 $delete = FILTER_INPUT(INPUT_POST, "delete", FILTER_SANITIZE_STRING);
 
-//Envoyer les modification à la base de données
+
 if($validate){
+  //Envoyer les modification à la base de données
   UpdateUser($login, $firstName, $lastName, $eMail, $password, $idUser);
+  //Retourner sur la page principale
+  header('Location: index.php');
+  exit;
 }
+
 else if($delete){
   //Supprimer l'utilisateur actuel
   DeleteUser(GetIdUser());

@@ -76,7 +76,7 @@ ExecuteMeteoProgram();
                 <ul class="nav flex-column">
                   <!--Retour page principale-->
                   <li class="nav-item">
-                    <a class="nav-link " aria-current="page" href="index.php"><img class="mIconButton" src="img/home.png"/> Home</a>
+                    <a class="nav-link " aria-current="page" href="index.php"><img class="mIconButton" src="img/home.png"/></a>
                   </li>
                   <li class="nav-item">
                     <!--Ajouter évènement-->

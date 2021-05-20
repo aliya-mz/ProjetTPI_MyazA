@@ -747,6 +747,7 @@ function DeleteClothe($idClothe){
 
 //Création de tenues______________________________________________________________________________________________
 
+//Messages d'erreur pour les tenues incomplètes
 DEFINE("MAIN_ERROR", "Vous feriez bien d'obtenir des vêtements");
 DEFINE("COAT_ERROR", "Vous feriez bien d'obtenir un manteau");
 DEFINE("SHOES_ERROR", "Vous feriez bien d'obtenir des chaussures");
@@ -757,8 +758,11 @@ function GenerateDress($temperatures, $weathers){
   $clothesForMeteo = GetClothesForMeteo($temperatures, $weathers);
   
   $dress = [];
-  //Sélectionner aléoirement un haut+bas ou un ensemble (Chance de tomber sur un haut par rapport à un ensemble égale à la proportionnalité de hauts dans l'ensemble des hauts et des ensembles)
-  if(count($clothesForMeteo["Exterieur"])!=0 && count($clothesForMeteo["Bas"])!=0 && $clothesForMeteo["Bas"]){
+
+  //var_dump($clothesForMeteo["Ensemble"]);
+  //var_dump($clothesForMeteo["Bas"]);
+  //Sélectionner aléatoirement un haut+bas ou un ensemble (Chance de tomber sur un haut par rapport à un ensemble égale à la proportionnalité de hauts dans l'ensemble des hauts et des ensembles)
+  if(count($clothesForMeteo["Ensemble"])!=0 && count($clothesForMeteo["Haut"])!=0 && count($clothesForMeteo["Bas"])!=0){
     //S'il y a des hauts et des ensemble qui correspondent à la météo
     if(rand(0, count($clothesForMeteo["Haut"])+count($clothesForMeteo["Ensemble"]))<count($clothesForMeteo["Ensemble"])){
       //Sélectionner un haut et un bas
@@ -785,12 +789,13 @@ function GenerateDress($temperatures, $weathers){
     //Si seul un vêtement existe dans cette catégorie, le prendre
     if(count($clothesForMeteo["Ensemble"]) == 1){
       $both = $clothesForMeteo["Ensemble"][0]["idClothe"];
+      array_push($dress, $both);
     }
-    //Sinon, choisir avec un random
+    //Sinon, choisir aléatoirement
     else{
       $both = $clothesForMeteo["Ensemble"][rand(0, count($clothesForMeteo["Ensemble"])-1)]["idClothe"];
+      array_push($dress, $both);
     }
-    array_push($dress, $both);
   }
   //Si aucun ne correspond, erreur
   else{
