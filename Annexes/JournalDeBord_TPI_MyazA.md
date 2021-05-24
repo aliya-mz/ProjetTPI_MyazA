@@ -287,11 +287,8 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 *A faire :*
 
 - **Documentation :** 
-- Modifier backlog et tests
-- Pseudo codes
-- Description architecture projet
+- Corriger backlog et tests
 - Description des tables
-- Description des fonctions
 - Corriger MLD
 
 - **Code : **
@@ -306,13 +303,13 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 
 8h30 : J'implémente le template de formulaire à tous les formulaires du site.
 
-9h40 : Faire la partie code
+10h00 : Je relis l'intégralité de mon code source, pour le corriger, nettoyer et commenter.
 
 **Après-midi**
 
-12h40 : Analyse fonctionnelle - correction backlog + tests
+13h40 : Analyse fonctionnelle - correction backlog + tests
 
-14h30 : Analyse organique
+16h30 : Je corrige le modèle logique de données que j'avais réalisé au début, et décris mes tables dans l'analyse organique.
 
 
 
@@ -321,17 +318,29 @@ Je poursuis mes péripéties avec les dates, pour la gestion du calendrier.
 *A faire :*
 
 - **Documentation :**
-- Ajouter planifications prévues et effectives, et finir les tâches non finies du jeudi
-- Relire de tous les documents
+- Ajouter planifications prévues et effectives
+- Description architecture projet
+- Description des fonctions
+- Relire tous les documents
 - Assembler et convertir en PDF
 
 **Matin**
 
+7h30 : Je réalise une dernière fois tous mes tests pour vérifier que rien n'a été cassé quand j'ai nettoyé le code.
 
+8h30 : Je rassemble tous les fichiers de mon code source pour pouvoir en faire un PDF.
+
+9h15 : Je réalise la description de l'architecture, et corrige l'écriture de mes tests.
+
+10h00 : Je commence la description des fonctions de mon projet.
 
 **Après-midi**
 
+12h40 : Je continuer la description des fonction.
 
+14h00 : Je relis l'ensemble de mes documents pour corriger les erreurs et compléter ce qui manque.
+
+15h30 : J'exporte mon planning effectif en PDF et l'ajoute à ma documentation, puis je crée dossiers de rendu.
 
 
 

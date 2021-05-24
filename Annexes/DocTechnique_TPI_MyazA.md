@@ -1,6 +1,6 @@
-# Documentation technique
+# Wearther
 
-Projet ***WearTher***, par *Myaz Aliya*, TPI 2021
+Documentation technique, Projet de TPI, *Myaz Aliya*
 
 <img src="DocImages\logo.png"/>
 
@@ -26,7 +26,7 @@ Projet ***WearTher***, par *Myaz Aliya*, TPI 2021
 
 Le projet ***WearTher*** est une application web qui propose des suggestions de tenues en fonction de la météo. Son but est de faire gagner du temps aux utilisateurs, voir de les sauver les jours où leur réveil ne sonne pas. L'application permet, en un clic, d'avoir un aperçu sur la météo du jour et de la semaine à venir, une suggestion de tenue journalière adaptée à la météo, et une vue sur leur agenda du jour, le tout sur la même page. En effet, pour être la plus pratique possible, l'application dispose également d'un calendrier et d'un semainier.
 
-J'ai réalisé ce projet en PHP avec une base de donnée MySQL. J'ai également fait appel à une API externe, *OpenWeatherMap*, pour les informations météo.
+J'ai réalisé ce projet en PHP avec une base de donnée MySQL. J'ai également fait appel à une API externe pour les informations météo.
 
 
 
@@ -41,13 +41,11 @@ L'application à réaliser est un système de recommandation de tenues en foncti
 - Elle comporte une gestion des utilisateurs, qui peuvent appartenir à deux types de rôles : les utilisateurs et les administrateurs. Ils doivent pouvoir se connecter. Les utilisateurs peuvent créer, modifier et supprimer leur compte. Les administrateurs peuvent créer, modifier et supprimer les comptes des utilisateurs.
 
 - L'utilisateur peut créer, modifier et supprimer des vêtements. Il peut choisir la couleur de son vêtement et lui associer une catégorie et des conditions météorologiques. Les vêtements proposés sont conformes aux conditions météorologiques du jour sélectionné.
-  "Des catégories et vêtements de base sont pré-disponibles. L’utilisateur peut en créer de nouveaux." -> changement
+  "Des catégories et vêtements de base sont pré-disponibles. L’utilisateur peut en créer de nouveaux."
 
 - Les informations météorologiques sont toujours actualisées depuis la source externe avant d’être affichées. Chaque jour peut être sélectionné individuellement pour voir les détails (température, ensoleillement et suggestions vestimentaires associées).
 - Un calendrier avec un prévisionnel météorologique des 3 jours à venir doit être affiché (temp. et ensoleillement).
 - L’application est fonctionnelle avec un moins un service de données météo externe.
-
-  
 
 
 
@@ -81,7 +79,7 @@ A la fin de la durée du TPI, je dois rendre aux experts et à mon enseignant :
 
 5. Une journal de travail
 
-   
+
 
 ### Matériel et logiciels nécessaires
 
@@ -98,6 +96,15 @@ A la fin de la durée du TPI, je dois rendre aux experts et à mon enseignant :
 
 
 
+### Changements du cahier des charge
+
+Certains éléments du cahiers des charges ont été modifiés suite à des discussions avec mon enseignant. Les voici :
+
+- De nouvelles catégories de vêtements ne peuvent être ajoutées par l'utilisateur, puisque chacune d'entre elles doit disposer d'un script xml spécifique pour que le vêtement puisse ensuite être affiché.
+- La météo et donc les recommandations vestimentaires ne sont disponibles que pour les 5 jours à venir et non la semaine, puisque telles sont les contraintes de l'API
+
+
+
 
 
 ## Méthodologie
@@ -110,7 +117,7 @@ J'ai commencé par lire attentivement mon énoncé afin d'en ressortir tout ce q
 
 #### 2. Planifier
 
-Ensuite, je me suis directement attaquée au planning, sous forme de diagramme de GANTT, dans le but d'être organisée dès le début et d'optimiser mon temps. Cela m'a aussi permis de clarifié toutes les tâches et sous-tâches que je devais réaliser pour mener mon projet jusqu'au bout. 
+Ensuite, je me suis directement attaquée au planning, sous forme de diagramme de GANTT, dans le but d'être organisée dès le début et d'optimiser mon temps. Cela m'a aussi permis de clarifié toutes les tâches et sous-tâches que je devais réaliser pour mener mon projet jusqu'au bout.
 
 Je me suis appuyée dessus pour faire, juste après, le product backlog avec des user stories, en définir ainsi clairement, du côté de l'utilisateur de mon site, les fonctionnalités à implémenter.
 
@@ -152,15 +159,51 @@ Le projet est donc réalisé en développement agile, grâce à un diagramme de 
 
 
 
-### Planification prévue
-
-[Insérer graphique]
 
 
+### Plannings
 
-### Planification effective
+Voici les plannings prévisionnels et effectifs commentés.
 
-[Insérer graphique]
+Ils également donnés en PDF, pour une meilleure visibilité.
+
+
+
+#### Planification prévue
+
+![](docImages/planningPervisionnelPart1.PNG)
+
+*Deux premières semaines*
+
+![](docImages/planningPervisionnelPar2.PNG)
+
+*Dernière semaine*
+
+
+
+#### Planification effective
+
+![](docImages/planningEffectifPart1.PNG)
+
+*Deux premières semaines*
+
+![](docImages/planningEffectifPart2.png)
+
+*Dernière semaine*
+
+
+
+#### Comparaison
+
+Dans mon planning effectif, j'ai pris un peu d'avance sur le début, avant de revenir sur les dates prévues. Je constate que je n'ai pas suffisamment différencié les longueurs des tâches dans mon planning prévisionnel, même si globalement c'était plutôt juste.
+
+On peut aussi remarquer, sur mon planning effectif, que j'ai tendance à réaliser plusieurs tâches en même temps, au lieu d'attendre d'avoir fini la première. J'ai fait l'effort de suivre plus ou moins l'ordre des tâches, mais dès que j'en commence une, j'ai envie de commencer toutes celles qui lui sont liées. C'est donc difficile à prévoir sur un planning, mais j'arrive mieux à travailler de cette manière.
+
+J'avais également oublié, dans ma planification, d'inscrire les phases de test intermédiaires pour la fin de chaque groupe de fonctionnalités.
+
+Finalement, les bugs découverts vers la fin, qui étaient trop spécifiques pour entrer dans mes scénarios de tests, m'ont aussi un peu déconcentrée du planning sur la fin, puisque je devais chaque jour passer du temps à résoudre ma dernière découverte.
+
+
 
 
 
@@ -168,13 +211,11 @@ Le projet est donc réalisé en développement agile, grâce à un diagramme de 
 
 ## Analyse fonctionnelle
 
-### Product backlog - /!\
-
-#### Utilisateurs
+### Product backlog
 
 | Nom                       | S1 : Inscription                                             |
 | ------------------------- | ------------------------------------------------------------ |
-| *Description (user story) | En tant qu'utilisateur non connecté, je peux créer un compte, en indiquant mon nom, prénom, pseudo, adresse maile et mot de passe. |
+| *Description (user story) | En tant qu'utilisateur non connecté, je peux créer un compte, en indiquant mon nom, prénom, pseudo, adresse mail et mot de passe. |
 | *Critère d'acceptation*   | Le test 1.1 passe                                            |
 | *Priorité*                | ! M                                                          |
 
@@ -190,99 +231,143 @@ Le projet est donc réalisé en développement agile, grâce à un diagramme de 
 | *Critère d'acceptation*    | Le test 1.6 passe                                            |
 | *Priorité*                 | M                                                            |
 
-| Nom                        | S4 : Supprimer un utilisateur                                |
-| -------------------------- | ------------------------------------------------------------ |
-| *Description (user story)* | En tant qu'administrateur connecté, je peux supprimer un utilisateur sélectionné dans une liste. |
-| *Critère d'acceptation*    | Les tests 1.8 à 1.9 passent                                  |
-| *Priorité*                 | S                                                            |
-
-| Nom                        | S5 : Modifier le compte                                      |
+| Nom                        | S4 : Modifier son compte                                     |
 | -------------------------- | ------------------------------------------------------------ |
 | *Description (user story)* | En tant qu'utilisateur connecté, je peux modifier chacune des informations liées à mon compte. |
 | *Critère d'acceptation*    | Le test 1.7 passe                                            |
+| *Priorité*                 | S                                                            |
+
+| Nom                        | S5 : Supprimer son compte                                    |
+| -------------------------- | ------------------------------------------------------------ |
+| *Description (user story)* | En tant qu'utilisateur connecté, je peux supprimer mon compte |
+| *Critère d'acceptation*    | Le test 1.8 passe                                            |
+| *Priorité*                 | S                                                            |
+
+| Nom                        | S6 : Créer un utilisateur                                    |
+| -------------------------- | ------------------------------------------------------------ |
+| *Description (user story)* | En tant qu'administrateur connecté, je peux créer un nouvel utilisateur. |
+| *Critère d'acceptation*    | Les test 1.12 passe                                          |
+| *Priorité*                 | S                                                            |
+
+| Nom                        | S7 : Modifier le compte d'un utilisateur                     |
+| -------------------------- | ------------------------------------------------------------ |
+| *Description (user story)* | En tant qu'administrateur connecté, connecté, je peux modifier les informations d'un compte utilisateur sélectionnée dans une liste |
+| *Critère d'acceptation*    | Les tests 1.9 et 1.10 passent                                |
+| *Priorité*                 | S                                                            |
+
+| Nom                        | S8 : Supprimer un utilisateur                                |
+| -------------------------- | ------------------------------------------------------------ |
+| *Description (user story)* | En tant qu'administrateur connecté, je peux supprimer un utilisateur sélectionné dans une liste. |
+| *Critère d'acceptation*    | Les tests 1.9 et 1.11 passent                                |
 | *Priorité*                 | S                                                            |
 
 
 
 #### Météo
 
-| Nom                        | S6 : Afficher la météo détaillée                             |
+| Nom                        | S9 : Afficher la météo détaillée                             |
 | -------------------------- | ------------------------------------------------------------ |
-| *Description (user story)* | En tant qu'utilisateur connecté, je peux visualiser, pour un jour sélectionné parmi les 5 prochains, les détails météo enregistrés toutes les trois heures |
-| *Critère d'acceptation*    | Le test 2.1 passe                                            |
+| *Description (user story)* | En tant qu'utilisateur connecté, je peux visualiser, pour un jour sélectionné parmi les 5 prochains, la température au cours de la journée et les détails météo pour toutes les trois heures. |
+| *Critère d'acceptation*    | Les tests 2.1 passe                                          |
 | *Priorité*                 | M                                                            |
 
-| Nom                        | S7 : Afficher la météo résumée                               |
+| Nom                        | S10 : Afficher la météo résumée                              |
 | -------------------------- | ------------------------------------------------------------ |
-| *Description (user story)* | En tant qu'utilisateur connecté, je peux visualiser, dans mon calendrier, pour les trois prochains jours, la température et l'état d'ensoleillement. |
-| *Critère d'acceptation*    | Le test 2.2 passe                                            |
+| *Description (user story)* | En tant qu'utilisateur connecté, je peux visualiser, dans mon calendrier, pour les quatre prochains jours, la température et l'état d'ensoleillement. |
+| *Critère d'acceptation*    | Les tests 2.3 et 3.1 passent                                 |
 | *Priorité*                 | S                                                            |
 
 
 
-#### Calendrier 
+#### Calendrier
 
-| Nom                        | S8 : Afficher le calendrier                                  |
+| Nom                        | S11 : Afficher le calendrier                                 |
 | -------------------------- | ------------------------------------------------------------ |
 | *Description (user story)* | En tant qu'utilisateur connecté, je peux visualiser mon calendrier, mois par mois, avec ses évènements, ainsi que la météo sur les trois jours à venir. |
 | *Critère d'acceptation*    | Les tests 2.2, 3.1 et 3.3 passent                            |
 | *Priorité*                 | M                                                            |
 
-| Nom                        | S9 : Afficher le semainier                                   |
+| Nom                        | S12 : Afficher le semainier                                  |
 | -------------------------- | ------------------------------------------------------------ |
 | *Description (user story)* | En tant qu'utilisateur connecté, je peux visualiser mon semainier, contenant tous les évènements hebdomadaires que j'ai ajouté. |
 | *Critère d'acceptation*    | Les tests 3.2 à 3.3 passent                                  |
 | *Priorité*                 | M                                                            |
 
-| Nom                        | S10 : Ajouter un évènement                                   |
+| Nom                        | S13 : Ajouter un évènement                                   |
 | -------------------------- | ------------------------------------------------------------ |
 | *Description (user story)* | En tant qu'utilisateur connecté, je peux remplir un formulaire contenant une description de l'évènement ainsi que sa date et son heure, ainsi qu'une case à cocher définissant si c'est un évènement hebdomadaire ou unique. |
 | *Critère d'acceptation*    | Les tests 3.3 à 3.4 passent                                  |
 | *Priorité*                 | M                                                            |
 
-| Nom                        | S11 : Afficher un évènement                                  |
+| Nom                        | S14 : Afficher les évènements d'une journée                  |
 | -------------------------- | ------------------------------------------------------------ |
 | *Description (user story)* | En tant qu'utilisateur connecté, je peux, en sélectionnant un jour parmi les 5 jours à venir, afficher les évènements assignés à cette date et ce jour de la semaine. |
 | *Critère d'acceptation*    | Les tests 3.5 à 3.6 passent                                  |
+| *Priorité*                 | S                                                            |
+
+| Nom                        | S15 : Supprimer un évènement                                 |
+| -------------------------- | ------------------------------------------------------------ |
+| *Description (user story)* | En tant qu'utilisateur connecté, je supprimer un évènement en cliquant sur la croix. |
+| *Critère d'acceptation*    | Le test 3.7 passe                                            |
 | *Priorité*                 | S                                                            |
 
 
 
 #### Vêtements
 
-| Nom                        | S12 : Ajouter un vêtement                                    |
+| Nom                        | S16 : Ajouter un vêtement                                    |
 | -------------------------- | ------------------------------------------------------------ |
 | *Description (user story)* | En tant qu'utilisateur connecté, je peux ajouter un vêtement à ma garde-robe en replissant un formulaire, qui indique son type et sa couleur, ainsi que la catégorie météo et intervalle de température dans lequel il peut être porté. |
 | *Critère d'acceptation*    | Le test 4.1 passe                                            |
 | *Priorité*                 | M                                                            |
 
-| Nom                        | S13 : Afficher les vêtements                                 |
+| Nom                        | S17 : Afficher un vêtement                                   |
 | -------------------------- | ------------------------------------------------------------ |
 | *Description (user story)* | En tant qu'utilisateurs connecté, je peux visualiser l'image d'un vêtement que j'ai créé, qui est un fichier SVG généré grâce au type et à la couleur du vêtement. |
 | *Critère d'acceptation*    | Le test 4.2 passe                                            |
 | *Priorité*                 | S                                                            |
 
-| Nom                        | S14 : Afficher une recommandation de tenue                   |
+| Nom                        | S18 : Afficher ma garde-robe                                 |
+| -------------------------- | ------------------------------------------------------------ |
+| *Description (user story)* | En tant qu'utilisateurs connecté, je peux visualiser l'image d'un vêtement que j'ai créé, qui est un fichier SVG généré grâce au type et à la couleur du vêtement. |
+| *Critère d'acceptation*    | Le test 4.1 et 4.2 passent                                   |
+| *Priorité*                 | S                                                            |
+
+| Nom                        | S19 : Afficher une recommandation de tenue                   |
 | -------------------------- | ------------------------------------------------------------ |
 | *Description (user story)* | En tant qu'utilisateur connecté, je peux visualiser, pour chaque jour sélectionné parmi les 5 à venir, une tenue adaptée à la météo prévue. |
 | *Critère d'acceptation*    | Les tests 4.2 à 4.3 passent                                  |
 | *Priorité*                 | M                                                            |
 
+| Nom                        | S20 : Modifier un vêtement                                   |
+| -------------------------- | ------------------------------------------------------------ |
+| *Description (user story)* | En tant qu'utilisateur connecté, je peux ajouter un vêtement à ma garde-robe en replissant un formulaire, qui indique son type et sa couleur, ainsi que la catégorie météo et intervalle de température dans lequel il peut être porté. |
+| *Critère d'acceptation*    | Le test 4.4 passe                                            |
+| *Priorité*                 | S                                                            |
 
+| Nom                        | S21 : Supprimer un vêtement                                  |
+| -------------------------- | ------------------------------------------------------------ |
+| *Description (user story)* | En tant qu'utilisateur connecté, je peux ajouter un vêtement à ma garde-robe en replissant un formulaire, qui indique son type et sa couleur, ainsi que la catégorie météo et intervalle de température dans lequel il peut être porté. |
+| *Critère d'acceptation*    | Le test 4.5 passe                                            |
+| *Priorité*                 | S                                                            |
 
 
 
 ## Description de l'interface
 
-Voici une description des pages principales de l'application. Seuls les formulaires, qui ne présentent pas de particularités, ne sont par présentés. 
+Voici une description des pages principales de l'application. Seuls les formulaires, qui ne présentent pas de particularités, ne sont par présentés.
+
+
 
 ***Page d'accueil*** : Affiche, pour une journée parmi les 5 à venir, la météo tout au long de la journée, une recommandations de tenue adaptée à la tenue, ainsi que les activités et évènements. Navigation entre ces jours.
 
-![](C:\Users\aliya.mz\Desktop\TPI\ProjetTPI_MyazA\annexes\DocImages\captureAccueil.PNG)
+Fonctionnalités : S9 et S19
 
-[/!\ Ajouter fonctionnalité associées]
+![](docImages\captureAccueil.PNG)
 
 ***Page de gestion de la garde-robe*** : Affiche les vêtements ajoutés par l'utilisateur, avec des contrôles permettant de les modifier et de les supprimer.
+
+Fonctionnalités : S16 à S21
 
 ![](DocImages\captureGardeRobe.PNG)
 
@@ -290,11 +375,15 @@ Voici une description des pages principales de l'application. Seuls les formulai
 
 ***Calendrier*** : Calendrier classique affichant les évènements ajoutés par l'utilisateur, ainsi que la météo du matin et du soir pour les trois jours à venir. Navigation de mois en mois.
 
+Fonctionnalités : S10, S11, S13 et S15
+
 ![](DocImages\captureCalendrier.PNG)
 
 
 
 ***Semainier*** : Semainier affichant, pour chaque jour de la semaine, de 6h à 22h, les activités hebdomadaires enregistrées par les utilisateurs.
+
+Fonctionnalités : S12, S13 et S15
 
 ![](DocImages\captureSemainier.PNG)
 
@@ -330,19 +419,31 @@ J'ai créé un repo git et y est sauvegardé mon projet plusieurs fois par jour,
 
 
 
-### Description de l’architecture du projet - à faire /!\
+### Description de l’architecture du projet
 
-[Diagramme de classe simplifié + capture d'écran de l'architecture]
+#### Schéma client-serveur
 
-[shéma client-serveur]
+![](docImages/architectureMaterielle.png)
 
-[organisation des répertoires]
+#### Organisation des répertoires
+
+*Racine* : Les pages du site sont toutes à la racine du projet. Les répertoires ***backend***, ***css*** et ***img*** sont également à la racine.
+
+*css* : Le répertoire ***css*** contient l'unique fichier css du projet.
+
+*img* : Le répertoire ***img*** contient les icones du site, ainsi qu'un autre répertoire, ***imgClothes***, qui est vide, et dans lequel sont créées dynamiquement les images des vêtement lors de l'affichage.
+
+*backend* : Le répertoire ***backend*** contient les fonctions et classes PHP, ainsi que les fonctions javascript du projet. Il contient aussi le répertoire ***database***
+
+*database* : Le répertoire ***database*** contient, dans des fichiers séparés, les constantes de connexion à la base de données, la fonction de connexion à la base de données, ainsi que les CRUD des toutes les tables.
+
+![](docImages/architectureTechnique.png)
 
 
 
 ### Modèle logique de données
 
-La base de données est composée des six tables suivantes. 
+La base de données est composée des six tables suivantes.
 
 <img src="docImages/mld.png"/>
 
@@ -398,9 +499,11 @@ Sauvegarde les groupes météo prédéfinis (Neige, Pluie, Normal). Le fonctionn
 
 
 
-### API externe - météo
+### Services externes
 
-Pour réaliser mon système de météo, j'ai utilisé l'API **OpenWeatherMap**, et plus spécifiquement la version gratuite de l'offre "*5 day weather forecast*", qui permet d'obtenir, pour les 5 jours (5x24h) à partir de maintenant, des informations météo détaillées toutes les trois heures. 
+#### OpenWeatherMap
+
+Pour réaliser mon système de météo, j'ai utilisé l'API **OpenWeatherMap**, et plus spécifiquement la version gratuite de l'offre "*5 day weather forecast*", qui permet d'obtenir, pour les 5 jours (5x24h) à partir de maintenant, des informations météo détaillées toutes les trois heures.
 
 Voici le lien de la documentation de cette version : https://openweathermap.org/forecast5
 
@@ -408,9 +511,17 @@ J'ai ensuite dû réaliser des fonctions qui permettent de traiter ces informati
 
 
 
+#### Google Charts
+
+Google Charts est un outil qui visualiser des données sous forme de graphique sur un site web. Pour l'utiliser, j'ai intégré un javascript à mon projet. Ce script charge des bibliothèques de graphiques Google et crée un objet de graphique. Les graphiques sont rendus à l'aide de la technologie HTML5 / SVG.
+
+Lien de la documentation google charts : https://developers.google.com/chart/interactive/docs
+
+
+
 ### Classes PHP
 
-J'ai créé des classes PHP, qui me permettent toutes d'organiser et d'enregistrer les informations météo renvoyées par l'API. 
+J'ai créé des classes PHP, qui me permettent toutes d'organiser et d'enregistrer les informations météo renvoyées par l'API.
 
 
 
@@ -458,41 +569,73 @@ Enregistre toutes les informations météo liées à un enregistrement
 
 ### Fonctions principales du projet
 
-Tout ce qui concerne la gestion des utilisateurs, de la météo, du calendrier, du semainier et de la garde-robe est programmé sous forme de fonctions. Celles-ci sont réunies dans un même fichier (functions.php). Voici la liste de ces fonctions, ainsi que la description de leur rôle. 
+Tout ce qui concerne la gestion des utilisateurs, de la météo, du calendrier, du semainier et de la garde-robe est programmé sous forme de fonctions. Celles-ci sont réunies dans un même fichier (functions.php). Voici la liste de ces fonctions, ainsi que la description de leur rôle.
 
-Seules les fonctions principales, qui résument le fonctionnement du programme, sont présentées. Les autres sont généralement des petites fonctions sans autre intérêt que la séparation des tâches, et sont déjà commentées dans le code source.
+Seules les fonctions principales, qui résument le fonctionnement du programme, sont présentées. Les autres sont généralement des petites fonctions sans autre intérêt que la séparation des tâches, et sont déjà commentées dans le code source. Les fonctions d'affichage notamment ne sont pas présentées si elles ne comportent rien de particulier.
 
 
 
 #### Gestion des utilisateurs
 
-Fonction **VerifyAccessibility**($acceptedRole) : Vérifie si le rôle de l'utilisateur connecté est identique à l'un des rôles récupérés en paramètre, et si ce n'est pas la cas, redirige vers la page principale.
+Fonction **VerifyAccessibility**($acceptedRole) :
 
-Fonction **ConnectUser**($login, $password) : Vérifie que le nom d'utilisateur recherché existe dans la base de données. Si c'est le cas, récupère son mot de passe hashé, puis vérifie qu'il soit identique au mot de passe entré grâce à la fonction php "*password_verify*". S'ils sont identiques, l'identifiant de l'utilisateur est enregistré dans la session, et est alors connecté.
+Son rôle est de vérifier que l'utilisateur a le droit d'accéder à la page courante. Elle vérifie si le rôle de l'utilisateur connecté est identique à l'un des rôles récupérés en paramètre, et si ce n'est pas la cas, redirige vers la page principale.
 
-Fonction **UpdateUser**($login, $firstName, $lastName, $eMail, $password) : Modifie les informations de l'utilisateur dans la base de données. Si le mot de passe a été modifié dans le formulaire, le hash avant de l'envoyer avec le reste des informations dans la requête update.
+Fonction **ConnectUser**($login, $password) :
+
+Son rôle est de connecter un utilisateur si possible. Elle vérifie que le nom d'utilisateur recherché existe dans la base de données. Si c'est le cas, récupère son mot de passe hashé, puis vérifie qu'il soit identique au mot de passe entré grâce à la fonction php "*password_verify*". S'ils sont identiques, l'identifiant de l'utilisateur est enregistré dans la session, et est alors connecté.
+
+Fonction **UpdateUser**($login, $firstName, $lastName, $eMail, $password) :
+
+Modifie les informations de l'utilisateur dans la base de données. Si le mot de passe a été modifié dans le formulaire, le hash avant de l'envoyer avec le reste des informations dans la requête update.
 
 
 
 #### Fonctionnement de la météo
 
-Fonction **ExecuteMeteoProgram**() : 
+Fonction **ExecuteMeteoProgram**() :
 
-Fonction **GetMeteoInfos()** :
+Son rôle de d'obtenir et d'enregistrer les prévisions météo.
 
-Fonction **ClassifyMeteoInfos**($meteoInfos) : 
+Elle appelle l'API météo pour obtenir les détails météo des 5 jours à venir, pour toutes les trois heures, et sélectionne uniquement les informations nécessaires au programme
 
-Fonction **ClassifyInfosByDay**($meteoInfos) :
+Elle classe ces informations dans un tableau de jours, qui eux-même sont des tableaux d'enregistrements.
 
-Fonction **DisplayDayMeteo**($numDay, $numHour) : 
+Ce tableau "semaine" est envoyé en paramètre à un nouvel objet *week*, qui va créer une liste d'objets *day*, qui eux-même vont créer une liste d'objets *meteoRecord*. La classe *meteoRecord* sauvegarde alors toutes les informations de la prévision météo d'une heure précise.
 
-Fonction **DisplayTemperatureGraphic**($hours, $temperatures, $date) : 
+Pour finir, l'objet *week*, contenant donc toutes les prévisions météo pour la semaine à venir, est enregistré dans la session.
 
-Fonction **DisplayRecordingsDetails**($day, $idRecording) : 
 
-Fonction **DisplayDaysEvents**($numDay) : 
+
+Fonction **DisplayTemperatureGraphic**($hours, $temperatures, $date) :  
+
+Transforme les tableaux d'heures et de températures de la journée en un string qui représente un tableau js, puis écrit en HTML l'appel d'une fonctions javascript qui utilise les services de Google Charts pour afficher un graphique des températures de la journée, dans une balise dont l'identifiant correspond la date du jour à afficher.
+
+
+
+Fonction **DisplayRecordingsDetails**($day, $idRecording) :
+
+Affiche, pour une heure sélectionnée dans la journée, l'humidité, la probabilité de précipitations et la vitesse du vent, en récupérant les informations dans grâce à l'objet *meteoRecord* de l'heure correspondante.
+
+
+
+Fonction **DisplayDaysEvents**($numDay) :  
+
+Son rôle est d'afficher les évènements et activités d'une journée.
+
+Elle récupère les activité du semainier dont le jour correspond au jour de la semaine du jour à affiché.
+
+Récupère ensuite les évènements du calendrier correspondant à la date du jour affiché. Trie l'ensemble des évènements et activités récupérés par ordre chronologique, puis les affiche.
+
+
 
 Fonction **DisplayMeteoSummary**($numDay) :
+
+Son rôle est d'afficher la météo dans une case du calendrier.
+
+Elle récupère la température et le groupe météo du matin et du soir, et les affiche dans la case correspondant du calendrier.
+
+Si l'heure de récupération des informations du matin est déjà passée, récupère à la place les informations de l'heure actuelle, et si l'heure du soir est déjà passée, récupère à la place la dernière heure.
 
 
 
@@ -500,23 +643,45 @@ Fonction **DisplayMeteoSummary**($numDay) :
 
 Fonction **GetCalendarDays**($month, $year) :
 
+Génère le tableau des jours à afficher pour un mois donné d'une année donnée
+
+
+
 Fonction **GetEventsBetween**($dateStart, $dateEnd) :
 
-Fonction **GetEventsWeekPlanner**() :
+Son rôle est d'obtenir les évènements du calendrier pour un mois donné.
 
-Fonction **DisplayMonthCalendar**($month, $year) :
-
-Fonction **DisplayWeekPlanner**() :
+Elle transforme les dates de début et de fin en timestamp pour pouvoir les envoyer dans la requête SQL, puis envoie une requête SELECT.
 
 
 
 #### Gestion des vêtements
 
-Fonction **GetClothesForMeteo**($temperatures, $weathers):
+Fonction **GetClothesForMeteo**($temperatures, $weathers) :
 
-Fonction **GenerateDress**($temperatures, $weathers) : 
+Récupère, pour  chaque groupe de vêtements (hauts, bas, chaussures...), tous les vêtements qui correspondent à la météo
+
+
+
+Fonction **GenerateDress**($temperatures, $weathers) :
+
+Son rôle est de créer une tenue adaptée à la météo.
+
+Elle récupère, pour chaque groupe de vêtements, la liste des vêtements adaptés à la météo, grâce à la fonction *GetClothesForMeteo*
+
+Pour chaque groupe de vêtements (haut et bas ou ensemble, chaussures, manteau), elle sélectionne un vêtement aléatoire.
+
+Ainsi, elle crée une tenue complète, comportant une veste ou manteau s'il fait froid, et prévient l'utilisateur s'il lui manque des vêtements dans sa garde-robe pour pouvoir sortir de chez lui.
+
+
 
 Fonction **CreateClotheImage**($idCategory, $color) :
+
+Crée un fichier SVG vide dans un sous-répertoire du projet, avec un nom aléatoire.
+
+Récupère dans la base de données le script xml, correspondant à une image vectorielle, de la catégorie du vêtement à afficher. Remplace la couleur dans le script par la couleur du vêtements, enregistrée pour le vêtement dans la base de données.
+
+Retourne le chemin de l'image créée.
 
 
 
@@ -526,7 +691,7 @@ Fonction **CreateClotheImage**($idCategory, $color) :
 
 #### Choix de l'API météo
 
-J'ai choisi l'API OpenWeatherMap parce que j'avais déjà un peu travaillé dessus, et qu'elle proposait une offre gratuite pratique et qui convenait pour l'utilisation que je voulais en faire. En plus, l'apparence professionnelle du site par rapport aux autres donnai plus confiance pour la suite.
+J'ai choisi l'API OpenWeatherMap parce que j'avais déjà un peu travaillé dessus, et qu'elle proposait une offre gratuite pratique et qui convenait pour l'utilisation que je voulais en faire. En plus, l'apparence professionnelle du site, comparément aux autres, donnait plus confiance pour la suite.
 
 #### Méthode de réalisation du calendrier
 
@@ -538,34 +703,16 @@ Il fallait que j'affiche des images de vêtements, auxquels l'utilisateur pouvai
 
 
 
-### Pseudo code /!\
-
-#### Génération du calendrier
-
-GetCalendarDays($month, $year)
-
-
-
-#### Génération d'une tenue
-
-Voici un structogramme représentant l'algorithme de recommandation de tenue. Cet algorithme a pour but de créer, de manière aléatoire, un tenue complète qui soit adaptée à la météo du jour. Dans cette version du programme, il est parfaitement fonctionnel et remplit son rôle, mais peut être amélioré dans le futur en y intégrant plus de détails.
-
-GetClothesForMeteo($temperatures, $weathers)
-
-GenerateDress($temperatures, $weathers)
 
 
 
 
 
-
-
-
-## Plan de tests et tests - à compléter
+## Plan de tests et tests
 
 ### Périmètre des tests
 
-Les tests de ce projet englobent les actions normales qu'un utilisateur, sur un navigateur classique moderne. 
+Les tests de ce projet englobent les actions normales qu'un utilisateur, sur un navigateur classique moderne.
 
 
 
@@ -585,7 +732,7 @@ MySQL 5.7.31
 
 
 
-### Scénarios de test - modifications à faire /!\
+### Scénarios de test - modifications à faire
 
 Les scénarios ont été écrits avant la réalisation du projet, afin de garantir la réponse aux demandes du cahier des charge. Lors de la réalisation d'un scénario, faire attention à ce que son scénario prérequis ait été exécuté avant. Dans le cadre de ce travail, les tests ont été exécutés manuellement.
 
@@ -593,213 +740,253 @@ Mauvaise utilisation / Fonctionnel /!\
 
 #### Scénarios - gestion des utilisateurs
 
-| Nom                 | 1.1 Inscription                                              |
-| ------------------- | ------------------------------------------------------------ |
-| *User story*        | S1 : Inscription                                             |
-| *Situation*         | Je suis déconnecté ; Je clique sur *"Connexion"* dans la navigation de la page principale ; en-dessous du formulaire de connexion, je clique sur "*je n'ai pas encore de compte*" ; j'entre les valeurs de test suivantes dans le formulaire : "**Nom**" : "*NomTest*" - "**Prénom**" : "PrenomTest" - "**Mail**" : "*test@gmail.com*" - "**Pseudo**" : "*PseudoTest*", "**Mot-de-passe**" : "*abc*"; Je clique sur "*valider*" ➔ Je suis redirigé vers la page principale, déconnecté. |
-| *Résultats obtenus* |                                                              |
-| *Statut*            | ✓                                                            |
+| Nom                  | 1.1 Inscription                                              |
+| -------------------- | ------------------------------------------------------------ |
+| *User story*         | S1 : Inscription                                             |
+| *Situation*          | Je suis déconnecté ; Je clique sur *"Connexion"* dans la navigation de la page principale ; en-dessous du formulaire de connexion, je clique sur "*je n'ai pas encore de compte*" ; j'entre les valeurs de test suivantes dans le formulaire : "**Nom**" : "*NomTest*" - "**Prénom**" : "PrenomTest" - "**Mail**" : "*test@gmail.com*" - "**Pseudo**" : "*PseudoTest*", "**Mot-de-passe**" : "*abc*"; Je clique sur "*valider*" |
+| *Résultats attendus* | Je suis redirigé vers la page principale, déconnecté.        |
+| *Statut*             | ✓                                                            |
 
-| Nom                 | 1.2 Connexion utilisateur (prérequis : scénario 1.1)         |
-| ------------------- | ------------------------------------------------------------ |
-| *User story*        | S2 : Connexion                                               |
-| *Situation*         | Je suis déconnecté ; Je clique sur *"Connexion"* dans la navigation de la page principale ; J'entre les valeurs suivantes dans le formulaire : "**Pseudo**" : "*pseudoTest*" - "**Mot de passe**" : "*abc*"; Je clique sur "*valider*" ➔ Alors, je suis redirigé vers la page principale, connecté. Dans la barre de navigation, je vois le le bouton "*Déconnexion*". Des liens menant vers le calendrier, le semainier, la garde-robe et l'ajout de vêtements sont apparus. |
-| *Résultats obtenus* |                                                              |
-| *Statut*            | ✓                                                            |
+| Nom                  | 1.2 Connexion utilisateur (prérequis : scénario 1.1)         |
+| -------------------- | ------------------------------------------------------------ |
+| *User story*         | S2 : Connexion                                               |
+| *Situation*          | Je suis déconnecté ; Je clique sur *"Connexion"* dans la navigation de la page principale ; J'entre les valeurs suivantes dans le formulaire : "**Pseudo**" : "*pseudoTest*" - "**Mot de passe**" : "*abc*"; Je clique sur "*valider*" |
+| *Résultats attendus* | Je suis redirigé vers la page principale, connecté. Dans la barre de navigation, je vois le le bouton "*Déconnexion*". Des liens menant vers le calendrier, le semainier, la garde-robe et l'ajout de vêtements sont apparus. |
+| *Statut*             | ✓                                                            |
 
-| Nom                 | 1.3 Connexion administrateur                                 |
-| ------------------- | ------------------------------------------------------------ |
-| *User story*        | S2 : Connexion                                               |
-| *Situation          | Etant donné que le compte administrateur existe déjà par défaut ; Je clique sur *"Connexion"* dans la navigation de la page principale ; J'entre les valeurs suivantes dans le formulaire : "**Pseudo**" : "SuperAdmin" - "**Mot de passe**" : "*abcd*"; Je clique sur "*valider*" ➔ Je suis redirigé vers la page principale, connecté. Dans la barre de navigation, je vois le le bouton "*Déconnexion*" et le lien "*Gestion des utilisateurs*". |
-| *Résultats obtenus* |                                                              |
-| *Statut*            | ✓                                                            |
+| Nom                  | 1.3 Connexion administrateur                                 |
+| -------------------- | ------------------------------------------------------------ |
+| *User story*         | S2 : Connexion                                               |
+| *Situation           | Etant donné que le compte administrateur existe déjà par défaut ; Je clique sur *"Connexion"* dans la navigation de la page principale ; J'entre les valeurs suivantes dans le formulaire : "**Pseudo**" : "SuperAdmin" - "**Mot de passe**" : "*abcd*"; Je clique sur "*valider* |
+| *Résultats attendus* | Je suis redirigé vers la page principale, connecté. Dans la barre de navigation, je vois le le bouton "*Déconnexion*" et le lien "*Gestion des utilisateurs*" |
+| *Statut*             | ✓                                                            |
 
-| Nom                 | 1.4 Refus de la connexion mot de passe erroné                |
-| ------------------- | ------------------------------------------------------------ |
-| *User story*        | S2 : Connexion                                               |
-| *Situation*         | Je suis déconnecté ; Je n'ai pas créé de compte ; Je clique sur *"Connexion"* dans la navigation de la page principale ; J'entre les valeurs suivantes dans le formulaire : "**Pseudo**" : "*pseudoTest*" - "**Mot de passe**" : "*abcd*"; Je clique sur "*valider*" ➔ Je reçois un message d'erreur m'indiquant que le nom d'utilisateur ou le mot de passe est erroné. |
-| *Résultats obtenus* |                                                              |
-| *Statut*            | ✓                                                            |
+| Nom                  | 1.4 Refus de la connexion mot de passe erroné                |
+| -------------------- | ------------------------------------------------------------ |
+| *User story*         | S2 : Connexion                                               |
+| *Situation*          | Je suis déconnecté ; Je n'ai pas créé de compte ; Je clique sur *"Connexion"* dans la navigation de la page principale ; J'entre les valeurs suivantes dans le formulaire : "**Pseudo**" : "*pseudoTest*" - "**Mot de passe**" : "*abcd*"; Je clique sur "*valider* |
+| *Résultats attendus* | Je reçois un message d'erreur m'indiquant que le nom d'utilisateur ou le mot de passe est erroné |
+| *Statut*             | ✓                                                            |
 
-| Nom                 | 1.5 Refus de la connexion utilisateur inexistant             |
-| ------------------- | ------------------------------------------------------------ |
-| *User story*        | S2 : Connexion                                               |
-| *Situation*         | Je suis déconnecté ; Je n'ai pas créé de compte ; Je clique sur *"Connexion"* dans la navigation de la page principale ; J'entre les valeurs suivantes dans le formulaire : "**Pseudo**" : "*pseudoInexistant*" - "**Mot de passe**" : "*abcd" ; Je clique sur "*valider*" ➔ Je reçois un message d'erreur m'indiquant que le nom d'utilisateur ou le mot de passe est erroné. |
-| *Résultats obtenus* |                                                              |
-| *Statut*            | ✓                                                            |
+| Nom                  | 1.5 Refus de la connexion utilisateur inexistant             |
+| -------------------- | ------------------------------------------------------------ |
+| *User story*         | S2 : Connexion                                               |
+| *Situation*          | Je suis déconnecté ; Je n'ai pas créé de compte ; Je clique sur *"Connexion"* dans la navigation de la page principale ; J'entre les valeurs suivantes dans le formulaire : "**Pseudo**" : "*pseudoInexistant*" - "**Mot de passe**" : "*abcd" ; Je clique sur "*valider*" |
+| *Résultats attendus* | Je reçois un message d'erreur m'indiquant que le nom d'utilisateur ou le mot de passe est erroné. |
+| *Statut*             | ✓                                                            |
 
-| Nom                 | 1.6 Déconnexion                                              |
-| ------------------- | ------------------------------------------------------------ |
-| *User story*        | S3 : Déconnexion                                             |
-| *Situation*         | Je suis connecté en tant qu'utilisateur (scénario 1.2) ; Je clique sur *"Déconnexion"* dans la navigation de la page principale ;  ➔ Je suis redirigé vers la page principale, déconnecté. Seuls le bouton "Connexion" est affiché dans la navigation. |
-| *Résultats obtenus* |                                                              |
-| *Statut*            | ✓                                                            |
+| Nom                  | 1.6 Déconnexion                                              |
+| -------------------- | ------------------------------------------------------------ |
+| *User story*         | S3 : Déconnexion                                             |
+| *Situation*          | Je suis connecté en tant qu'utilisateur (scénario 1.2) ; Je clique sur *"Déconnexion"* dans la navigation de la page principale |
+| *Résultats attendus* | Je suis redirigé vers la page principale, déconnecté. Seuls le bouton "Connexion" est affiché dans la navigation. |
+| *Statut*             | ✓                                                            |
 
-| Nom                 | 1.7 Modifier le compte                                       |
-| ------------------- | ------------------------------------------------------------ |
-| *User story*        | S5 : Modifier le compte                                      |
-| *Situation*         | Je suis connecté en tant qu'utilisateur (scénario 1.2) ; Je clique sur *"Mon compte"* dans la navigation de la page principale ; sur la page "*Mon compte*" ; Je modifie le champs "**Mail**" par "*nouveau@gmail.com*" ; Je clique sur "*Valider*" ; Je clique sur "*Home*" ; Je re-clique sur *"Mon compte"* ➔ Le champs "**Mail**" contient : "*nouveau@gmail.com*"; |
-| *Résultats obtenus* |                                                              |
-| *Statut*            | ✓                                                            |
+| Nom                  | 1.7 Modifier son compte                                      |
+| -------------------- | ------------------------------------------------------------ |
+| *User story*         | S4 : Modifier son compte                                     |
+| *Situation*          | Je suis connecté en tant qu'utilisateur (scénario 1.2) ; Je clique sur *"Mon compte"* dans la navigation de la page principale ; sur la page "*Mon compte*" ; Je modifie le champs "**Mail**" par "*nouveau@gmail.com*" ; Je clique sur "*Valider*" ; Je clique sur "*Home*" ; Je re-clique sur *"Mon compte"* depuis la page principale |
+| *Résultats attendus* | Le champs "**Mail**" contient : "*nouveau@gmail.com*";       |
+| *Statut*             | ✓                                                            |
 
-| Nom                 | 1.8 Voir les utilisateurs                                    |
-| ------------------- | ------------------------------------------------------------ |
-| *User story*        | S4 : Supprimer un utilisateur                                |
-| *Situation*         | Je suis connecté en tant qu'administrateur (scénario 1.3); Je clique sur "*Gestion des utilisateurs*" dans la navigation de la page principale ➔ Alors, je suis redirigé vers la page de gestion des utilisateurs, qui affiche la liste des comptes utilisateurs. |
-| *Résultats obtenus* |                                                              |
-| *Statut*            | ✓                                                            |
+| Nom                  | 1.8 Supprimer son compte                                     |
+| -------------------- | ------------------------------------------------------------ |
+| *User story*         | S8 : Supprimer un utilisateur                                |
+| *Situation*          | Je suis connecté en tant qu'utilisateur (scénario 1.2) ; Je clique sur *"Mon compte"* dans la navigation de la page principale ; Je clique sur "*Supprimer* mon compte" ; je suis redirigé vers la page d'accueil, déconnecté ; je clique sur "inscription"; j'entre mes identifiants et valide le formulaire |
+| *Résultats attendus* | La connexion est refusée.                                    |
+| *Statut*             | ✓                                                            |
 
-| Nom                 | 1.9 Supprimer un utilisateur                                 |
-| ------------------- | ------------------------------------------------------------ |
-| *User story*        | S4 : Supprimer un utilisateur                                |
-| *Situation*         | Je suis connecté en tant qu'administrateur (scénario 1.3) ; Je clique sur la case à cocher de l'utilisateur *"PseudoTest"* dans la liste de la page "*Gestion des utilisateurs*"  (scénario 1.8) ;  Je clique sur "*Supprimer*"➔ La page est actualisée et l'utilisateur *"PseudoTest"* n'est plus dans la liste. |
-| *Résultats obtenus* |                                                              |
-| *Statut*            | ✓                                                            |
+| Nom                  | 1.9 Voir les utilisateurs                                    |
+| -------------------- | ------------------------------------------------------------ |
+| *User story*         | S5 : Supprimer un utilisateur ; S.7 Modifier le compte d'un utilisateur |
+| *Situation*          | Je suis connecté en tant qu'administrateur (scénario 1.3); Je clique sur "*Gestion des utilisateurs*" dans la navigation de la page principale |
+| *Résultats attendus* | Alors, je suis redirigé vers la page de gestion des utilisateurs, qui affiche la liste des comptes utilisateurs. |
+| *Statut*             | ✓                                                            |
+
+| Nom                  | 1.10 Modifier un compte utilisateur                          |
+| -------------------- | ------------------------------------------------------------ |
+| *User story*         | S7 : Modifier le compte d'un utilisateur                     |
+| *Situation*          | Je suis connecté en tant qu'administrateur (scénario 1.3); Je clique sur "*Gestion des utilisateurs*" dans la navigation de la page principale ; je clique sur le bouton *edit* d'un utilisateur ; je remplace le pseudo de l'utilisateur par *pseudoModifie* |
+| *Résultats attendus* | Alors, je suis redirigé vers la page de gestion des utilisateurs, qui affiche l'utilisateur avec comme pseudo *pseudoModifie* |
+| *Statut*             | ✓                                                            |
+
+| Nom                  | 1.11 Supprimer un utilisateur                                |
+| -------------------- | ------------------------------------------------------------ |
+| *User story*         | S8 : Supprimer un utilisateur                                |
+| *Situation*          | Je suis connecté en tant qu'administrateur (scénario 1.3) ; Je clique sur la case à cocher de l'utilisateur *"PseudoTest"* dans la liste de la page "*Gestion des utilisateurs*"  (scénario 1.8) ;  Je clique sur "*Supprimer*" |
+| *Résultats attendus* | La page est actualisée et l'utilisateur *"PseudoTest"* n'est plus dans la liste. |
+| *Statut*             | ✓                                                            |
+
+| Nom                  | 1.12 Ajouter un utilisateur                                  |
+| -------------------- | ------------------------------------------------------------ |
+| *User story*         | S6 : Créer un utilisateur                                    |
+| *Situation*          | Je suis connecté en tant qu'administrateur (scénario 1.3) ; Je clique sur "*Gestion des utilisateurs*" dans la navigation de la page principale ; Je clique sur "Ajouter un utilisateur" ; Je remplis le formulaire et le valide |
+| *Résultats attendus* | Alors, je suis redirigé vers la page de gestion des utilisateurs, qui affiche dans la liste des utilisateurs l'utilisateur ajouté |
+| *Statut*             | ✓                                                            |
 
 
 
 #### Scénarios  - gestion de la météo
 
-| Nom                 | 2.1 Afficher météo d'une journée                             |
-| ------------------- | ------------------------------------------------------------ |
-| *User story*        | S6 : Afficher la météo détaillée                             |
-| *Situation*         | Je suis connecté en tant qu'utilisateur (scénario 1.2) ; Je suis sur la page principale ;  ➔ Je peux voir, pour le jour actuel et des deux suivants, la température et le niveau d'ensoleillement. |
-| *Résultats obtenus* |                                                              |
-| *Statut*            | ✓                                                            |
+| Nom                  | 2.1 Afficher météo d'une journée                             |
+| -------------------- | ------------------------------------------------------------ |
+| *User story*         | S9 : Afficher la météo détaillée                             |
+| *Situation*          | Je suis connecté en tant qu'utilisateur (scénario 1.2) ; Je suis sur la page principale |
+| *Résultats attendus* | Je peux voir, pour le jour actuel, l'évolution de la température au cours de la journée |
+| *Statut*             | ✓                                                            |
 
-| Nom                 | 2.2 Afficher météo d'une heure de la journée                 |
-| ------------------- | ------------------------------------------------------------ |
-| *User story*        | S6 : Afficher la météo détaillée                             |
-| *Situation*         | Je suis connecté en tant qu'utilisateur (scénario 1.2) ; Je suis sur la page principale ;  ➔ Je peux voir, pour le jour actuel et des deux suivants, la température et le niveau d'ensoleillement. |
-| *Résultats obtenus* |                                                              |
-| *Statut*            | ✓                                                            |
+| Nom                          | 2.2 Afficher météo d'une heure de la journée                 |
+| ---------------------------- | ------------------------------------------------------------ |
+| *User story*                 | S9 : Afficher la météo détaillée                             |
+| *Situation*                  | Je suis connecté en tant qu'utilisateur (scénario 1.2) ; Je suis sur la page principale |
+|                              | Je peux voir, pour le jour actuel, pour lune heure proche de l'heure actuelle, les informations suivantes : description de la météo, humidité, vitesse du vent et probabilité de précipitations. |
+| *Résultats attendus**Statut* | ✓                                                            |
 
-| Nom                 | 2.3 Afficher la météo résumée                                |
-| ------------------- | ------------------------------------------------------------ |
-| *User story*        | S7 : Afficher la météo résumée                               |
-| *Situation*         | Je suis connecté en tant qu'utilisateur (scénario 1.2) ; Je clique sur "*Calendrier*"  depuis la page principale ;  ➔ Je peux voir, pour le jour actuel et des deux suivants, la température et le niveau d'ensoleillement du matin et du soir. |
-| *Résultats obtenus* |                                                              |
-| *Statut*            | ✓                                                            |
-
-/!\ À faire plus tard : pareil pour les deux, mais avec des données de test.
+| Nom                  | 2.3 Afficher la météo résumée                                |
+| -------------------- | ------------------------------------------------------------ |
+| *User story*         | S10 : Afficher la météo résumée                              |
+| *Situation*          | Je suis connecté en tant qu'utilisateur (scénario 1.2) ; Je clique sur "*Calendrier*"  depuis la page principale |
+| *Résultats attendus* | Je peux voir, pour le jour actuel et des deux suivants, la température et le niveau d'ensoleillement du matin et du soir. |
+| *Statut*             | ✓                                                            |
 
 
 
 #### Scénarios  - gestion du calendrier
 
-[Ajouter "Supprimer un évènement du calendrier" et "Supprimer un évènement du semainier"]
+| Nom                  | 3.1 Afficher le calendrier                                   |
+| -------------------- | ------------------------------------------------------------ |
+| *User story*         | S11 : Afficher le calendrier                                 |
+| *Situation*          | Je suis connecté en tant qu'utilisateur ; Je clique sur "*Calendrier*"  depuis la page principale |
+| *Résultats attendus* | La page apparaît avec un calendrier, dont le mois affiché est le mois actuel. Le nombre de jours du mois (Mai = 31) est correct.  Les jour de la semaine du jour actuel est correct. |
+| *Statut*             | ✓                                                            |
 
-| Nom                 | 3.1 Afficher le calendrier                                   |
-| ------------------- | ------------------------------------------------------------ |
-| *User story*        | S8 : Afficher le calendrier                                  |
-| *Situation*         | Je suis connecté en tant qu'utilisateur ; Je clique sur "*Calendrier*"  depuis la page principale ;  ➔ La page apparaît avec un calendrier, dont le mois affiché est le mois actuel. Le nombre de jours du mois (Mai = 31) est correct.  Les jour de la semaine du jour actuel est correct. |
-| *Résultats obtenus* |                                                              |
-| *Statut*            | ✓                                                            |
+| Nom                  | 3.2 Afficher le semainier                                    |
+| -------------------- | ------------------------------------------------------------ |
+| *User story*         | S12 : Afficher le semainier                                  |
+| *Situation*          | Je suis connecté en tant qu'utilisateur; Je clique sur "*Calendrier*"  depuis la page principale |
+| *Résultats attendus* | La page apparaît avec un semainier (lundi-dimanche).         |
+| *Statut*             | ✓                                                            |
 
-| Nom                 | 3.2 Afficher le semainier                                    |
-| ------------------- | ------------------------------------------------------------ |
-| *User story*        | S9 : Afficher le semainier                                   |
-| *Situation*         | Je suis connecté en tant qu'utilisateur; Je clique sur "*Calendrier*"  depuis la page principale ;  ➔ La page apparaît avec un semainier (lundi-dimanche). |
-| *Résultats obtenus* |                                                              |
-| *Statut*            | ✓                                                            |
+| Nom                  | 3.3 Ajouter un évènement au calendrier |
+| -------------------- | -------------------------------------- |
+| *User story*         | S13 : Ajouter un évènement             |
+| *Situation*          | [A faire]                              |
+| *Résultats attendus* |                                        |
+| *Statut*             | ✓                                      |
 
-| Nom                 | 3.3 Ajouter un évènement au calendrier |
-| ------------------- | -------------------------------------- |
-| *User story*        | S10 : Ajouter un évènement             |
-| *Situation*         | [A faire]                              |
-| *Résultats obtenus* |                                        |
-| *Statut*            | ✓                                      |
+| Nom                  | 3.4 Ajouter un évènement au semainier |
+| -------------------- | ------------------------------------- |
+| *User story*         | S13 : Ajouter un évènement            |
+| *Situation*          | [A faire]                             |
+| *Résultats attendus* |                                       |
+| *Statut*             | ✓                                     |
 
-| Nom                 | 3.4 Ajouter un évènement au semainier |
-| ------------------- | ------------------------------------- |
-| *User story*        | S10 : Ajouter un évènement            |
-| *Situation*         | [A faire]                             |
-| *Résultats obtenus* |                                       |
-| *Statut*            | ✓                                     |
+| Nom                  | 3.5 Afficher les évènements uniques pour un jour (prérequis : 3.3) |
+| -------------------- | ------------------------------------------------------------ |
+| *User story*         | S14 : Afficher les évènements d'une journée                  |
+| *Situation*          | Je suis connecté en tant qu'utilisateur ; Je suis sur la page principale |
+| *Résultats attendus* | La page apparaît avec le jour suivant (si on est mercredi -> jeudi). Je vois l'évènement nommé "Anniversaire ", assigné à l'heure : "*20:00*". |
+| *Statut*             | ✓                                                            |
 
-| Nom                 | 3.5 Afficher les évènements uniques pour un jour (prérequis : 3.3) |
-| ------------------- | ------------------------------------------------------------ |
-| *User story*        | S11 : Afficher un évènement                                  |
-| *Situation*         | Je suis connecté en tant qu'utilisateur ; Je clique sur "*>*"  (jour suivant) sur la page principale ➔ La page apparaît avec le jour suivant (si on est mercredi -> jeudi). Je vois l'évènement nommé "Anniversaire ", assigné à l'heure : "*20:00*". |
-| *Résultats obtenus* |                                                              |
-| *Statut*            | ✓                                                            |
+| Nom                  | 3.6 Afficher les évènements hebdomadaires pour un jour (prérequis : 3.4) |
+| -------------------- | ------------------------------------------------------------ |
+| *User story*         | S14 : Afficher les évènements d'une journée                  |
+| *Situation*          | Je suis connecté en tant qu'utilisateur ; Je suis sur la page principale |
+| *Résultats attendus* | La page apparaît avec le jour actuel. Je vois l'évènement nommé "Sport", assigné à l'heure : "*18:00*" |
+| *Statut*             | ✓                                                            |
 
-| Nom                 | 3.6 Afficher les évènements hebdomadaires pour un jour (prérequis : 3.4) |
-| ------------------- | ------------------------------------------------------------ |
-| *User story*        | S11 : Afficher un évènement                                  |
-| *Situation*         | Je suis connecté en tant qu'utilisateur ; Je clique sur "*>*"  (jour suivant) sur la page principale ➔ La page apparaît avec le jour suivant (si on est mercredi -> jeudi). Je vois l'évènement nommé "Sport", assigné à l'heure : "*18:00*". |
-| *Résultats obtenus* |                                                              |
-| *Statut*            | ✓                                                            |
+| Nom                  | 3.7 Supprimer un évènement                                   |
+| -------------------- | ------------------------------------------------------------ |
+| *User story*         | S15 : Supprimer un évènement                                 |
+| *Situation*          | Je suis connecté en tant qu'utilisateur ; Je suis sur la page principale ; je clique sur "calendrier" ; Je clique sur la croix de l'évènement "Anniversaire" |
+| *Résultats attendus* | L'évènement disparaît du calendrier                          |
+| *Statut*             | ✓                                                            |
 
 
 
 #### Scénarios - gestion de la garde-robe
 
-[Ajouter "Modifier un vêtement" et "Supprimer un vêtement"]
+[Nom ; Type ; Couleur ; Catégorie météo ; temp min ; temp max]
 
-
-
-[Nom ; Type ; Couleur ; Catégorie météo ; Intervalle temp]
-
-["Pull vert préféré" ;  "Pull" ;  "\#F08080" ;  "Neige" ;  "-10;5"]
+["Pull vert préféré" ;  "Pull" ;  "\#F08080" ;  "Neige" ;  -10, 20]
 
 | Nom                  | 4.1 Ajouter un vêtement                                      |
 | -------------------- | ------------------------------------------------------------ |
-| *User story*         | S12 : Ajouter un vêtement                                    |
-| *Situation*          | Je suis connecté en tant qu'utilisateur ; Je clique sur "*Nouveau vêtement*" sur la page principale ;  Je remplis le formulaire avec les données de test ci-dessus ; J'appuie sur "*valider*" ➔ Je suis redirigé vers ma garde-robe. Je peux y voir, dans la catégorie "*Pulls*", le titre de mon vêtement : "*Pull vert préféré*". |
-| *Résultats attendus* |                                                              |
+| *User story*         | S16 : Ajouter un vêtement                                    |
+| *Situation*          | Je suis connecté en tant qu'utilisateur ; Je clique sur "*Nouveau vêtement*" sur la page principale ;  Je remplis le formulaire avec les données de test ci-dessus ; J'appuie sur "*valider*" |
+| *Résultats attendus* | Je suis redirigé vers ma garde-robe. Je peux y voir, dans la catégorie "*Pulls*", le titre de mon vêtement : "*Pull vert préféré*". |
 | *Statut*             | ✓                                                            |
 
 | Nom                  | 4.2 Afficher l'image d'un vêtement (prérequis : scénario 4.1) |
 | -------------------- | ------------------------------------------------------------ |
-| *User story*         | S13 : Afficher les vêtements                                 |
+| *User story*         | S17 : Afficher les vêtements                                 |
 | *Situation*          | Je suis connecté en tant qu'utilisateur ; Je clique sur "*Ma garde-robe*" sur la page principale. |
-| *Résultats attendus* | Je suis redirigé vers ma garde-robe. Je peux y voir l'image d'un pull rouge. |
+| *Résultats attendus* | Je suis redirigé vers ma garde-robe. Je peux y voir l'image d'un pull vert. |
 | *Statut*             | ✓                                                            |
 
-[Nom ; Type ; Couleur ; Catégorie météo ; Intervalle temp]
+| Nom                  | 4.3 Afficher un tenue adaptée à la météo                     |
+| -------------------- | ------------------------------------------------------------ |
+| *User story*         | S19 : Afficher une recommandation de tenue                   |
+| *Situation*          | Je suis connecté en tant qu'utilisateur ; J'ai ajouté les données de test ci-dessus ; Je clique sur le deuxième  lien de la navigation horizontale (bouton du jour de demain) sur la page principale |
+| *Résultats attendus* | Sur la page du jour, une tenue comprenant un haut, un bas et des chaussures au minimum est affiché. La tenue est adaptée à la météo affichée : la température et l'ensoleillement affiché est compris dans les intervalles de température et catégories météo de chaque vêtement. |
+| *Statut*             | ✓                                                            |
 
-[  ;  ;  ;  ;  ]
+| Nom                  | 4.4 Modifier un vêtement (prérequis : scénario 4.1)          |
+| -------------------- | ------------------------------------------------------------ |
+| *User story*         | S20: Modifier un vêtement                                    |
+| *Situation*          | Je suis connecté en tant qu'utilisateur ; Je clique "ma garde robe" ; Je cliquer sur le bouton *edit* d'un vêtement ; Je modifier son nom dans le formulaire ; je valide le formulaire |
+| *Résultats attendus* | Le nom du vêtement affiché dans la garde-robe est le nouveau nom |
+| *Statut*             | ✓                                                            |
 
-| Nom                 | 4.3 Afficher un tenue adaptée à la météo                     |
-| ------------------- | ------------------------------------------------------------ |
-| *User story*        | S14 : Afficher une recommandation de tenue                   |
-| *Situation*         | Je suis connecté en tant qu'utilisateur ; J'ai ajouté les données de test ci-dessus ; Je clique sur "*>*"  (jour suivant) sur la page principale ➔ Sur la page du jour, une tenue comprenant un haut, un bas et des chaussures au minimum est affiché. La tenue est adaptée à la météo affichée : la température et l'ensoleillement affiché est compris dans les intervalles de température et catégories météo de chaque vêtement. |
-| *Résultats obtenus* |                                                              |
-| *Statut*            | ✓                                                            |
+| Nom                  | 4.5 Supprimer un vêtement (prérequis : scénario 4.1)         |
+| -------------------- | ------------------------------------------------------------ |
+| *User story*         | S21 : Supprimer un vêtement                                  |
+| *Situation*          | Je clique "ma garde robe" ; Je cliquer sur le bouton *X* d'un vêtement |
+| *Résultats attendus* | Le vêtement a disparu de la garde-robe                       |
+| *Statut*             | ✓                                                            |
 
 
 
-### Evolution des tests - modifications à faire /!\
+
+
+### Evolution des tests
 
 | N° test | J0 - 03.05 | J1 - 04.05 | J2 - 05.05 | J3- 06.05 | J4- 10.05 | J5- 11.05 | J6- 12.05 | J7- 17.05 | J8- 18.05 | J9- 18.05 | J10- 29.05 |
 | ------- | ---------- | ---------- | ---------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | ---------- |
-| 1.1     | N.A.       | N.A.       | ✔️          | ✔️         | ✔️         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓          |
-| 1.2     | N.A.       | N.A.       | ✓          | ✓         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓          |
-| 1.3     | N.A.       | N.A.       | ✓          | ✓         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓          |
-| 1.4     | N.A.       | N.A.       | ✓          | ✓         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓          |
-| 1.5     | N.A.       | N.A.       | ✓          | ✓         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓          |
-| 1.6     | N.A.       | N.A.       | ✓          | ✓         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓          |
-| 1.7     | N.A.       | N.A.       | ✓          | ✓         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓          |
-| 1.8     | N.A.       | N.A.       | ✓          | ✓         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓          |
-| 1.9     | N.A.       | N.A.       | ✓          | ✓         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓          |
-| 2.1     | N.A.       | N.A.       | ✗          | ❌         | ❌         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓          |
-| 2.2     | N.A.       | N.A.       | ✗          | ❌         | ❌         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓          |
-| 3.1     | N.A.       | N.A.       | ✗          | ❌         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓          |
-| 3.2     | N.A.       | N.A.       | ✗          | ❌         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓          |
-| 3.3     | N.A.       | N.A.       | ✗          | ❌         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓          |
-| 3.4     | N.A.       | N.A.       | ✗          | ❌         | ❌         | ❌         | ❌         | ✓         | ✓         | ✓         | ✓          |
-| 3.5     | N.A.       | N.A.       | ✗          | ❌         | ❌         | ✓         | ✓         | ✓         | ✓         | ✓         | ✓          |
-| 3.6     | N.A.       | N.A.       | ✗          | ❌         | ❌         | ❌         | ❌         | ✓         | ✓         | ✓         | ✓          |
-| 4.1     | N.A.       | N.A.       | ✗          | ❌         | ❌         | ❌         | ✓         | ✓         | ✓         | ✓         | ✓          |
-| 4.2     | N.A.       | N.A.       | ✗          | ❌         | ❌         | ❌         | ✓         | ✓         | ✓         | ✓         | ✓          |
-| 4.3     | N.A.       | N.A.       | ✗          | ❌         | ❌         | ❌         | ✓         | ✓         | ✓         | ✓         | ✓          |
+| 1.1     | N.A.       | N.A.       | ✔️          | ✔️         | ✔️         | ✔️      | ✓         | ✓         | ✓         | ✓         | ✓          |
+| 1.2     | N.A.       | N.A.       | ✔️          | ✔️         | ✔️         | ✔️       | ✓         | ✓         | ✓         | ✓         | ✓          |
+| 1.3     | N.A.       | N.A.       | ✔️          | ✔️         | ✔️         | ✔️       | ✓         | ✓         | ✓         | ✓         | ✓          |
+| 1.4     | N.A.       | N.A.       | ✔️          | ✔️         | ✔️         | ✔️       | ✓         | ✓         | ✓         | ✓         | ✓          |
+| 1.5     | N.A.       | N.A.       | ✔️          | ✔️         | ✔️         | ✔️       | ✓         | ✓         | ✓         | ✓         | ✓          |
+| 1.6     | N.A.       | N.A.       | ✔️          | ✔️         | ✔️         | ✔️       | ✓         | ✓         | ✓         | ✓         | ✓          |
+| 1.7     | N.A.       | N.A.       | ✔️          | ✔️         | ✔️         | ✔️       | ✓         | ✓         | ✓         | ✓         | ✓          |
+| 1.8     | N.A.       | N.A.       | ✔️          | ✔️         | ✔️         | ✔️       | ✓         | ✓         | ✓         | ✓         | ✓          |
+| 1.9     | N.A.       | N.A.       | ✔️          | ✔️         | ✔️         | ✔️       | ✓         | ✓         | ✓         | ✓         | ✓          |
+| 1.10     | N.A.       | N.A.       | ✔️          | ✔️         | ✔️         | ✔️       | ✓         | ✓         | ✓         | ✓         | ✓          |
+| 1.11     | N.A.       | N.A.       | ✔️          | ✔️         | ✔️         | ✔️       | ✓         | ✓         | ✓         | ✓         | ✓          |
+| 1.12     | N.A.       | N.A.       | ✔️          | ✔️         | ✔️         | ✔️       | ✓         | ✓         | ✓         | ✓         | ✓          |
+| 2.1     | N.A.       | N.A.       | N.A.       | ❌         | ❌         | ✔️       | ✓         | ✓         | ✓         | ✓         | ✓          |
+| 2.2     | N.A.       | N.A.       | N.A.       | ❌         | ❌         | ✔️       | ✓         | ✓         | ✓         | ✓         | ✓          |
+| 2.3     | N.A.       | N.A.       | N.A.       | ❌         | ❌         | ✔️       | ✓         | ✓         | ✓         | ✓         | ✓          |
+| 3.1     | N.A.       | N.A.       | N.A.       | ❌         | ✔️         | ✔️       | ✓         | ✓         | ✓         | ✓         | ✓          |
+| 3.2     | N.A.       | N.A.       | N.A.       | N.A.      | ✔️         | ✔️         | ✓         | ✓         | ✓         | ✓         | ✓          |
+| 3.3     | N.A.       | N.A.       | N.A.       | N.A.      | ✔️         | ✔️         | ✓         | ✓         | ✓         | ✓         | ✓          |
+| 3.4     | N.A.       | N.A.       | N.A.       | N.A.      | ❌         | ❌         | ❌         | ✓         | ✓         | ✓         | ✓          |
+| 3.5     | N.A.       | N.A.       | N.A.       | N.A.      | ❌         | ✔️         | ✔️         | ✓         | ✓         | ✓         | ✓          |
+| 3.6     | N.A.       | N.A.       | N.A.       | N.A.      | ❌         | N.A.      | ❌         | ✓         | ✓         | ✓         | ✓          |
+| 3.7     | N.A.       | N.A.       | N.A.       | N.A.      | ❌         | ✔️         | ✔️         | ✓         | ✓         | ✓         | ✓          |
+| 3.8     | N.A.       | N.A.       | N.A.       | N.A.      | N.A.         | ❌         | ❌         | ✓         | ✓         | ✓         | ✓          |
+| 4.1     | N.A.       | N.A.       | N.A.       | N.A.      | N.A.         | N.A.      | ✔️         | ✓         | ✓         | ✓         | ✓          |
+| 4.2     | N.A.       | N.A.       | N.A.       | N.A.      | N.A.         | N.A.      | ✔️         | ✓         | ✓         | ✓         | ✓          |
+| 4.3     | N.A.       | N.A.       | N.A.       | N.A.      | N.A.         | N.A.      | ✔️         | ✓         | ✓         | ✓         | ✓          |
+| 4.4     | N.A.       | N.A.       | N.A.       | N.A.      | N.A.         | N.A.      | ✔️         | ✓         | ✓         | ✓         | ✓          |
+| 4.5     | N.A.       | N.A.       | N.A.       | N.A.      | N.A.         | N.A.      | ✔️         | ✓         | ✓         | ✓         | ✓          |
 
 N.A. : Non applicable
 
 ✗ : Echec du test
 
-✓ : Succès du test
+✓ = ✔️  : Succès du test
 
 
 
@@ -808,8 +995,6 @@ N.A. : Non applicable
 ## Conclusion
 
 Pour résumer, je vais faire un tour de ce que j'avais à faire, de ce que j'ai fait, de ce qui peut encore être fait. Ensuite, je ferai un bilan en exprimant les difficultés réalisées lors du travail, et donnerai mon ressenti personnel quant au travail.
-
-
 
 ### Que devais-je réaliser ?
 
@@ -821,7 +1006,7 @@ Pour le bon fonctionnement de ce projet, je devais réaliser, en PHP :
 * Une gestion de la garde robe avec ajout, modification et suppression de vêtements
 * Le stockage de données les concernant dans une base de données SQL
 * L'utilisation d'une API externe qui fournit des informations météorologiques
-* Un affichage des informations météorologiques 
+* Un affichage des informations météorologiques
 * Un système de recommandation de tenue aléatoire, en fonction de la météo
 * Un calendrier permettant de gérer les évènements des utilisateur et d'afficher la météo pour les 4 jours à venir
 
@@ -829,13 +1014,13 @@ Pour le bon fonctionnement de ce projet, je devais réaliser, en PHP :
 
 ### Comment le projet peut-il évoluer ?
 
-Le projet étant maintenant fonctionnel, les améliorations pourront surtout servir à étendre les services proposés, et améliorer l'expérience utilisateur.
+J'ai implémenté toutes les fonctionnalités demandées. Le projet étant maintenant fonctionnel, les améliorations pourront surtout servir à étendre les services proposés, et améliorer l'expérience utilisateur.
 
 #### Améliorations possibles
 
 ***Amélioration de l'algorithme de recommandation***
 
-L'algorithme de recommandation de tenue pourrait prendre en compte davantage de paramètres, comme par exemple les différences de météo au cours de la journée, et les heures des activités de la personne, afin de s'adapter à la météo des heures où elle sortira.
+L'algorithme de recommandation de tenue pourrait prendre en compte davantage de paramètres, comme par exemple les différences de météo au cours de la journée, et les heures des activités de la personne, afin de s'adapter à la météo des heures où elle sortira. Il pourrait également prendre en compte la couleur des vêtements pour faire des choix plus esthétiques.
 
 ***Création manuelle de tenue***
 
@@ -845,15 +1030,11 @@ L'application pourrait permettre à l'utilisateur de créer lui-même des tenues
 
 L'application pourrait enregistrer une tenue recommandée pour un jour précis, afin que la même soit réaffichée, pour le même jour, la prochaine fois que l'utilisateur rouvrira la page.
 
-***Gestion des machines***
-
-L'application pourrait comporter une page supplémentaire, qui afficherait tous les vêtements qui seront portés lors de la semaine, afin de faciliter la gestion des machines.
-
 
 
 ### Difficultés rencontrées
 
-La partie, dans la programmation, qui m'a semblé la plus difficile, est la gestion des dates. En effet, j'ai dû créer et traiter des dates, faire des calculs, les envoyer dans un type différent à la base de données, notamment pour créer le calendrier. 
+La partie, dans la programmation, qui m'a semblé la plus difficile, est la gestion des dates. En effet, j'ai dû créer et traiter des dates, faire des calculs, les envoyer dans un type différent à la base de données, notamment pour créer le calendrier.
 
 A part cette complication, que j'ai bien surmontée, je n'ai pas particulièrement eu de problèmes dans la réalisation du projet
 
@@ -863,7 +1044,7 @@ J'ai en revanche rencontré quelques difficultés avec la documentation, puisque
 
 ### Bilan personnel
 
-J'ai, dès le début, décidé de ne rien ajouter à mon cahier des charges, et de tout faire de la manière la plus simple possible, puisque j'ai généralement tendance à faire le contraire, et que ça me porte préjudice. J'ai pris du temps pour énumérer les tâches et estimer le temps qu'elles me prendraient, pour être sûre que j'étais large. Je suis heureuse de constater que ces efforts ont porté leurs fruits et que j'ai parfaitement réussi à organiser mon temps, sans trop d'efforts. J'en conclus que je devrais plus souvent mettre cela en place. 
+J'ai, dès le début, décidé de ne rien ajouter à mon cahier des charges, et de tout faire de la manière la plus simple possible, puisque j'ai généralement tendance à faire le contraire, et que ça me porte préjudice. J'ai pris du temps pour énumérer les tâches et estimer le temps qu'elles me prendraient, pour être sûre que j'étais large. Je suis heureuse de constater que ces efforts ont porté leurs fruits et que j'ai parfaitement réussi à organiser mon temps, sans trop d'efforts. J'en conclus que je devrais plus souvent mettre cela en place.
 
 D'autre part, c'était agréable de travailler sur un projet qui était adapté à mes connaissances, et qui demandait quand même de la réflexion, puisqu'il y a plusieurs algorithmes que j'ai dû inventer pour réaliser les fonctionnalités. Malgré que ce soit fait dans le cadre d'un examen, je me suis plus amusée que stressée, du moins pour la partie programmation.
 
@@ -873,7 +1054,7 @@ Et je suis plutôt contente du résultat final, qui, même s'il peut être amél
 
 ### Remerciements
 
-Je tiens à remercier M. François, mon enseignant, pour son accompagnement et ses conseils, ainsi que l'ensemble de des professeurs qui m'ont permis d'acquérir les connaissances nécessaires à la réalisation de mon travail, avec une mention spéciale à M. Bonvin, mon professeur de classe.
+Je tiens à remercier M. François, mon enseignant, pour son accompagnement et ses conseils, ainsi que l'ensemble des professeurs qui m'ont permis d'acquérir les connaissances nécessaires à la réalisation de mon travail, spécialement M. Bonvin, mon professeur de classe.
 
 
 
@@ -913,6 +1094,6 @@ https://www.php.net/manual/fr/ref.datetime.php
 
 **CRUD** : Création, Lecture, Mise-à-jour, Suppression (« Create, Read, Update, Delete »).
 
-**Backlog** : 
+**Backlog** : Liste de tâches priorisées représentent les fonctionnalités du programme
 
-**User story** :
+**User story** : Description simple et précise de l'utilisation d'une fonctionnalité

@@ -242,12 +242,12 @@ function UpdateUser($login, $firstName, $lastName, $eMail, $password, $idUserToU
 
 //Générer le calendrier et semainier ____________________________________________________________________________
 
-//Retourner le numéro du jour dont les détails doivent être affichés
+//Retourner le numéro du jour dont auquel l'activité doit être ajoutée
 function GetDay($idDay){
   $day = "";
   //Récupérer le jour envoyé en paramètre
   if(isset($idDay)){
-    if(intval($idDay) <= 6 && intval($idDay) >= 0){
+    if(intval($idDay) <= 7 && intval($idDay) >= 1){
       $day = $idDay;
     }
     //Si le paramètre est erroné, quitter
@@ -264,7 +264,7 @@ function GetDay($idDay){
   return $day;
 }
 
-//Retourner le numéro de l'heure du jour dont plus de détails doivent être affichés
+//Retourner l'heure à laquelle l'activité doit être ajoutée
 function GetHour($idHour){
   $hour = "";
   //Récupérer le mois envoyé en paramètre
@@ -309,7 +309,7 @@ function GetYear($idYear){
   return $year;
 }
 
-//Retourner le mois à affiche dans le calendrier
+//Retourner le mois à afficher dans le calendrier
 function GetMonth($idMonth){
   $month = "";
   //Récupérer le mois envoyé en paramètre
@@ -334,11 +334,15 @@ function GetMonth($idMonth){
 
 //Calculer le mois précédent
 function GetLastMonth($theMonth, $theYear){
+  //Si l'année en paramètre est suppérieure à la limite
   if(intval($theYear) >= 1970){
+    //Si on est au premier mois de l'année
     if(intval($theMonth) <= 1){
+      //Passer au dernier mois
       $theMonth = 12;
     }
     else{
+      //Sinon, passer au mois précédent
       $theMonth -= 1;
     }
   }  
@@ -347,11 +351,15 @@ function GetLastMonth($theMonth, $theYear){
 
 //Calculer le mois suivant
 function GetNextMonth($theMonth, $theYear){
+  //Si l'année est inférieure à la limite
   if(intval($theYear) <= 2050){
+    //Si on est au dernier mois de l'année
     if(intval($theMonth) >= 12){
+      //Passer au premier
       $theMonth = 1;
     }
     else{
+      //Sinon, avancer d'un mois
       $theMonth += 1;
     }
   }  
@@ -381,10 +389,7 @@ function GetCalendarDays($month, $year){
   //Créer la date du 1er du mois donné en paramètre
   $timeZone = 'Europe/Zurich';
   date_default_timezone_set($timeZone);
-
   $dateSrc = $year."-".$month."-01 00:00";
-  //$dateTime = new DateTime($dateSrc);  
-  //$dateFirstOfMonth = date('d.m.Y H:i:s', strtotime($dateSrc));
 
   //Déterminer quel jour de la semaine est à cette date
   $date = date('Y-m-d', strtotime($dateSrc));
@@ -397,20 +402,25 @@ function GetCalendarDays($month, $year){
   if($daysToAdd == -1){
     $daysToAdd = 6;
   }
-
+  //Créer la date en soustrayant ces jours à la date actuelle
   $dateStart = date_create($year.'-'.$month.'-01');
-  //Soustraction
   date_sub($dateStart, date_interval_create_from_date_string($daysToAdd.' days'));
   
   //Parcourir tous les jours pour classer leurs dates dans un tableau de semaines
+  //Pour chaque semainer
   for($w = 0; $w < 6; $w++){
     $week = [];
+    //Pour chaque jour
     for($d = 0; $d < 7; $d++){
+      //Ajouter un jour à la date
       $day = $dateStart;
       if(!($w==$d && $w==0))
         date_add($day, date_interval_create_from_date_string('1 days'));
+      
+        //Ajouter le jour à la semaine
       array_push($week, date_format($day, 'Y-m-d'));
-    }  
+    }
+    //Ajouter la semaine au mois
     array_push($days, $week);
   }
   return $days;
@@ -419,8 +429,10 @@ function GetCalendarDays($month, $year){
 //Générer un tableau à deux dimensions contenant toutes les heures à afficher dans le semainier
 function GetWeekHours(){
   $hours = [];
+  //Pour chaque jour
   for($d = 0; $d < 7; $d++){
     $day = [];
+    //Ajouter chaque heure de 6h à 20h
     for($h = 6; $h <= 20; $h++){
       array_push($day, $h);
     }
@@ -433,6 +445,7 @@ function GetWeekHours(){
 
 //Récupérer tous les évènements ajoutés au calendrier, compris dans les jours du mois actuellement affiché
 function GetEventsBetween($dateStart, $dateEnd){
+  //Transformer les dates de début et de fin en timestamp dans le format de la base de données
   $timestampStart = DateToTimestamp($dateStart);
   $timestampEnd = DateToTimestamp($dateEnd);
 
@@ -444,16 +457,12 @@ function GetEventsBetween($dateStart, $dateEnd){
   foreach($events as $event){
     array_push($dates, $event["theDate"]);
   }
-
   $classifiedEvents = array_fill_keys($dates, []);
   $countEvents = 0;
   foreach($classifiedEvents as $date => $classifiedEvent){
     array_push($classifiedEvents[$date], $events[$countEvents]);
     $countEvents += 1;
   }
-
-  //var_dump($classifiedEvents);
-
 
   return $classifiedEvents;
 }
@@ -468,7 +477,6 @@ function GetEventsWeekPlanner(){
   foreach($events as $event){
     array_push($hours, (intval(explode(":",$event["theHour"])[0]).":".intval(explode(".",$event["theDate"])[0])));
   }
- 
   $classifiedEvents = array_fill_keys($hours, []);
   $countEvents = 0;
   foreach($classifiedEvents as $hour => $classifiedEvent){
@@ -479,34 +487,37 @@ function GetEventsWeekPlanner(){
   return $classifiedEvents;
 }
 
-//Enregistre un évènement
+//Enregistrer un évènement dans la base de données
 function SaveEvent($isReccurent, $description, $dateStart, $dateEnd, $hour, $day){
-  //Formater les dates pour les envoyer à la requête sous forme de TimeStamps
-  //Evènement unique
+  //Si c'est un évènement unique
   if($isReccurent == 0){
+    //Formater les dates en timestamp
     $dateStart = DateToTimestamp($dateStart);
     $dateEnd = DateToTimestamp($dateEnd);
   }
-  //Activité hebdomadaire
+  //Si c'est une activité hebdomadaire
   else{
+    //Formater les dates en timestamp
     $dateStart = HourToTimestamp($hour, $day);
     $dateEnd = $dateStart;
 
-    //Supprimer l'activité qui occupe déjà cet horaire, s'il existe
+    //Supprimer l'activité qui occupe déjà cet horaire, s'il y en a une
     DeleteEventByTime($dateStart, GetIdUser());
   }
-  //Créer l'évènement
+
+  //Ajouter l'évènement
   createEvent($description, $dateStart, $dateEnd, $isReccurent, GetIdUser());
 }
 
-//Supprime un évènement
+//Supprimer un évènement
 function DeleteEvent($idEvent){
   //Appelle la fonction du CRUD
   DeleteEventById($idEvent);
 }
 
-//Formater la date pour la convertir en timestant mySql
+//Formater la date pour la convertir en timestant mySql pour les évènements uniques
 function DateToTimestamp($date){
+  //Récupérer les élémente de la date
   $hour = date('H', strtotime($date));
   $minute = date('i', strtotime($date));
   $month = date('m', strtotime($date));
@@ -519,9 +530,9 @@ function DateToTimestamp($date){
   return $timestamp;
 }
 
-//Formater la date pour la convertir en un timestamp mySql qui ne contient que l'heure et le jour (0-6 pour les jours de la semaine)
+//Formater la date pour la convertir en un timestamp mySql pour les évènements hebdomadaires
 function HourToTimestamp($hour, $day){
-  //Transformer les dates en timestamp mySQL
+  //Transformer les dates en timestamp mySQL, avec pour seuls paramètres l'heure et le jour de la semaine, mis à la place du jour du mois
   $timestamp = date ('Y-m-d H:i:s', mktime (intval($hour), 0, 0, 1, intval($day), 2000));
   return $timestamp;
 }
@@ -538,7 +549,7 @@ function DisplayMonthCalendar($month, $year){
   echo "<table class=\"table table-bordered table-light calendarTable\">";
   echo "<thead><tr>
           <th scope=\"col\">Lun.</th> <th scope=\"col\">Mar.</th> <th scope=\"col\">Mer.</th> <th scope=\"col\">Jeu.</th> <th scope=\"col\">Ven</th> <th scope=\"col\">Sam.</th> <th scope=\"col\">Dim.</th>
-        </tr></thead>";
+          </tr></thead>";
   //Afficher les jours
   echo "<tbody>";
   $lastDay = "";
@@ -569,8 +580,6 @@ function DisplayMonthCalendar($month, $year){
 
       //Si le jour est le jour actuel ou l'un des deux jours suivants, afficher la météo
       $actualDate = date_create(date('Y-m-d'));     
-      //echo $day . " == ".$actualDate->format('Y-m-d'). " ; ";
-
       if($day == date_add($actualDate, date_interval_create_from_date_string('0 days'))->format('Y-m-d')){
         DisplayMeteoSummary(0);
       }
@@ -604,8 +613,10 @@ function DisplayMonthCalendar($month, $year){
 
 //Afficher le semainier sous forme de tableau
 function DisplayWeekPlanner(){
+  //Récupérer les informations à afficher
   $hours = GetWeekHours();
   $events = GetEventsWeekPlanner();
+
   //Afficher le tableau du semainier
   echo "<table class=\"table table-bordered table-light calendarTable\">";
   echo "<thead><tr>
@@ -633,7 +644,6 @@ function DisplayWeekPlanner(){
       echo "</div>";
       echo "</td>";
     }
-
     echo "</tr>";    
   }
   
@@ -641,7 +651,7 @@ function DisplayWeekPlanner(){
   echo "</table>";
 }
 
-//Renvoie le nom du mois en français grâce à son numéro
+//Renvoyer le nom du mois en français grâce à son numéro
 function GetMonthName($idMonth, $long){
   $monthLongNames = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
   $monthShortNames = ["Janv.", "Févr.", "Mars", "Avr.", "Mai.", "Juin", "Juill.", "Août", "Sept.", "Oct.", "Nov.", "Déc."];
@@ -654,7 +664,7 @@ function GetMonthName($idMonth, $long){
   }
 }
 
-//Affichage d'un évènement donnée
+//Afficher un évènement donnée
 function DisplayEvent($event, $calendar){
   //Afficher les évènements, avec un bouton supprimer
   echo "<div class=\"eventBubble\">";
@@ -678,7 +688,7 @@ DEFINE("CLOTHES_GROUPS", ["Haut", "Bas", "Ensemble", "Exterieur", "Chaussures"])
 
 //Gestion du formulaire___________________________________________________________________________________________
 
-//Retourne l'identifiant du vêtement à modifier
+//Retourner l'identifiant du vêtement à modifier
 function GetClothe($idClothe){
   $id = 0;
   //Récupérer le jour envoyé en paramètre
@@ -707,17 +717,17 @@ function GetClothe($idClothe){
   return $clothe;
 }
 
-//Retourne la liste des catégories de vêtements
+//Retourner la liste des catégories de vêtements
 function GetCategories(){
   return readCategories();
 }
 
-//Retourne la catégorie correspondant à l'id
+//Retourner la catégorie correspondant à l'id
 function GetCategory($idCategory){
   return readCategoryById($idCategory);
 }
 
-//Retourne la liste des catégories météo
+//Retourner la liste des catégories météo
 function GetWeathers(){
   return readWeathers();
 }
@@ -741,7 +751,7 @@ function CategoriesToSelect($categories, $categorySelected){
 //Afficher les catégories météo de la BD dans une liste déroulante
 function WeathersToSelect($weathers, $weatherSelected){
   echo "<select name=\"groupWeather\">";
-  //parcourir les catégories de la BD et les afficher
+  //Parcourir les catégories de la BD et les afficher
   foreach($weathers as $weather){
     //si la catégorie est celle sélecionnée précédemment (sticky), la re-sélectionner
     if($weather["idWeather"] == $weatherSelected){
@@ -758,10 +768,9 @@ function WeathersToSelect($weathers, $weatherSelected){
 function SaveClothe($name, $idCategory, $idWeather, $color, $tempMin, $tempsMax){
    //Insert dans la BD
    CreateClothe($name, $idCategory, $idWeather, $color, $tempMin, $tempsMax, GetIdUser());
-   echo $name . " ". $idCategory. " " .$idWeather. " " .$color. " " .$tempMin. " " .$tempsMax. " " .GetIdUser();
 }
 
-//Supprime le vêtement correspondant à l'ID en appelant le CRUD
+//Supprimer le vêtement correspondant à un identifiant
 function DeleteClothe($idClothe){
   DeleteClotheById($idClothe);
 }
@@ -773,15 +782,13 @@ DEFINE("MAIN_ERROR", "Vous feriez bien d'obtenir des vêtements");
 DEFINE("COAT_ERROR", "Vous feriez bien d'obtenir un manteau");
 DEFINE("SHOES_ERROR", "Vous feriez bien d'obtenir des chaussures");
 
-//Génère une tenue complète en fonction de la météo
+//Générer une tenue complète en fonction de la météo
 function GenerateDress($temperatures, $weathers){
   //Récupérer un tableau de listes pour chaque groupe de vêtement, correspondant à la météo du jour
   $clothesForMeteo = GetClothesForMeteo($temperatures, $weathers);
   
   $dress = [];
 
-  //var_dump($clothesForMeteo["Ensemble"]);
-  //var_dump($clothesForMeteo["Bas"]);
   //Sélectionner aléatoirement un haut+bas ou un ensemble (Chance de tomber sur un haut par rapport à un ensemble égale à la proportionnalité de hauts dans l'ensemble des hauts et des ensembles)
   if(count($clothesForMeteo["Ensemble"])!=0 && count($clothesForMeteo["Haut"])!=0 && count($clothesForMeteo["Bas"])!=0){
     //S'il y a des hauts et des ensemble qui correspondent à la météo
@@ -857,8 +864,10 @@ function GenerateDress($temperatures, $weathers){
   return $dress;
 }
 
+//Retourner, pour chaque groupe de vêtements (haut, bas...) une liste des vêtements adaptés à la météo
 function GetClothesForMeteo($temperatures, $weathers){
   //Traiter les information météo de toute la journée pour récupérer ce qui est important à la création de la tenue
+
   //Faire la moyenne des température de la journée
   $minTemp = $temperatures[0];
   $maxTemp = $temperatures[0];
@@ -868,8 +877,8 @@ function GetClothesForMeteo($temperatures, $weathers){
   }
   $temperature = round($sum / count($temperatures));
 
-  $weatherPriority = false;
   //Récupérer les temps particuliers de la journée (neige, pluie, normal)
+  $weatherPriority = false;
   foreach($weathers as $weather){
     //Il neige
     if($weather == "Snow"){
@@ -889,7 +898,7 @@ function GetClothesForMeteo($temperatures, $weathers){
     }
   }
 
-  //Créer un tableau avec tous les vêtements possibles pour cette météo (neige prioritaire), classés par catégorie
+  //Créer un tableau avec tous les vêtements possibles pour cette météo, classés par groupes
   $clothesForMeteo = [
     CLOTHES_GROUPS[0] => ReadClothesByMeteoAndCategorie($temperature, $weatherPriority, CLOTHES_GROUPS[0], GetIdUser()),
     CLOTHES_GROUPS[1] => ReadClothesByMeteoAndCategorie($temperature, $weatherPriority, CLOTHES_GROUPS[1], GetIdUser()),
@@ -916,9 +925,10 @@ function CreateClotheImage($idCategory, $color){
   $aModifier = "PLACE_COLOR";
   $script = str_replace($aModifier, $color, $script);
 
-  //écrire le script créé dans le fichier
+  //Ecrire le script créé dans le fichier
   fwrite($file, $script);
 
+  //Fermer le fichier
   fclose($file);
   
   //Retourner l'adresse du fichier
@@ -927,7 +937,8 @@ function CreateClotheImage($idCategory, $color){
 
 //Supprimer toutes les images crées
 function DeleteClothesImages(){
-  $files = glob('img/clothesImg/*'); // get all file names
+  $files = glob('img/clothesImg/*');
+  //Parcourir tous les fichiers du répertoire et le supprimer
   foreach($files as $file){
     if(is_file($file))
       unlink($file);
@@ -936,19 +947,26 @@ function DeleteClothesImages(){
 
 //Afficher une tenue complète adaptée à la météo
 function DisplayDress($temperature, $weather){
+  //Récupérer une tenue adaptée à la météo
   $dress = GenerateDress($temperature, $weather);
   
+  //Afficher chaque élément de la tenue
   foreach($dress as $idClothe){
+    //Si un vêtement a été trouvé pour ce groupe, l'afficher
     if(is_numeric($idClothe))
-    DisplayClothe(GetClothe($idClothe));
+      DisplayClothe(GetClothe($idClothe));
+    //Sinon, afficher un message d'erreur
     else
-    DisplayEmptyClothe($idClothe);
+      DisplayEmptyClothe($idClothe);
   }
 }
 
 //Afficher tous les vêtements de l'utilisateur
 function DisplayClothesList(){
+  //Récupérer les vêtements de l'utilisateur
   $clothes = ReadClothesByUser(GetIdUser());
+
+  //Tous les afficher
   foreach($clothes as $clothe){
     DisplayClotheWithControls($clothe);
   }
@@ -956,8 +974,10 @@ function DisplayClothesList(){
 
 //Afficher un vêtement
 function DisplayClothe($clothe){
+  //Créer une l'image correspondant à la catégorie et à la couleur du vêtement, et récupérer son chemin
   $imagePath = CreateClotheImage($clothe["idCategory"], $clothe["color"]);
   
+  //Afficher le nom et l'image du vêtement
   echo "<div class=\"eventBubble clothesBubble\">"
         ."<div class=\"displayClothe\">"
         .$clothe["name"]
@@ -968,8 +988,10 @@ function DisplayClothe($clothe){
 
 //Afficher un vêtement avec les contrôles (modifier et supprimer)
 function DisplayClotheWithControls($clothe){
+  //Créer une l'image correspondant à la catégorie et à la couleur du vêtement, et récupérer son chemin
   $imagePath = CreateClotheImage($clothe["idCategory"], $clothe["color"]);
   
+  //Afficher le nome t l'image du vêtements, ainsi que les boutons qui permettent de le supprimer ou de le modifier
   echo "<div class=\"eventBubble clothesBubble\">"
         ."<div class=\"displayClothe\">"
         .$clothe["name"]
@@ -981,18 +1003,21 @@ function DisplayClotheWithControls($clothe){
 }
 
 //Afficher une case vide avec un message d'erreur pour un vêtement nécessaire non existant
-function DisplayEmptyClothe($idClothe){
+function DisplayEmptyClothe($error){
   echo "<div class=\"eventBubble clothesBubble text-center\">"
         ."<div class=\"displayClothe\">"
-        .$idClothe
+        .$error
         ."</div>
         </div>";
 }
 
-//Génère un string aléatoire pour nommer l'image du vêtement
+//Générer un string aléatoire pour nommer l'image du vêtement
 function GenerateRandomString($length) {
+  //Caractères pouvant être utilisés dans le string
   $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
   $charactersLength = strlen($characters);
+
+  //Générer un string aléatoire d'une longueur définie
   $randomString = '';
   for ($i = 0; $i < $length; $i++) {
       $randomString .= $characters[rand(0, $charactersLength - 1)];
@@ -1039,7 +1064,7 @@ function ExecuteMeteoProgram(){
     //Les enregistrer dans un objet
     $week = new week($ClassedInfos);
 
-    //sauvegarder l'objet dans la session
+    //Sauvegarder l'objet dans la session
     SetMeteo($week);
 }
 
@@ -1048,6 +1073,8 @@ function GetMeteoInfos(){
     //Appel de l'API
     $url = "http://api.openweathermap.org/data/2.5/forecast?q=Geneve&appid=".KEY_IP."&lang=fr";
     $result = file_get_contents($url);
+
+    //Récupérer les informations json en php
     $meteoInfos = json_decode($result, true);
 
     return $meteoInfos;
@@ -1055,50 +1082,54 @@ function GetMeteoInfos(){
 
 //Trier les information météo nécessaires
 function ClassifyMeteoInfos($meteoInfos){ 
-    $nbDays = 5; 
-    $nbDayRecording = 8;
-    
-    $recordingsInfos = [];
+  //Nombre de jours de la prévision
+  $nbDays = 5;
+  //Nombre d'enregistrements par jour
+  $nbDayRecording = 8;
+  
+  $recordingsInfos = [];
 
-    //Parcourir tous les enregistrements météo de la semaine
-    for($i = 0; $i < ($nbDayRecording * $nbDays); $i++){
-        //enregistrer sous forme de dictionnaire les informations météo récupérées par l'API
-        $recordingInfos = $array = [
-            //Date de l'enregistrement
-            "date" => explode(" ",$meteoInfos["list"][$i]["dt_txt"])[0],
-            //Heure de l'enregistrement
-            "heure" => explode(":", explode(" ",$meteoInfos["list"][$i]["dt_txt"])[1])[0],            
-            //Récupérer la temperature
-            "temperature" => round($meteoInfos["list"][$i]["main"]["temp"]-273.15),
-            //Le groupe météorologique(pluie, neige...)
-            "groupeMeteorologique" => $meteoInfos["list"][$i]["weather"][0]["main"],
-            //La description de la météo
-            "descriptionMeteo" => $meteoInfos["list"][$i]["weather"][0]["description"],
-            //l'icone météo
-            "icone" => $meteoInfos["list"][$i]["weather"][0]["icon"],
-            //L'humidité
-            "humidite" => $meteoInfos["list"][$i]["main"]["humidity"],
-            //La vitesse du vent
-            "vitesseVent" => ($meteoInfos["list"][$i]["wind"]["speed"]*10),
-            //La probabilité de pécipitations
-            "probPrecipitations" => ($meteoInfos["list"][$i]["pop"]*100),
-        ];
+  //Parcourir tous les enregistrements météo de la semaine
+  for($i = 0; $i < ($nbDayRecording * $nbDays); $i++){
+      //Enregistrer sous forme de dictionnaire les informations météo récupérées par l'API
+      $recordingInfos = $array = [
+          //Date de l'enregistrement
+          "date" => explode(" ",$meteoInfos["list"][$i]["dt_txt"])[0],
+          //Heure de l'enregistrement
+          "heure" => explode(":", explode(" ",$meteoInfos["list"][$i]["dt_txt"])[1])[0],            
+          //Récupérer la temperature
+          "temperature" => round($meteoInfos["list"][$i]["main"]["temp"]-273.15),
+          //Le groupe météorologique(pluie, neige...)
+          "groupeMeteorologique" => $meteoInfos["list"][$i]["weather"][0]["main"],
+          //La description de la météo
+          "descriptionMeteo" => $meteoInfos["list"][$i]["weather"][0]["description"],
+          //l'icone météo
+          "icone" => $meteoInfos["list"][$i]["weather"][0]["icon"],
+          //L'humidité
+          "humidite" => $meteoInfos["list"][$i]["main"]["humidity"],
+          //La vitesse du vent
+          "vitesseVent" => ($meteoInfos["list"][$i]["wind"]["speed"]*10),
+          //La probabilité de pécipitations
+          "probPrecipitations" => ($meteoInfos["list"][$i]["pop"]*100),
+      ];
 
-        //Ajouter le relevé météo au tableau général
-        array_push($recordingsInfos, $recordingInfos);
-    }
+      //Ajouter le relevé météo au tableau général
+      array_push($recordingsInfos, $recordingInfos);
+  }
 
-    //var_dump($recordingsInfos);
-    return $recordingsInfos;
+  return $recordingsInfos;
 }
 
 //Organiser les informations météo par jours dans une classe "semaine"
 function ClassifyInfosByDay($meteoInfos){
-    $daysInfos = [];
+    //Nombre d'heures entre chaque enregistrement
     $intervalEnreg = 3;
+
+    $daysInfos = [];
 
     //Récupérer la première heure disponible de la journée (les heures déjà passées ne sont pas données)
     $firstHour = $meteoInfos[0]["heure"];
+
     //Calculer le nombre d'enregistrements météo restants pour la journée (une journée commence à minuit)
     $lastingHours = ((24-$firstHour)/$intervalEnreg);
 
@@ -1111,11 +1142,9 @@ function ClassifyInfosByDay($meteoInfos){
         }
     }
 
-    //var_dump($meteoInfos);
-
-    //Créer un tableau contenant les jours, contenant eux-mêmes * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    //Créer un tableau contenant les jours, contenant eux-mêmes les enregistrements
     $countRecordings = 0;
-    //parcourir tous les jours (les 5 à venir)
+    //parcourir les jours
     for($i = 0; $i < 5; $i++){
         $dayRecording = [];
         //Tant que l'enregistrement suivant a la même date que le précédent
@@ -1131,10 +1160,6 @@ function ClassifyInfosByDay($meteoInfos){
         array_push($daysInfos, $dayRecording);
     }
 
-    //echo GetJourSemaineActuel();
-
-    //var_dump($daysInfos);
-
     return $daysInfos;
 }
 
@@ -1146,6 +1171,7 @@ function ShowDaysNav(){
   if(GetUserRole()==1){
     //Afficher les liens vers les informations de chacun des cinq jours à venir
     for($i = 0; $i < 5; $i++){
+      //Mettre en évidence le jour actuellement affiché
       if($i == GetDayToDisplay()){
         echo '<li class="nav-item">
             <a class="nav-link active displayBlock activeDay" aria-current="page" href="index.php?numDay='.$i.'">'.GetWeekDayName($i).'</a>
@@ -1177,6 +1203,7 @@ function GetDayToDisplay(){
   return $dayToDisplay;
 }
 
+//Retourner l'heure dont les informations détaillées doivent être affichées
 function GetHourToDisplay(){
   //Récupérer le jour envoyé en paramètre
   if(isset($_GET["numHour"])){
@@ -1199,7 +1226,6 @@ function DisplayDayMeteo($numDay, $numHour){
     $day = GetMeteo()->GetDay($numDay);
     
     echo "</div>";
-
     echo "<div class=\"meteoTable\">";
 
     //Températures
@@ -1271,11 +1297,10 @@ function DisplayTemperatureGraphic($hours, $temperatures, $date){
 
 //Afficher les informations détaillées pour une heure en particulier de la journée
 function DisplayRecordingsDetails($day, $idRecording){
-
   //Récupérer l'enregistrement à afficher
   $recording = $day->GetHour($idRecording);
 
-  //Afficher les informations météo de l'enregistrements
+  //Afficher les informations détaillées de l'enregistrements
   echo '<img src="http://openweathermap.org/img/wn/'.$recording->GetIcon().'.png"/>';
   echo "<p>".$recording->GetMeteoDescription()."</p>";
   echo "<p> Précipitations : ".$recording->GetProbPrecipitations()."% </p>";
@@ -1289,14 +1314,12 @@ function DisplayDaysEvents($numDay){
   $weeklyEvents = GetEventsWeekPlanner();  
   $events = [];  
 
-  //Les ajouter à la liste des évènements du jour
+  //Les ajouter à la liste des évènements du jour, si leur jour correspond
   foreach($weeklyEvents as $key => $event){
       if(intval(explode(".",$event["theDate"])[0]) == GetWeekDay($numDay)){
         array_push($events, $event);        
       }
   }
-
-  //Récupérer les évènements du calendrier à cette date
 
   //Récupérer le début et la fin de la journée actuelle
   $timeZone = 'Europe/Zurich';
@@ -1312,7 +1335,7 @@ function DisplayDaysEvents($numDay){
   $dateStart = date('d.m.Y H:i:s', strtotime(date_format($dateStart, 'd.m.Y H:i:s')));
   $dateEnd = date('d.m.Y H:i:s', strtotime(date_format($dateEnd, 'd.m.Y H:i:s')));
 
-  //Envoyer la requête
+  //Récupérer les évènements du calendrier à cette date
   $todaysEvents = GetEventsBetween($dateStart, $dateEnd);
 
   //Ajouter les évènements du calendrier aux évènements précédemment récupérés du semainier
@@ -1355,7 +1378,7 @@ function SortEventsByTime($events){
   return $events;
 }
 
-//Affiche la météo résumée pour le calendrier
+//Afficher la météo résumée pour le calendrier
 function DisplayMeteoSummary($numDay){
   //Récupérer les informations météo du jour sélectionné
   $day = GetMeteo()->GetDay($numDay);
@@ -1408,7 +1431,7 @@ function DisplayMeteoSummary($numDay){
   }
 }
 
-//Retournre, pour dans X jours, le nom du jour de la semaine en français
+//Retourner, pour dans X jours, le nom du jour de la semaine en français
 function GetWeekDayName($numDay){
     $days = array('Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi');
 
@@ -1421,7 +1444,7 @@ function GetWeekDayName($numDay){
     return $days[$index];
 }
 
-//Retournre, le nom du jour de la semaine en français
+//Retourner, pour dans X jours, le nom du jour de la semaine en français
 function GetWeekDayNameAbsolute($numDay){
   $days = array('Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi');
 
@@ -1430,11 +1453,10 @@ function GetWeekDayNameAbsolute($numDay){
 
 //Retourner, pour dans X jours, le numéro du jour de la semaine (0-6 pour dimanche-samedi)
 function GetWeekDay($numDay){
-  //récupérer l'index du jour actuel et ajouter le nombre de jours indiqué en paramètre
+  //Récupérer l'index du jour actuel et ajouter le nombre de jours indiqué en paramètre
   $index = date('w', date_timestamp_get(new DateTime('now'))) + $numDay;
   if($index > 6){
       $index = ($index % 6) - 1;
   }
-
   return $index;
 }
